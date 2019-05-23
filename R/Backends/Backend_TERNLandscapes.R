@@ -9,8 +9,6 @@ library(stringr)
 NSSC_dbPath <- 'C:/Projects/TernLandscapes/Site Data/NSSC_2.0.0.sqlite'
 
 
-library(SoilDataFederatoR)
-
 system.file("extdata", "NSSC_2.0.0.sqlite", package = "SoilDataFederatoR")
 
 # These agencies have their own endpoints thus not wanted here
