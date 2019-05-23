@@ -1,0 +1,5 @@
+System_time,Server,Request_method,HTTP_user_agent,QUERY_STRING,REMOTE_ADDR
+2019-05-23 15:46:45,FANCY-DP,GET/__swagger__/,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) QtWebEngine/5.12.1 Chrome/69.0.3497.128 Safari/537.36,,127.0.0.1 
+2019-05-23 15:46:45,FANCY-DP,GET/swagger.json,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) QtWebEngine/5.12.1 Chrome/69.0.3497.128 Safari/537.36,?schemes=http&host=127.0.0.1:8074&path=/,127.0.0.1 
+2019-05-23 15:47:30,FANCY-DP,GET/__swagger__/,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) QtWebEngine/5.12.1 Chrome/69.0.3497.128 Safari/537.36,,127.0.0.1 
+2019-05-23 15:47:30,FANCY-DP,GET/swagger.json,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) QtWebEngine/5.12.1 Chrome/69.0.3497.128 Safari/537.36,?schemes=http&host=127.0.0.1:8074&path=/,127.0.0.1 
