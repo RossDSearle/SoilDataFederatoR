@@ -3,9 +3,20 @@ library(DBI)
 library(stringr)
 library(data.table)
 
+asPkg = F
+
+machineName <- as.character(Sys.info()['nodename'])
+if(!asPkg){
+  if(machineName=='soils-discovery'){
+    #projectRoot <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
+    setwd('/srv/plumber/TERNLandscapes/SoilDataFederatoR')
+  }else{
+    setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
+  }
+}
+getwd()
 
 dbPathSoilsFed <- paste0("R/DB/soilsFederator.sqlite")
-
 
 source(paste0('R/Helpers/dbHelpers.R'))
 
@@ -16,7 +27,6 @@ source(paste0('R/Backends/Backend_ASRIS.R'))
 source(paste0('R/Backends/Backend_TERNLandscapes.R'))
 
 source(paste0('R/Helpers/Functions_BackendLists.R'))
-#source(paste0( 'R/WebAPI/apiEndPoints.R'))
 
 
 # getData_WAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){

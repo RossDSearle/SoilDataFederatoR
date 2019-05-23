@@ -1,7 +1,4 @@
-
 library(stringr)
-
-apiChk = ''
 
 projectRoot <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
 
@@ -9,9 +6,6 @@ machineName <- as.character(Sys.info()['nodename'])
 
 #* @apiTitle Soil Federator Web API
 #* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the Soils Federation Service can be found <a href='http://esoil.io/FederatedServices/FedeartedSesnsorsHelpPage.html' > here </a>
-
-
-
 
 #' Log system time, request method and HTTP user agent of the incoming request
 #' @filter logger
