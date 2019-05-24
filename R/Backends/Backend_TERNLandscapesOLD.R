@@ -6,10 +6,10 @@ library(stringr)
 
 ### This uses the National Soil Site Collation - Searle 2014
 
-NSSC_dbPath <- 'C:/Projects/TernLandscapes/Site Data/NSSC_2.0.0.sqlite'
+#NSSC_dbPath <- 'C:/Projects/TernLandscapes/Site Data/NSSC_2.0.0.sqlite'
 
 
-system.file("extdata", "NSSC_2.0.0.sqlite", package = "SoilDataFederatoR")
+
 
 # These agencies have their own endpoints thus not wanted here
 agencyFilters <- c('301', '302', '303')

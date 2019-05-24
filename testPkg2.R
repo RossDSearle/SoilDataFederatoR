@@ -1,6 +1,8 @@
 library(SoilDataFederatoR)
 
 
+set.seed()
+
 SoilDataFederatoR::
 
 

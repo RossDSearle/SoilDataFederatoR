@@ -2,18 +2,21 @@
 % Please edit documentation in R/Backends.R
 \name{getSoilData}
 \alias{getSoilData}
-\title{Ctetsysjh}
+\title{Returns Observed Soil Properties}
 \usage{
 getSoilData(providers = NULL, observedProperty = NULL,
-  observedPropertyGroup = NULL, usr = "Admin", pwd = "c")
+  observedPropertyGroup = NULL, usr = "Public", pwd = "Public")
 }
 \arguments{
-\item{temp_F}{The temperature in Fahrenheit.}
+\item{providers}{List of the Providers to query}
+
+\item{observedProperty}{the Observed Soil Property code to query. It can be a ':' delimited list eg 4A1;3B2}
+
+\item{providers}{observedPropertyGroup The Observed Soil property Group to Query on}
 }
 \value{
-The temperature in Kelvin.
-getSoilData
+Dataframe of Observed Property values
 }
 \description{
-This function converts input temperatures in Fahrenheit to Kelvin.
+This function will query all the available data providers to return all of the available soil observed property data
 }

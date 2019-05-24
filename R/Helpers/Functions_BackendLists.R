@@ -27,7 +27,8 @@ getData_CSIRO <- function(observedProperty=NULL, observedPropertyGroup=NULL){
 }
 
 
-getDataFunctions <- c(LawsonGrains=getData_LawsonGrains, QLDGovernment=getData_QLDGovernment, ASRIS=getData_ASRIS, WAGovernment=getData_WAGovernment,
-                      NSWGovernment=getData_NSWGovernment, VicGovernment=getData_VicGovernment, QLDGovernment=getData_QLDGovernment, SAGovernment=getData_SAGovernment,
-                      TasGovernment=getData_TasGovernment, NTGovernment=getData_NTGovernment, CSIRO=getData_CSIRO)
+getDataFunctions <- c(LawsonGrains=getData_LawsonGrains, QLDGovernment=getData_QLDGovernment, ASRIS=getData_ASRIS, TERNLandscapes=getData_TernLandscapes,
+                      WAGovernment=getData_WAGovernment,
+                      NSWGovernment=getData_NSWGovernment, VicGovernment=getData_VicGovernment, QLDGovernment=getData_QLDGovernment,
+                      SAGovernment=getData_SAGovernment, TasGovernment=getData_TasGovernment, NTGovernment=getData_NTGovernment, CSIRO=getData_CSIRO)
 

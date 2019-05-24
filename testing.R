@@ -1,6 +1,9 @@
 
-source(paste0('C:/Users/sea084/Dropbox/RossRCode/Git/soilsDataFederator','/Backends/Backends.R'))
+source(paste0('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/R','/Backends.R'))
 
+
+usr <- 'ross.searle@csiro.au'; pwd <- 'a'
+usr='Public'; pwd='Public'
 
 op = 'h_texture'
 op = '4A1;4b1'
@@ -45,7 +48,8 @@ df <- getSoilData(providers='WAGovernment', observedProperty=op, observedPropert
 head(df)
 
 
-
+df <- getSoilData( observedProperty=op, observedPropertyGroup = NULL)
+head(df)
 
 
 getData_TERNLandscapes(provider='WAGovernment', observedProperty=op, observedPropertyGroup = NULL)

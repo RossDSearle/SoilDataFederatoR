@@ -1,6 +1,16 @@
 library(DBI)
 library(RSQLite)
 
+
+getEndPointURL <- function(DataStoreName){
+
+  DataStoreName <- 'TERNSoilDB'
+    sql <- paste0("Select * from DataStores where Name = '", DataStoreName, "' COLLATE NOCASE")
+    store = doQueryFromFed(sql)
+    url <- store$Location
+    return(url)
+}
+
 getUnits <- function(propertyType, property){
   if(str_to_lower(propertyType) == str_to_lower(PropertyTypes$LaboratoryMeasurement)){
     sql <- paste0("Select * from LabMethods where LABM_CODE = '", property, "' COLLATE NOCASE")
@@ -142,6 +152,21 @@ getPropertyGroups <- function( verbose=F){
   return(props)
 }
 
+getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGroup=NULL){
+
+  if(!is.null(observedPropertyGroup)){
+    sql <- paste0("select * from Properties where PropertyGroup = '", observedPropertyGroup, "'")
+    props <- doQueryFromFed(sql)
+    ps <- na.omit(props$Property)
+    # ps <- na.omit(Properties[str_to_upper(Properties$PropertyGroup)==str_to_upper(observedPropertyGroup), ]$Property )
+  }else{
+    bits <- str_split(ObserverdProperties, ';')
+    ps <- bits[[1]]
+  }
+  return(ps)
+}
+
+
 
 
 blankResponseDF <- function(){
@@ -223,7 +248,7 @@ pointsInAust <- function(df, lat_fld, lon_fld){
 
 }
 
-
+dbListTables(conn)
 
 NSSCTables <- c("AGENCIES"
                 ,"ARCHIVE_SAMPLES"
