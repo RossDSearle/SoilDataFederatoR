@@ -6,7 +6,7 @@ usr <- 'ross.searle@csiro.au'; pwd <- 'a'
 usr='Public'; pwd='Public'
 
 op = 'h_texture'
-op = '4A1;4b1'
+op = '4A1'
 og = 'PH'
 observedPropertyGroup = 'NITROGEN'
 observedPropertyGroup = NULL

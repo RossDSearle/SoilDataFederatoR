@@ -217,7 +217,7 @@ doQuery <- function(conn, sql){
 
 
 doQueryFromFed <- function(sql){
-
+#print(dbPathSoilsFed)
   conn <- DBI::dbConnect(RSQLite::SQLite(), dbPathSoilsFed)
   qry <- dbSendQuery(conn, sql)
   res <- dbFetch(qry)
@@ -248,7 +248,7 @@ pointsInAust <- function(df, lat_fld, lon_fld){
 
 }
 
-dbListTables(conn)
+
 
 NSSCTables <- c("AGENCIES"
                 ,"ARCHIVE_SAMPLES"

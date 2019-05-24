@@ -12,7 +12,7 @@ if(!asPkg){
   if(machineName=='soils-discovery'){
     #projectRoot <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
     setwd('/srv/plumber/TERNLandscapes/SoilDataFederatoR')
-    dbPathSoilsFed <- '/srv/plumber/TERNLandscapes/SoilDataFederatoR/inst/extdata'
+    dbPathSoilsFed <- '/srv/plumber/TERNLandscapes/SoilDataFederatoR/DB/soilsFederator.sqlite'
   }else{
     setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
     dbPathSoilsFed <- system.file("extdata", "soilsFederator.sqlite", package = "SoilDataFederatoR")

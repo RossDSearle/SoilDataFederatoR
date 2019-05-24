@@ -1,0 +1,42 @@
+System_time,Server,Request_method,HTTP_user_agent,QUERY_STRING,REMOTE_ADDR
+2019-05-24 12:01:56,soils-discovery,GET/__swagger__/,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:01:56,soils-discovery,GET/__swagger__/swagger-ui.css,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:01:56,soils-discovery,GET/__swagger__/swagger-ui-bundle.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:01:56,soils-discovery,GET/__swagger__/swagger-ui-standalone-preset.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:01:57,soils-discovery,GET/openapi.json,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:02:34,soils-discovery,GET/SoilDataAPI/SoilData,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,?observedProperty=4A1,127.0.0.1 
+2019-05-24 12:20:47,soils-discovery,GET/__swagger__/,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:20:47,soils-discovery,GET/__swagger__/swagger-ui.css,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:20:47,soils-discovery,GET/__swagger__/swagger-ui-bundle.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:20:47,soils-discovery,GET/__swagger__/swagger-ui-standalone-preset.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:20:47,soils-discovery,GET/openapi.json,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 12:21:03,soils-discovery,GET/SoilDataAPI/Providers,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:42:22,soils-discovery,GET/__swagger__/,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:42:22,soils-discovery,GET/__swagger__/swagger-ui.css,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:42:22,soils-discovery,GET/__swagger__/swagger-ui-standalone-preset.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:42:22,soils-discovery,GET/__swagger__/swagger-ui-bundle.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:42:22,soils-discovery,GET/openapi.json,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:43:47,soils-discovery,GET/__swagger__/,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:43:47,soils-discovery,GET/__swagger__/swagger-ui.css,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:43:47,soils-discovery,GET/__swagger__/swagger-ui-bundle.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:43:47,soils-discovery,GET/__swagger__/swagger-ui-standalone-preset.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:43:47,soils-discovery,GET/openapi.json,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:49:52,soils-discovery,GET/__swagger__/,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:49:52,soils-discovery,GET/__swagger__/swagger-ui.css,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:49:52,soils-discovery,GET/__swagger__/swagger-ui-bundle.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:49:52,soils-discovery,GET/__swagger__/swagger-ui-standalone-preset.js,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:49:52,soils-discovery,GET/openapi.json,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:50:30,soils-discovery,GET/SoilDataAPI/Providers,Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0,,127.0.0.1 
+2019-05-24 13:55:57,soils-discovery,GET/__swagger__/,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:55:57,soils-discovery,GET/__swagger__/swagger-ui-bundle.js,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:55:57,soils-discovery,GET/__swagger__/swagger-ui.css,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:55:57,soils-discovery,GET/__swagger__/swagger-ui-standalone-preset.js,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:56:06,soils-discovery,GET/openapi.json,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:56:06,soils-discovery,GET/__swagger__/favicon-32x32.png,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:56:09,soils-discovery,GET/openapi.json,Apache-HttpClient/4.5.1 (Java/1.8.0_181),,192.168.48.2 
+2019-05-24 13:57:45,soils-discovery,GET/__swagger__/,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:57:45,soils-discovery,GET/__swagger__/swagger-ui-bundle.js,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:57:45,soils-discovery,GET/__swagger__/swagger-ui-standalone-preset.js,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:57:45,soils-discovery,GET/__swagger__/swagger-ui.css,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:57:53,soils-discovery,GET/openapi.json,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/74.0.3729.169 Safari/537.36,,192.168.48.2 
+2019-05-24 13:57:54,soils-discovery,GET/openapi.json,Apache-HttpClient/4.5.1 (Java/1.8.0_181),,192.168.48.2 

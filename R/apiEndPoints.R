@@ -1,6 +1,16 @@
 library(stringr)
 
-projectRoot <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
+#projectRoot <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
+
+machineName <- as.character(Sys.info()['nodename'])
+if(machineName=='soils-discovery'){
+
+  deployDir <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
+  server <- 'http://esoil.io'
+}else{
+  deployDir <-'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
+  server <- '0.0.0.0'
+}
 
 machineName <- as.character(Sys.info()['nodename'])
 
@@ -23,12 +33,13 @@ function(req){
 
   dt <- format(Sys.time(), "%d-%m-%Y")
 
-  logDir <- paste0(projectRoot, "/WebAPI/Logs")
+  logDir <- paste0(deployDir, "/Logs")
+  print(logDir)
   if(!dir.exists(logDir)){
      dir.create(logDir , recursive = T)
     }
 
-  logfile <- paste0(projectRoot, "/WebAPI/Logs/SoilFederationAPI_logs_", dt, ".csv")
+  logfile <- paste0(deployDir, "/Logs/SoilFederationAPI_logs_", dt, ".csv")
   if(file.exists(logfile)){
     cat(logentry, '\n', file=logfile, append=T)
   }else{
