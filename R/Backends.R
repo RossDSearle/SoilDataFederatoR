@@ -4,6 +4,7 @@ library(stringr)
 library(data.table)
 
 asPkg = F
+Devel = T
 
 #system.file("extdata", "NSSC_2.0.0.sqlite", package = "SoilDataFederatoR")
 
@@ -15,6 +16,7 @@ if(!asPkg){
     dbPathSoilsFed <- '/srv/plumber/TERNLandscapes/SoilDataFederatoR/DB/soilsFederator.sqlite'
   }else{
     setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
+    # path below is - C:/R/R-3.6.0/library/SoilDataFederatoR/extdata/soilsFederator.sqlit
     dbPathSoilsFed <- system.file("extdata", "soilsFederator.sqlite", package = "SoilDataFederatoR")
   }
 }
@@ -48,7 +50,8 @@ PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', Field
 
 getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, usr='Public', pwd='Public'){
 
-  orgs <- getProviders(activeOnly=T,usr=usr, pwd=pwd)
+  #orgs <- getProviders(activeOnly=T,usr=usr, pwd=pwd)
+  orgs <- getProviders(usr=usr, pwd=pwd)
 
   if(!is.null(providers)){
     bits <- str_split(providers, ';')
@@ -60,19 +63,25 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
   cat(paste('Available Providers\n'))
   cat(paste('====================\n '))
   cat(paste0(availProviders, '\n'))
+  cat(paste0('\n'))
 
   outdfs <- list(length(availProviders))
 
    for(i in 1:length(availProviders)) {
     prov <- availProviders[[i]]
+    cat(paste0('Extracting data from ', prov, '\n'))
    # possibleError <- tryCatch(
     outdfs[[i]] <- getDataFunctions[[prov]](observedProperty, observedPropertyGroup)
+    head(outdfs[[i]])
     #  error=function(e) e
     #)
     #if(inherits(possibleError, "error")) next
   }
 
  outDF = as.data.frame(data.table::rbindlist(outdfs))
+ outDF$ExtractTime<- format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
+
+
 
  return(outDF)
 

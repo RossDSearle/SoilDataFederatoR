@@ -16,14 +16,14 @@ library(data.table)
 getData_QLDGovernment <- function( observedProperty=NULL, observedPropertyGroup=NULL ){
 
   OrgName <- 'QLDGovernment'
-  print(paste0('Extracting data from ', OrgName))
+  #cat(paste0('Extracting data from ', OrgName))
 
   samples <- fromJSON(paste0("https://soil-chem.information.qld.gov.au/odata/Samples"))
   mappings <- doQueryFromFed(paste0("Select * from Mappings where Organisation = '", OrgName, "'" ))
 
   nativeProps <- getNativeProperties(OrgName, mappings, observedProperty, observedPropertyGroup)
 
-  if(length(nativeProp) == 0){
+  if(length(nativeProps) == 0){
     return(blankResponseDF())
   }
 
@@ -32,7 +32,7 @@ getData_QLDGovernment <- function( observedProperty=NULL, observedPropertyGroup=
     for (i in 1:length(nativeProps)) {
 
       prop <- nativeProps[i]
-      cat(prop)
+
       sd <- fromJSON(URLencode(paste0("https://soil-chem.information.qld.gov.au/odata/SiteLabMethodResults?$filter=LabMethodCode eq '", prop, "'")))
       if(nrow(sd) > 0){
           fdf <- merge(sd, samples,  by=c("projectCode","siteId", "observationNumber", "sampleNumber"), all.x = T)
@@ -44,6 +44,8 @@ getData_QLDGovernment <- function( observedProperty=NULL, observedPropertyGroup=
                                        fdf$sampleNumber, fdf$analysisDate, fdf$longitude , fdf$latitude,
                                        fdf$upperDepth, fdf$lowerDepth, propertyType, prop, fdf$formattedValue , units, 'Brilliant')
           lodfs[[i]] <- oOutDF
+      }else{
+        return(blankResponseDF())
       }
     }
 

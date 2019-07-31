@@ -22,23 +22,22 @@ op <- 'SEG_FORM'
 
 getPropertyType(observedProperty)
 
-df <- getSoilData(NULL, observedProperty=op)
-df <- getSoilData(NULL, observedPropertyGroup=og)
-
-nrow(df)
-head(df)
-
 
 getProviders(activeOnly = T, usr = 'Public', pwd = 'Public')
-getProviders(activeOnly = F)
-getProviders()
+getProviders(activeOnly = F) # disabled this for now
+getProviders(usr = 'Admin', pwd = 'c')
 
 getProviders(activeOnly = T, usr = 'LawsonGrains', pwd = 'b')
 getProviders(activeOnly = T, usr = 'Admin', pwd = 'c')
 
-df <- getSoilData('TERNLandscapes', observedProperty='3A1')
+df <- getSoilData('TERNLandscapes', observedProperty='4A1')
 df <- getSoilData(providers='QLDGovernment', observedProperty='3A1')
+df <- getSoilData(providers='CSIRO', observedProperty='3A1')
+df <- getSoilData(providers='LawsonGrains', observedProperty='3A1')
 
+df <- getSoilData( observedProperty='3A1', usr = 'Admin', pwd = 'c')
+head(df)
+tail(df)
 
 op = 'h_texture'
 op = 'SEG_FORM'
@@ -46,7 +45,7 @@ op = 'RO_ABUN'
 op = 'S_DESC_BY'
 
 df <- getSoilData(providers='WAGovernment', observedProperty=op, observedPropertyGroup = NULL)
-head(df)
+
 
 
 df <- getSoilData( observedProperty=op, observedPropertyGroup = NULL)

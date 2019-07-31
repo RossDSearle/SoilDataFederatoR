@@ -50,26 +50,25 @@ getNativeProperties <- function(OrgName, mappings, observedProperty, observedPro
         if(str_to_upper(mappings$ObservedProperty[i]) %in% str_to_upper(recs) ){
           nativeProp <- mappings[i,]
           meths <- c(meths, nativeProp$OrigPropertyCode)
-          print("here")
+
         }
       }
       nativeProps <- unique(meths)
     }
-  print(nativeProps)
+
   return(nativeProps)
 }
 
 
 
-getProviders <- function(activeOnly=T, usr='Public', pwd='Public'){
+getProviders <- function( usr='Public', pwd='Public'){
+  #getProviders <- function(activeOnly=T, usr='Public', pwd='Public'){
 
 
   if(usr=='Public'){
-    if(activeOnly){
+    #if(activeOnly){
       sql <- paste0("Select * from Providers where Active = 1 and Availability = 'Public'")
-    }else{
-      sql <- paste0("Select * from Providers where Availability = 'Public'")
-    }
+    #
     orgs = doQueryFromFed(sql)
     return(orgs)
 
@@ -93,21 +92,21 @@ getProviders <- function(activeOnly=T, usr='Public', pwd='Public'){
     if(pwd == cpwd){
 
       if(usr == 'Admin'){
-        sql <- paste0("Select * from Providers")
+        sql <- paste0("Select * from Providers WHERE Active = 1")
         orgs = doQueryFromFed(sql)
         return(orgs)
 
       }else if('All' %in% accessList){
 
-        sql <- "SELECT * FROM Sites INNER JOIN Sensors ON Sites.SiteID = Sensors.SiteID"
-        orgs = doQueryFromFed(sql)
+        #sql <- "SELECT * FROM Sites INNER JOIN Sensors ON Sites.SiteID = Sensors.SiteID"
+        #orgs = doQueryFromFed(sql)
 
-        return(orgs)
+        return(NULL)
       }
       else {
 
         sql <- paste0("Select * from Providers
-        WHERE Availability = 'Public' or ( Availability == 'Private' and OrgName IN ( SELECT access FROM AuthAccess WHERE GroupName = '", cgrp, "'))")
+        WHERE Active = 1 and ( Availability = 'Public' or ( Availability == 'Private' and OrgName IN ( SELECT access FROM AuthAccess WHERE GroupName = '", cgrp, "')))")
         orgs = doQueryFromFed(sql)
 
         return(orgs)
@@ -173,7 +172,7 @@ getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGroup=N
 
 blankResponseDF <- function(){
 
-  outDF <- na.omit(data.frame(Organisation=NULL, Dataset=character(), Observation_ID=character(), SampleID=character(), Date=character() ,
+  outDF <- na.omit(data.frame(Organisation=NULL, Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
                               Longitude=numeric() , Latitude= numeric(),
                               UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
                               Units= character(), Quality=integer()))
@@ -181,7 +180,7 @@ blankResponseDF <- function(){
 
 generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units, qualityCode ){
 
-  outDF <- na.omit(data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, SampleID=sampleID , Date=date ,
+  outDF <- na.omit(data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, SampleID=sampleID , SampleDate=date ,
                               Longitude=longitude, Latitude=latitude ,
                               UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
                               Value=value , Units=units, Quality=qualityCode))

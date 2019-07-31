@@ -20,25 +20,25 @@ getLGMethod <- function(methods, mappings){
 getData_LawsonGrains <- function( observedProperty=NULL, observedPropertyGroup=NULL ){
 
   OrgName <- 'LawsonGrains'
-  print(paste0('Extracting data from ', OrgName))
+  #print(paste0('Extracting data from ', OrgName))
 
   locsUrl <- 'http://esoil.io/SoilsFederator/Providers/LawsonGrains/all_Locs.xlsx'
   dataUrl <- 'http://esoil.io/SoilsFederator/Providers/LawsonGrains/LawsonSoils.xlsx'
 
   p1f <- tempfile()
   download.file(locsUrl, p1f, mode="wb", quiet = T)
-  locs<-read_excel(path = p1f)
+  locs<- suppressMessages( read_excel(path = p1f))
 
   p2f <- tempfile()
   download.file(dataUrl, p2f, mode="wb", quiet = T)
-  lg <- read_excel(path = p2f)
+  lg <- suppressMessages( read_excel(path = p2f))
 
   mappings <- doQueryFromFed(paste0("Select * from Mappings where Organisation = '", OrgName, "'" ))
 
   nativeProps <- getNativeProperties(OrgName, mappings, observedProperty, observedPropertyGroup)
 
 
-if(length(nativeProp) == 0){
+if(length(nativeProps) == 0){
       return(blankResponseDF())
 }
 
@@ -60,7 +60,7 @@ if(length(nativeProp) == 0){
     propertyType <- getPropertyType(prop)
     units <- getUnits(propertyType = propertyType, prop = prop)
 
-    oOutDF <- generateResponseDF(OrgName, paste0(fdf$Aggregation , '_', fdf$SampleNo ), fdf$LabNumber, fdf$Year, fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, prop, fdf$Value, units)
+    oOutDF <- generateResponseDF(OrgName, 'AgCatalyst', paste0(fdf$Aggregation , '_', fdf$SampleNo ), fdf$LabNumber, paste0('01-04-', sd$Year,'T00:00:00' ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, prop, fdf$Value, units, "Brilliant")
     cDF<- rbind(cDF, oOutDF)
   }
 
