@@ -40,9 +40,9 @@ getData_QLDGovernment <- function( observedProperty=NULL, observedPropertyGroup=
           propertyType <- getPropertyType(prop)
           units <- getUnits(propertyType = propertyType, prop = prop)
 
-          oOutDF <- generateResponseDF(OrgName, paste0(fdf$projectCode , '_', fdf$siteId, '_', fdf$observationNumber ),
+          oOutDF <- generateResponseDF(OrgName, "SALI", paste0(fdf$projectCode , '_', fdf$siteId, '_', fdf$observationNumber ),
                                        fdf$sampleNumber, fdf$analysisDate, fdf$longitude , fdf$latitude,
-                                       fdf$upperDepth, fdf$lowerDepth, propertyType, prop, fdf$formattedValue , units)
+                                       fdf$upperDepth, fdf$lowerDepth, propertyType, prop, fdf$formattedValue , units, 'Brilliant')
           lodfs[[i]] <- oOutDF
       }
     }
