@@ -50,10 +50,12 @@ getNativeProperties <- function(OrgName, mappings, observedProperty, observedPro
         if(str_to_upper(mappings$ObservedProperty[i]) %in% str_to_upper(recs) ){
           nativeProp <- mappings[i,]
           meths <- c(meths, nativeProp$OrigPropertyCode)
+          print("here")
         }
       }
-      nativeProps <- meths
+      nativeProps <- unique(meths)
     }
+  print(nativeProps)
   return(nativeProps)
 }
 
@@ -177,9 +179,9 @@ blankResponseDF <- function(){
                               Units= character(), Quality=integer()))
 }
 
-generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units,qualityCode ){
+generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units, qualityCode ){
 
-  outDF <- na.omit(data.frame(Provider=provider, Dataset=datset, Observation_ID=observation_ID, SampleID=sampleID , Date=date ,
+  outDF <- na.omit(data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, SampleID=sampleID , Date=date ,
                               Longitude=longitude, Latitude=latitude ,
                               UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
                               Value=value , Units=units, Quality=qualityCode))

@@ -5,11 +5,11 @@ library(data.table)
 library(stringr)
 
 
-getData_TernLandscapes <- function(observedProperty, observedPropertyGroup){
+getData_TERNLandscapes <- function(observedProperty, observedPropertyGroup){
 
   ep <- getEndPointURL('TERNSoilDB')
 
-  ps <- getPropertiesList(ObserverdProperties, observedPropertyGroup)
+  ps <- getPropertiesList(observedProperty, observedPropertyGroup)
 
   lodfs <- list(length(ps))
 

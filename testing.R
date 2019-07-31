@@ -37,6 +37,7 @@ getProviders(activeOnly = T, usr = 'LawsonGrains', pwd = 'b')
 getProviders(activeOnly = T, usr = 'Admin', pwd = 'c')
 
 df <- getSoilData('TERNLandscapes', observedProperty='3A1')
+df <- getSoilData(providers='QLDGovernment', observedProperty='3A1')
 
 
 op = 'h_texture'

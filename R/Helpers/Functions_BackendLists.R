@@ -1,34 +1,44 @@
 
 
+FLgetData_LawsonGrains <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+ # getData_TERNLandscapes(provider='WAGovernment', observedProperty, observedPropertyGroup)
+}
+FLgetData_WAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+ #getData_TERNLandscapes(provider='WAGovernment', observedProperty, observedPropertyGroup)
+}
+FLgetData_ASRIS <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+  #getData_TERNLandscapes(provider='WAGovernment', observedProperty, observedPropertyGroup)
+}
+FLgetData_TernLandscapes <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+ # getData_TERNLandscapes(provider='SAGovernment', observedProperty, observedPropertyGroup)
+}
+FLgetData_SAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+ # getData_TERNLandscapes(provider='SAGovernment', observedProperty, observedPropertyGroup)
+}
+FLgetData_VicGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+ # getData_TERNLandscapes(provider='VicGovernment', observedProperty, observedPropertyGroup)
+}
+FLgetData_TasGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+ # getData_TERNLandscapes(provider='TasGovernment', observedProperty, observedPropertyGroup)
+}
+FLgetData_NSWGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+ # getData_TERNLandscapes(provider='NSWGovernment', observedProperty, observedPropertyGroup)
+}
+FLgetData_QLDGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
 
-getData_WAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-  getData_TERNLandscapes(provider='WAGovernment', observedProperty, observedPropertyGroup)
+  getData_QLDGovernment( observedProperty, observedPropertyGroup)
+  #getData_TERNLandscapes(provider='QLDGovernment', observedProperty, observedPropertyGroup)
 }
-getData_SAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-  getData_TERNLandscapes(provider='SAGovernment', observedProperty, observedPropertyGroup)
+FLgetData_NTGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+  #getData_TERNLandscapes(provider='NTGovernment', observedProperty, observedPropertyGroup)
 }
-getData_VicGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-  getData_TERNLandscapes(provider='VicGovernment', observedProperty, observedPropertyGroup)
-}
-getData_TasGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-  getData_TERNLandscapes(provider='TasGovernment', observedProperty, observedPropertyGroup)
-}
-getData_NSWGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-  getData_TERNLandscapes(provider='NSWGovernment', observedProperty, observedPropertyGroup)
-}
-getData_QLDGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-  getData_TERNLandscapes(provider='QLDGovernment', observedProperty, observedPropertyGroup)
-}
-getData_NTGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-  getData_TERNLandscapes(provider='NTGovernment', observedProperty, observedPropertyGroup)
-}
-getData_CSIRO <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-  getData_TERNLandscapes(provider='CSIRO', observedProperty, observedPropertyGroup)
+FLgetData_CSIRO <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+ # getData_TERNLandscapes(provider='CSIRO', observedProperty, observedPropertyGroup)
 }
 
 
-getDataFunctions <- c(LawsonGrains=getData_LawsonGrains, QLDGovernment=getData_QLDGovernment, ASRIS=getData_ASRIS, TERNLandscapes=getData_TernLandscapes,
-                      WAGovernment=getData_WAGovernment,
-                      NSWGovernment=getData_NSWGovernment, VicGovernment=getData_VicGovernment, QLDGovernment=getData_QLDGovernment,
-                      SAGovernment=getData_SAGovernment, TasGovernment=getData_TasGovernment, NTGovernment=getData_NTGovernment, CSIRO=getData_CSIRO)
+getDataFunctions <- c(LawsonGrains=FLgetData_LawsonGrains, QLDGovernment=FLgetData_QLDGovernment, ASRIS=FLgetData_ASRIS, TERNLandscapes=FLgetData_TernLandscapes,
+                      WAGovernment=FLgetData_WAGovernment,
+                      NSWGovernment=FLgetData_NSWGovernment, VicGovernment=FLgetData_VicGovernment, QLDGovernment=FLgetData_QLDGovernment,
+                      SAGovernment=FLgetData_SAGovernment, TasGovernment=FLgetData_TasGovernment, NTGovernment=FLgetData_NTGovernment, CSIRO=FLgetData_CSIRO)
 
