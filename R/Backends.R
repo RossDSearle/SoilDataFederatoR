@@ -79,6 +79,12 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
   }
 
  outDF = as.data.frame(data.table::rbindlist(outdfs))
+
+
+ if(nrow(outDF)==0){
+   return(blankResponseDF())
+ }
+
  outDF$ExtractTime<- format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
 
 

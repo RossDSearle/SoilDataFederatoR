@@ -4,8 +4,12 @@ library(stringr)
 library(pdftools)
 
 
-projectRoot <- 'C:/Users/sea084/Dropbox/RossRCode/Git/soilsDataFederator'
-dbPathSoilsFed <- paste0(projectRoot, "/DB/soilsFederator.sqlite")
+setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
+# path below is - C:/R/R-3.6.0/library/SoilDataFederatoR/extdata/soilsFederator.sqlit
+dbPathSoilsFed <- system.file("extdata", "soilsFederator.sqlite", package = "SoilDataFederatoR")
+
+ projectRoot <- 'C:/Users/sea084/Dropbox/RossRCode/Git/soilsDataFederator'
+# dbPathSoilsFed <- paste0(projectRoot, "/DB/soilsFederator.sqlite")
 
 source(paste0(projectRoot, '/DB/dbHelpers.R'))
 
@@ -16,7 +20,7 @@ cat(t, file = 'c:/temp/sits.txt')
 
 
 
-t2 <- read.table('C:/Users/sea084/Dropbox/RossRCode/Git/soilsDataFederator/DataMassage/PCSites/pcsitesRaw4.csv', 
+t2 <- read.table('C:/Users/sea084/Dropbox/RossRCode/Git/soilsDataFederator/DataMassage/PCSites/pcsitesRaw4.csv',
                 header = T, stringsAsFactors= F, strip.white = T, blank.lines.skip = TRUE, sep = ',')
 
 t3 <- na.omit(t2)
@@ -41,3 +45,22 @@ nrow(mt)
 nrow(pt2)
 mtnew <- dbReadTable(conn, "Properties")
 nrow(mtnew)
+
+
+
+setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
+# path below is - C:/R/R-3.6.0/library/SoilDataFederatoR/extdata/soilsFederator.sqlit
+dbPathSoilsFed <- system.file("extdata", "soilsFederator.sqlite", package = "SoilDataFederatoR")
+
+
+survMapPath <- 'C:/Users/sea084/Dropbox/RossRCode/Git/SoilFederatoRPackage/Mappings/TERNSurveillance_PropertyMappings.csv'
+survMapDF <- read.csv(survMapPath)
+survMapDF <- na.omit(survMapDF)
+
+mappings <- dbReadTable(conn, "Mappings")
+head( mappings)
+head(survMapDF)
+colnames(survMapDF) <- colnames(mappings)
+dbWriteTable(conn, "Mappings", survMapDF, append=T)
+
+

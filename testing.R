@@ -34,6 +34,8 @@ df <- getSoilData('TERNLandscapes', observedProperty='4A1')
 df <- getSoilData(providers='QLDGovernment', observedProperty='3A1')
 df <- getSoilData(providers='CSIRO', observedProperty='3A1')
 df <- getSoilData(providers='LawsonGrains', observedProperty='3A1')
+df <- getSoilData(providers='TERNSurveillance', observedProperty='4A1')
+head(df)
 
 df <- getSoilData( observedProperty='3A1', usr = 'Admin', pwd = 'c')
 head(df)
