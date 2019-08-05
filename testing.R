@@ -35,7 +35,12 @@ df <- getSoilData(providers='QLDGovernment', observedProperty='3A1')
 df <- getSoilData(providers='CSIRO', observedProperty='3A1')
 df <- getSoilData(providers='LawsonGrains', observedProperty='3A1')
 df <- getSoilData(providers='TERNSurveillance', observedProperty='4A1')
+
+df <- getData_NSSC(provider='NSWGovernment', observedProperty='CF_ABUN')
+df <- getData_NSSC(provider='NSWGovernment', observedProperty='RO_ABUN')
+df <- getData_NSSC(provider='NSWGovernment', observedProperty='h_texture;RO_ABUN')
 head(df)
+tail(df)
 
 df <- getSoilData( observedProperty='3A1', usr = 'Admin', pwd = 'c')
 head(df)

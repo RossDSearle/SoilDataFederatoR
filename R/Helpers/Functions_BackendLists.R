@@ -1,53 +1,64 @@
 
+getData_NSWGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+  provider <- 'NSWGovernment'
+  url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+  fdf <- fromJSON(paste0(url))
+  return <- fdf
+  }
 
-# FLgetData_LawsonGrains <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#  # getData_TERNLandscapes(provider='WAGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_WAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#  #getData_TERNLandscapes(provider='WAGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_ASRIS <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#   #getData_TERNLandscapes(provider='WAGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_TernLandscapes <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#   getData_TERNLandscapes( observedProperty, observedPropertyGroup)
-# }
-# FLgetData_SAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#  # getData_TERNLandscapes(provider='SAGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_VicGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#  # getData_TERNLandscapes(provider='VicGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_TasGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#  # getData_TERNLandscapes(provider='TasGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_NSWGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#  # getData_TERNLandscapes(provider='NSWGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_QLDGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#
-#   getData_QLDGovernment( observedProperty, observedPropertyGroup)
-#   #getData_TERNLandscapes(provider='QLDGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_NTGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#   #getData_TERNLandscapes(provider='NTGovernment', observedProperty, observedPropertyGroup)
-# }
-# FLgetData_CSIRO <- function(observedProperty=NULL, observedPropertyGroup=NULL){
-#   getData_ASRIS( observedProperty, observedPropertyGroup)
-# }
+getData_WAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+  provider <- 'WAGovernment'
+  url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+  fdf <- fromJSON(paste0(url))
+  return <- fdf
+}
+
+getData_VicGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+  provider <- 'VicGovernment'
+  url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+  fdf <- fromJSON(paste0(url))
+  return <- fdf
+}
+
+getData_SAGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+  provider <- 'SAGovernment'
+  url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+  fdf <- fromJSON(paste0(url))
+  return <- fdf
+}
+
+getData_TasGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+  provider <- 'TasGovernment'
+  url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+  fdf <- fromJSON(paste0(url))
+  return <- fdf
+}
+
+getData_NTGovernment <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+  provider <- 'NTGovernment'
+  url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+  fdf <- fromJSON(paste0(url))
+  return <- fdf
+}
+
 
 
 getDataFunctions <- c(LawsonGrains=getData_LawsonGrains,
                       QLDGovernment=getData_QLDGovernment,
-                      ASRIS=FLgetData_ASRIS,
+                      ASRIS=getData_ASRIS,
                       TERNLandscapes=getData_TERNLandscapes,
                       TERNSurveillance=getData_TERNSurveillance,
-                      #WAGovernment=FLgetData_WAGovernment,
-                      #NSWGovernment=FLgetData_NSWGovernment,
-                      #VicGovernment=FLgetData_VicGovernment,
-                      #QLDGovernment=FLgetData_QLDGovernment,
-                      #SAGovernment=FLgetData_SAGovernment,
-                      #TasGovernment=FLgetData_TasGovernment,
-                      #NTGovernment=FLgetData_NTGovernment,
-                      CSIRO=getData_ASRIS)
+                      WAGovernment=getData_WAGovernment,
+                      NSWGovernment=getData_NSWGovernment,
+                      VicGovernment=getData_VicGovernment,
+                      SAGovernment=getData_SAGovernment,
+                      TasGovernment=getData_TasGovernment,
+                      NTGovernment=getData_NTGovernment
+                      #CSIRO=getData_ASRIS
+                      )
+
+
+
+
+
 

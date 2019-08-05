@@ -6,7 +6,16 @@ library(stringr)
 
 ### This uses the National Soil Site Collation - Searle 2014
 
-NSSC_dbPath <- 'C:/Projects/TernLandscapes/Site Data/NSSC_2.0.0.sqlite'
+
+
+machineName <- as.character(Sys.info()['nodename'])
+
+if(machineName=='soils-discovery'){
+  NSSC_dbPath <- '/home/sea084/Data/NSSC_2.0.0.sqlite'
+}else{
+  NSSC_dbPath <- 'C:/Projects/TernLandscapes/Site Data/NSSC_2.0.0.sqlite'
+}
+#}
 
 #data(SoilDataFederatoR)
 #library(SoilDataFederatoR)

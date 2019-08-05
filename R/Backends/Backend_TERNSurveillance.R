@@ -1,3 +1,10 @@
+library(httr)
+library(jsonlite)
+library(RCurl)
+library(data.table)
+library(stringr)
+library(RSQLite)
+library(DBI)
 
 
 getData_TERNSurveillance <- function(observedProperty=NULL, observedPropertyGroup=NULL ){
