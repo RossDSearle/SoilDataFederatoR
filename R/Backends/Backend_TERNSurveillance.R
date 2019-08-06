@@ -7,9 +7,9 @@ library(RSQLite)
 library(DBI)
 
 
-getData_TERNSurveillance <- function(observedProperty=NULL, observedPropertyGroup=NULL ){
+getData_TERNSurveillance <- function(provider=NULL,observedProperty=NULL, observedPropertyGroup=NULL ){
 
-  OrgName <- 'TERNSurveillance'
+  OrgName <- provider
 
 
   allInfo <- fromJSON("http://swarmapi.ausplots.aekos.org.au/ross" )

@@ -4,12 +4,8 @@ library(RSQLite)
 machineName <- as.character(Sys.info()['nodename'])
 #if(!asPkg){
   if(machineName=='soils-discovery'){
-    #projectRoot <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
-    #setwd('/srv/plumber/TERNLandscapes/SoilDataFederatoR')
     dbPathSoilsFed <- '/srv/plumber/TERNLandscapes/SoilDataFederatoR/DB/soilsFederator.sqlite'
   }else{
-    #setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
-    # path below is - C:/R/R-3.6.0/library/SoilDataFederatoR/extdata/soilsFederator.sqlite
     dbPathSoilsFed <- system.file("extdata", "soilsFederator.sqlite", package = "SoilDataFederatoR")
   }
 #}
@@ -162,7 +158,7 @@ getProperties <- function(PropertyGroup=NULL, verbose=F){
 }
 
 getPropertyGroups <- function( verbose=F){
-  sql <- paste0("Select distinct PropertyGroup, PropertyType from Properties COLLATE NOCASE")
+  sql <- paste0("Select distinct PropertyGroup, PropertyType from Properties")
   props = doQueryFromFed(sql)
   return(props)
 }
@@ -186,7 +182,7 @@ getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGroup=N
 
 blankResponseDF <- function(){
 
-  outDF <- na.omit(data.frame(Organisation=NULL, Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+  outDF <- na.omit(data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
                               Longitude=numeric() , Latitude= numeric(),
                               UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
                               Units= character(), Quality=integer()))

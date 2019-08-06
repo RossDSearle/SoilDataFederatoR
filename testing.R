@@ -1,13 +1,17 @@
 
-source(paste0('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/R','/Backends.R'))
+machineName <- as.character(Sys.info()['nodename'])
+#if(!asPkg){
+  if(machineName=='soils-discovery'){
+    source(paste0('/srv/plumber/TERNLandscapes/SoilDataFederatoR/R/Backends.R'))
+  }else{
+    source(paste0('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/R/Backends.R'))
+  }
+#}
 
 
 usr <- 'ross.searle@csiro.au'; pwd <- 'a'
 usr='Public'; pwd='Public'
 
-op = 'h_texture'
-op = '4A1'
-og = 'PH'
 observedPropertyGroup = 'NITROGEN'
 observedPropertyGroup = NULL
 observedProperty = '3A1'
@@ -15,28 +19,27 @@ observedProperty = 'h_texture'
 observedProperty = 'SEG_FORM'
 observedProperty = 'RO_ABUN'
 observedProperty = 'S_DESC_BY'
-op= 'RO_ABUN'
-
-op <- 'h_texture'
-op <- 'SEG_FORM'
 
 getPropertyType(observedProperty)
 
-
-getProviders(activeOnly = T, usr = 'Public', pwd = 'Public')
-getProviders(activeOnly = F) # disabled this for now
+getProviders()
 getProviders(usr = 'Admin', pwd = 'c')
 
 getProviders(activeOnly = T, usr = 'LawsonGrains', pwd = 'b')
 getProviders(activeOnly = T, usr = 'Admin', pwd = 'c')
 
-df <- getSoilData('TERNLandscapes', observedProperty='4A1')
-df <- getSoilData(providers='QLDGovernment', observedProperty='3A1')
-df <- getSoilData(providers='CSIRO', observedProperty='3A1')
-df <- getSoilData(providers='LawsonGrains', observedProperty='3A1')
-df <- getSoilData(providers='TERNSurveillance', observedProperty='4A1')
+df <- getSoilData(providers=NULL, observedProperty='3A1')
 
-df <- getData_NSSC(provider='NSWGovernment', observedProperty='CF_ABUN')
+df <- getSoilData('TERNLandscapes', observedProperty='3A1') #OK
+df <- getSoilData(providers='QLDGovernment', observedProperty='3A1') #OK
+df <- getSoilData(providers='CSIRO', observedProperty='3A1') #OK
+df <- getSoilData(providers='LawsonGrains', observedProperty='3A1') #OK
+df <- getSoilData(providers='TERNSurveillance', observedProperty='4A1') #OK
+df <- getSoilData(providers='NSWGovernment', observedProperty='4A1') #OK
+
+df <- getSoilData(providers='NTGovernment', observedProperty='3A1') #OK
+
+df <- getData_NSSC(provider='NSWGovernment', observedProperty='3A1')
 df <- getData_NSSC(provider='NSWGovernment', observedProperty='RO_ABUN')
 df <- getData_NSSC(provider='NSWGovernment', observedProperty='h_texture;RO_ABUN')
 head(df)

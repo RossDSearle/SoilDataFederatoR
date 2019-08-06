@@ -13,9 +13,9 @@ library(data.table)
 # nrow(testvals)
 # head(testvals)
 
-getData_QLDGovernment <- function( observedProperty=NULL, observedPropertyGroup=NULL ){
+getData_QLDGovernment <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
 
-  OrgName <- 'QLDGovernment'
+  OrgName <- provider
   #cat(paste0('Extracting data from ', OrgName))
 
   samples <- fromJSON(paste0("https://soil-chem.information.qld.gov.au/odata/Samples"))
