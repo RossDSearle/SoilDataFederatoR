@@ -3,6 +3,8 @@
 getData_NSSC_Wrapper <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL){
 
   url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+
+  print(provider)
   fdf <- fromJSON(paste0(url))
   if(is.data.frame(fdf)){
     return <- fdf

@@ -219,18 +219,22 @@ bob <- function(){
 #* @get /SoilDataAPI/SoilData
 apiGetSoilData<- function(res, usr='Public', pwd='Public', providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, format='json', numToReturn=NULL){
 
-  nrows <- as.numeric(numToReturn)
+  nrowsToGet <- as.numeric(numToReturn)
 
   tryCatch({
 
     DF <-getSoilData(providers, observedProperty, observedPropertyGroup)
 
     if(!is.null(numToReturn)){
-      DF<- DF[1:numToReturn,]
+      nget <- min(nrowsToGet, nrow(DF))
+      print(nget)
+      oDF <- DF[1:nget, ]
+    }else{
+      oDF <- DF
     }
 
     label <- 'SoilProperty'
-    resp <- cerealize(DF, label, format, res)
+    resp <- cerealize(oDF, label, format, res)
   }, error = function(res)
   {
     print(geterrmessage())
