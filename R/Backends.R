@@ -4,20 +4,15 @@ library(stringr)
 library(data.table)
 
 asPkg = F
-Devel = T
-
-#system.file("extdata", "NSSC_2.0.0.sqlite", package = "SoilDataFederatoR")
+Devel = F
 
 machineName <- as.character(Sys.info()['nodename'])
 if(!asPkg){
   if(machineName=='soils-discovery'){
-    #projectRoot <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
     setwd('/srv/plumber/TERNLandscapes/SoilDataFederatoR')
-    #dbPathSoilsFed <- '/srv/plumber/TERNLandscapes/SoilDataFederatoR/DB/soilsFederator.sqlite'
   }else{
-    setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
     # path below is - C:/R/R-3.6.0/library/SoilDataFederatoR/extdata/soilsFederator.sqlite
-    #dbPathSoilsFed <- system.file("extdata", "soilsFederator.sqlite", package = "SoilDataFederatoR")
+    setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
   }
 }
 
@@ -35,8 +30,6 @@ source(paste0('R/Helpers/Functions_BackendLists.R'))
 
 PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', FieldMeasurement='FieldMeasurement', stringsAsFactors = F)
 
-
-#ASRIS_df <- read.csv( 'c:/temp/Asris.csv')  ## This is a temporary hack until the endpoint is finished
 
 #' Returns Observed Soil Properties
 #'
@@ -71,8 +64,16 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
     prov <- availProviders[[i]]
     cat(paste0('Extracting data from ', prov, '\n'))
    # possibleError <- tryCatch(
-    outdfs[[i]] <- getDataFunctions[[prov]](observedProperty, observedPropertyGroup)
-    head(outdfs[[i]])
+    odf <- getDataFunctions[[prov]](provider=prov, observedProperty, observedPropertyGroup)
+    print(head(odf))
+    if(is.data.frame(odf))
+    {
+      outdfs[[i]] <- odf
+    }else{
+      outdfs[[i]] <- blankResponseDF()
+    }
+
+
     #  error=function(e) e
     #)
     #if(inherits(possibleError, "error")) next
@@ -94,20 +95,6 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
 }
 
 
-
-
-#' CGet Providers
-#' Blah Blah Blah
-#' @param Bob The temperature in Fahrenheit.
-#' @return The temperature in Kelvin.
-
-#' getProviders1
-
-getProviders1 <- function(activeOnly=T,usr=NULL, pwd=NULL){
-
-  return(NULL)
-
-}
 
 
 
