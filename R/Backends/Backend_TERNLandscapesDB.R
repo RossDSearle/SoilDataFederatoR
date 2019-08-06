@@ -4,15 +4,15 @@ library(RCurl)
 library(data.table)
 library(stringr)
 
-getData_TERNLandscapes <- function(observedProperty=NULL, observedPropertyGroup=NULL){
+getData_TERNLandscapes <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL){
 
   if(Devel){
     ep <- 'http://localhost:8055/TERNSoilDB'
   }else{
-    ep <- getEndPointURL('TERNSoilDB')
+    ep <- getEndPointURL('http://esoil.io/TERNLandscapes/SoilDataFederatoRDatabase/TERNSoilDB')
   }
 
-  OrgName <- 'TERNLandscapes'
+  OrgName <- provider
  # cat(paste0('Extracting data from ', OrgName, '\n'))
   ps <- getPropertiesList(observedProperty, observedPropertyGroup)
 
