@@ -31,6 +31,8 @@ getProviders(activeOnly = T, usr = 'LawsonGrains', pwd = 'b')
 getProviders(activeOnly = T, usr = 'Admin', pwd = 'c')
 
 df <- getSoilData('TERNLandscapes', observedProperty='4A1')
+df <- getSoilData('TERNSurveillance', observedProperty='4A1')
+df <- getSoilData('NTGovernment', observedProperty='4A1')
 df <- getSoilData(providers='QLDGovernment', observedProperty='3A1')
 df <- getSoilData(providers='CSIRO', observedProperty='3A1')
 df <- getSoilData(providers='LawsonGrains', observedProperty='3A1')
