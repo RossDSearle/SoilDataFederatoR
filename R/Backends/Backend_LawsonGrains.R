@@ -17,9 +17,9 @@ getLGMethod <- function(methods, mappings){
 
 
 
-getData_LawsonGrains <- function( observedProperty=NULL, observedPropertyGroup=NULL ){
+getData_LawsonGrains <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
 
-  OrgName <- 'LawsonGrains'
+  OrgName <- provider
   #print(paste0('Extracting data from ', OrgName))
 
   locsUrl <- 'http://esoil.io/SoilsFederator/Providers/LawsonGrains/all_Locs.xlsx'
@@ -33,8 +33,8 @@ getData_LawsonGrains <- function( observedProperty=NULL, observedPropertyGroup=N
   download.file(dataUrl, p2f, mode="wb", quiet = T)
   lg <- suppressMessages( read_excel(path = p2f))
 
+  pl <- getPropertiesList(observedProperty, observedPropertyGroup)
   mappings <- doQueryFromFed(paste0("Select * from Mappings where Organisation = '", OrgName, "'" ))
-
   nativeProps <- getNativeProperties(OrgName, mappings, observedProperty, observedPropertyGroup)
 
 
@@ -46,6 +46,7 @@ if(length(nativeProps) == 0){
 
   for (i in 1:length(nativeProps)) {
 
+    prop <- pl[i]
     sd <- merge(lg, locs,  by.x=c("Sample No."),by.y=c("Site ID"), all.x = T)
 
     bits <- str_split(sd$Depth, '-')
@@ -63,6 +64,9 @@ if(length(nativeProps) == 0){
     oOutDF <- generateResponseDF(OrgName, 'AgCatalyst', paste0(fdf$Aggregation , '_', fdf$SampleNo ), fdf$LabNumber, paste0('01-04-', sd$Year,'T00:00:00' ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, prop, fdf$Value, units, "Brilliant")
     cDF<- rbind(cDF, oOutDF)
   }
+
+  unlink(p1f)
+  unlink(p2f)
 
    return(cDF)
 }
