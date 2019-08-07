@@ -16,7 +16,7 @@ if(machineName=='soils-discovery'){
 source(paste0(deployDir, '/R/Helpers/apiHelpers.R'))
 source(paste0(deployDir, '/R/Backends.R'))
 
-#* @apiTitle TERN Soil Federator Web API
+#* @apiTitle TERN Soil FederatoR Web API
 #* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the Soils Federation Service can be found <a href='http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/help/index.html' > here </a>
 
 #' Log system time, request method and HTTP user agent of the incoming request
