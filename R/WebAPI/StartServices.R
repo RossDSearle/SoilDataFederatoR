@@ -23,7 +23,7 @@ r <- plumb(paste0(deployDir, "/WebAPI/apiEndPoints.R"))
 
 server <- 'http://esoil.io'
 portNum <- 8074
-
+#portNum <- 8079
 
 print(r)
 
