@@ -18,7 +18,12 @@ source(paste0(deployDir, '/R/Backends.R'))
 
 #* @apiTitle TERN Soil FederatoR Web API
 #* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the Soils Federation Service can be found <a href='http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/help/index.html' > here </a>
-#* <p>You need to register to obtain a API key before you can access the data</p>
+#* <h2>API Key Registration</h2>
+#* You need to register for an API Key to be able to use the API to access the soil data. You can quickly register <a
+#* href="https://shiny.esoil.io/SoilDataFederator/Register/"
+#* target="_blank">HERE</a>. Just supply your email address, name and organisation and you are good to go.
+
+
 
 #' Log system time, request method and HTTP user agent of the incoming request
 #' @filter logger
@@ -62,29 +67,29 @@ writeLogEntry <- function(logfile, logentry){
 
 
 
-#* Register with teh SoilFederator to obtain an API Key to access the data. We require this just so we can update you of cahnges to the system etc. We may contact you to ask about how you are  using the system
-#* @param organisation Your organisation
-#* @param name Your last name
-#* @param name Your first name
-#* @param email Your email address
-#* @tag Register
-#* @get /SoilDataAPI/Register
-apiGetProviders <- function( res, format='json'){
-
-  tryCatch({
-
-    DF <- getProviders()
-    label <- 'DataProvider'
-    resp <- cerealize(DF, label, format, res)
-    return(resp)
-
-  }, error = function(res)
-  {
-    print(geterrmessage())
-    res$status <- 400
-    list(error=jsonlite::unbox(geterrmessage()))
-  })
-}
+# #* Register with teh SoilFederator to obtain an API Key to access the data. We require this just so we can update you of cahnges to the system etc. We may contact you to ask about how you are  using the system
+# #* @param organisation Your organisation
+# #* @param name Your last name
+# #* @param name Your first name
+# #* @param email Your email address
+# #* @tag Register
+# #* @get /SoilDataAPI/Register
+# apiGetProviders <- function( res, format='json'){
+#
+#   tryCatch({
+#
+#     DF <- getProviders()
+#     label <- 'DataProvider'
+#     resp <- cerealize(DF, label, format, res)
+#     return(resp)
+#
+#   }, error = function(res)
+#   {
+#     print(geterrmessage())
+#     res$status <- 400
+#     list(error=jsonlite::unbox(geterrmessage()))
+#   })
+# }
 
 
 
