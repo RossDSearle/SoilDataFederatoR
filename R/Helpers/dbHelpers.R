@@ -70,7 +70,9 @@ getNativeProperties <- function(OrgName, mappings, observedProperty, observedPro
 }
 
 
-AuthenticateAPIKey <- function(usr='Public', key='Public'){
+AuthenticateAPIKey <- function(usr='Demo', key='Demo'){
+
+  if(usr=='Demo'){return("OK")}
 
   sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
   idRec <- doQueryFromFed(sql)
@@ -85,7 +87,13 @@ AuthenticateAPIKey <- function(usr='Public', key='Public'){
 
 getProviders <- function( usr=NULL, key=NULL){
 
-  if(is.null(usr) | is.null(key)) {return(NULL)}
+
+  if(is.null(usr) | is.null(key)) {
+
+    sql <- paste0("Select * from Providers WHERE Active = 1 and not Restricted")
+    orgs = doQueryFromFed(sql)
+    return(orgs)
+    }
 
     sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
     idRec <- doQueryFromFed(sql)
@@ -104,6 +112,7 @@ getProviders <- function( usr=NULL, key=NULL){
       if(cgrp == 'Public'){
         sql <- paste0("Select * from Providers WHERE Active = 1 and not Restricted")
         orgs = doQueryFromFed(sql)
+
         return(orgs)
       }else if(cgrp == 'Admin'){
         sql <- paste0("Select * from Providers")
@@ -189,6 +198,7 @@ getProvidersOldToBeDeleted <- function( usr='Public', key='Public'){
 getObservedProperties <- function(verbose=F){
   sql <- paste0("Select * from LabMethods")
   methods = doQueryFromFed(sql)
+
   if(verbose){
     return(methods)
   }else{

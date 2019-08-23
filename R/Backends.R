@@ -87,6 +87,9 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
 
      outDF = as.data.frame(data.table::rbindlist(outdfs))
 
+     if(usr=='Demo'){
+       outDF <- outDF[1:5,]
+     }
 
      if(nrow(outDF)==0){
        return(blankResponseDF())

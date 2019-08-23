@@ -67,42 +67,20 @@ writeLogEntry <- function(logfile, logentry){
 
 
 
-# #* Register with teh SoilFederator to obtain an API Key to access the data. We require this just so we can update you of cahnges to the system etc. We may contact you to ask about how you are  using the system
-# #* @param organisation Your organisation
-# #* @param name Your last name
-# #* @param name Your first name
-# #* @param email Your email address
-# #* @tag Register
-# #* @get /SoilDataAPI/Register
-# apiGetProviders <- function( res, format='json'){
-#
-#   tryCatch({
-#
-#     DF <- getProviders()
-#     label <- 'DataProvider'
-#     resp <- cerealize(DF, label, format, res)
-#     return(resp)
-#
-#   }, error = function(res)
-#   {
-#     print(geterrmessage())
-#     res$status <- 400
-#     list(error=jsonlite::unbox(geterrmessage()))
-#   })
-# }
 
 
-#* @param key API key for accessing the API.
-#* @param usr User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/
 #* Returns information about the data providers known to the SoilDataFederator
+
+#* @param key (Optional)  API key for accessing the API.
+#* @param usr (Optional) User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/
 #* @param format (Optional) format of the response to return. Either json, csv, or xml. Default = json
 #* @tag Soil Data Federator
 #* @get /SoilDataAPI/Providers
-apiGetProviders <- function( res, format='json'){
+apiGetProviders <- function( res, usr=NULL, key=NULL, format='json'){
 
   tryCatch({
 
-    DF <- getProviders()
+    DF <- getProviders(usr, key)
     label <- 'DataProvider'
     resp <- cerealize(DF, label, format, res)
     return(resp)
@@ -122,8 +100,7 @@ apiGetProviders <- function( res, format='json'){
 
 #* Returns a listing of the available properties
 
-#* @param key API key for accessing the API.
-#* @param usr User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/
+
 #* @param format (Optional) format of the response to return. Either json, csv, or xml. Default = json
 #* @param verbose (Optional) return just the property codes or the full descriptions. Default = True
 #* @param PropertyGroup (Optional) return just the properties for a given PropertyGroup. Default = All
@@ -179,8 +156,7 @@ apiGetProperties <- function( res,PropertyGroup=NULL, verbose=T, format='json'){
 
 
 #* Returns a listing of the available Property Groups
-#* @param key API key for accessing the API.
-#* @param usr User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/
+
 #* @param format (Optional) format of the response to return. Either json, csv, or xml. Default = json
 #* @tag Soil Data Federator
 #* @get /SoilDataAPI/PropertyGroups
@@ -240,8 +216,8 @@ bob <- function(){
 
 #* Returns soil data
 
-#* @param key API key for accessing the API.
-#* @param usr User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/
+#* @param key (Required)  API key for accessing the API.
+#* @param usr (Required) User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/ You can use usr=Demo & key=Demo but only the first 5 records will be returned
 #* @param numToReturn (Optional) The number of records to be returned. Default = All
 #* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
 #* @param providers (Optional) Filter the data returned to a specific set of Providers. It should be a single Provider code or a semi-colon delimited text string of Provider codes. Default = All providers
@@ -250,13 +226,13 @@ bob <- function(){
 
 #* @tag Soil Data Federator
 #* @get /SoilDataAPI/SoilData
-apiGetSoilData<- function(res, usr=NULL, key=NULL, providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, format='json', numToReturn=NULL){
+apiGetSoilData<- function(res, usr='Demo', key='Demo', providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, format='json', numToReturn=NULL){
 
   nrowsToGet <- as.numeric(numToReturn)
 
   tryCatch({
 
-    DF <-getSoilData(providers, observedProperty, observedPropertyGroup, usr=NULL, key=NULL)
+    DF <-getSoilData(providers, observedProperty, observedPropertyGroup, usr, key)
 
     if(!is.null(numToReturn)){
       nget <- min(nrowsToGet, nrow(DF))
