@@ -70,8 +70,64 @@ getNativeProperties <- function(OrgName, mappings, observedProperty, observedPro
 }
 
 
+AuthenticateAPIKey <- function(usr='Public', key='Public'){
 
-getProviders <- function( usr='Public', pwd='Public'){
+  sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
+  idRec <- doQueryFromFed(sql)
+  print(sql)
+
+  if(nrow(idRec) != 1){return('Error : You need to register to obtain an API key. To register go to https://shiny.esoil.io/SoilDataFederator/Register/')}
+  if(idRec$Pwd != key){return(paste0('Error : Incorrect API key supplied. Have a look at the help pages at or otherwise contact ', administrator, ' for assistance.'))}
+
+  return("OK")
+}
+
+
+getProviders <- function( usr=NULL, key=NULL){
+
+  if(is.null(usr) | is.null(key)) {return(NULL)}
+
+    sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
+    idRec <- doQueryFromFed(sql)
+
+    cusr <- as.character(idRec$usrID[1])
+    cpwd <- as.character(idRec$Pwd[1])
+    cgrp <- as.character(idRec$GroupName[1])
+
+    sql <- paste0("SELECT * FROM AuthAccess WHERE GroupName = '", cgrp, "'")
+    accessRecs <- doQueryFromFed(sql)
+
+    accessList <- accessRecs$access
+
+    if(key == cpwd){
+
+      if(cgrp == 'Public'){
+        sql <- paste0("Select * from Providers WHERE Active = 1 and not Restricted")
+        orgs = doQueryFromFed(sql)
+        return(orgs)
+      }else if(cgrp == 'Admin'){
+        sql <- paste0("Select * from Providers")
+        orgs = doQueryFromFed(sql)
+        return(orgs)
+      }
+      else {
+        sql <- paste0("Select * from Providers
+        WHERE Active = 1 and ( not Restricted or ( Restricted and OrgName IN ( SELECT access FROM AuthAccess WHERE GroupName = '", cgrp, "')))")
+        orgs = doQueryFromFed(sql)
+
+        return(orgs)
+      }
+      stop('Login failed')
+    }
+    else{
+      stop('Incorrect user name or API Key')
+    }
+    stop('Login failed')
+
+}
+
+
+getProvidersOldToBeDeleted <- function( usr='Public', key='Public'){
   #getProviders <- function(activeOnly=T, usr='Public', pwd='Public'){
 
 
@@ -99,7 +155,7 @@ getProviders <- function( usr='Public', pwd='Public'){
 
     accessList <- accessRecs$access
 
-    if(pwd == cpwd){
+    if(key == cpwd){
 
       if(usr == 'Admin'){
         sql <- paste0("Select * from Providers WHERE Active = 1")

@@ -16,6 +16,7 @@ if(!asPkg){
   }
 }
 
+administrator <- 'ross.searle@csiro.au'
 
 source(paste0('R/Helpers/dbHelpers.R'))
 
@@ -42,57 +43,62 @@ PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', Field
 
 
 
-getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, usr='Public', pwd='Public'){
+getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, usr=NULL, key=NULL){
 
   #orgs <- getProviders(activeOnly=T,usr=usr, pwd=pwd)
-  orgs <- getProviders(usr=usr, pwd=pwd)
 
-  if(!is.null(providers)){
-    bits <- str_split(providers, ';')
-    availProviders <- bits[[1]]
-  }else{
-    availProviders <- orgs$OrgName
-  }
+ auth  <- AuthenticateAPIKey(usr, key)
 
-  cat(paste('Available Providers\n'))
-  cat(paste('====================\n '))
-  cat(paste0(availProviders, '\n'))
-  cat(paste0('\n'))
+ if(auth == 'OK'){
+      orgs <- getProviders(usr=usr, key=key)
 
-  outdfs <- list(length(availProviders))
+      if(!is.null(providers)){
+        bits <- str_split(providers, ';')
+        availProviders <- bits[[1]]
+      }else{
+        availProviders <- orgs$OrgName
+      }
 
-   for(i in 1:length(availProviders)) {
-    prov <- availProviders[[i]]
-    cat(paste0('Extracting data from ', prov, '\n'))
-   # possibleError <- tryCatch(
-    odf <- getDataFunctions[[prov]](provider=prov, observedProperty, observedPropertyGroup)
-    print(head(odf))
-    if(is.data.frame(odf))
-    {
-      outdfs[[i]] <- odf
-    }else{
-      outdfs[[i]] <- blankResponseDF()
-    }
+      cat(paste('Available Providers\n'))
+      cat(paste('====================\n '))
+      cat(paste0(availProviders, '\n'))
+      cat(paste0('\n'))
 
+      outdfs <- list(length(availProviders))
 
-    #  error=function(e) e
-    #)
-    #if(inherits(possibleError, "error")) next
-  }
-
- outDF = as.data.frame(data.table::rbindlist(outdfs))
+       for(i in 1:length(availProviders)) {
+        prov <- availProviders[[i]]
+        cat(paste0('Extracting data from ', prov, '\n'))
+       # possibleError <- tryCatch(
+        odf <- getDataFunctions[[prov]](provider=prov, observedProperty, observedPropertyGroup)
+        print(head(odf))
+        if(is.data.frame(odf))
+        {
+          outdfs[[i]] <- odf
+        }else{
+          outdfs[[i]] <- blankResponseDF()
+        }
 
 
- if(nrow(outDF)==0){
-   return(blankResponseDF())
- }
+        #  error=function(e) e
+        #)
+        #if(inherits(possibleError, "error")) next
+      }
 
- outDF$ExtractTime<- format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
+     outDF = as.data.frame(data.table::rbindlist(outdfs))
 
 
+     if(nrow(outDF)==0){
+       return(blankResponseDF())
+     }
 
- return(outDF)
+     outDF$ExtractTime<- format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
 
+     return(outDF)
+
+
+ }else
+   stop(auth)
 }
 
 

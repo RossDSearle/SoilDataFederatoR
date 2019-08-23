@@ -12,6 +12,18 @@ machineName <- as.character(Sys.info()['nodename'])
 usr <- 'ross.searle@csiro.au'; pwd <- 'a'
 usr='Public'; pwd='Public'
 
+##########  Key authentication
+
+usr <- 'ross.searle@csiro.au'
+key <- 'a'
+usr <- 'Admin'
+key <- '2jpft6WvquTLjwO9XqFD'
+AuthenticateAPIKey(usr, key)
+getProviders(usr = usr, key = key)
+
+
+
+
 observedPropertyGroup = 'NITROGEN'
 observedPropertyGroup = NULL
 observedProperty = '3A1'
@@ -23,14 +35,15 @@ observedProperty = 'S_DESC_BY'
 getPropertyType(observedProperty)
 
 getProviders()
-getProviders(usr = 'Admin', pwd = 'c')
+getProviders(usr = usr, key = key)
 
-getProviders(activeOnly = T, usr = 'LawsonGrains', pwd = 'b')
-getProviders(activeOnly = T, usr = 'Admin', pwd = 'c')
+getProviders( usr = 'LawsonGrains', key = 'b')
+getProviders( usr = 'Admin', pwd = 'c')
 
 
-df <- getSoilData('TERNLandscapes', observedProperty='4A1')
-df <- getSoilData('TERNSurveillance', observedProperty='4A1')
+df <- getSoilData('TERNLandscapes', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+
+df <- getSoilData('TERNSurveillance', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 df <- getSoilData('NTGovernment', observedProperty='4A1')
 df <- getSoilData(providers='QLDGovernment', observedProperty='3A1')
 df <- getSoilData(providers='CSIRO', observedProperty='3A1')
