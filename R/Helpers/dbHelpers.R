@@ -70,7 +70,7 @@ getNativeProperties <- function(OrgName, mappings, observedProperty, observedPro
 }
 
 
-AuthenticateAPIKey <- function(usr='Demo', key='Demo'){
+AuthenticateAPIKey <- function(usr=NULL, key=NULL){
 
   if(usr=='Demo'){return("OK")}
 

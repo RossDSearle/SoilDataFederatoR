@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
@@ -7,36 +6,7 @@
   <title>TERN SoilDataFederator Information</title>
   <meta content="Ross Searle" name="author">
   <style type="text/css">
-=======
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>TERN SoilDataFederator</title></head><body style="width: 985px;">&nbsp;<img src="images/SoilDataFederator_Header.png" alt=""><br>
-<span style="font-family: Calibri;">The SoilDataFederator is a web API
-that brings together soil site data from a range of disparate data
-sources. It allows the user to query soils data stores across Australia
-in a consistent manner and the data returned is a consistent
-format.&nbsp; Users do not need to know&nbsp; the details of each of
-the individual data stores structures and querying mechanisms. The data
-in the system is historical soil survey data and is composed of both
-morphological description data and Laboratory analysis data</span>.<br>
-<br>
-The <span style="font-family: Calibri;">SoilDataFederator web API is designed to be as simple as possible. Users can query API end point to return information about<br>
-<br>
-</span>
-<ul>
-  <li><span style="font-family: Calibri;"><span style="font-weight: bold;">Providers</span> - which organisations are contributing data.</span></li>
-  <li><span style="font-family: Calibri;"><span style="font-weight: bold;">Properties </span>- which soil propertes are available in the system.</span></li>
-  <li><span style="font-family: Calibri;"><span style="font-weight: bold;">PropertyGroups</span> - defined groupings of Properties (a convenience for querying)</span></li>
-</ul>
-<span style="font-family: Calibri;">and then return data using the <span style="font-weight: bold;"><br>
-</span></span>
-<ul>
-  <li><span style="font-family: Calibri;"><span style="font-weight: bold;">SoilData</span> end point.</span></li>
-</ul>
-The current contributors to the Federator are listed <a href="http://shiny.esoil.io/SoilFederatorWebPages/Providers/" target="_blank">HERE</a><br>
-<span style="font-family: Calibri;"><br>
-<br>
-</span>
->>>>>>> 095fe3716221a315cb4028f87d53c679accf528d
+
 
 
   </style>
@@ -51,7 +21,7 @@ The current contributors to the Federator are listed <a href="http://shiny.esoil
 <div class="headertext1">Soil and Landscape Grid</div>
 <div class="headertext2">of Australia</div>
 </div>
-<h1><big style="color: rgb(153, 153, 153);"><big>Soil Data Federator</big></big></h1>
+<h1><big style="color: rgb(153, 153, 153);"><big>SoilDataFederator</big></big></h1>
 <h1>About</h1>
 The SoilDataFederator is a web API that brings together soil site data
 from a range of disparate data sources. It allows the user to query
@@ -81,18 +51,21 @@ The current contributors to the Federator are listed <a
  target="_blank">HERE</a><br>
 <br>
 The code for the SoilDataFederator is written in R and can be found <a
- href="https://github.com/RossDSearle/SoilDataFederatoR"
- target="_blank">HERE</a><br>
+ href="https://github.com/RossDSearle/SoilDataFederatoR" target="_blank">HERE</a><br>
 <br>
-
 <h1>API Key Registration</h1>
-You need to register for an API Key to be able to use the API to access the soil data. You can quickly register <a
+You need to register for an API Key to be able to use the API to access
+the soil data. You can quickly register <a
  href="https://shiny.esoil.io/SoilDataFederator/Register/"
- target="_blank">HERE</a>. Just supply your email address, name and organisation and you are good to go.  
+ target="_blank">HERE</a>. Just supply your email address, name and
+organisation and you are good to go. We might get in touch once in a
+while to ask for feedback or let you know about changes etc. All of the
+current endpoint will work without an API Key, except for the
+"GetSoilData" endpoint - the one you'll actually want to use. If you
+don't want to register, but instead you just want to check out how the
+API works you can use usr=Demo &amp; key=Demo authentication. Only the
+first 5 records will be returned.<br>
 <br>
-<br>
-
-
 <h1>Examples</h1>
 The <span style="font-weight: bold;">Swagger UI </span>for the API is
 located <a
@@ -137,14 +110,14 @@ of the response to return. Either json, csv, or xml. Default = json</span></li>
  style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"></span>
 <ul>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers&nbsp;</a>
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers&nbsp;</a>
 - Returns data as json format</li>
   <li><a target="_blank"
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=xml">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=xml</a>
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=xml">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=xml</a>
 - Returns data as xml format</li>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=csv">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=csv</a>
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=csv">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=csv</a>
 -
 Returns data as csv file download</li>
 </ul>
@@ -183,23 +156,23 @@ of the response to return. Either json, csv, or xml. Default = json</span></li>
 <h4>Endpoint Syntax</h4>
 <ul>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties
     </a> - Returns a verbose list of soil properties<br>
   </li>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?verbose=F"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?verbose=F
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?verbose=F"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?verbose=F
     </a> - Returns just a list of soil properties</li>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=pH"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=pH
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=pH"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=pH
     </a> - Returns a list of soil properties for the "pH"
 PropertyGroup. This is analagous to the traditonal "Lab Method Groups"<br>
   </li>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=COARSE_FRAGS"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=COARSE_FRAGS</a>&nbsp;
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=COARSE_FRAGS"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=COARSE_FRAGS</a>&nbsp;
 - Returns a list of soil properties for the "<a
  href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=COARSE_FRAGS"
  target="_blank">COARSE_FRAGS</a>" PropertyGroup. This is analagous to
@@ -224,8 +197,8 @@ of the response to return. Either json, csv, or xml. Default = json</span></li>
 <h4>Endpoint Syntax</h4>
 <ul>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/PropertyGroups"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/PropertyGroups
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/PropertyGroups"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/PropertyGroups
     </a> - Returns a list of soil PropertyGroups</li>
 </ul>
 <br>
@@ -297,16 +270,18 @@ records will be returned</span></li>
  style="font-style: italic;">usr</span> </span><span
  style="font-style: italic;">(string) </span><span
  style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">-
-username to access restricted
-data sets</span></li>
+username to access the API<br>
+    </span></li>
   <li><span
  style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
- style="font-style: italic;">pwd</span> </span><span
+ style="font-style: italic;">key</span> </span><span
  style="font-style: italic;">(string) </span><span
  style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">-
-password </span><span
- style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">to
-access restricted data sets</span></li>
+the API key</span><span
+ style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+to
+access the API<br>
+    </span></li>
 </ul>
 <span
  style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">Further
@@ -316,26 +291,25 @@ filter parameters can potentially be added on request by asking a <a
 <h4>Endpoint Syntax</h4>
 <ul>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;numToReturn=100"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;numToReturn=100</a>
-- returns the data for requested soil Property</li>
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;providers=TasGovernment&amp;usr=Demo&amp;key=Demo"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;providers=TasGovernment</a><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;providers=TasGovernment&amp;usr=Demo&amp;key=Demo"
+ target="_blank">&amp;usr=Demo&amp;key=Demo</a>
+- returns soil propery data filtered by a specifc Provider code. Only 5
+records will be returned for demonstration purposes unless you have a
+registered API key</li>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1
-    </a>- returns <span style="font-weight: bold;">ALL</span> the data
-for requested soil Property. This will take 10s of seconds to run and
-may blow up your browser as it tries to render the returned json
-string. Have a go, but if your browser falls over try it using the
-provided&nbsp; <a href="SoilDataFederatorR_Examples.R">R scripts</a>.<br>
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=4A1&amp;usr=Demo&amp;key=Demo"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=4A1&amp;usr=Demo&amp;key=Demo</a>
+- returns ALL the data for requested soil Property. However, only 5
+records will be returned for demonstration purposes unless you have a
+registered API key<br>
   </li>
   <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;providers=TasGovernment"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;providers=TasGovernment</a>
-- returns soil propery data filtered by a specifc Provider code<br>
-  </li>
-  <li><a
- href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedPropertyGroup=DENSITY&amp;numToReturn=100"
- target="_blank">http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedPropertyGroup=DENSITY&amp;numToReturn=100</a>
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedPropertyGroup=DENSITY&amp;usr=Demo&amp;key=Demo"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedPropertyGroup=DENSITY</a><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedPropertyGroup=DENSITY&amp;usr=Demo&amp;key=Demo"
+ target="_blank">&amp;usr=Demo&amp;key=Demo</a>
 - returns the data for requested soil PropertyGroup. Looks like this
 might be brocken at the moment<br>
   </li>

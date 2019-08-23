@@ -16,8 +16,8 @@ if(machineName=='soils-discovery'){
 source(paste0(deployDir, '/R/Helpers/apiHelpers.R'))
 source(paste0(deployDir, '/R/Backends.R'))
 
-#* @apiTitle TERN Soil FederatoR Web API
-#* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the Soils Federation Service can be found <a href='http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/help/index.html' > HERE </a>
+#* @apiTitle TERN SoilDataFederatoR Web API
+#* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the SoilDataFederatoR service can be found <a href='http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/help/index.html' > HERE </a>
 #* <h2>API Key Registration</h2>
 #* You need to register for an API Key to be able to use the API to access the soil data. You can quickly register <a
 #* href="https://shiny.esoil.io/SoilDataFederator/Register/"
