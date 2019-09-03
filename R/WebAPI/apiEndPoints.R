@@ -1,5 +1,7 @@
 library(stringr)
+library(XML)
 library(xml2)
+library(htmlTable)
 
 #projectRoot <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
 
@@ -112,34 +114,9 @@ apiGetProperties <- function( res,PropertyGroup=NULL, verbose=T, format='json'){
   tryCatch({
 
     DF <-getProperties(PropertyGroup, verbose)
-
-    if(format == 'xml'){
-
-      res$setHeader("Content-Type", "application/xml; charset=utf-8")
-      xdoc=xml_new_root('Properties')
-      vars_xml <- lapply(purrr::transpose(DF),
-                         function(x) {
-                           as_xml_document(list(property = lapply(x, as.list)))
-                         })
-
-      for(trial in vars_xml) xml_add_child(xdoc, trial)
-      res$body <- as(xdoc, "character")
-      return(res)
-
-    }else if(format == 'csv'){
-      res$setHeader("content-disposition", "attachment; filename=soilProperties.csv");
-      res$setHeader("Content-Type", "application/csv; charset=utf-8")
-      res$body <- writecsv(DF)
-      return(res)
-
-    }else if(format == 'html'){
-      res$setHeader("Content-Type", "text/html ; charset=utf-8")
-      res$body <- htmlTable(DF, align = "l", align.header = "l", caption = "Soil Properties")
-      return(res)
-
-    }else{
-      return(DF)
-    }
+    label <- 'Properties'
+    resp <- cerealize(DF, label, format, res)
+    return(resp)
 
   }, error = function(res)
   {
@@ -165,34 +142,9 @@ apiGetPropetyGroups <- function( res, verbose=T, format='json'){
   tryCatch({
 
     DF <-getPropertyGroups(verbose)
-
-    if(format == 'xml'){
-
-      res$setHeader("Content-Type", "application/xml; charset=utf-8")
-      xdoc=xml_new_root('PropertyGroups')
-      vars_xml <- lapply(purrr::transpose(DF),
-                         function(x) {
-                           as_xml_document(list(PropertyGroup = lapply(x, as.list)))
-                         })
-
-      for(trial in vars_xml) xml_add_child(xdoc, trial)
-      res$body <- as(xdoc, "character")
-      return(res)
-
-    }else if(format == 'csv'){
-      res$setHeader("content-disposition", "attachment; filename=PropertyGroups.csv");
-      res$setHeader("Content-Type", "application/csv; charset=utf-8")
-      res$body <- writecsv(DF)
-      return(res)
-
-    }else if(format == 'html'){
-      res$setHeader("Content-Type", "text/html ; charset=utf-8")
-      res$body <- htmlTable(DF, align = "l", align.header = "l", caption = "PropertyGroups")
-      return(res)
-
-    }else{
-      return(DF)
-    }
+    label <- 'PropetyGroups'
+    resp <- cerealize(DF, label, format, res)
+    return(resp)
 
   }, error = function(res)
   {
@@ -257,6 +209,78 @@ apiGetSoilData<- function(res, usr='Demo', key='Demo', providers=NULL, observedP
 
 #* @assets /srv/plumber/TERNLandscapes/SoilDataFederatoR/R/Docs /help
 list()
+
+
+
+
+
+
+
+
+cerealize <- function(DF, label, format, res){
+
+
+  if(format == 'xml'){
+
+    res$setHeader("Content-Type", "application/xml; charset=utf-8")
+    xmlT <- writexml(DF, label)
+    res$body <- xmlT
+    return(res)
+
+  }else if(format == 'csv'){
+    res$setHeader("content-disposition", paste0("attachment; filename=", label, ".csv"));
+    res$setHeader("Content-Type", "application/csv; charset=utf-8")
+    res$body <- writecsv(DF)
+    return(res)
+
+  }else if(format == 'html'){
+    res$setHeader("Content-Type", "text/html ; charset=utf-8")
+    res$body <- htmlTable(DF, align = "l", align.header = "l", caption = label)
+    return(res)
+
+  }else{
+    return(DF)
+  }
+
+
+}
+
+
+
+writecsv <- function(DF){
+
+  tc <- textConnection("value_str2", open="w")
+  write.table(DF, textConnection("value_str2", open="w"), sep=",", row.names=F, col.names=T)
+  value_str2 <- paste0(get("value_str2"), collapse="\n")
+  close(tc)
+  return(value_str2)
+
+}
+
+writexml <- function(df, label){
+
+  o <- apply(df, 1, DataFrameToXmlwriter, label)
+  s <- unlist(o)
+  xml <- paste( s, collapse = '')
+  xml2 <- str_replace_all(paste0('<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>\n<', label, 'Records>\n', xml, '</', label, 'Records>'), '&', '')
+
+
+  #cat(xml2, file='c:/temp/x.xml')
+  return(xml2)
+}
+
+DataFrameToXmlwriter <- function(x, label){
+
+  v <- paste0('<', label, 'Record>')
+  for (i in 1:length(names(x))) {
+
+    v <- paste0(v, '<', names(x)[i], '>', str_replace(x[i], '<', 'less than'), '</', names(x)[i], '> ')
+  }
+  v <- paste0(v,'</', label, 'Record>\n')
+
+  v2 <- v
+  return(v2)
+}
 
 
 

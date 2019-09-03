@@ -103,7 +103,7 @@ df <- getSoilData('QLDGovernment', observedPropertyGroup=og)
 
 df <- getSoilData(providers = provs, observedProperty='3A1')
 
-provs='LawsonGrains;QLDGovernment'
+provs='LawsonGrains'
 
 providers='LawsonGrains'
 
