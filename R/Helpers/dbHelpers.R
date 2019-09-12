@@ -1,5 +1,7 @@
 library(DBI)
 library(RSQLite)
+library(raster)
+
 
 machineName <- as.character(Sys.info()['nodename'])
 #if(!asPkg){
@@ -11,6 +13,37 @@ machineName <- as.character(Sys.info()['nodename'])
 #}
 
 
+# provider = 'LawsonGrains'
+# areasOverlap(provider)
+#
+# bbox <- extent(142.6, 143.1, -35.9, -35.48)
+
+areasOverlap <- function(provider, bbox){
+
+  sql <- paste0("Select * from Providers where OrgName = '", provider, "'")
+  prov = doQueryFromFed(sql)
+
+  if(nrow(p) > 0){
+    pext <- extent( prov$MinX[1], prov$MaxX[1], prov$MinY[1], prov$MaxY[1])
+    ppoly <- makeBoundingBoxPolygon(pext)
+    upoly <- makeBoundingBoxPolygon(bbox)
+  }
+}
+
+makeBoundingBoxPolygon <- function(ext){
+
+  m <- matrix(nrow = 5, ncol = 2)
+  m[1,1] <- ext@xmin; m[1,2]<- ext@ymin;
+  m[2,1] <- ext@xmin; m[2,2]<- ext@ymax;
+  m[3,1] <- ext@xmax; m[3,2]<- ext@ymax;
+  m[4,1] <- ext@xmax; m[4,2]<- ext@ymin;
+  m[5,1] <- ext@xmin; m[5,2]<- ext@ymin;
+
+  pts = list(m)
+  p <- st_polygon(pts)
+
+  return(p)
+}
 
 getEndPointURL <- function(DataStoreName){
 
@@ -248,10 +281,10 @@ getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGroup=N
 
 blankResponseDF <- function(){
 
-  outDF <- na.omit(data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+  outDF <- data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
                               Longitude=numeric() , Latitude= numeric(),
                               UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
-                              Units= character(), Quality=integer()))
+                              Units= character(), Quality=integer(), stringsAsFactors = F)
 }
 
 generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units, qualityCode ){
@@ -259,9 +292,29 @@ generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date
   outDF <- na.omit(data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, SampleID=sampleID , SampleDate=date ,
                               Longitude=longitude, Latitude=latitude ,
                               UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
-                              Value=value , Units=units, Quality=qualityCode))
+                              Value=value , Units=units, Quality=qualityCode, stringsAsFactors = F))
   oOutDF <- outDF[order(outDF$Observation_ID, outDF$Dataset, outDF$UpperDepth, outDF$SampleID),]
   return(oOutDF)
+}
+
+convertToRequiredDataTypes <- function(df){
+
+  df$Provider <- as.character(df$Provider)
+  df$Dataset <- as.character(df$Dataset)
+  df$Observation_ID <- as.character(df$Observation_ID)
+  df$SampleID <- as.character(df$SampleID)
+  df$SampleDate <- as.character(df$SampleDate)
+  df$Longitude <- as.numeric(as.character(df$Longitude))
+  df$Latitude <- as.numeric(as.character(df$Latitude))
+  df$UpperDepth  <- as.numeric(as.character(df$UpperDepth ))
+  df$LowerDepth <- as.numeric(as.character(df$LowerDepth))
+  df$PropertyType <- as.character(df$PropertyType)
+  df$ObservedProperty <- as.character(df$ObservedProperty)
+  df$Value <- as.character(df$Value)
+  df$Units <- as.character(df$Units)
+  df$Quality <- as.character(df$Quality)
+
+  return(df)
 }
 
 
