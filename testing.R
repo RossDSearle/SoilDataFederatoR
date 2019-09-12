@@ -1,3 +1,7 @@
+library(rgdal)
+library(sf)
+library(aqp)
+
 
 machineName <- as.character(Sys.info()['nodename'])
 #if(!asPkg){
@@ -9,7 +13,7 @@ machineName <- as.character(Sys.info()['nodename'])
 #}
 
 
-usr <- 'ross.searle@csiro.au'; pwd <- 'a'
+usr <- 'ross.searle@csiro.au'; key <- 'a'
 usr='Public'; pwd='Public'
 
 ##########  Key authentication
@@ -41,13 +45,18 @@ getProviders( usr = 'LawsonGrains', key = 'b')
 getProviders( usr = 'Demo', key = 'Demo')
 
 
-df <- getSoilData('TERNLandscapes', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData('LawsonGrains', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 
 df <- getSoilData('TERNSurveillance', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 df <- getSoilData(providers='TERNSurveillance', observedProperty='4A1', usr='Demo', key='Demo')
 
 
-df <- getSoilData('NTGovernment', observedProperty='4A1')
+df <- getSoilData('TERNLandscapes', observedProperty='4A1')
+df <- getSoilData( observedProperty='4A1')
+df <- getSoilData( observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+
+df <- getSoilData('TERNLandscapes', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+
 df <- getSoilData(providers='QLDGovernment', observedProperty='3A1')
 df <- getSoilData(providers='CSIRO', observedProperty='3A1')
 df <- getSoilData(providers='LawsonGrains', observedProperty='3A1')
@@ -103,7 +112,7 @@ df <- getSoilData('QLDGovernment', observedPropertyGroup=og)
 
 df <- getSoilData(providers = provs, observedProperty='3A1')
 
-provs='LawsonGrains;QLDGovernment'
+provs='LawsonGrains'
 
 providers='LawsonGrains'
 
@@ -112,8 +121,5 @@ provs='LawsonGrains;ASRIS'
 df <- getSoilData(providers = provs, observedProperty='3A1')
 tail(df)
 head(df)
-
-
-
 
 

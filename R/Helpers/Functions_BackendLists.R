@@ -24,7 +24,7 @@ getDataFunctions <- c(LawsonGrains=getData_LawsonGrains,
                       VicGovernment=getData_NSSC_Wrapper,
                       SAGovernment=getData_NSSC_Wrapper,
                       TasGovernment=getData_NSSC_Wrapper,
-                      NTGovernment=getData_NTGovt,
+                      NTGovernment=getData_NSSC_Wrapper,
                       CSIRO=getData_ASRIS
                       )
 
