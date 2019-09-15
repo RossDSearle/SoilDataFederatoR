@@ -4,13 +4,20 @@ library(httr)
 library(jsonlite)
 library(DT)
 library(shinyWidgets)
+library(rhandsontable)
+library(leaflet)
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(data.table)
+
 
 
 source("helpers.R")
 
-testdf <- read.csv('c:/temp/df.csv', stringsAsFactors = F)
-serverLoc <- 'http://127.0.0.1:6902'
-#server <- 'http://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
+#testdf <- read.csv('c:/temp/df.csv', stringsAsFactors = F)
+#serverLoc <- 'http://127.0.0.1:6902'
+serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
 
 url <- paste0(serverLoc, '/SoilDataAPI/Providers')
 providerList <- fromJSON(url)
@@ -35,24 +42,27 @@ blankResponseDF <- function(){
 
 # Define UI for random distribution app ----
 ui <- fluidPage(
-    titlePanel("SoilDataFederator"),
+
+  titlePanel(
+    tags$head(tags$link( rel="icon", type="image/png", href="barrow50.png", sizes="32x32" ),
+              tags$title("SoilDataFederator")
+    )),
+
 
     tags$style(appCSS),
-
-
     theme = shinytheme("flatly"),
 
 
-    # App title ----
-  #  titlePanel(HTML("<img src=soilcores2.PNG style='vertical-align: top;'>")),
+   titlePanel(HTML("<img src=Header.PNG style='vertical-align: top;'>")),
+
 
     # Sidebar layout with input and output definitions ----
     sidebarLayout(
 
-        # Sidebar panel for inputs ----
+        # Sidebar panel for inputs
         sidebarPanel(
-             fluidRow(textInput('authusr', 'User Name', value='ross.searle@csiro.au' )),
-             fluidRow(passwordInput('authkey', 'API key', value='a')),
+            fluidRow(textInput('authusr', 'User Name', value='ross.searle@csiro.au' )),
+            fluidRow(passwordInput('authkey', 'API key', value='a')),
             fluidRow(selectInput('currentProvider', 'Select a Provider', choices = c('All', providerList$OrgFullName))),
             fluidRow(selectInput('propTypes', 'Select a Provider', choices = c('FieldMeasurement', 'LaboratoryMeasurement'), selected='LaboratoryMeasurement')),
             fluidRow(selectInput('propGrps', 'Property Groups', choices = NULL)),
@@ -67,7 +77,9 @@ ui <- fluidPage(
             ),
 
        # withBusyIndicatorUI(
-            actionButton("getData2","Get Data", class = "btn-success")
+       fluidRow(column(4, actionButton("getData2","Get Data", class = "btn-success")),
+                column(8,downloadButton('downloadData', 'Download Data'))
+       )
        #)
 
         ),
@@ -78,19 +90,26 @@ ui <- fluidPage(
             # Output: Tabset w/ plot, summary, and table ----
             tabsetPanel(type = "tabs",
                         tabPanel("Data",
-                                 #rHandsontableOutput("dataTab")
-                                 DT::dataTableOutput("dataTab")),
+                                 rHandsontableOutput("dataTab")
+                                 #DT::dataTableOutput("dataTab")
+                                 ),
+
                         tabPanel("Summary", verbatimTextOutput("summary"),
                                  htmlOutput("SummaryText"),
                                  rHandsontableOutput("summaryTab"),
                                  plotOutput('dplot'),
                                  plotOutput('bplot'),
                                  rHandsontableOutput("perProvTab")
-
-
                                  ),
                         tabPanel("Map",
-                                 leafletOutput("sitesMap", width = "750", height = "550"))
+                                 leafletOutput("sitesMap", width = "750", height = "550")
+                                 ),
+                        tabPanel("Data Contibutors",
+                                 rHandsontableOutput("contributorsTab")
+                        ),
+                        tabPanel("API Requests",
+                                 rHandsontableOutput("apiTab")
+                                 )
             )
 
         )
@@ -102,10 +121,35 @@ server <- function(session, input, output) {
 
     RV <- reactiveValues()
     RV$currentdata = NULL
+    RV$apiDF <- data.frame(Time=as.character(Sys.time()), Request=paste0(serverLoc, '/SoilDataAPI/Providers'), stringsAsFactors = F)
+
+    output$downloadData <- downloadHandler(
+        filename = function() {
+          paste('TERNSoilsFederator-', Sys.Date(), '.csv', sep='')
+        },
+        content = function(con) {
+          write.csv(RV$currentdata, con)
+        }
+      )
+
+    output$contributorsTab = renderRHandsontable({
+      url <- paste0(serverLoc, '/SoilDataAPI/Providers')
+      contribs <- fromJSON(url)
+      contribs$ContactEmail <- paste0('<a href=mailto:', contribs$ContactEmail, '?subject=Soil%20Data%20on%20TERN-Landscapes%20SoilDataFederator>', contribs$ContactEmail, '</a>'  )
+      contribs$OrgURL <- paste0('<a href=', contribs$OrgURL, ' target="_blank">', contribs$OrgURL, '</a>'  )
+      rhandsontable(contribs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F) %>%
+        hot_col('ContactEmail', renderer = htmlwidgets::JS("safeHtmlRenderer")) %>%
+      hot_col('OrgURL', renderer = htmlwidgets::JS("safeHtmlRenderer"))
+    })
+
+    output$apiTab = renderRHandsontable({
+      req(RV$apiDF)
+      rhandsontable(RV$apiDF , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
+    })
 
     observe({
 
-      RV$currentdata <- testdf
+      #RV$currentdata <- testdf
     })
 
     output$sitesMap <- renderLeaflet({
@@ -145,6 +189,7 @@ server <- function(session, input, output) {
     })
 
     output$SummaryText <- renderText({
+      req(input$propObs)
       paste0('<p></p><p style="color:green;font-weight: bold;">Summary Statistics for ',   input$propObs, '</p>' )
     })
 
@@ -159,10 +204,10 @@ server <- function(session, input, output) {
       dfs[4,] <- c('Mean ' ,s[4])
       dfs[5,] <- c('3rd Quartile ' ,s[5])
       dfs[6,] <- c('Max value ',s[6])
-      validCnt <- length(which(!is.na(df$Value)))
-      naCnt <- length(which(is.na(df$Value)))
-      dfs[7,] <- c('Locations', length(unique(df$Observation_ID)))
-      dfs[8,] <- c('Records', nrow(df))
+      validCnt <- length(which(!is.na(dfs$Value)))
+      naCnt <- length(which(is.na(dfs$Value)))
+      dfs[7,] <- c('Locations', length(unique(dfs$Observation_ID)))
+      dfs[8,] <- c('Records', nrow(dfs))
       dfs[9,] <- c('Valid Vals', validCnt)
       dfs[10,] <- c('NA Vals', naCnt)
 
@@ -171,19 +216,29 @@ server <- function(session, input, output) {
 
     output$perProvTab = renderRHandsontable({
       req(RV$currentdata )
-      dfs<-setDT(df)[ , list(mean = mean(Value) ,median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9)) , by = .(Provider)]
+      dfs<-setDT(as.data.table(RV$currentdata ))[ , list(mean = mean(Value) ,median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9)) , by = .(Provider)]
       rhandsontable(dfs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
     })
 
 
+    output$dataTab = renderRHandsontable({
+      req(RV$currentdata )
+     # dfs<-setDT(as.data.table(RV$currentdata ))[ , list(mean = mean(Value) ,median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9)) , by = .(Provider)]
 
-    output$dataTab = DT::renderDataTable({
-        RV$currentdata
+      dsub <- RV$currentdata[1:100, ]
+       rhandsontable(dsub , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
     })
+
+    # output$dataTab = DT::renderDataTable({
+    #     RV$currentdata
+    # })
+
+
     observe({
 
         req(input$propTypes)
         url <- paste0(serverLoc, '/SoilDataAPI/PropertyGroups')
+        RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
         resp <- fromJSON(url)
         vals <- resp[resp$PropertyType == input$propTypes, ]
         updateSelectInput(session, "propGrps", choices = sort(vals$PropertyGroup), selected = 'PH')
@@ -195,6 +250,7 @@ server <- function(session, input, output) {
         req(input$propGrps)
 
         url <- paste0(serverLoc, '/SoilDataAPI/Properties?PropertyGroup=', input$propGrps)
+        RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
         print(url)
         resp <- fromJSON(url)
         print(head(resp))
@@ -225,7 +281,8 @@ server <- function(session, input, output) {
               )
 
                 url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', input$propObs, '&providers=', provs[i], '&usr=', input$authusr, '&key=', input$authkey)
-               # url <- paste0('http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&providers=', provs[i])
+                RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
+                # url <- paste0('http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&providers=', provs[i])
 
                  print(url)
                 odf <- fromJSON(url)

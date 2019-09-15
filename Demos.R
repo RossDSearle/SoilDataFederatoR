@@ -6,17 +6,114 @@ library(RColorBrewer)
 library(ithir)
 library(tidyverse)
 library(data.table)
+library(jsonlite)
 
 source(paste0('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/R/Backends.R'))
 
+#serverLoc <- 'http://127.0.0.1:6902'
+serverLoc  <- 'http://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
+
+drawLeafletMap <- function(pts, title){
+
+  pal <- colorNumeric(c("red", "green", "blue"), domain = df.SP$Value)
+
+  leaflet() %>%
+    addTiles() %>%
+    addProviderTiles("Esri.WorldTopoMap", group = "Topo") %>%
+    addProviderTiles("Esri.WorldImagery", group = "ESRI Aerial") %>%
+    addCircleMarkers(data=df.SP, group='Soil pH', radius = 2, opacity=1,
+                     stroke=F,
+                     fillOpacity = 1,
+                     weight=1,
+                     #fillColor = "yellow",
+                     color = ~pal(df.SP$Value),
+                     popup = paste0("Site ID : ", df.SP$Observation_ID ,
+                                    "<br> Attribute : ", df.SP$ObservedProperty ,
+                                    "<br> Value : ", df.SP$Value )) %>%
+    addLegend("topright", pal = pal, values = df.SP$Value,
+              title = "Soil Data",
+              #labFormat = labelFormat(prefix = "$"),
+              opacity = 1
+    ) %>%
+    addLayersControl(
+      baseGroups = c("Topo","ESRI Aerial"),
+      overlayGroups = c("Soil Data"),
+      options = layersControlOptions(collapsed = T))
+}
+
+drawStaticMap <-  function(pts, title){
+  pPath <- paste0('C:/Projects/GIS/National/Australia.shp')
+  austBdy <- read_sf(pPath)
+
+  bkd <-  as.numeric(as.character(pts$Value))
+  # palt <-brewer.pal(11,"BrBG")
+  # cuts = cut(bkd, 4:10)
+
+  par(mar=c(0,0,0,0))
+  plot(st_geometry(austBdy), border='black', reset=FALSE, col='beige')
+
+  pal <- colorNumeric(c("red", "green", "blue"), domain = bkd)
+  plot(pts["Value"], pch=20, add=T,  pal = sf.colors(7)  )
+  legend("topright", legend=paste(seq(4, 10, 1)),fill=sf.colors(7), title = title )
+
+}
+
+blankResponseDF <- function(){
+
+  outDF <- data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+                      Longitude=numeric() , Latitude= numeric(),
+                      UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
+                      Units= character(), Quality=integer(), stringsAsFactors = F)
+}
+
+
+
+
+
+#############################################################################################
+#                                                                                           #
+#                                    Start of the Demo                                      #
+#                                                                                           #
+#############################################################################################
+
 usr <- 'ross.searle@csiro.au'; pwd <- 'a'
-
-
 prop <- '4A1'
 
+
+###  From the package directly
 df <- getSoilData(providers='TERNSurveillance', observedProperty=prop, usr='ross.searle@csiro.au', key='a')
 df <- getSoilData(providers='CSIRO', observedProperty=prop, usr='ross.searle@csiro.au', key='a')
 df <- getSoilData(observedProperty=prop, usr='ross.searle@csiro.au', key='a')
+
+
+
+###  From the web API
+
+### get everything in one go
+url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', prop, '&usr=', usr, '&key=', pwd)
+df <- fromJSON(url)
+
+
+### get from individual providers
+url <- paste0(serverLoc, '/SoilDataAPI/Providers')
+providerList <- fromJSON(url)
+provs <- providerList$OrgName
+outdfs <- list(length(provs))
+
+for(i in 1:length(provs)){
+  url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', prop, '&providers=', provs[i], '&usr=', usr, '&key=', pwd)
+  print(url)
+  odf <- fromJSON(url)
+
+  if(is.data.frame(odf))
+  {
+    outdfs[[i]] <- odf
+  }else{
+    outdfs[[i]] <- blankResponseDF()
+  }
+}
+df = as.data.frame(data.table::rbindlist(outdfs, fill=T))
+
 
 ###  Run the data through some Quality filters   #######
 
@@ -35,11 +132,12 @@ outdf <- outdf[outdf$Value > 1 & outdf$Value < 12, ]
 
 ####  Save the data for a rainy day
 write.csv(outdf, 'c:/temp/df.csv')
-df <- read.csv('c:/temp/df.csv', stringsAsFactors = F)
-
+outdf <- read.csv('c:/temp/df.csv', stringsAsFactors = F)
+df <- outdf
 
 ##### Summarise the data
 s <- summary(df$Value)
+s
 
 dfs <- data.frame(label=character(6), other=character(6), stringsAsFactors = F)
 dfs[1,] <- c('Min Value ',s[1])
@@ -65,14 +163,21 @@ polygon(d, col="blue", border="blue")
 
 unique(df$Provider)
 #df %>% group_by(Provider) %>% summarize(mean = mean(Value),median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9))
-setDT(df)[ , list(mean = mean(Value) ,median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9)) , by = .(Provider)]
+setDT(df)[ , list(mean = mean(Value) ,median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9), Count = length(Value)) , by = .(Provider)]
 #boxplot(Value~Provider,data=df, main=paste0('Distributions for ', prop),  xlab="Provider", ylab=prop,las=2)
 ggplot(df, aes(x=Provider, y=Value)) + geom_boxplot() + theme(axis.text.x  = element_text(angle=90, vjust=0.5))
 
 
 
-#####  Draw some Maps
-frows <- df %>% group_by(Provider, Dataset,Observation_ID) %>% filter(row_number()==1)
+
+
+#############################################################################################
+#                                                                                           #
+#                                    Draw some Maps                                         #
+#                                                                                           #
+#############################################################################################
+
+frows <- as.data.frame(df) %>% group_by(Provider, Dataset,Observation_ID) %>% filter(row_number()==1)
 df.SP <- st_as_sf(frows, coords = c("Longitude", "Latitude"), crs = 4326)
 nrow(df.SP)
 
@@ -84,63 +189,17 @@ drawStaticMap(pts, title)
 
 drawLeafletMap(pts, title)
 
-drawLeafletMap <- function(pts, title){
-
-  pal <- colorNumeric(c("red", "green", "blue"), domain = df.SP$Value)
-
-    leaflet() %>%
-      addTiles() %>%
-      addProviderTiles("Esri.WorldTopoMap", group = "Topo") %>%
-      addProviderTiles("Esri.WorldImagery", group = "ESRI Aerial") %>%
-      addCircleMarkers(data=df.SP, group='Soil pH', radius = 2, opacity=1,
-                       stroke=F,
-                       fillOpacity = 1,
-                       weight=1,
-                       #fillColor = "yellow",
-                       color = ~pal(df.SP$Value),
-                       popup = paste0("Site ID : ", df.SP$Observation_ID ,
-                                      "<br> Attribute : ", df.SP$ObservedProperty ,
-                                      "<br> Value : ", df.SP$Value )) %>%
-      addLegend("topright", pal = pal, values = df.SP$Value,
-                title = "Soil Data",
-                #labFormat = labelFormat(prefix = "$"),
-                opacity = 1
-      ) %>%
-      addLayersControl(
-        baseGroups = c("Topo","ESRI Aerial"),
-        overlayGroups = c("Soil Data"),
-        options = layersControlOptions(collapsed = T))
-}
 
 
-
-drawStaticMap <-  function(pts, title){
-    pPath <- paste0('C:/Projects/GIS/National/Australia.shp')
-    austBdy <- read_sf(pPath)
-
-     bkd <-  as.numeric(as.character(pts$Value))
-    # palt <-brewer.pal(11,"BrBG")
-    # cuts = cut(bkd, 4:10)
-
-    par(mar=c(0,0,0,0))
-    plot(st_geometry(austBdy), border='black', reset=FALSE, col='beige')
-
-    pal <- colorNumeric(c("red", "green", "blue"), domain = bkd)
-    plot(pts["Value"], pch=20, add=T,  pal = sf.colors(7)  )
-    legend("topright", legend=paste(seq(4, 10, 1)),fill=sf.colors(7), title = title )
-
-}
+#############################################################################################
+#                                                                                           #
+#                                Some Spling Stuff                                          #
+#                                                                                           #
+#############################################################################################
 
 
-
-
-
-
-pdf <- df
-
+pdf <- as.data.frame(df)
 profs <- pdf[which(pdf$Provider == 'QLDGovernment'), ]
-
-profs[i] <- lapply(profs[i], as.character)
 
 # change  horizon depth units to 'cm'
 profs$UpperDepth   <- as.numeric(as.character(profs$UpperDepth )) * 100
@@ -169,7 +228,7 @@ spls <- ea_spline(profs4spline[1:100], var.name="Value", lam = 0.1, d = t(c(0,5,
 
 saveRDS(spls, 'c:/temp/splines.rds')
 
-str(spls)
+
 ######  Draw all splines on 1 plot ########
 par(mfrow=c(1,1))
 stdDeps <- c('2.5', '10', '22.5', '45', '80', '150')
