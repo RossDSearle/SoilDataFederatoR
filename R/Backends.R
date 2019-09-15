@@ -64,7 +64,7 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
       cat(paste0(availProviders, '\n'))
       cat(paste0('\n'))
 
-      outdfs <- list(length(availProviders))
+      outdfs <- vector("list", length(provs))
 
        for(i in 1:length(availProviders)) {
         prov <- availProviders[[i]]

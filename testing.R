@@ -48,7 +48,7 @@ getProviders( usr = 'Demo', key = 'Demo')
 df <- getSoilData('LawsonGrains', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 
 df <- getSoilData('TERNSurveillance', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-df <- getSoilData('TERNSurveillance', observedProperty='4A1', usr='Demo', key='Demo')
+df <- getSoilData(providers='TERNSurveillance', observedProperty='4A1', usr='Demo', key='Demo')
 
 
 df <- getSoilData('TERNLandscapes', observedProperty='4A1')

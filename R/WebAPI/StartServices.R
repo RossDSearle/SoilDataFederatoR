@@ -10,6 +10,7 @@ if(machineName=='soils-discovery'){
   options("plumber.host" = "0.0.0.0")
   options("plumber.apiHost" = "0.0.0.0")
   portNum <- 8074
+  #portNum <- 8073
 }else{
   deployDir <-'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/R'
   server <- '127.0.0.1'
