@@ -1,6 +1,7 @@
 library(DBI)
 library(RSQLite)
 library(raster)
+library(sf)
 
 
 machineName <- as.character(Sys.info()['nodename'])
@@ -13,21 +14,21 @@ machineName <- as.character(Sys.info()['nodename'])
 #}
 
 
-# provider = 'LawsonGrains'
-# areasOverlap(provider)
-#
-# bbox <- extent(142.6, 143.1, -35.9, -35.48)
 
-areasOverlap <- function(provider, bbox){
+
+areasOverlap <- function(provider, bBox){
 
   sql <- paste0("Select * from Providers where OrgName = '", provider, "'")
   prov = doQueryFromFed(sql)
 
-  if(nrow(p) > 0){
+  if(nrow(prov) > 0){
     pext <- extent( prov$MinX[1], prov$MaxX[1], prov$MinY[1], prov$MaxY[1])
     ppoly <- makeBoundingBoxPolygon(pext)
-    upoly <- makeBoundingBoxPolygon(bbox)
+    upoly <- makeBoundingBoxPolygon(bBox)
+    res <- sf::st_intersects(ppoly, upoly, sparse=F)[1,1]
+    return(res)
   }
+  return(NULL)
 }
 
 makeBoundingBoxPolygon <- function(ext){

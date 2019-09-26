@@ -45,6 +45,17 @@ getProviders( usr = 'LawsonGrains', key = 'b')
 getProviders( usr = 'Demo', key = 'Demo')
 
 
+df <- getSoilData(providers='CSIRO', observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
+
+df <- getSoilData(providers='CSIRO', observedProperty='mr_type', usr='ross.searle@csiro.au', key='a')
+
+df <- getSoilData(providers='NTGovernment', observedProperty='4A1')
+df <- getSoilData(providers='NTGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+nrow(df)
+
+
+
+
 df <- getSoilData('LawsonGrains', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 
 df <- getSoilData('TERNSurveillance', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
@@ -122,4 +133,22 @@ df <- getSoilData(providers = provs, observedProperty='3A1')
 tail(df)
 head(df)
 
+
+#########  spatial extent clipping   ###########################
+provider = 'LawsonGrains'
+areasOverlap(provider)
+#
+bbox <- extent(142.6, 143.1, -35.9, -35.48)
+wext <- '142.6;143.1;-35.9;-35.48'
+bbox <- extent(110.6, 153.1, -43, -9)
+wext <- '110;153;-43;-9'
+
+bits <- str_split(wext, ';')
+l <- as.numeric(bits[[1]][1])
+r <- as.numeric(bits[[1]][2])
+t <- as.numeric(bits[[1]][4])
+b <- as.numeric(bits[[1]][3])
+bboxExt <- extent(l, r, b, t)
+
+df <- getSoilData('LawsonGrains', observedProperty='4A1', bbox=bboxExt, usr='ross.searle@csiro.au', key='a')
 

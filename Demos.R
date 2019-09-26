@@ -11,7 +11,7 @@ library(jsonlite)
 source(paste0('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/R/Backends.R'))
 
 #serverLoc <- 'http://127.0.0.1:6902'
-serverLoc  <- 'http://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
+serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
 
 drawLeafletMap <- function(pts, title){
 
@@ -98,7 +98,7 @@ df <- fromJSON(url)
 url <- paste0(serverLoc, '/SoilDataAPI/Providers')
 providerList <- fromJSON(url)
 provs <- providerList$OrgName
-outdfs <- list(length(provs))
+outdfs <- vector("list", length(provs))
 
 for(i in 1:length(provs)){
   url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', prop, '&providers=', provs[i], '&usr=', usr, '&key=', pwd)
@@ -113,7 +113,7 @@ for(i in 1:length(provs)){
   }
 }
 df = as.data.frame(data.table::rbindlist(outdfs, fill=T))
-
+nrow(df)
 
 ###  Run the data through some Quality filters   #######
 
@@ -133,9 +133,11 @@ outdf <- outdf[outdf$Value > 1 & outdf$Value < 12, ]
 ####  Save the data for a rainy day
 write.csv(outdf, 'c:/temp/df.csv')
 outdf <- read.csv('c:/temp/df.csv', stringsAsFactors = F)
-df <- outdf
+
 
 ##### Summarise the data
+
+df <- outdf
 s <- summary(df$Value)
 s
 

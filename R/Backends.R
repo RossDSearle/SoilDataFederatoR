@@ -45,7 +45,7 @@ PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', Field
 
 
 
-getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, usr='Demo', key='Demo'){
+getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bBox=NULL, usr='Demo', key='Demo'){
 
  auth  <- AuthenticateAPIKey(usr, key)
 
@@ -64,13 +64,25 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
       cat(paste0(availProviders, '\n'))
       cat(paste0('\n'))
 
-      outdfs <- vector("list", length(provs))
+      outdfs <- vector("list", length(availProviders))
 
        for(i in 1:length(availProviders)) {
         prov <- availProviders[[i]]
         cat(paste0('Extracting data from ', prov, '\n'))
+
+        if(is.null(bBox)){
+          odf <- sendRequest(provider=prov, observedProperty, observedPropertyGroup)
+        }else{
+          if(areasOverlap(provider=prov, bBox=bBox)){
+            odf <- sendRequest(provider=prov, observedProperty, observedPropertyGroup)
+          }else{
+            cat(paste0('   Requsted area and provider extent do not overlap - skipping\n'))
+            odf <- blankResponseDF()
+          }
+        }
+
        # possibleError <- tryCatch(
-        odf <- sendRequest(provider=prov, observedProperty, observedPropertyGroup)
+
         print(head(odf))
         if(is.data.frame(odf))
         {
@@ -126,10 +138,42 @@ sendRequest<- function(provider, observedProperty, observedPropertyGroup){
       print(w)
     },
     finally = {
-      message('All done, quitting.')
+      #message('All done, quitting.')
     }
   )
 }
+
+
+
+getData_NSSC_Wrapper <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL){
+
+  url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+
+  print(provider)
+  fdf <- fromJSON(paste0(url))
+  if(is.data.frame(fdf)){
+    return <- fdf
+  }else{
+    return(blankResponseDF())
+  }
+}
+
+
+
+getDataFunctions <- c(LawsonGrains=getData_LawsonGrains,
+                      QLDGovernment=getData_QLDGovernment,
+                      TERNLandscapes=getData_TERNLandscapes,
+                      TERNSurveillance=getData_TERNSurveillance,
+                      WAGovernment=getData_NSSC_Wrapper,
+                      NSWGovernment=getData_NSSC_Wrapper,
+                      VicGovernment=getData_NSSC_Wrapper,
+                      SAGovernment=getData_NSSC_Wrapper,
+                      TasGovernment=getData_NSSC_Wrapper,
+                      NTGovernment=getData_NTGovt,
+                      CSIRO=getData_ASRIS
+)
+
+
 
 
 

@@ -172,19 +172,32 @@ bob <- function(){
 #* @param usr (Required) User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/ You can use usr=Demo & key=Demo but only the first 5 records will be returned
 #* @param numToReturn (Optional) The number of records to be returned. Default = All
 #* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
+#* @param bbox (Optional) The  rectangular bounding box of the area in the form minx;maxx;miny;maxy - semicolon delimited
+
 #* @param providers (Optional) Filter the data returned to a specific set of Providers. It should be a single Provider code or a semi-colon delimited text string of Provider codes. Default = All providers
 #* @param observedPropertyGroup (Optional) Extract data for a defined group of soil properties.
 #* @param observedProperty (Optional) Specify the soil data property/s to return. It should be a single observedProperty code or a semi-colon delimited text string of observedProperty codes.
 
 #* @tag Soil Data Federator
 #* @get /SoilDataAPI/SoilData
-apiGetSoilData<- function(res, usr='Demo', key='Demo', providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, format='json', numToReturn=NULL){
+apiGetSoilData<- function(res, usr='Demo', key='Demo', providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bbox=NULL, format='json', numToReturn=NULL){
 
   nrowsToGet <- as.numeric(numToReturn)
 
   tryCatch({
 
-    DF <-getSoilData(providers, observedProperty, observedPropertyGroup, usr, key)
+    if(!is.null(bbox)){
+      bits <- str_split(wext, ';')
+      l <- as.numeric(bits[[1]][1])
+      r <- as.numeric(bits[[1]][2])
+      t <- as.numeric(bits[[1]][4])
+      b <- as.numeric(bits[[1]][3])
+      bboxExt <- extent(l, r, b, t)
+    }else{
+      bboxExt <- NULL
+    }
+
+    DF <-getSoilData(providers, observedProperty, observedPropertyGroup, bboxExt, usr, key)
 
     if(!is.null(numToReturn)){
       nget <- min(nrowsToGet, nrow(DF))
