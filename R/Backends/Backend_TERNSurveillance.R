@@ -7,9 +7,24 @@ library(RSQLite)
 library(DBI)
 
 
-getData_TERNSurveillance <- function(provider=NULL,observedProperty=NULL, observedPropertyGroup=NULL ){
 
-  OrgName <- provider
+
+
+
+getLocationData_TERNSurveillance <- function(DataSet){
+
+  OrgName <- getOrgName(DataSet)
+  locs <- fromJSON("http://swarmapi.ausplots.aekos.org.au/ross" )
+
+  dfl <- data.frame(paste0( locs$site_location_name, '_', locs$site_location_visit_id), locs$visit_date, locs$latitude, locs$longitude )
+  colnames(dfl) <- c('ObsID', 'Date',  'Lat', 'Lon')
+  df <- distinct(dfl)
+  oOutDF <-  generateResponseAllLocs(OrgName, DataSet, df$ObsID, df$Lon, df$Lat, df$Date )
+}
+
+getData_TERNSurveillance <- function(DataSet=NULL, DataStore, observedProperty=NULL, observedPropertyGroup=NULL ){
+
+  OrgName <- getOrgName(DataSet)
 
 
   allInfo <- fromJSON("http://swarmapi.ausplots.aekos.org.au/ross" )
@@ -39,7 +54,7 @@ getData_TERNSurveillance <- function(provider=NULL,observedProperty=NULL, observ
       propertyType <- getPropertyType(prop)
       units <- getUnits(propertyType = propertyType, prop = prop)
       oOutDF <- generateResponseDF(OrgName, OrgName, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), fdf$site_location_visit_id, fdf$visit_date, fdf$longitude, fdf$latitude,
-                                   fdf$upper_depth, fdf$lower_depth, propertyType, prop, fdf$value, units = units, qualityCode = "Brilliant")
+                                   fdf$upper_depth, fdf$lower_depth, propertyType, prop, fdf$value, units = units)
 
       lodfs[[i]] <- oOutDF
     }else{

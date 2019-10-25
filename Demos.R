@@ -92,7 +92,12 @@ df <- getSoilData(observedProperty=prop, usr='ross.searle@csiro.au', key='a')
 ### get everything in one go
 url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', prop, '&usr=', usr, '&key=', pwd)
 df <- fromJSON(url)
+head(df)
+nrow(df)
 
+url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', prop, '&providers=TERNSurveillance', '&usr=', usr, '&key=', pwd)
+df2 <- fromJSON(url)
+head(df2, 10)
 
 ### get from individual providers
 url <- paste0(serverLoc, '/SoilDataAPI/Providers')

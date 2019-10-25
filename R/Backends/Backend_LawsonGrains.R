@@ -16,11 +16,37 @@ getLGMethod <- function(methods, mappings){
 }
 
 
+getLocationData_LawsonGrains <- function(DataSet){
 
-getData_LawsonGrains <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
+  OrgName <- getOrgName(DataSet)
 
-  OrgName <- provider
-  #print(paste0('Extracting data from ', OrgName))
+  locsUrl <- 'http://esoil.io/SoilsFederator/Providers/LawsonGrains/all_Locs.xlsx'
+  dataUrl <- 'http://esoil.io/SoilsFederator/Providers/LawsonGrains/LawsonSoils.xlsx'
+
+  p1f <- tempfile()
+  download.file(locsUrl, p1f, mode="wb", quiet = T)
+  locs<- suppressMessages( read_excel(path = p1f))
+
+  p2f <- tempfile()
+  download.file(dataUrl, p2f, mode="wb", quiet = T)
+  lg <- suppressMessages( read_excel(path = p2f))
+
+    sd <- merge(lg, locs,  by.x=c("Sample No."),by.y=c("Site ID"), all.x = T)
+
+    dfl <- data.frame(paste0(sd$Aggregation , '_', sd$`Sample No.` ), paste0('01-04-', sd$Year,'T00:00:00' ), sd$Lat, sd$Lon )
+    colnames(dfl) <- c('ObsID', 'Date',  'Lat', 'Lon')
+    df <- distinct(dfl)
+    oOutDF <-  generateResponseAllLocs(OrgName, DataSet, df$ObsID, df$Lon, df$Lat, df$Date )
+
+    unlink(p1f)
+    unlink(p2f)
+
+    return(oOutDF)
+}
+
+getData_LawsonGrains <- function(DataSet, DataStore, observedProperty, observedPropertyGroup=NULL ){
+
+  OrgName <- getOrgName(DataSet)
 
   locsUrl <- 'http://esoil.io/SoilsFederator/Providers/LawsonGrains/all_Locs.xlsx'
   dataUrl <- 'http://esoil.io/SoilsFederator/Providers/LawsonGrains/LawsonSoils.xlsx'
@@ -34,15 +60,15 @@ getData_LawsonGrains <- function(provider=NULL, observedProperty=NULL, observedP
   lg <- suppressMessages( read_excel(path = p2f))
 
   pl <- getPropertiesList(observedProperty, observedPropertyGroup)
+
   mappings <- doQueryFromFed(paste0("Select * from Mappings where Organisation = '", OrgName, "'" ))
   nativeProps <- getNativeProperties(OrgName, mappings, observedProperty, observedPropertyGroup)
-
 
 if(length(nativeProps) == 0){
       return(blankResponseDF())
 }
 
-  cDF <- blankResponseDF()
+  lodfs <- vector("list", length(nativeProps))
 
   for (i in 1:length(nativeProps)) {
 
@@ -61,12 +87,17 @@ if(length(nativeProps) == 0){
     propertyType <- getPropertyType(prop)
     units <- getUnits(propertyType = propertyType, prop = prop)
 
-    oOutDF <- generateResponseDF(OrgName, 'AgCatalyst', paste0(fdf$Aggregation , '_', fdf$SampleNo ), fdf$LabNumber, paste0('01-04-', sd$Year,'T00:00:00' ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, prop, fdf$Value, units, "Brilliant")
-    cDF<- rbind(cDF, oOutDF)
+    oOutDF <- generateResponseDF(OrgName, DataSet, paste0(fdf$Aggregation , '_', fdf$SampleNo ), fdf$LabNumber, paste0('01-04-', sd$Year,'T00:00:00' ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, prop, fdf$Value, units)
+
+    lodfs[[i]] <- oOutDF
+     #cDF<- rbind(cDF, oOutDF)
   }
+
+  outDF = as.data.frame(data.table::rbindlist(lodfs))
 
   unlink(p1f)
   unlink(p2f)
 
-   return(cDF)
+  print(head(outDF))
+   return(outDF)
 }

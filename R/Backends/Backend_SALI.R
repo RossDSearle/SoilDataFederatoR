@@ -13,10 +13,9 @@ library(data.table)
 # nrow(testvals)
 # head(testvals)
 
-getData_QLDGovernment <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
+getData_QLDGovernment <- function(DataSet, DataStore, observedProperty, observedPropertyGroup=NULL ){
 
-  OrgName <- provider
-  #cat(paste0('Extracting data from ', OrgName))
+  OrgName <- getOrgName(DataSet)
 
   samples <- fromJSON(paste0("https://soil-chem.information.qld.gov.au/odata/Samples"))
   mappings <- doQueryFromFed(paste0("Select * from Mappings where Organisation = '", OrgName, "'" ))
@@ -40,9 +39,9 @@ getData_QLDGovernment <- function(provider=NULL, observedProperty=NULL, observed
           propertyType <- getPropertyType(prop)
           units <- getUnits(propertyType = propertyType, prop = prop)
 
-          oOutDF <- generateResponseDF(OrgName, "SALI", paste0(fdf$projectCode , '_', fdf$siteId, '_', fdf$observationNumber ),
+          oOutDF <- generateResponseDF(OrgName, DataSet, paste0(fdf$projectCode , '_', fdf$siteId, '_', fdf$observationNumber ),
                                        fdf$sampleNumber, fdf$analysisDate, fdf$longitude , fdf$latitude,
-                                       fdf$upperDepth, fdf$lowerDepth, propertyType, prop, fdf$formattedValue , units, 'Brilliant')
+                                       fdf$upperDepth, fdf$lowerDepth, propertyType, prop, fdf$formattedValue , units)
           lodfs[[i]] <- oOutDF
       }else{
         return(blankResponseDF())

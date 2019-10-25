@@ -4,6 +4,7 @@ library(stringr)
 library(data.table)
 require(dplyr)
 require(dtplyr)
+require(sf)
 
 asPkg = F
 Devel = F
@@ -27,9 +28,9 @@ source(paste0('R/Backends/Backend_SALI.R'))
 source(paste0('R/Backends/Backend_LawsonGrains.R'))
 source(paste0('R/Backends/Backend_ASRIS.R'))
 source(paste0('R/Backends/Backend_TERNLandscapesDB.R'))
-source(paste0('R/Backends/Backend_NTGovt.R'))
+#source(paste0('R/Backends/Backend_NTGovt.R'))
 
-source(paste0('R/Helpers/Functions_BackendLists.R'))
+#source(paste0('R/Helpers/Functions_BackendLists.R'))
 
 
 PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', FieldMeasurement='FieldMeasurement', stringsAsFactors = F)
@@ -45,51 +46,57 @@ PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', Field
 
 
 
-getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bBox=NULL, usr='Demo', key='Demo'){
+getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bBox=NULL, usr='Demo', key='Demo'){
 
  auth  <- AuthenticateAPIKey(usr, key)
 
  if(auth == 'OK'){
-      orgs <- getProviders(usr=usr, key=key)
+      authDataSets <- getDataSets(usr=usr, key=key)
 
-      if(!is.null(providers)){
-        bits <- str_split(providers, ';')
-        availProviders <- bits[[1]]
+      if(!is.null(DataSets)){
+        bits <- str_split(DataSets, ';')
+        availDataSets <- bits[[1]]
       }else{
-        availProviders <- orgs$OrgName
+        availDataSets <- authDataSets$DataSet
       }
 
-      cat(paste('Available Providers\n'))
+      cat(paste('Available DataSets\n'))
       cat(paste('====================\n '))
-      cat(paste0(availProviders, '\n'))
+      cat(paste0(availDataSets, '\n'))
       cat(paste0('\n'))
 
-      outdfs <- vector("list", length(availProviders))
+      outdfs <- vector("list", length(availDataSets))
 
-       for(i in 1:length(availProviders)) {
-        prov <- availProviders[[i]]
-        cat(paste0('Extracting data from ', prov, '\n'))
+       for(i in 1:length(availDataSets)) {
+        dataset <- availDataSets[[i]]
+
+        dStore <- getDataStore(dataset)
+        cat(paste0('Extracting data from ', dataset, '\n'))
 
         if(is.null(bBox)){
-          odf <- sendRequest(provider=prov, observedProperty, observedPropertyGroup)
+
+          odf <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
+
         }else{
-          if(areasOverlap(provider=prov, bBox=bBox)){
-            odf <- sendRequest(provider=prov, observedProperty, observedPropertyGroup)
+          if(areasOverlap(DataSet=dataset, bBox=bBox)){
+            odf <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
           }else{
-            cat(paste0('   Requsted area and provider extent do not overlap - skipping\n'))
+            cat(paste0('   Requested area and provider extent do not overlap - skipping\n'))
             odf <- blankResponseDF()
           }
         }
 
        # possibleError <- tryCatch(
 
-        print(head(odf))
+
         if(is.data.frame(odf))
         {
+          odf <- getDataQualityInfo(dataset, odf)
           outdfs[[i]] <- odf
         }else{
           outdfs[[i]] <- blankResponseDF()
         }
+
 
 
         #  error=function(e) e
@@ -100,7 +107,9 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
      outDF = as.data.frame(data.table::rbindlist(outdfs, fill=T))
 
      if(usr=='Demo'){
+
        outDF <- outDF[1:5,]
+
      }
 
      if(nrow(outDF)==0){
@@ -108,13 +117,14 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
      }
 
      outDF2 <- convertToRequiredDataTypes(outDF)
+     print("here2")
      outDF2$ExtractTime<- format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
      outDF2 <- outDF2[!is.na(outDF2$Value),]
      outDF2[!is.na(outDF2$UpperDepth),]
 
 
      DT <- as.data.table(outDF2)
-     DT %>% group_by(Provider, Dataset,Observation_ID) %>% arrange(UpperDepth, LowerDepth)
+     DT %>% group_by(Provider, Dataset, Observation_ID) %>% arrange(UpperDepth, LowerDepth)
 
      return(DT)
 
@@ -124,28 +134,87 @@ getSoilData <- function(providers=NULL, observedProperty=NULL, observedPropertyG
 }
 
 
+#' Returns all locations of soil observations
+#'
+#' This function will query all the available data providers to return all of the available soil observation locations
+#' @param providers List of the Providers to query
+#' @return Dataframe of observation locations
 
-sendRequest<- function(provider, observedProperty, observedPropertyGroup){
+
+
+getLocations <- function(DataSets=NULL, bBox=NULL){
+
+
+  authDataSets <- getDataSets(usr=usr, key=key)
+
+  if(!is.null(DataSets)){
+    bits <- str_split(DataSets, ';')
+    availDataSets <- bits[[1]]
+    print(availDataSets)
+  }else{
+    availDataSets <- authDataSets$OrgName
+  }
+
+  outdfs <- vector("list", length(availDataSets))
+
+    for(i in 1:length(availDataSets)) {
+
+
+      dataset <- availDataSets[[i]]
+      dStore <- getDataStore(dataset)
+
+      if(!is.null(getLocationDataFunctions[[dStore]]) ){
+      cat(paste0('Extracting data from ', dataset, '\n'))
+
+
+      if(is.null(bBox)){
+
+        odf <- getLocationDataFunctions[[dStore]](DataSet=dataset)
+
+      }else{
+        if(areasOverlap(Dataset=dataset, bBox=bBox)){
+          odf <- getLocationDataFunctions[[dStore]](DataSet=dataset)
+        }else{
+          cat(paste0('   Requested area and provider extent do not overlap - skipping\n'))
+          odf <- blankResponseDF()
+        }
+      }
+      outdfs[[i]] <- odf
+      }
+    }
+    #outDF = as.data.frame(data.table::rbindlist(outdfs, fill=T))
+    outDF = as.data.frame(data.table::rbindlist(outdfs, fill=T))
+    outDF$ExtractTime<- format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
+   # DT <- as.data.table(outDF2)
+   # DT %>% group_by(Provider, Dataset,Observation_ID) %>% arrange(UpperDepth, LowerDepth)
+
+    return(outDF)
+}
+
+
+
+sendRequest<- function(DataSet, DataStore, observedProperty, observedPropertyGroup){
   tryCatch(
     expr = {
-      odf <- getDataFunctions[[provider]](provider=provider, observedProperty, observedPropertyGroup)
+      odf <- getDataSetFunctions[[DataStore]](DataSet=DataSet, DataStore=DataStore, observedProperty, observedPropertyGroup)
     },
     error = function(e){
+      print(e)
       blankResponseDF()
     },
     warning = function(w){
-      message('Caught an warning!')
+      message('Caught a warning!')
       print(w)
     },
     finally = {
-      #message('All done, quitting.')
+      message('Success')
     }
   )
 }
 
 
 
-getData_NSSC_Wrapper <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL){
+getData_NSSC_Wrapper <- function(DataSet=NULL,  observedProperty=NULL, observedPropertyGroup=NULL){
 
   url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
 
@@ -160,20 +229,110 @@ getData_NSSC_Wrapper <- function(provider=NULL, observedProperty=NULL, observedP
 
 
 
-getDataFunctions <- c(LawsonGrains=getData_LawsonGrains,
-                      QLDGovernment=getData_QLDGovernment,
-                      TERNLandscapes=getData_TERNLandscapes,
-                      TERNSurveillance=getData_TERNSurveillance,
-                      WAGovernment=getData_NSSC_Wrapper,
-                      NSWGovernment=getData_NSSC_Wrapper,
-                      VicGovernment=getData_NSSC_Wrapper,
-                      SAGovernment=getData_NSSC_Wrapper,
-                      TasGovernment=getData_NSSC_Wrapper,
-                      NTGovernment=getData_NTGovt,
-                      CSIRO=getData_ASRIS
+
+####### Functions Lists   #######################
+getDataSetFunctions <-  c(
+                          LawsonGrains=getData_LawsonGrains,
+                          QLDGovernment=getData_QLDGovernment,
+                          TERNSurveillance=getData_TERNSurveillance,
+                          NSSC=getData_NSSC_Wrapper,
+                          ASRIS=getData_ASRIS,
+                          TERNLandscapesDB=getData_TERNLandscapesDB
+)
+
+getLocationDataFunctions <- c(
+                      LawsonGrains=getLocationData_LawsonGrains,
+                      # QLDGovernment=getData_QLDGovernment,
+                       TERNSurveillance=getLocationData_TERNSurveillance,
+                      TERNLandscapesDB=getLocationData_TERNLandscapesDB,
+                      # WAGovernment=getData_NSSC_Wrapper,
+                      # NSWGovernment=getData_NSSC_Wrapper,
+                      # VicGovernment=getData_NSSC_Wrapper,
+                      # SAGovernment=getData_NSSC_Wrapper,
+                      # TasGovernment=getData_NSSC_Wrapper,
+                     NTGovernment=getLocationData_ASRIS,
+                     ASRIS=getLocationData_ASRIS,
+                      NLWRA=getLocationData_TERNLandscapesDB,
+                      GeoscienceAustralia=getLocationData_TERNLandscapesDB
 )
 
 
+###########  Backend Helpers ############
+
+getDataQualityInfo <- function(dataSetName, dataset){
+
+  if (nrow(dataset) == 0){
+  }else{
+
+   quals <-  doQueryFromFed(paste0('select * from DataSets where DataSet = "', dataSetName, '"'))
+   dataset$QualCollection <- quals$QualCollection[1]
+   dataset$QualSpatialAgg <- quals$QualSpatialAgg[1]
+   dataset$QualManagement <- quals$QualManagement[1]
+
+  }
+  return (dataset)
+}
 
 
+convertToRequiredDataTypes <- function(df){
+
+
+  df$Provider <- as.character(df$Provider)
+  df$Dataset <- as.character(df$Dataset)
+  df$Observation_ID <- as.character(df$Observation_ID)
+  df$SampleID <- as.character(df$SampleID)
+  df$SampleDate <- as.character(df$SampleDate)
+  df$Longitude <- as.numeric(as.character(df$Longitude))
+  df$Latitude <- as.numeric(as.character(df$Latitude))
+  df$UpperDepth  <- as.numeric(as.character(df$UpperDepth))
+  df$LowerDepth <- as.numeric(as.character(df$LowerDepth))
+  df$PropertyType <- as.character(df$PropertyType)
+  df$ObservedProperty <- as.character(df$ObservedProperty)
+  df$Value <- as.character(df$Value)
+
+  return(df)
+}
+
+blankResponseDF <- function(){
+
+  outDF <- data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+                      Longitude=numeric() , Latitude= numeric(),
+                      UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
+                      Units= character(),   QualCollection=integer(), QualSpatialAgg=integer(), QualManagement=integer(), stringsAsFactors = F)
+}
+
+generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units ){
+
+  outDF <- data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, SampleID=sampleID , SampleDate=date ,
+                      Longitude=longitude, Latitude=latitude ,
+                      UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
+                      Value=value , Units=units, QualCollection=NA, QualSpatialAgg=NA, QualManagement=NA, stringsAsFactors = F)
+  oOutDF <- outDF[order(outDF$Observation_ID, outDF$Dataset, outDF$UpperDepth, outDF$SampleID),]
+  return(oOutDF)
+}
+
+generateResponseAllLocs<- function(provider, dataset, observation_ID, longitude, latitude, date ){
+  outDF <- data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, Longitude=longitude, Latitude=latitude ,SampleDate=date, stringsAsFactors = F)
+  return <- outDF
+}
+
+
+
+
+plotObservationLocationsImage <- function(DF){
+
+  pPath <- paste0('R/AncillaryData/Aust.shp')
+  austBdy <- read_sf(pPath)
+  meuse_sf = st_as_sf(DF, coords = c("Longitude", "Latitude"), crs = 4326, agr = "constant")
+
+  bkd <-  as.numeric(unique(as.factor(meuse_sf$DataSet )))
+  palt <-brewer.pal(length(bkd),"Set1")
+
+  par(mar=c(0,0,0,0))
+  plot(st_geometry(austBdy), border='black', reset=FALSE, col='beige')
+  # plot(x, y, ..., pch = 1, cex = 1, col = 1, bg = 0, lwd = 1, lty = 1, type = "p", add = FALSE)
+  plot(meuse_sf[1], pch=20, add=T, pal=palt  )
+  legend("topleft", legend=levels(as.factor(meuse_sf$DataSet )),fill=palt )
+
+}
 

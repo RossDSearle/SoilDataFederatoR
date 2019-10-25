@@ -46,14 +46,14 @@ makeBoundingBoxPolygon <- function(ext){
   return(p)
 }
 
-getEndPointURL <- function(DataStoreName){
-
-  DataStoreName <- 'TERNSoilDB'
-    sql <- paste0("Select * from DataStores where Name = '", DataStoreName, "' COLLATE NOCASE")
-    store = doQueryFromFed(sql)
-    url <- store$Location
-    return(url)
-}
+# getEndPointURL <- function(DataStoreName){
+#
+#   DataStoreName <- 'TERNSoilDB'
+#     sql <- paste0("Select * from DataStores where Name = '", DataStoreName, "' COLLATE NOCASE")
+#     store = doQueryFromFed(sql)
+#     url <- store$Location
+#     return(url)
+# }
 
 getUnits <- function(propertyType, property){
   if(str_to_lower(propertyType) == str_to_lower(PropertyTypes$LaboratoryMeasurement)){
@@ -119,115 +119,124 @@ AuthenticateAPIKey <- function(usr=NULL, key=NULL){
 }
 
 
-getProviders <- function( usr=NULL, key=NULL){
+# getProviders <- function( usr=NULL, key=NULL){
+#
+#
+#   if(is.null(usr) | is.null(key)) {
+#
+#     sql <- paste0("Select * from Providers WHERE Active = 1 and not Restricted")
+#     orgs = doQueryFromFed(sql)
+#     return(orgs)
+#     }
+#
+#     sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
+#     idRec <- doQueryFromFed(sql)
+#
+#     cusr <- as.character(idRec$usrID[1])
+#     cpwd <- as.character(idRec$Pwd[1])
+#     cgrp <- as.character(idRec$GroupName[1])
+#
+#     sql <- paste0("SELECT * FROM AuthAccess WHERE GroupName = '", cgrp, "'")
+#     accessRecs <- doQueryFromFed(sql)
+#
+#     accessList <- accessRecs$access
+#
+#     if(key == cpwd){
+#
+#       if(cgrp == 'Public'){
+#         sql <- paste0("Select * from Providers WHERE Active = 1 and not Restricted")
+#         orgs = doQueryFromFed(sql)
+#
+#         return(orgs)
+#       }else if(cgrp == 'Admin'){
+#         sql <- paste0("Select * from Providers")
+#         orgs = doQueryFromFed(sql)
+#         return(orgs)
+#       }
+#       else {
+#         sql <- paste0("Select * from Providers
+#         WHERE Active = 1 and ( not Restricted or ( Restricted and OrgName IN ( SELECT access FROM AuthAccess WHERE GroupName = '", cgrp, "')))")
+#         orgs = doQueryFromFed(sql)
+#
+#         return(orgs)
+#       }
+#       stop('Login failed')
+#     }
+#     else{
+#       stop('Incorrect user name or API Key')
+#     }
+#     stop('Login failed')
+#
+# }
+
+getDataSets <- function( usr=NULL, key=NULL){
 
 
   if(is.null(usr) | is.null(key)) {
 
-    sql <- paste0("Select * from Providers WHERE Active = 1 and not Restricted")
+    sql <- paste0("Select * from DataSets WHERE Active = 1 and not Restricted")
     orgs = doQueryFromFed(sql)
     return(orgs)
+  }
+
+  sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
+  idRec <- doQueryFromFed(sql)
+
+  cusr <- as.character(idRec$usrID[1])
+  cpwd <- as.character(idRec$Pwd[1])
+  cgrp <- as.character(idRec$GroupName[1])
+
+  sql <- paste0("SELECT * FROM AuthAccess WHERE GroupName = '", cgrp, "'")
+  accessRecs <- doQueryFromFed(sql)
+
+  accessList <- accessRecs$access
+
+  if(key == cpwd){
+
+    if(cgrp == 'Public'){
+      sql <- paste0("Select * from DataSets WHERE Active = 1 and not Restricted")
+      orgs = doQueryFromFed(sql)
+
+      return(orgs)
+    }else if(cgrp == 'Admin'){
+      sql <- paste0("Select * from DataSets")
+      orgs = doQueryFromFed(sql)
+      return(orgs)
     }
+    else {
+      sql <- paste0("Select * from DataSets
+        WHERE Active = 1 and ( not Restricted or ( Restricted and DataSet IN ( SELECT access FROM AuthAccess WHERE GroupName = '", cgrp, "')))")
+      orgs = doQueryFromFed(sql)
 
-    sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
-    idRec <- doQueryFromFed(sql)
-
-    cusr <- as.character(idRec$usrID[1])
-    cpwd <- as.character(idRec$Pwd[1])
-    cgrp <- as.character(idRec$GroupName[1])
-
-    sql <- paste0("SELECT * FROM AuthAccess WHERE GroupName = '", cgrp, "'")
-    accessRecs <- doQueryFromFed(sql)
-
-    accessList <- accessRecs$access
-
-    if(key == cpwd){
-
-      if(cgrp == 'Public'){
-        sql <- paste0("Select * from Providers WHERE Active = 1 and not Restricted")
-        orgs = doQueryFromFed(sql)
-
-        return(orgs)
-      }else if(cgrp == 'Admin'){
-        sql <- paste0("Select * from Providers")
-        orgs = doQueryFromFed(sql)
-        return(orgs)
-      }
-      else {
-        sql <- paste0("Select * from Providers
-        WHERE Active = 1 and ( not Restricted or ( Restricted and OrgName IN ( SELECT access FROM AuthAccess WHERE GroupName = '", cgrp, "')))")
-        orgs = doQueryFromFed(sql)
-
-        return(orgs)
-      }
-      stop('Login failed')
-    }
-    else{
-      stop('Incorrect user name or API Key')
-    }
-    stop('Login failed')
-
-}
-
-
-getProvidersOldToBeDeleted <- function( usr='Public', key='Public'){
-  #getProviders <- function(activeOnly=T, usr='Public', pwd='Public'){
-
-
-  if(usr=='Public'){
-    #if(activeOnly){
-      sql <- paste0("Select * from Providers where Active = 1 and Availability = 'Public'")
-    #
-    orgs = doQueryFromFed(sql)
-    return(orgs)
-
-  }else{
-
-    sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
-    idRec <- doQueryFromFed(sql)
-
-    if(nrow(idRec) != 1){stop('Incorrect user name or password - username actually')}
-
-    cusr <- as.character(idRec$usrID[1])
-    cpwd <- as.character(idRec$Pwd[1])
-    cgrp <- as.character(idRec$GroupName[1])
-
-    sql <- paste0("SELECT * FROM AuthAccess WHERE GroupName = '", cgrp, "'")
-    accessRecs <- doQueryFromFed(sql)
-
-
-    accessList <- accessRecs$access
-
-    if(key == cpwd){
-
-      if(usr == 'Admin'){
-        sql <- paste0("Select * from Providers WHERE Active = 1")
-        orgs = doQueryFromFed(sql)
-        return(orgs)
-
-      }else if('All' %in% accessList){
-
-        #sql <- "SELECT * FROM Sites INNER JOIN Sensors ON Sites.SiteID = Sensors.SiteID"
-        #orgs = doQueryFromFed(sql)
-
-        return(NULL)
-      }
-      else {
-
-        sql <- paste0("Select * from Providers
-        WHERE Active = 1 and ( Availability = 'Public' or ( Availability == 'Private' and OrgName IN ( SELECT access FROM AuthAccess WHERE GroupName = '", cgrp, "')))")
-        orgs = doQueryFromFed(sql)
-
-        return(orgs)
-      }
-      stop('Login failed')
-    }
-    else{
-      stop('Incorrect user name or password')
+      return(orgs)
     }
     stop('Login failed')
   }
+  else{
+    stop('Incorrect user name or API Key')
+  }
+  stop('Login failed')
+
 }
+
+
+getDataStore<- function(Dataset){
+  sql <- paste0("Select DataStore from DataSets where DataSet = '", Dataset, "'")
+  ds = doQueryFromFed(sql)
+
+  return(as.character(ds))
+
+}
+
+
+getOrgName<- function(Dataset){
+  sql <- paste0("Select OrgName from DataSets where DataSet = '", Dataset, "'")
+  org = doQueryFromFed(sql)
+
+  return(as.character(org))
+
+}
+
 
 getObservedProperties <- function(verbose=F){
   sql <- paste0("Select * from LabMethods")
@@ -279,44 +288,6 @@ getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGroup=N
 
 
 
-
-blankResponseDF <- function(){
-
-  outDF <- data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
-                              Longitude=numeric() , Latitude= numeric(),
-                              UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
-                              Units= character(), Quality=integer(), stringsAsFactors = F)
-}
-
-generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units, qualityCode ){
-
-  outDF <- na.omit(data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, SampleID=sampleID , SampleDate=date ,
-                              Longitude=longitude, Latitude=latitude ,
-                              UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
-                              Value=value , Units=units, Quality=qualityCode, stringsAsFactors = F))
-  oOutDF <- outDF[order(outDF$Observation_ID, outDF$Dataset, outDF$UpperDepth, outDF$SampleID),]
-  return(oOutDF)
-}
-
-convertToRequiredDataTypes <- function(df){
-
-  df$Provider <- as.character(df$Provider)
-  df$Dataset <- as.character(df$Dataset)
-  df$Observation_ID <- as.character(df$Observation_ID)
-  df$SampleID <- as.character(df$SampleID)
-  df$SampleDate <- as.character(df$SampleDate)
-  df$Longitude <- as.numeric(as.character(df$Longitude))
-  df$Latitude <- as.numeric(as.character(df$Latitude))
-  df$UpperDepth  <- as.numeric(as.character(df$UpperDepth ))
-  df$LowerDepth <- as.numeric(as.character(df$LowerDepth))
-  df$PropertyType <- as.character(df$PropertyType)
-  df$ObservedProperty <- as.character(df$ObservedProperty)
-  df$Value <- as.character(df$Value)
-  df$Units <- as.character(df$Units)
-  df$Quality <- as.character(df$Quality)
-
-  return(df)
-}
 
 
 sqlFromFile <- function(file){

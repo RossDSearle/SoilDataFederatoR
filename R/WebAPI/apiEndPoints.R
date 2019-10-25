@@ -71,19 +71,19 @@ writeLogEntry <- function(logfile, logentry){
 
 
 
-#* Returns information about the data providers known to the SoilDataFederator
+#* Returns information about the DataSets available in the SoilDataFederator
 
 #* @param key (Optional)  API key for accessing the API.
 #* @param usr (Optional) User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/
 #* @param format (Optional) format of the response to return. Either json, csv, or xml. Default = json
 #* @tag Soil Data Federator
-#* @get /SoilDataAPI/Providers
-apiGetProviders <- function( res, usr=NULL, key=NULL, format='json'){
+#* @get /SoilDataAPI/DataSets
+apiGetDataSets <- function( res, usr=NULL, key=NULL, format='json'){
 
   tryCatch({
 
-    DF <- getProviders(usr, key)
-    label <- 'DataProvider'
+    DF <- getDataSets(usr, key)
+    label <- 'DataSets'
     resp <- cerealize(DF, label, format, res)
     return(resp)
 
@@ -166,7 +166,7 @@ bob <- function(){
 
 }
 
-#* Returns soil data
+#* Returns soil observation data
 
 #* @param key (Required)  API key for accessing the API.
 #* @param usr (Required) User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/ You can use usr=Demo & key=Demo but only the first 5 records will be returned
@@ -174,7 +174,7 @@ bob <- function(){
 #* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
 #* @param bbox (Optional) The  rectangular bounding box of the area in the form minx;maxx;miny;maxy - semicolon delimited
 
-#* @param providers (Optional) Filter the data returned to a specific set of Providers. It should be a single Provider code or a semi-colon delimited text string of Provider codes. Default = All providers
+#* @param DataSet (Optional) Filter the data returned to a specific set of DataSets. It should be a single DataSet code or a semi-colon delimited text string of DataSet codes. Default = All DataSets
 #* @param observedPropertyGroup (Optional) Extract data for a defined group of soil properties.
 #* @param observedProperty (Optional) Specify the soil data property/s to return. It should be a single observedProperty code or a semi-colon delimited text string of observedProperty codes.
 
@@ -218,6 +218,58 @@ apiGetSoilData<- function(res, usr='Demo', key='Demo', providers=NULL, observedP
 }
 
 
+#* Returns the soil observation locations.
+
+#* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
+#* @param bbox (Optional) The  rectangular bounding box of the area in the form minx;maxx;miny;maxy - semicolon delimited
+
+#* @param DataSets (Optional) Filter on a specific DataSet.
+#* @tag Soil Data Federator
+#* @get /SoilDataAPI/ObservationLocations
+apiGetObservationLocations <- function(res,DataSets=NULL, bBox=NULL, format='json'){
+
+  tryCatch({
+
+    DF <-getLocations(DataSets=DataSets, bBox)
+    #DF
+     label <- 'ObservationLocations'
+     print(head(DF))
+     resp <- cerealize(DF, label, format, res)
+    # return(resp)
+  }, error = function(res)
+  {
+    res$status <- 400 # Bad request
+    list(error=jsonlite::unbox(geterrmessage()))
+
+  })
+}
+
+#* Returns an image of the soil observation locations.
+
+#* @param DataSets (Optional) Filter on a specific DataSet.
+#* @png (width = 400, height = 500)
+#* @tag Soil Data Federator
+#* @get /SoilDataAPI/ObservationLocationsAsMap
+apiGetObservationLocationsAsMap <- function(DataSets=NULL, bBox=NULL){
+
+  tryCatch({
+
+    DF <-getLocations(DataSets=DataSets, bBox)
+    spp <- plotObservationLocationsImage(DF)
+    return(plot(spp))
+  }, error = function(res)
+  {
+    res$status <- 400 # Bad request
+    list(error=jsonlite::unbox(geterrmessage()))
+
+  })
+}
+
+
+
+
+
+
 
 
 #* @assets /srv/plumber/TERNLandscapes/SoilDataFederatoR/R/Docs /help
@@ -233,9 +285,11 @@ list()
 cerealize <- function(DF, label, format, res){
 
 
+
   if(format == 'xml'){
 
     res$setHeader("Content-Type", "application/xml; charset=utf-8")
+    print(format)
     xmlT <- writexml(DF, label)
     res$body <- xmlT
     return(res)
@@ -271,6 +325,8 @@ writecsv <- function(DF){
 }
 
 writexml <- function(df, label){
+
+
 
   o <- apply(df, 1, DataFrameToXmlwriter, label)
   s <- unlist(o)
