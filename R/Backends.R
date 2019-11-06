@@ -136,7 +136,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
 #' Returns all locations of soil observations
 #'
 #' This function will query all the available data providers to return all of the available soil observation locations
-#' @param providers List of the Providers to query
+#' @param DataSets List of the Providers to query
 #' @return Dataframe of observation locations
 
 
@@ -287,15 +287,17 @@ convertToRequiredDataTypes <- function(df){
 
 blankResponseDF <- function(){
 
-  outDF <- data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+  outDF <- data.frame(DataStore=character(), Dataset=character(), Provider=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
                       Longitude=numeric() , Latitude= numeric(),
                       UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
                       Units= character(),   QualCollection=integer(), QualSpatialAgg=integer(), QualManagement=integer(), stringsAsFactors = F)
 }
 
-generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units ){
+generateResponseDF <- function( dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units ){
 
-  outDF <- data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, SampleID=sampleID , SampleDate=date ,
+  provider=getOrgName(dataset)
+  datastore=getDataStore(dataset)
+  outDF <- data.frame(DataStore=datastore, Dataset=dataset,Provider=provider, Observation_ID=observation_ID, SampleID=sampleID , SampleDate=date ,
                       Longitude=longitude, Latitude=latitude ,
                       UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
                       Value=value , Units=units, QualCollection=NA, QualSpatialAgg=NA, QualManagement=NA, stringsAsFactors = F)
@@ -303,8 +305,10 @@ generateResponseDF <- function(provider, dataset, observation_ID, sampleID, date
   return(oOutDF)
 }
 
-generateResponseAllLocs<- function(provider, dataset, observation_ID, longitude, latitude, date ){
-  outDF <- data.frame(Provider=provider, Dataset=dataset, Observation_ID=observation_ID, Longitude=longitude, Latitude=latitude ,SampleDate=date, stringsAsFactors = F)
+generateResponseAllLocs<- function(dataset, observation_ID, longitude, latitude, date ){
+  provider=getOrgName(dataset)
+  datastore=getDataStore(dataset)
+  outDF <- data.frame(DataStore=datastore, Dataset=dataset, Provider=provider, Observation_ID=observation_ID, Longitude=longitude, Latitude=latitude ,SampleDate=date, stringsAsFactors = F)
   return <- outDF
 }
 

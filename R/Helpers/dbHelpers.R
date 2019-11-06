@@ -230,6 +230,7 @@ getDataStore<- function(Dataset){
 
 
 getOrgName<- function(Dataset){
+
   sql <- paste0("Select OrgName from DataSets where DataSet = '", Dataset, "'")
   org = doQueryFromFed(sql)
 

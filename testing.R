@@ -38,11 +38,6 @@ observedProperty = 'S_DESC_BY'
 
 getPropertyType(observedProperty)
 
-getProviders()
-getProviders(usr = usr, key = key)
-
-getProviders( usr = 'LawsonGrains', key = 'b')
-getProviders( usr = 'Demo', key = 'Demo')
 
 df <- getSoilData( observedProperty='3A1', usr = 'Admin', pwd = 'c')
 head(df)
@@ -109,7 +104,7 @@ for (i in 1:length(ds)) {
 
   cat(crayon::blue('\n', dSt,' : ', sep=''))
 
-  r2 <- getLocations(DataSets=dSt, usr='ross.searle@csiro.au', key='a')
+  r2 <- getSiteLocations(DataSets=dSt, usr='ross.searle@csiro.au', key='a')
 
   if(nrow(r2) > 0){
     cat(crayon::green('SUCCESS', sep=''))
@@ -125,40 +120,40 @@ getLocations(usr=usr, key=key)
 
 
 getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='TERNSurveillance', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='TERNSurveillance', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='LawsonGrains_AgCatalyst', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='LawsonGrains_AgCatalyst', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='LawsonGrains_AgCatalyst', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='NatGeoChemicalSurvey', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='NatGeoChemicalSurvey', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='EastCentral_Australia',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='EastCentral_Australia', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='EastCentral_Australia', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='NatSoil',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NatSoil',observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='NatSoil', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='NatSoil', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='NTGovernment',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='NTGovernment', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='NTGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='SCARP',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SCARP',observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='SCARP', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='SCARP', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='SAGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='SAGovernment', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='SAGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='WAGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='WAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='WAGovernment', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='WAGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='QLDGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
 #########  spatial extent clipping   ###########################
 provider = 'LawsonGrains'
@@ -199,5 +194,21 @@ ObsProp <- 'o_permeability'
 ObsProp <- 'o_asc_ord'
 ObsProp <- 's_slope'
 ObsProp <- 's_notes'
+
+
+
+
+
+
+library(jsonlite)
+
+df <- fromJSON('http://127.0.0.1:3287/SoilDataAPI/ObservationLocations?DataSet=TERNSurveillance')
+
+df2 <- fromJSON('http://127.0.0.1:3287/SoilDataAPI/ObservationLocations')
+nrow(df2)
+write.csv(df2, 'c:/temp/locs.csv')
+
+
+
 
 

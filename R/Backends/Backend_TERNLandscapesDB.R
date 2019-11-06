@@ -71,7 +71,7 @@ getData_TERNLandscapesDB <- function(DataSet, ObserverdProperties=NULL, observed
     fdf <- doHostedQuery(sql)
 
     if(nrow(fdf) >0){
-    oOutDF <- generateResponseDF(OrgName, DataSet, fdf$Observation_ID, fdf$SampleID ,fdf$Date , fdf$Longitude, fdf$Latitude ,
+    oOutDF <- generateResponseDF(DataSet, fdf$Observation_ID, fdf$SampleID ,fdf$Date , fdf$Longitude, fdf$Latitude ,
                                  fdf$UpperDepth , fdf$LowerDepth ,propertyType, ps[i], fdf$Value , fdf$Units)
     lodfs[[i]] <- oOutDF
     }else{
@@ -89,7 +89,7 @@ getLocationData_TERNLandscapesDB <- function(DataSet){
     OrgName <- getOrgName(DataSet)
     sql <- paste0("select DISTINCT Provider, Dataset, Observation_ID, Longitude, Latitude, Date from ObservedProperties where DataSet = '", DataSet, "' order by Dataset, Observation_ID")
     fdf <- doHostedQuery(sql)
-    oOutDF <- generateResponseAllLocs(OrgName, DataSet, fdf$Observation_ID, fdf$Longitude, fdf$Latitude, fdf$Date )
+    oOutDF <- generateResponseAllLocs(DataSet, fdf$Observation_ID, fdf$Longitude, fdf$Latitude, fdf$Date )
 
   return(oOutDF)
 

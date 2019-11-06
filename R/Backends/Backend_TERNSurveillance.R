@@ -19,7 +19,7 @@ getLocationData_TERNSurveillance <- function(DataSet){
   dfl <- data.frame(paste0( locs$site_location_name, '_', locs$site_location_visit_id), locs$visit_date, locs$latitude, locs$longitude )
   colnames(dfl) <- c('ObsID', 'Date',  'Lat', 'Lon')
   df <- distinct(dfl)
-  oOutDF <-  generateResponseAllLocs(OrgName, DataSet, df$ObsID, df$Lon, df$Lat, df$Date )
+  oOutDF <-  generateResponseAllLocs(DataSet, df$ObsID, df$Lon, df$Lat, df$Date )
 }
 
 getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
@@ -53,7 +53,7 @@ getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observ
 
       propertyType <- getPropertyType(prop)
       units <- getUnits(propertyType = propertyType, prop = prop)
-      oOutDF <- generateResponseDF(OrgName, OrgName, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), fdf$site_location_visit_id, fdf$visit_date, fdf$longitude, fdf$latitude,
+      oOutDF <- generateResponseDF(DataSet, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), fdf$site_location_visit_id, fdf$visit_date, fdf$longitude, fdf$latitude,
                                    fdf$upper_depth, fdf$lower_depth, propertyType, prop, fdf$value, units = units)
 
       lodfs[[i]] <- oOutDF
