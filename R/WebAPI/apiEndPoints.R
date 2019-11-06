@@ -223,15 +223,15 @@ apiGetSoilData<- function(res, usr='Demo', key='Demo', DataSet=NULL, observedPro
 #* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
 #* @param bbox (Optional) The  rectangular bounding box of the area in the form minx;maxx;miny;maxy - semicolon delimited
 
-#* @param DataSets (Optional) Filter on a specific DataSet.
+#* @param DataSet (Optional) Filter on a specific DataSet.
 #* @tag Soil Data Federator
 #* @get /SoilDataAPI/ObservationLocations
-apiGetObservationLocations <- function(res,DataSets=NULL, bBox=NULL, format='json'){
+apiGetObservationLocations <- function(res, DataSet=NULL, bbox=NULL, format='json', usr='Demo', key='Demo'){
 
   tryCatch({
 
-    DF <-getLocations(DataSets=DataSets, bBox)
-    #DF
+    DF <-getSiteLocations(DataSet, bbox)
+    #DF = data.frame(c('Hi'))
      label <- 'ObservationLocations'
      print(head(DF))
      resp <- cerealize(DF, label, format, res)
@@ -246,15 +246,15 @@ apiGetObservationLocations <- function(res,DataSets=NULL, bBox=NULL, format='jso
 
 #* Returns an image of the soil observation locations.
 
-#* @param DataSets (Optional) Filter on a specific DataSet.
+#* @param DataSet (Optional) Filter on a specific DataSet.
 #* @png (width = 400, height = 500)
 #* @tag Soil Data Federator
 #* @get /SoilDataAPI/ObservationLocationsAsMap
-apiGetObservationLocationsAsMap <- function(DataSets=NULL, bBox=NULL){
+apiGetObservationLocationsAsMap <- function(DataSet=NULL, bBox=NULL, usr='Demo', key='Demo'){
 
   tryCatch({
 
-    DF <-getLocations(DataSets=DataSets, bBox)
+    DF <-getLocations(DataSets=DataSets, bBox=bBox)
     spp <- plotObservationLocationsImage(DF)
     return(plot(spp))
   }, error = function(res)

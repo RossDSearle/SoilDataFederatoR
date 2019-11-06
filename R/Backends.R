@@ -141,7 +141,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
 
 
 
-getLocations <- function(DataSets=NULL, bBox=NULL, usr=usr, key=key){
+getSiteLocations <- function(DataSets=NULL, bBox=NULL, usr='Demo', key='Demo'){
 
 
   authDataSets <- getDataSets(usr=usr, key=key)
@@ -152,6 +152,7 @@ getLocations <- function(DataSets=NULL, bBox=NULL, usr=usr, key=key){
   }else{
     availDataSets <- authDataSets$OrgName
   }
+
 
   outdfs <- vector("list", length(availDataSets))
 
