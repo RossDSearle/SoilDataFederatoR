@@ -15,7 +15,7 @@ machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){
   NSSC_dbPath <- '/OSM/CBR/LW_SOILDATAREPO/work/TERNLandscapes/SoilsFederator/HostedDBs/NSSC_2.0.0.sqlite'
 }else{
-  NSSC_dbPath <- 'C:/Projects/TernLandscapes/Site Data/NSSC_2.0.0.sqlite'
+  NSSC_dbPath <- 'C:/Projects/TernLandscapes/Site Data/HostedDBs/NSSC_2.0.0.sqlite'
  }
 
 

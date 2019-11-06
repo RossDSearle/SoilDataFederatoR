@@ -5,7 +5,7 @@ rootDir<- 'C:/Projects/TernLandscapes/Site Data/QLD'
 
 
 
-dbPath <- paste0(rootDir,'/SALI_Morphology.sqlite')
+dbPath <- paste0('C:/Projects/TernLandscapes/Site Data/HostedDBs/SALI_Morphology.sqlite')
 
 con <- DBI::dbConnect(RSQLite::SQLite(), dbPath)
 sitesTablesList <- dbListTables(con)
@@ -32,11 +32,14 @@ ds <- readRDS('C:/Projects/TernLandscapes/Site Data/QLD/SALI_SIT-data_20191101.r
 str(ds)
 names(ds)
 
+
+#####  IMPORTANT ######  Leave existing tables as I have manually set all thl foriegn keys etc - delete the existing records and update
+
 for(i in 1:length(names(ds))){
   print(i)
   tblName <- names(ds)[i]
   tbl <- ds[[tblName]]
-  dbWriteTable(con, tblName, tbl, overwrite = T)
+  dbWriteTable(con, tblName, tbl, overwrite = F)
 
   flds <- names(tbl)
 
@@ -63,5 +66,8 @@ levs <- read.csv(paste0(rootDir,'/SALITableNames.csv'))
 dbWriteTable(con, "TableLevels", levs, overwrite = T)
 
 
+ot <- ds$OBS
+ot$OBS_DATE <- as.character(ot$OBS_DATE)
+dbWriteTable(con, "dtest", ot, overwrite = T)
 
 

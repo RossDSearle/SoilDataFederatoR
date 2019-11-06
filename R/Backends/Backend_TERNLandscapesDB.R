@@ -6,7 +6,7 @@ machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){
   TernDBPath <- '/OSM/CBR/LW_SOILDATAREPO/work/TERNLandscapes/SoilsFederator/HostedDBs'
 }else{
-  projectRoot <<- 'C:/Users/sea084/Dropbox/RossRCode/Git/TERNLandscapes/APIs/SoilDataFederatoRDatabase'
+  TernDBPath <<- 'C:/Projects/TernLandscapes/Site Data/HostedDBs'
 }
 
 Hosted_dbPath <- paste0(TernDBPath, '/SoilDataFederatorDatabase.db3')
@@ -69,9 +69,14 @@ getData_TERNLandscapesDB <- function(DataSet, ObserverdProperties=NULL, observed
     prop <- ps[i]
     sql <- paste0("select * from ObservedProperties where ObservedProperty = '", prop, "'", provsql, ' order by Dataset, Observation_ID, UpperDepth, SampleID')
     fdf <- doHostedQuery(sql)
+
+    if(nrow(fdf) >0){
     oOutDF <- generateResponseDF(OrgName, DataSet, fdf$Observation_ID, fdf$SampleID ,fdf$Date , fdf$Longitude, fdf$Latitude ,
                                  fdf$UpperDepth , fdf$LowerDepth ,propertyType, ps[i], fdf$Value , fdf$Units)
     lodfs[[i]] <- oOutDF
+    }else{
+      lodfs[[i]] <- blankResponseDF()
+    }
   }
 
   outDF = as.data.frame(data.table::rbindlist(lodfs))

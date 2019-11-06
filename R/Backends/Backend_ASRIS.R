@@ -111,7 +111,7 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
       }
 
     fdfRaw <- fromJSON(url)
-    cat(head(fdfRaw))
+
      if(nrow(fdfRaw) > 0){
 
        if(ep=='http://asris-daas02/NatSoil_restricted_Services/api'){

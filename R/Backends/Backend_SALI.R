@@ -9,7 +9,7 @@ machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){
   SALI_dbPath <- '/OSM/CBR/LW_SOILDATAREPO/work/TERNLandscapes/SoilsFederator/HostedDBs/SALI_Morphology.sqlite'
 }else{
-  SALI_dbPath <- 'C:/Projects/TernLandscapes/Site Data/QLD/SALI_Morphology.sqlite'
+  SALI_dbPath <- 'C:/Projects/TernLandscapes/Site Data/HostedDBs/SALI_Morphology.sqlite'
 }
 
 doQueryFromSALI <- function(sql){
@@ -30,6 +30,21 @@ doQueryFromSALI <- function(sql){
 # testvals <- fromJSON(URLencode("https://soil-chem.information.qld.gov.au/odata/SiteLabMethodResults?$filter=LABP_CODE eq 'PH'"))
 # nrow(testvals)
 # head(testvals)
+
+
+getLocationData_QLDGovernment <- function(DataSet){
+
+  OrgName <- getOrgName(DataSet)
+  sql <- paste0('SELECT SIT.PROJECT_CODE, OBS.SITE_ID, OBS.OBS_NO, OBS.OBS_DATE, OLC.DATUM, OLC.LONGITUDE, OLC.LATITUDE
+FROM (SIT INNER JOIN OBS ON (SIT.PROJECT_CODE = OBS.PROJECT_CODE) AND (SIT.SITE_ID = OBS.SITE_ID)) INNER JOIN OLC ON (OBS.PROJECT_CODE = OLC.PROJECT_CODE) AND (OBS.SITE_ID = OLC.SITE_ID) AND (OBS.OBS_NO = OLC.OBS_NO)
+WHERE (((OLC.DATUM)="3"))')
+  fdf <- doQueryFromSALI(sql)
+  oOutDF <- generateResponseAllLocs(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ) , fdf$LONGITUDE, fdf$LATITUDE, fdf$OBS_DATE )
+
+  return(oOutDF)
+
+}
+
 
 getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGroup=NULL ){
 
@@ -86,9 +101,12 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           sql2 <- str_replace_all(sql1, 'yyyy', nativeProp)
 
           fdf =  doQueryFromSALI(sql2)
-          head(fdf)
 
-          oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , fdf$OBS_DATE , fdf$LONGITUDE, fdf$LATITUDE ,
+          day <- str_sub(fdf$OBS_DATE, 9,10)
+          mnth <- str_sub(fdf$OBS_DATE, 6,7)
+          yr <- str_sub(fdf$OBS_DATE, 1,4)
+
+          oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
                                        fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'NA')
           lodfs[[i]] <- oOutDF
 
@@ -104,9 +122,11 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
             sql2 <- str_replace_all(sql1, 'yyyy', nativeProp)
 
             fdf =  doQueryFromSALI(sql2)
-            head(fdf)
+            day <- str_sub(fdf$OBS_DATE, 9,10)
+            mnth <- str_sub(fdf$OBS_DATE, 6,7)
+            yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-            oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , fdf$OBS_DATE , fdf$LONGITUDE, fdf$LATITUDE ,
+            oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
                                          fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'NA')
             lodfs[[i]] <- oOutDF
 
@@ -120,9 +140,11 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
             sql2 <- str_replace_all(sql1, 'yyyy', nativeProp)
 
             fdf =  doQueryFromSALI(sql2)
-            head(fdf)
+            day <- str_sub(fdf$OBS_DATE, 9,10)
+            mnth <- str_sub(fdf$OBS_DATE, 6,7)
+            yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-            oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , fdf$OBS_DATE , fdf$LONGITUDE, fdf$LATITUDE ,
+            oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
                                          fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'NA')
             lodfs[[i]] <- oOutDF
           }
@@ -144,10 +166,11 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           sql2 <- str_replace_all(sql1, 'yyyy', nativeProp)
 
           fdf =  doQueryFromSALI(sql2)
+          day <- str_sub(fdf$OBS_DATE, 9,10)
+          mnth <- str_sub(fdf$OBS_DATE, 6,7)
+          yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-          head(fdf)
-
-          oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , fdf$OBS_DATE , fdf$LONGITUDE, fdf$LATITUDE ,
+          oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
                                        'NA' , 'NA' , propertyType, ObsProp, fdf[, 8] , 'NA')
           lodfs[[i]] <- oOutDF
 
@@ -169,10 +192,11 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           sql2 <- str_replace_all(sql1, 'yyyy', nativeProp)
 
           fdf =  doQueryFromSALI(sql2)
+          day <- str_sub(fdf$OBS_DATE, 9,10)
+          mnth <- str_sub(fdf$OBS_DATE, 6,7)
+          yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-          head(fdf)
-
-          oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , fdf$OBS_DATE , fdf$LONGITUDE, fdf$LATITUDE ,
+          oOutDF <- generateResponseDF(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
                                        'NA' , 'NA' , propertyType, ObsProp, fdf[, 8] , 'NA')
           lodfs[[i]] <- oOutDF
 

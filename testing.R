@@ -60,28 +60,43 @@ usr='Demo'; key='Demo'
 usr <- 'ross.searle@csiro.au'
 key <- 'a'
 
-OP <- '3A1'
+
+
+props <- c('3A1', 'h_texture')
 
 sql <- 'select * from Datasets where Active=1'
 dSets <- doQueryFromFed(sql)
 
 ds <- dSets$DataSet
 
-for (i in 1:length(ds)) {
-  dSt <- ds[i]
 
-  cat(crayon::blue('\n', dSt,' : ', sep=''))
-  r1 <- getSoilData(DataSets=dSt,observedProperty=OP, usr='ross.searle@csiro.au', key='a', verbose=F)
-  #r2 <- getLocations(DataSets=dSt, usr='ross.searle@csiro.au', key='a')
+for (j in 1:length(props)) {
 
-  if(nrow(r1) > 0){
-    cat(crayon::green('SUCCESS', sep=''))
-    cat(' -  returned ', nrow(r1), ' records', sep='')
+  OP <- props[j]
+
+  if(j==1){
+    cat(crayon::yellow('\n\nTesting Lab Data EndPoints', sep=''))
+    cat(crayon::yellow('\n===============================', sep=''))
   }else{
-    cat(crayon::red('PROBLEM', sep=''))
+    cat(crayon::yellow('\n\nTesting Morphology Data EndPoints', sep=''))
+    cat(crayon::yellow('\n=====================================', sep=''))
   }
-}
 
+    for (i in 1:length(ds)) {
+      dSt <- ds[i]
+
+      cat(crayon::blue('\n', dSt,' : ', sep=''))
+      r1 <- getSoilData(DataSets=dSt,observedProperty=OP, usr='ross.searle@csiro.au', key='a', verbose=F)
+      #r2 <- getLocations(DataSets=dSt, usr='ross.searle@csiro.au', key='a')
+
+      if(nrow(r1) > 0){
+        cat(crayon::green('SUCCESS', sep=''))
+        cat(' -  returned ', nrow(r1), ' records', sep='')
+      }else{
+        cat(crayon::red('POSSIBLE PROBLEM', sep=''))
+      }
+    }
+}
 
 
 
@@ -95,13 +110,11 @@ getSoilData(DataSets='LawsonGrains_AgCatalyst', observedProperty='4A1', usr='ros
 getLocations(DataSets='LawsonGrains_AgCatalyst', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getLocations(DataSets='NatGeoChemicalSurvey', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='EastCentral_Australia',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getLocations(DataSets='EastCentral_Australia', usr='ross.searle@csiro.au', key='a')
-
-
-getSoilData(DataSets='QLDGovernment',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='NatSoil',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NatSoil',observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')

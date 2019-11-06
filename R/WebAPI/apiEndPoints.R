@@ -180,7 +180,7 @@ bob <- function(){
 
 #* @tag Soil Data Federator
 #* @get /SoilDataAPI/SoilData
-apiGetSoilData<- function(res, usr='Demo', key='Demo', providers=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bbox=NULL, format='json', numToReturn=NULL){
+apiGetSoilData<- function(res, usr='Demo', key='Demo', DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bbox=NULL, format='json', numToReturn=NULL){
 
   nrowsToGet <- as.numeric(numToReturn)
 
@@ -197,7 +197,7 @@ apiGetSoilData<- function(res, usr='Demo', key='Demo', providers=NULL, observedP
       bboxExt <- NULL
     }
 
-    DF <-getSoilData(providers, observedProperty, observedPropertyGroup, bboxExt, usr, key)
+    DF <-getSoilData(DataSet, observedProperty, observedPropertyGroup, bboxExt, usr, key)
 
     if(!is.null(numToReturn)){
       nget <- min(nrowsToGet, nrow(DF))
