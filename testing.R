@@ -100,6 +100,27 @@ for (j in 1:length(props)) {
 
 
 
+####  Test the getLocations EndPoints
+
+cat(crayon::yellow('\n\nTesting LOcations EndPoints', sep=''))
+cat(crayon::yellow('\n=====================================', sep=''))
+for (i in 1:length(ds)) {
+  dSt <- ds[i]
+
+  cat(crayon::blue('\n', dSt,' : ', sep=''))
+
+  r2 <- getLocations(DataSets=dSt, usr='ross.searle@csiro.au', key='a')
+
+  if(nrow(r2) > 0){
+    cat(crayon::green('SUCCESS', sep=''))
+    cat(' -  returned ', nrow(r2), ' records', sep='')
+  }else{
+    cat(crayon::red('POSSIBLE PROBLEM', sep=''))
+  }
+}
+
+
+
 getLocations(usr=usr, key=key)
 
 
