@@ -149,7 +149,6 @@ getLocations <- function(DataSets=NULL, bBox=NULL, usr=usr, key=key){
   if(!is.null(DataSets)){
     bits <- str_split(DataSets, ';')
     availDataSets <- bits[[1]]
-    print(availDataSets)
   }else{
     availDataSets <- authDataSets$OrgName
   }
@@ -241,14 +240,11 @@ getDataSetFunctions <-  c(
 
 getLocationDataFunctions <- c(
                       LawsonGrains=getLocationData_LawsonGrains,
-                      # QLDGovernment=getData_QLDGovernment,
+                      SALI=getLocationData_QLDGovernment,
                       TERNSurveillance=getLocationData_TERNSurveillance,
-                      TERNLandscapesDB=getLocationData_TERNLandscapesDB,
                       NSSC=getLocationData_NSSC,
-                      NTGovernment=getLocationData_ASRIS,
                       ASRIS=getLocationData_ASRIS,
-                      NLWRA=getLocationData_TERNLandscapesDB,
-                      GeoscienceAustralia=getLocationData_TERNLandscapesDB
+                      TERNLandscapesDB=getLocationData_TERNLandscapesDB
 )
 
 

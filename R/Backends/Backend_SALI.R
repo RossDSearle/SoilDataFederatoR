@@ -39,7 +39,10 @@ getLocationData_QLDGovernment <- function(DataSet){
 FROM (SIT INNER JOIN OBS ON (SIT.PROJECT_CODE = OBS.PROJECT_CODE) AND (SIT.SITE_ID = OBS.SITE_ID)) INNER JOIN OLC ON (OBS.PROJECT_CODE = OLC.PROJECT_CODE) AND (OBS.SITE_ID = OLC.SITE_ID) AND (OBS.OBS_NO = OLC.OBS_NO)
 WHERE (((OLC.DATUM)="3"))')
   fdf <- doQueryFromSALI(sql)
-  oOutDF <- generateResponseAllLocs(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ) , fdf$LONGITUDE, fdf$LATITUDE, fdf$OBS_DATE )
+  day <- str_sub(fdf$OBS_DATE, 9,10)
+  mnth <- str_sub(fdf$OBS_DATE, 6,7)
+  yr <- str_sub(fdf$OBS_DATE, 1,4)
+  oOutDF <- generateResponseAllLocs(OrgName, DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ) , fdf$LONGITUDE, fdf$LATITUDE, paste0(day, '-', mnth, '-', yr,'T00:00:00'))
 
   return(oOutDF)
 
