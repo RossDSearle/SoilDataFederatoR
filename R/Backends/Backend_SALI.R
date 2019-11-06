@@ -7,7 +7,7 @@ library(stringr)
 
 machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){
-  SALI_dbPath <- '/home/sea084/Data/SALI_Morphology.sqlite'
+  SALI_dbPath <- '/OSM/CBR/LW_SOILDATAREPO/work/TERNLandscapes/SoilsFederator/HostedDBs/SALI_Morphology.sqlite'
 }else{
   SALI_dbPath <- 'C:/Projects/TernLandscapes/Site Data/QLD/SALI_Morphology.sqlite'
 }

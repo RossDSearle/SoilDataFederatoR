@@ -97,6 +97,9 @@ getLocations(DataSets='LawsonGrains_AgCatalyst', usr='ross.searle@csiro.au', key
 getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getLocations(DataSets='NatGeoChemicalSurvey', usr='ross.searle@csiro.au', key='a')
 
+getSoilData(DataSets='EastCentral_Australia',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='EastCentral_Australia', usr='ross.searle@csiro.au', key='a')
+
 
 getSoilData(DataSets='QLDGovernment',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 

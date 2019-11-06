@@ -4,12 +4,12 @@ library(DBI)
 
 machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){
-  projectRoot <<- '/srv/plumber/TERNLandscapes/SoilDataFederatoRDatabase'
+  TernDBPath <- '/OSM/CBR/LW_SOILDATAREPO/work/TERNLandscapes/SoilsFederator/HostedDBs'
 }else{
   projectRoot <<- 'C:/Users/sea084/Dropbox/RossRCode/Git/TERNLandscapes/APIs/SoilDataFederatoRDatabase'
 }
 
-Hosted_dbPath <- paste0(projectRoot, '/DB/SoilDataFederatorDatabase.db3')
+Hosted_dbPath <- paste0(TernDBPath, '/SoilDataFederatorDatabase.db3')
 
 doHostedQuery <- function(sql){
   conn <- DBI::dbConnect(RSQLite::SQLite(), Hosted_dbPath)
