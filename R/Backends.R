@@ -28,6 +28,7 @@ source(paste0('R/Backends/Backend_SALI.R'))
 source(paste0('R/Backends/Backend_LawsonGrains.R'))
 source(paste0('R/Backends/Backend_ASRIS.R'))
 source(paste0('R/Backends/Backend_TERNLandscapesDB.R'))
+source(paste0('R/Backends/Backend_NSSC.R'))
 #source(paste0('R/Backends/Backend_NTGovt.R'))
 
 #source(paste0('R/Helpers/Functions_BackendLists.R'))
@@ -46,7 +47,7 @@ PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', Field
 
 
 
-getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bBox=NULL, usr='Demo', key='Demo'){
+getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bBox=NULL, usr='Demo', key='Demo', verbose=F){
 
  auth  <- AuthenticateAPIKey(usr, key)
 
@@ -60,10 +61,12 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
         availDataSets <- authDataSets$DataSet
       }
 
-      cat(paste('Available DataSets\n'))
-      cat(paste('====================\n '))
-      cat(paste0(availDataSets, '\n'))
-      cat(paste0('\n'))
+      if(verbose){
+        cat(paste('Available DataSets\n'))
+        cat(paste('====================\n '))
+        cat(paste0(availDataSets, '\n'))
+        cat(paste0('\n'))
+      }
 
       outdfs <- vector("list", length(availDataSets))
 
@@ -71,11 +74,14 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
         dataset <- availDataSets[[i]]
 
         dStore <- getDataStore(dataset)
-        cat(paste0('Extracting data from ', dataset, '\n'))
+        if(verbose){
+           cat(paste0('Extracting data from ', dataset, '\n'))
+        }
 
         if(is.null(bBox)){
 
           odf <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
+          #DataStore=dStore,
 
         }else{
           if(areasOverlap(DataSet=dataset, bBox=bBox)){
@@ -85,10 +91,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
             odf <- blankResponseDF()
           }
         }
-
        # possibleError <- tryCatch(
-
-
         if(is.data.frame(odf))
         {
           odf <- getDataQualityInfo(dataset, odf)
@@ -96,9 +99,6 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
         }else{
           outdfs[[i]] <- blankResponseDF()
         }
-
-
-
         #  error=function(e) e
         #)
         #if(inherits(possibleError, "error")) next
@@ -117,7 +117,6 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
      }
 
      outDF2 <- convertToRequiredDataTypes(outDF)
-     print("here2")
      outDF2$ExtractTime<- format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
      outDF2 <- outDF2[!is.na(outDF2$Value),]
      outDF2[!is.na(outDF2$UpperDepth),]
@@ -142,7 +141,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
 
 
 
-getLocations <- function(DataSets=NULL, bBox=NULL){
+getLocations <- function(DataSets=NULL, bBox=NULL, usr=usr, key=key){
 
 
   authDataSets <- getDataSets(usr=usr, key=key)
@@ -164,7 +163,7 @@ getLocations <- function(DataSets=NULL, bBox=NULL){
       dStore <- getDataStore(dataset)
 
       if(!is.null(getLocationDataFunctions[[dStore]]) ){
-      cat(paste0('Extracting data from ', dataset, '\n'))
+      #cat(paste0('Extracting data from ', dataset, '\n'))
 
 
       if(is.null(bBox)){
@@ -196,36 +195,36 @@ getLocations <- function(DataSets=NULL, bBox=NULL){
 sendRequest<- function(DataSet, DataStore, observedProperty, observedPropertyGroup){
   tryCatch(
     expr = {
-      odf <- getDataSetFunctions[[DataStore]](DataSet=DataSet, DataStore=DataStore, observedProperty, observedPropertyGroup)
+      odf <- getDataSetFunctions[[DataStore]](DataSet=DataSet, observedProperty, observedPropertyGroup)
     },
     error = function(e){
       print(e)
       blankResponseDF()
     },
     warning = function(w){
-      message('Caught a warning!')
+      #message('Caught a warning!')
       print(w)
     },
     finally = {
-      message('Success')
+     # message('Success')
     }
   )
 }
 
 
 
-getData_NSSC_Wrapper <- function(DataSet=NULL,  observedProperty=NULL, observedPropertyGroup=NULL){
-
-  url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
-
-  print(provider)
-  fdf <- fromJSON(paste0(url))
-  if(is.data.frame(fdf)){
-    return <- fdf
-  }else{
-    return(blankResponseDF())
-  }
-}
+# getData_NSSC_Wrapper <- function(DataSet=NULL,  observedProperty=NULL, observedPropertyGroup=NULL){
+#
+#   url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
+#
+#   print(provider)
+#   fdf <- fromJSON(paste0(url))
+#   if(is.data.frame(fdf)){
+#     return <- fdf
+#   }else{
+#     return(blankResponseDF())
+#   }
+# }
 
 
 
@@ -233,9 +232,9 @@ getData_NSSC_Wrapper <- function(DataSet=NULL,  observedProperty=NULL, observedP
 ####### Functions Lists   #######################
 getDataSetFunctions <-  c(
                           LawsonGrains=getData_LawsonGrains,
-                          QLDGovernment=getData_QLDGovernment,
+                          SALI=getData_QLDGovernment,
                           TERNSurveillance=getData_TERNSurveillance,
-                          NSSC=getData_NSSC_Wrapper,
+                          NSSC=getData_NSSC,
                           ASRIS=getData_ASRIS,
                           TERNLandscapesDB=getData_TERNLandscapesDB
 )
@@ -243,15 +242,11 @@ getDataSetFunctions <-  c(
 getLocationDataFunctions <- c(
                       LawsonGrains=getLocationData_LawsonGrains,
                       # QLDGovernment=getData_QLDGovernment,
-                       TERNSurveillance=getLocationData_TERNSurveillance,
+                      TERNSurveillance=getLocationData_TERNSurveillance,
                       TERNLandscapesDB=getLocationData_TERNLandscapesDB,
-                      # WAGovernment=getData_NSSC_Wrapper,
-                      # NSWGovernment=getData_NSSC_Wrapper,
-                      # VicGovernment=getData_NSSC_Wrapper,
-                      # SAGovernment=getData_NSSC_Wrapper,
-                      # TasGovernment=getData_NSSC_Wrapper,
-                     NTGovernment=getLocationData_ASRIS,
-                     ASRIS=getLocationData_ASRIS,
+                      NSSC=getLocationData_NSSC,
+                      NTGovernment=getLocationData_ASRIS,
+                      ASRIS=getLocationData_ASRIS,
                       NLWRA=getLocationData_TERNLandscapesDB,
                       GeoscienceAustralia=getLocationData_TERNLandscapesDB
 )

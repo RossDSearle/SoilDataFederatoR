@@ -20,19 +20,6 @@ doHostedQuery <- function(sql){
   return(res)
 }
 
-# getData_NLWRA <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL){
-#   return(hDB_getSoilData(DataSet=DataSet, ObserverdProperties=observedProperty, observedPropertyGroup=observedPropertyGroup))
-# }
-# getLocationData_NLWRA <- function(DataSet){
-#   return(hDB_getAllLocations(DataSet=DataSet))
-# }
-
-# getData_GeoScienceAustralia <- function(provider=NULL, observedProperty=NULL, observedPropertyGroup=NULL){
-#   return(hDB_getSoilData(DataSet=DataSet, ObserverdProperties=observedProperty, observedPropertyGroup=observedPropertyGroup))
-# }
-# getLocationData_GeoScienceAustralia <- function(DataSet){
-#   return(hDB_getAllLocations(DataSet=DataSet))
-#}
 
 hDB_getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGroup=NULL){
 
@@ -47,14 +34,6 @@ hDB_getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGro
   return(ps)
 }
 
-
-# hDB_getDataSets <- function(){
-#   sql <- 'Select DataSet from DataSets'
-#   p <- doHostedQuery(sql)
-#   return(p)
-#
-# }
-
 hDB_getDatasets <- function(DataSet=NULL, verbose=F){
 
   if(verbose){
@@ -62,7 +41,6 @@ hDB_getDatasets <- function(DataSet=NULL, verbose=F){
   }else{
     fields <- ' Provider, Dataset '
   }
-
 
   if(is.null(Provider)){
     sql <- paste0('Select', fields, 'from DataSets')
@@ -75,9 +53,7 @@ hDB_getDatasets <- function(DataSet=NULL, verbose=F){
   }
 }
 
-getData_TERNLandscapesDB <- function(DataSet, DataStore, ObserverdProperties=NULL, observedPropertyGroup=NULL){
-
-  print(paste0("DataSet = ", DataSet))
+getData_TERNLandscapesDB <- function(DataSet, ObserverdProperties=NULL, observedPropertyGroup=NULL){
 
   OrgName <- getOrgName(DataSet)
   ps <- hDB_getPropertiesList(ObserverdProperties, observedPropertyGroup)
@@ -89,11 +65,9 @@ getData_TERNLandscapesDB <- function(DataSet, DataStore, ObserverdProperties=NUL
     provsql <- paste0(" and DataSet = '", DataSet, "'")
   }
 
-
   for (i in 1:length(ps)) {
     prop <- ps[i]
     sql <- paste0("select * from ObservedProperties where ObservedProperty = '", prop, "'", provsql, ' order by Dataset, Observation_ID, UpperDepth, SampleID')
-    print(sql)
     fdf <- doHostedQuery(sql)
     oOutDF <- generateResponseDF(OrgName, DataSet, fdf$Observation_ID, fdf$SampleID ,fdf$Date , fdf$Longitude, fdf$Latitude ,
                                  fdf$UpperDepth , fdf$LowerDepth ,propertyType, ps[i], fdf$Value , fdf$Units)
@@ -109,7 +83,6 @@ getLocationData_TERNLandscapesDB <- function(DataSet){
 
     OrgName <- getOrgName(DataSet)
     sql <- paste0("select DISTINCT Provider, Dataset, Observation_ID, Longitude, Latitude, Date from ObservedProperties where DataSet = '", DataSet, "' order by Dataset, Observation_ID")
-
     fdf <- doHostedQuery(sql)
     oOutDF <- generateResponseAllLocs(OrgName, DataSet, fdf$Observation_ID, fdf$Longitude, fdf$Latitude, fdf$Date )
 

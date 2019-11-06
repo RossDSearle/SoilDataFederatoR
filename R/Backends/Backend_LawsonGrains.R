@@ -44,7 +44,7 @@ getLocationData_LawsonGrains <- function(DataSet){
     return(oOutDF)
 }
 
-getData_LawsonGrains <- function(DataSet, DataStore, observedProperty, observedPropertyGroup=NULL ){
+getData_LawsonGrains <- function(DataSet, observedProperty, observedPropertyGroup=NULL ){
 
   OrgName <- getOrgName(DataSet)
 
@@ -90,7 +90,6 @@ if(length(nativeProps) == 0){
     oOutDF <- generateResponseDF(OrgName, DataSet, paste0(fdf$Aggregation , '_', fdf$SampleNo ), fdf$LabNumber, paste0('01-04-', sd$Year,'T00:00:00' ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, prop, fdf$Value, units)
 
     lodfs[[i]] <- oOutDF
-     #cDF<- rbind(cDF, oOutDF)
   }
 
   outDF = as.data.frame(data.table::rbindlist(lodfs))
@@ -98,6 +97,5 @@ if(length(nativeProps) == 0){
   unlink(p1f)
   unlink(p2f)
 
-  print(head(outDF))
    return(outDF)
 }

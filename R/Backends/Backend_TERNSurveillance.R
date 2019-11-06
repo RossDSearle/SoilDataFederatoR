@@ -22,7 +22,7 @@ getLocationData_TERNSurveillance <- function(DataSet){
   oOutDF <-  generateResponseAllLocs(OrgName, DataSet, df$ObsID, df$Lon, df$Lat, df$Date )
 }
 
-getData_TERNSurveillance <- function(DataSet=NULL, DataStore, observedProperty=NULL, observedPropertyGroup=NULL ){
+getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
 
   OrgName <- getOrgName(DataSet)
 

@@ -56,8 +56,31 @@ op = 'S_DESC_BY'
 
 
 usr='Demo'; key='Demo'
+
 usr <- 'ross.searle@csiro.au'
 key <- 'a'
+
+OP <- '3A1'
+
+sql <- 'select * from Datasets where Active=1'
+dSets <- doQueryFromFed(sql)
+
+ds <- dSets$DataSet
+
+for (i in 1:length(ds)) {
+  dSt <- ds[i]
+
+  cat(crayon::blue('\n', dSt,' : ', sep=''))
+  r1 <- getSoilData(DataSets=dSt,observedProperty=OP, usr='ross.searle@csiro.au', key='a', verbose=F)
+  #r2 <- getLocations(DataSets=dSt, usr='ross.searle@csiro.au', key='a')
+
+  if(nrow(r1) > 0){
+    cat(crayon::green('SUCCESS', sep=''))
+    cat(' -  returned ', nrow(r1), ' records', sep='')
+  }else{
+    cat(crayon::red('PROBLEM', sep=''))
+  }
+}
 
 
 
@@ -65,29 +88,40 @@ key <- 'a'
 getLocations(usr=usr, key=key)
 
 
-getSoilData(DataSets = 'TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets= 'TERNSurveillance', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='TERNSurveillance', usr='ross.searle@csiro.au', key='a')
 
-getSoilData(DataSets = 'LawsonGrains_AgCatalyst', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets= 'LawsonGrains_AgCatalyst', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='LawsonGrains_AgCatalyst', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='LawsonGrains_AgCatalyst', usr='ross.searle@csiro.au', key='a')
 
-getSoilData(DataSets = 'NatGeoChemicalSurvey',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets= 'NatGeoChemicalSurvey', usr='ross.searle@csiro.au', key='a')
-
-
-getSoilData(DataSets = 'SALI',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-
-getSoilData(DataSets = 'NatSoil',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets= 'NatSoil', usr='ross.searle@csiro.au', key='a')
-
-getSoilData(DataSets = 'NTGovernment',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getLocations(DataSets= 'NTGovernment', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='NatGeoChemicalSurvey', usr='ross.searle@csiro.au', key='a')
 
 
-plotObservationLocationsImage()
-  NatGeoChemicalSurvey
+getSoilData(DataSets='QLDGovernment',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 
+getSoilData(DataSets='NatSoil',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NatSoil',observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='NatSoil', usr='ross.searle@csiro.au', key='a')
 
+getSoilData(DataSets='NTGovernment',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='NTGovernment', usr='ross.searle@csiro.au', key='a')
+
+getSoilData(DataSets='SCARP',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='SCARP',observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='SCARP', usr='ross.searle@csiro.au', key='a')
+
+getSoilData(DataSets='SAGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='SAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='SAGovernment', usr='ross.searle@csiro.au', key='a')
+
+getSoilData(DataSets='WAGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='WAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='WAGovernment', usr='ross.searle@csiro.au', key='a')
+
+getSoilData(DataSets='QLDGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+getLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
 #########  spatial extent clipping   ###########################
 provider = 'LawsonGrains'
@@ -120,9 +154,13 @@ df <- getSoilData('LawsonGrains', observedProperty='4A1', bbox=bboxExt, usr='ros
 
 
 
-
-
-
-
+DataSet <- 'QLDGovernment'
+ObsProp <- 'cf_size'
+ObsProp <- 'h_texture'
+ObsProp <- 'o_asc_ord'
+ObsProp <- 'o_permeability'
+ObsProp <- 'o_asc_ord'
+ObsProp <- 's_slope'
+ObsProp <- 's_notes'
 
 

@@ -18,21 +18,25 @@ library(stringr)
 # http://asris-daas02/NT_Services/api/LabResults?method_code=15_NR_CA&horizon_num=4&horizon_lower_depth=1&horizon_upper_dept=2&upper_bound_lat=-13&lower_bound_lat=-14.514&upper_bound_lon=131.092&lower_bound_lon=130
 
 
-getService <- function(Dataset){
+getASRISService <- function(Dataset){
 
-  if(Dataset=='NatSoil'){
+  if(str_to_upper(Dataset)=='NATSOIL'){
     return('http://asris-daas02/NatSoil_Services/api')
-
-  }else if(Dataset=='NTGovernment'){
+  }else if(str_to_upper(Dataset)=='NTGOVERNMENT'){
     return('http://asris-daas02/NT_Services/api')
+  }else if(str_to_upper(Dataset)=='WAGOVERNMENT'){
+    return('http://asris-daas02/WA_Services/api')
+  }  else if(str_to_upper(Dataset)=='SCARP'){
+    return('http://asris-daas02/NatSoil_restricted_Services/api')
   }
+
   return(NULL)
 }
 
 
 getLocationData_ASRIS<- function(DataSet){
 
-  ep <- getService(DataSet)
+  ep <- getASRISService(DataSet)
   OrgName <- getOrgName(DataSet)
   fdf <- fromJSON(paste0(ep, '/MorphResults?morphology_attribute=s_date_desc'))
   day <- str_sub(fdf$o_date_desc, 1,2)
@@ -44,44 +48,53 @@ getLocationData_ASRIS<- function(DataSet){
 
 
 
-getData_ASRIS<- function(DataSet=NULL, DataStore, observedProperty=NULL, observedPropertyGroup=NULL ){
+getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
 
- ep <- getService(DataSet)
+ ep <- getASRISService(DataSet)
 
   OrgName <- getOrgName(DataSet)
-  ps <- getPropertiesList(observedProperty, observedPropertyGroup)
+  propList <- getPropertiesList(observedProperty, observedPropertyGroup)
 
-  mappings <- doQueryFromFed(paste0("Select * from Mappings where Organisation = '", OrgName, "'" ))
-  nativeProps <- getNativeProperties(OrgName, mappings, observedProperty, observedPropertyGroup)
-
-  if(length(nativeProps) == 0){
+  if(length(propList) == 0){
     return(blankResponseDF())
   }
 
-  lodfs <- list(length(nativeProps))
+  lodfs <- list(length(propList))
 
 
-  for (i in 1:length(nativeProps)) {
+  for (i in 1:length(propList)) {
 
-    nprop <- nativeProps[i]
-    propertyType <- getPropertyType(observedProperty)
+    ObsProp <- propList[i]
+    propertyType <- getPropertyType(ObsProp)
+    units <- getUnits(propertyType = propertyType, prop = ObsProp)
 
     if(propertyType == 'LaboratoryMeasurement'){
       ### Hit the Laboratory endpoint
 
-        fdf <- fromJSON(paste0(ep, '/LabResults?method_code=', observedProperty))
-        if(nrow(fdf) > 0){
+      if(ep=='http://asris-daas02/NatSoil_restricted_Services/api'){
+        url <- paste0(ep, '/LabResults?method_code=', ObsProp)
+        #url <- paste0(ep, '/LabResults?method_code=', ObsProp , '&proj_code=', DataSet)
+      }else{
+        url <- paste0(ep, '/LabResults?method_code=', ObsProp)
+      }
 
-          propType <- getPropertyType(prop)
+      fdfRaw <- fromJSON(url)
 
-          units <- getUnits(propertyType = propType, prop = prop)
+
+        if(nrow(fdfRaw) > 0){
+
+          if(ep=='http://asris-daas02/NatSoil_restricted_Services/api'){
+            fdf <- fdfRaw[fdfRaw$proj_code == DataSet, ]
+          }else{
+            fdf <- fdfRaw
+          }
 
           day <- str_sub(fdf$o_date_desc, 1,2)
           mnth <- str_sub(fdf$o_date_desc, 3,4)
           yr <- str_sub(fdf$o_date_desc, 5,8)
 
           oOutDF <- generateResponseDF(OrgName, DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$samp_no ,paste0(day, '-', mnth, '-', yr,'T00:00:00' ) , fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
-                                       fdf$samp_upper_depth , fdf$samp_lower_depth , propType, ps[i], fdf$labr_value , units)
+                                       fdf$samp_upper_depth , fdf$samp_lower_depth , propertyType, ObsProp, fdf$labr_value , units)
           lodfs[[i]] <- oOutDF
         }else{
           return(blankResponseDF())
@@ -89,22 +102,34 @@ getData_ASRIS<- function(DataSet=NULL, DataStore, observedProperty=NULL, observe
     }else{
 
     ### Hit the morpholgy endpoint
-      fdf <- fromJSON(paste0(ep, '/MorphResults?morphology_attribute=', observedProperty))
-     print(head(fdf))
 
-     if(nrow(fdf) > 0){
+      if(ep=='http://asris-daas02/NatSoil_restricted_Services/api'){
+        url <- paste0(ep, '/MorphResults?morphology_attribute=', ObsProp)
+        #url <- paste0(ep, '/MorphResults?morphology_attribute=', ObsProp , '&proj_code=', DataSet)
+      }else{
+        url <- paste0(ep, '/MorphResults?morphology_attribute=', ObsProp)
+      }
 
-       propType <- getPropertyType(nprop)
+    fdfRaw <- fromJSON(url)
+    cat(head(fdfRaw))
+     if(nrow(fdfRaw) > 0){
 
-       units <- getUnits(propertyType = propType, prop = nprop)
+       if(ep=='http://asris-daas02/NatSoil_restricted_Services/api'){
+         fdf <- fdfRaw[fdfRaw$proj_code == DataSet, ]
+       }else{
+           fdf <- fdfRaw
+       }
 
        day <- str_sub(fdf$o_date_desc, 1,2)
        mnth <- str_sub(fdf$o_date_desc, 3,4)
        yr <- str_sub(fdf$o_date_desc, 5,8)
 
        oOutDF <- generateResponseDF(OrgName, DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$samp_no ,paste0(day, '-', mnth, '-', yr,'T00:00:00' ) , fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
-                                    fdf$samp_upper_depth , fdf$samp_lower_depth , propType, ps[i], fdf$morphology_attribute_value , units)
-       lodfs[[i]] <- oOutDF
+                                    fdf$h_upper_depth , fdf$h_lower_depth , propertyType, ObsProp, fdf$morphology_attribute_value , units)
+       NoOutDF <- oOutDF[!is.na(oOutDF$Value), ]
+       NoOutDF <- oOutDF[oOutDF$Value != '', ]
+
+       lodfs[[i]] <- NoOutDF
      }else{
        return(blankResponseDF())
      }
