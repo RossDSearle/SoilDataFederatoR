@@ -212,3 +212,7 @@ write.csv(df2, 'c:/temp/locs.csv')
 
 
 
+#12499
+
+getDataForASite('12499')
+

@@ -291,6 +291,31 @@ apiGetDataQualityDescriptions <- function(res, DataSet=NULL, bbox=NULL, format='
 }
 
 
+#* Returns the codes and descriptions for the SoilDataFederator data quality descriptors.
+
+#* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
+#* @param SiteID Site identifier
+
+#* @tag Soil Data Federator Development
+#* @get /SoilDataAPI/getSite
+apiGetSiteData <- function(res, SiteID, format='json'){
+
+  tryCatch({
+
+    DF <- getDataForASite(SiteID)
+    print(DF)
+    label <- 'SiteData'
+    resp <- cerealize(DF, label, format, res)
+
+  }, error = function(res)
+  {
+    res$status <- 400
+    list(error=jsonlite::unbox(geterrmessage()))
+
+  })
+}
+
+
 
 
 
