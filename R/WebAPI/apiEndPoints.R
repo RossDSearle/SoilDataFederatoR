@@ -246,15 +246,17 @@ apiGetObservationLocations <- function(res, DataSet=NULL, bbox=NULL, format='jso
 
 #* Returns an image of the soil observation locations.
 
+#* @param bbox (Optional) The  rectangular bounding box of the area in the form minx;maxx;miny;maxy - semicolon delimited
 #* @param DataSet (Optional) Filter on a specific DataSet.
 #* @png (width = 400, height = 500)
 #* @tag Soil Data Federator
 #* @get /SoilDataAPI/ObservationLocationsAsMap
-apiGetObservationLocationsAsMap <- function(DataSet=NULL, bBox=NULL, usr='Demo', key='Demo'){
+apiGetObservationLocationsAsMap <- function(DataSet=NULL, bbox=NULL, usr='Demo', key='Demo'){
 
   tryCatch({
 
-    DF <-getLocations(DataSets=DataSets, bBox=bBox)
+    DF <-getSiteLocations(DataSet, bbox)
+    print(head(DF))
     spp <- plotObservationLocationsImage(DF)
     return(plot(spp))
   }, error = function(res)

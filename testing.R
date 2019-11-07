@@ -165,18 +165,18 @@ bbox <- extent(110.6, 153.1, -43, -9)
 wext <- '110;153;-43;-9'
 
 
-wext <- '130.3488;130.8577;-12.4212;-11.4207'
+bbox <- '130.3488;130.8577;-12.4212;-11.4207'
 
 
-wext <- '130.8488;130.9577;-12.7212;-12.5207'
+bbox <- '130.8488;130.9577;-12.7212;-12.5207'
 
-bits <- str_split(wext, ';')
-l <- as.numeric(bits[[1]][1])
-r <- as.numeric(bits[[1]][2])
-t <- as.numeric(bits[[1]][4])
-b <- as.numeric(bits[[1]][3])
-bboxExt <- extent(l, r, b, t)
-sdf <-  getSiteLocations(DataSets='NTGovernment', bBox=bboxExt, usr='ross.searle@csiro.au', key='a')
+# bits <- str_split(wext, ';')
+# l <- as.numeric(bits[[1]][1])
+# r <- as.numeric(bits[[1]][2])
+# t <- as.numeric(bits[[1]][4])
+# b <- as.numeric(bits[[1]][3])
+# bboxExt <- extent(l, r, b, t)
+sdf <-  getSiteLocations(DataSets='NTGovernment', bBox=bbox, usr='ross.searle@csiro.au', key='a')
 nrow(sdf)
 head(sdf)
 coordinates(sdf) <- ~Longitude+Latitude

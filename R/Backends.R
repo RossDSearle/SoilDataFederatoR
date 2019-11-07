@@ -5,6 +5,7 @@ library(data.table)
 require(dplyr)
 require(dtplyr)
 require(sf)
+library(RColorBrewer)
 
 asPkg = F
 Devel = F
@@ -89,7 +90,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
             odfAll <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
             odf <- getWindow(odfAll,bBox )
           }else{
-            cat(paste0('   Requested area and provider extent do not overlap - skipping\n'))
+            cat(paste0('   Requested area and dataset extent do not overlap - skipping\n'))
             odf <- blankResponseDF()
           }
         }
@@ -177,7 +178,7 @@ getSiteLocations <- function(DataSets=NULL, bBox=NULL, usr='Demo', key='Demo'){
           odfAll <- getLocationDataFunctions[[dStore]](DataSet=dataset)
           odf <- getWindow(odfAll,bBox )
         }else{
-          cat(paste0('   Requested area and provider extent do not overlap - skipping\n'))
+          cat(paste0('   Requested area and dataset extent do not overlap - skipping\n'))
           odf <- blankResponseDF()
         }
       }
@@ -331,11 +332,18 @@ plotObservationLocationsImage <- function(DF){
   plot(st_geometry(austBdy), border='black', reset=FALSE, col='beige')
   # plot(x, y, ..., pch = 1, cex = 1, col = 1, bg = 0, lwd = 1, lty = 1, type = "p", add = FALSE)
   plot(meuse_sf[1], pch=20, add=T, pal=palt  )
-  legend("topleft", legend=levels(as.factor(meuse_sf$DataSet )),fill=palt )
+  legend("topleft", legend=levels(as.factor(meuse_sf$Dataset)),fill=palt )
 
 }
 
-getWindow <- function(outDF, bboxExt){
+getWindow <- function(outDF, bBox){
+
+  bits <- str_split(bBox, ';')
+  l <- as.numeric(bits[[1]][1])
+  r <- as.numeric(bits[[1]][2])
+  t <- as.numeric(bits[[1]][4])
+  b <- as.numeric(bits[[1]][3])
+  bboxExt <- extent(l, r, b, t)
 
   outdf <- outDF[(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax), ]
 
