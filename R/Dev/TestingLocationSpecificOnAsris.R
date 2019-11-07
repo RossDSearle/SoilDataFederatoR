@@ -1,5 +1,5 @@
 
-props <- fromJSON('http://asris-daas02/WA_Services/api/MorphologyMetaData')
+#props <- fromJSON('http://asris-daas02/WA_Services/api/MorphologyMetaData')
 
 
 #12499

@@ -84,11 +84,10 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
         if(is.null(bBox)){
 
           odf <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
-          #DataStore=dStore,
-
         }else{
           if(areasOverlap(DataSet=dataset, bBox=bBox)){
-            odf <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
+            odfAll <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
+            odf <- getWindow(odfAll,bBox )
           }else{
             cat(paste0('   Requested area and provider extent do not overlap - skipping\n'))
             odf <- blankResponseDF()
@@ -174,8 +173,9 @@ getSiteLocations <- function(DataSets=NULL, bBox=NULL, usr='Demo', key='Demo'){
         odf <- getLocationDataFunctions[[dStore]](DataSet=dataset)
 
       }else{
-        if(areasOverlap(Dataset=dataset, bBox=bBox)){
-          odf <- getLocationDataFunctions[[dStore]](DataSet=dataset)
+        if(areasOverlap(DataSet=dataset, bBox=bBox)){
+          odfAll <- getLocationDataFunctions[[dStore]](DataSet=dataset)
+          odf <- getWindow(odfAll,bBox )
         }else{
           cat(paste0('   Requested area and provider extent do not overlap - skipping\n'))
           odf <- blankResponseDF()
@@ -334,4 +334,20 @@ plotObservationLocationsImage <- function(DF){
   legend("topleft", legend=levels(as.factor(meuse_sf$DataSet )),fill=palt )
 
 }
+
+getWindow <- function(outDF, bboxExt){
+
+  outdf <- outDF[(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax), ]
+
+  idx <- which(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax)
+  outdf <- outDF[idx, ]
+
+
+
+
+   return(outdf)
+}
+
+
+
 

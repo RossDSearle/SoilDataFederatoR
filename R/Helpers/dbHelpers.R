@@ -17,9 +17,9 @@ machineName <- as.character(Sys.info()['nodename'])
 
 
 
-areasOverlap <- function(provider, bBox){
+areasOverlap <- function(DataSet, bBox){
 
-  sql <- paste0("Select * from Providers where OrgName = '", provider, "'")
+  sql <- paste0("Select * from DataSets where DataSet = '", DataSet, "'")
   prov = doQueryFromFed(sql)
 
   if(nrow(prov) > 0){
