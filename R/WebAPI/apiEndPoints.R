@@ -267,6 +267,29 @@ apiGetObservationLocationsAsMap <- function(DataSet=NULL, bBox=NULL, usr='Demo',
 
 
 
+#* Returns the codes and descriptions for the SoilDataFederator data quality descriptors.
+
+#* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
+
+
+#* @tag Soil Data Federator
+#* @get /SoilDataAPI/DataQualityDescriptions
+apiGetDataQualityDescriptions <- function(res, DataSet=NULL, bbox=NULL, format='json', usr='Demo', key='Demo'){
+
+  tryCatch({
+
+    DF <-getDataQualityDescriptions()
+    label <- 'DataQualityDescriptions'
+    resp <- cerealize(DF, label, format, res)
+
+  }, error = function(res)
+  {
+    res$status <- 400
+    list(error=jsonlite::unbox(geterrmessage()))
+
+  })
+}
+
 
 
 

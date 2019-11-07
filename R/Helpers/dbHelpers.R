@@ -199,7 +199,7 @@ getDataSets <- function( usr=NULL, key=NULL){
 
       return(orgs)
     }else if(cgrp == 'Admin'){
-      sql <- paste0("Select * from DataSets")
+      sql <- paste0("Select * from DataSets WHERE Active = 1")
       orgs = doQueryFromFed(sql)
       return(orgs)
     }
@@ -279,7 +279,6 @@ getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGroup=N
     sql <- paste0("select * from Properties where PropertyGroup = '", observedPropertyGroup, "'")
     props <- doQueryFromFed(sql)
     ps <- na.omit(props$Property)
-    # ps <- na.omit(Properties[str_to_upper(Properties$PropertyGroup)==str_to_upper(observedPropertyGroup), ]$Property )
   }else{
     bits <- str_split(ObserverdProperties, ';')
     ps <- bits[[1]]
@@ -287,8 +286,11 @@ getPropertiesList <- function( ObserverdProperties=NULL, observedPropertyGroup=N
   return(ps)
 }
 
-
-
+getDataQualityDescriptions <- function(){
+  sql <- paste0("select * from QualCodes")
+  quals <- doQueryFromFed(sql)
+  return(quals)
+}
 
 
 sqlFromFile <- function(file){
