@@ -19,7 +19,7 @@ source("helpers.R")
 #serverLoc <- 'http://127.0.0.1:6902'
 serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
 
-url <- paste0(serverLoc, '/SoilDataAPI/Providers')
+url <- paste0(serverLoc, '/SoilDataAPI/DataSets')
 providerList <- fromJSON(url)
 
 print(getwd())

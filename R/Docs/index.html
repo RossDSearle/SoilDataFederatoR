@@ -35,8 +35,8 @@ description data and Laboratory analysis data.<br>
 The SoilDataFederator web API is designed to be as simple as possible.
 Users can query API end point to return information about<br>
 <ul>
-  <li><span style="font-weight: bold;">Providers </span>- which
-organisations are contributing data. </li>
+  <li><span style="font-weight: bold;">DataSets </span>- which
+DataSets are avialable in the system. </li>
   <li><span style="font-weight: bold;">Properties</span> - which soil
 properties are available in the system. </li>
   <li><span style="font-weight: bold;">PropertyGroups </span>- defined
@@ -90,11 +90,10 @@ Some licencing info should go here when we sort it out.<br>
 <br>
 The following endpoints are currently available in the SoilDataFederator<br>
 <br>
-<h2 style="font-weight: bold;">Providers</h2>
-The <span style="font-weight: bold;">Providers</span> endpoint returns
-all of the organisations who are
-contributing data. The "OrgName" field can be used to filter data
-requests for some of the other endpoints. Examples of the 3 different
+<h2 style="font-weight: bold;">DataSets</h2>
+The DataSets endpoint returns
+all of the DataSets available in the SoilDataFederator. Examples of the
+3 different
 returned formats are listed below. After this, only the json example
 will be provided but other formats can be returned using the same query
 parameters.<br>
@@ -110,14 +109,22 @@ of the response to return. Either json, csv, or xml. Default = json</span></li>
  style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"></span>
 <ul>
   <li><a
- href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers"
- target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers&nbsp;</a>
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets&nbsp;</a>
 - Returns data as json format</li>
-  <li><a target="_blank"
- href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=xml">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=xml</a>
-- Returns data as xml format</li>
   <li><a
- href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=csv">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Providers?format=csv</a>
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets?format=xml"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets</a><a
+ target="_blank"
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets?format=xml">?format=xml</a><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets?format=xml"
+ target="_blank">
+    </a>- Returns data as xml format</li>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets?format=csv"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets</a><a
+ target="_blank"
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets?format=csv">?format=csv</a>
 -
 Returns data as csv file download</li>
 </ul>
@@ -245,12 +252,12 @@ to query on. eg 'pH" or 'SURF_COARSE_FRAGS'. Either this
 or the "observedProperty" parameter is required.</span></li>
   <li><span
  style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
- style="font-style: italic;">providers</span> </span><span
+ style="font-style: italic;">DataSet</span> </span><span
  style="font-style: italic;">(string) </span><span
  style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
-- filter on specific data
-Providers. This can be a single provider code or a semi colon delimited
-text string eg "TasGovernment;NSWGovernment". If this parameter is not
+- filter on specific data sets. This can be a single DataSet code or a
+semi colon delimited
+text string eg "TasGovernment;SAGovernment". If this parameter is not
 provided all the data Providers will be queried.</span></li>
   <li><span style="font-style: italic;">format</span> <span
  style="font-style: italic;">(string) </span> -&nbsp; <span
@@ -291,9 +298,9 @@ filter parameters can potentially be added on request by asking a <a
 <h4>Endpoint Syntax</h4>
 <ul>
   <li><a
- href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;providers=TasGovernment&amp;usr=Demo&amp;key=Demo"
- target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;providers=TasGovernment</a><a
- href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;providers=TasGovernment&amp;usr=Demo&amp;key=Demo"
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;DataSet=TasGovernment&amp;usr=Demo&amp;key=Demo"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;DataSet=TasGovernment</a><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;DataSet=TasGovernment&amp;usr=Demo&amp;key=Demo"
  target="_blank">&amp;usr=Demo&amp;key=Demo</a>
 - returns soil propery data filtered by a specifc Provider code. Only 5
 records will be returned for demonstration purposes unless you have a
@@ -321,8 +328,12 @@ might be brocken at the moment<br>
 The fields returned from the SoilDataFederator for the "SoilData"
 endpont are<br>
 <ul>
-  <li>Provider&nbsp;&nbsp;&nbsp; </li>
-  <li>Dataset&nbsp;&nbsp;&nbsp; </li>
+  <li>DataStore<br>
+  </li>
+  <li>Dataset&nbsp;&nbsp; <br>
+  </li>
+  <li>Provider <br>
+  </li>
   <li>Observation_ID&nbsp;&nbsp;&nbsp; </li>
   <li>SampleID&nbsp;&nbsp;&nbsp; </li>
   <li>SampleDate&nbsp;&nbsp;&nbsp; </li>
@@ -334,7 +345,10 @@ endpont are<br>
   <li>ObservedProperty&nbsp;&nbsp;&nbsp; </li>
   <li>Value&nbsp;&nbsp;&nbsp; </li>
   <li>Units&nbsp;&nbsp;&nbsp; </li>
-  <li>Quality&nbsp;&nbsp;&nbsp; </li>
+  <li>QualCollection</li>
+  <li>QualSpatialAgg</li>
+  <li>QualManagement<br>
+  </li>
   <li>ExtractTime&nbsp;&nbsp;&nbsp; </li>
 </ul>
 <div id="message-bar" class="swagger-ui-wrap" data-sw-translate="">&nbsp;<br>
@@ -342,7 +356,7 @@ endpont are<br>
 returned data</span><br>
 </div>
 <br>
-<img style="width: 1804px; height: 527px;" alt="Data Format"
+<img style="width: 1663px; height: 628px;" alt="Output format"
  src="images/OutputFomat.PNG"><br>
 <div id="footer">
 <h1 class="textinbar">SLGA Funders<span style="margin-left: 22%;">Partners</span></h1>
