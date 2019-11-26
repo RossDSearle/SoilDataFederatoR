@@ -51,6 +51,7 @@ getLocationData_ASRIS<- function(DataSet){
 getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
 
  ep <- getASRISService(DataSet)
+ print(paste0('provider = ' ,ep))
 
   OrgName <- getOrgName(DataSet)
   propList <- getPropertiesList(observedProperty, observedPropertyGroup)
@@ -78,7 +79,13 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
         url <- paste0(ep, '/LabResults?method_code=', ObsProp)
       }
 
+
+
       fdfRaw <- fromJSON(url)
+      if(length(fdfRaw)==0){
+        return(blankResponseDF())
+      }
+     print(url)
 
 
         if(nrow(fdfRaw) > 0){
