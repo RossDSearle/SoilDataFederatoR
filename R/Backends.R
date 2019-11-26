@@ -345,7 +345,7 @@ getWindow <- function(outDF, bBox){
   b <- as.numeric(bits[[1]][3])
   bboxExt <- extent(l, r, b, t)
 
-  outdf <- outDF[(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax), ]
+  #outdf <- outDF[(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax), ]
 
   idx <- which(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax)
   outdf <- outDF[idx, ]

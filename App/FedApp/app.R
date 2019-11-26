@@ -20,9 +20,10 @@ source("helpers.R")
 serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
 
 url <- paste0(serverLoc, '/SoilDataAPI/DataSets')
-providerList <- fromJSON(url)
+datasetList <- fromJSON(url)
+#print(datasetList)
 
-print(getwd())
+#print(getwd())
 
 
 insertRow <- function(existingDF, newrow, r) {
@@ -31,12 +32,13 @@ insertRow <- function(existingDF, newrow, r) {
   existingDF
 }
 
+
 blankResponseDF <- function(){
 
-  outDF <- data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+  outDF <- data.frame(DataStore=character(), Dataset=character(), Provider=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
                       Longitude=numeric() , Latitude= numeric(),
                       UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
-                      Units= character(), Quality=integer(), stringsAsFactors = F)
+                      Units= character(),   QualCollection=integer(), QualSpatialAgg=integer(), QualManagement=integer(), stringsAsFactors = F)
 }
 
 
@@ -61,10 +63,15 @@ ui <- fluidPage(
 
         # Sidebar panel for inputs
         sidebarPanel(
+          wellPanel(
+            #tags$style(tableHTML::make_css(list('.well', 'border-width', '10px')), tableHTML::make_css(list('.well', 'border-color', 'red'))),
             fluidRow(textInput('authusr', 'User Name', value='ross.searle@csiro.au' )),
-            fluidRow(passwordInput('authkey', 'API key', value='a')),
-            fluidRow(selectInput('currentProvider', 'Select a Provider', choices = c('All', providerList$OrgFullName))),
-            fluidRow(selectInput('propTypes', 'Select a Provider', choices = c('FieldMeasurement', 'LaboratoryMeasurement'), selected='LaboratoryMeasurement')),
+            fluidRow(passwordInput('authkey', 'API key', value='a'),
+                     fluidRow(         actionButton("loginBtn","Login", class = "btn-success"))
+                     )
+            ),
+            fluidRow(selectInput('currentDataset', 'Select a DataSet', choices = c('All', datasetList$DataSet))),
+            fluidRow(selectInput('propTypes', 'Select a Property Type', choices = c('FieldMeasurement', 'LaboratoryMeasurement'), selected='LaboratoryMeasurement')),
             fluidRow(selectInput('propGrps', 'Property Groups', choices = NULL)),
             fluidRow(selectInput('propObs', 'Observed Property', choices = NULL)),
             tags$br(),
@@ -121,7 +128,7 @@ server <- function(session, input, output) {
 
     RV <- reactiveValues()
     RV$currentdata = NULL
-    RV$apiDF <- data.frame(Time=as.character(Sys.time()), Request=paste0(serverLoc, '/SoilDataAPI/Providers'), stringsAsFactors = F)
+    RV$apiDF <- data.frame(Time=as.character(Sys.time()), Request=paste0(serverLoc, '/SoilDataAPI/DataSets'), stringsAsFactors = F)
 
     output$downloadData <- downloadHandler(
         filename = function() {
@@ -133,7 +140,7 @@ server <- function(session, input, output) {
       )
 
     output$contributorsTab = renderRHandsontable({
-      url <- paste0(serverLoc, '/SoilDataAPI/Providers')
+      url <- paste0(serverLoc, '/SoilDataAPI/DataSets')
       contribs <- fromJSON(url)
       contribs$ContactEmail <- paste0('<a href=mailto:', contribs$ContactEmail, '?subject=Soil%20Data%20on%20TERN-Landscapes%20SoilDataFederator>', contribs$ContactEmail, '</a>'  )
       contribs$OrgURL <- paste0('<a href=', contribs$OrgURL, ' target="_blank">', contribs$OrgURL, '</a>'  )
@@ -157,6 +164,7 @@ server <- function(session, input, output) {
       req(RV$currentdata )
 
       df <- as.data.frame(RV$currentdata)
+      print(head(df))
       frows <- df %>% group_by(Provider, Dataset, Observation_ID) %>% filter(row_number()==1)
       df.SP <- st_as_sf(frows, coords = c("Longitude", "Latitude"), crs = 4326)
 
@@ -196,20 +204,20 @@ server <- function(session, input, output) {
     output$summaryTab = renderRHandsontable({
       req(RV$currentdata )
 
-      s<- RV$currentdata$Value
-      dfs <- data.frame(label=character(6), other=character(6), stringsAsFactors = F)
+      s<- summary(RV$currentdata$Value)
+      dfs <- data.frame(Statistic=character(6), Value=character(6), stringsAsFactors = F)
       dfs[1,] <- c('Min Value ',s[1])
       dfs[2,] <- c('1st Quartile ',s[2])
       dfs[3,] <- c('Median ' ,s[3])
       dfs[4,] <- c('Mean ' ,s[4])
       dfs[5,] <- c('3rd Quartile ' ,s[5])
       dfs[6,] <- c('Max value ',s[6])
-      validCnt <- length(which(!is.na(dfs$Value)))
-      naCnt <- length(which(is.na(dfs$Value)))
-      dfs[7,] <- c('Locations', length(unique(dfs$Observation_ID)))
-      dfs[8,] <- c('Records', nrow(dfs))
-      dfs[9,] <- c('Valid Vals', validCnt)
-      dfs[10,] <- c('NA Vals', naCnt)
+      #validCnt <- length(which(!is.na(dfs$Value)))
+      #naCnt <- length(which(is.na(dfs$Value)))
+      dfs[7,] <- c('Locations', length(unique(RV$currentdata$Observation_ID)))
+      dfs[8,] <- c('Records', nrow(RV$currentdata))
+     # dfs[9,] <- c('Valid Vals', validCnt)
+     # dfs[10,] <- c('NA Vals', naCnt)
 
       rhandsontable(dfs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
     })
@@ -261,13 +269,15 @@ server <- function(session, input, output) {
 
     observeEvent(input$getData2, {
 
-            if(input$currentProvider == 'All'){
-                provs <- providerList$OrgName
+            if(input$currentDataset == 'All'){
+                provs <- datasetList$DataSet
             }
             else{
-                provs = providerList[providerList$OrgFullName == input$currentProvider, 1]
+                provs = datasetList[datasetList$DataSet == input$currentDataset, 1]
             }
             #outDF <- data.frame(stringsAsFactors = f)
+
+      print(provs)
 
             outdfs <- list(length(provs))
 
@@ -280,10 +290,8 @@ server <- function(session, input, output) {
                 title = paste("Getting data from ", provs[i])
               )
 
-                url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', input$propObs, '&providers=', provs[i], '&usr=', input$authusr, '&key=', input$authkey)
+                url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', input$propObs, '&DataSet=', provs[i], '&usr=', input$authusr, '&key=', input$authkey)
                 RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
-                # url <- paste0('http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&providers=', provs[i])
-
                  print(url)
                 odf <- fromJSON(url)
 
@@ -301,14 +309,17 @@ server <- function(session, input, output) {
 
 
             df$Value <- as.numeric(as.character(df$Value))
-            df <- df[!is.na(df$Value),]
+            print(head(df))
+            ids <- which(!is.na(df$Value)  & !is.na(df$Longitude) & !is.na(df$Latitude) & df$Latitude != 'NA')
+            print(head(ids))
+            df2 <- df[ids,]
 
             # Is With Australia Bounding Box
             xmin=113.3;ymin=-43.7;xmax=153.6;ymax=-10.6
-            outdf <- df[df$Longitude >= xmin & df$Longitude <= xmax & df$Latitude >= ymin & df$Latitude <= ymax, ]
+            outDF <- df2[df2$Longitude >= xmin & df2$Longitude <= xmax & df2$Latitude >= ymin & df2$Latitude <= ymax, ]
 
             # Is within reasonable value range
-            outDF <- outdf[outdf$Value > 0 & outdf$Value < 12, ]
+           # outDF <- outdf[outdf$Value > 0 & outdf$Value < 12, ]
 
             updateProgressBar(
               session = session,
