@@ -81,16 +81,17 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
         if(verbose){
            cat(paste0('Extracting data from ', dataset, '\n'))
         }
-
+        print(dataset)
         if(is.null(bBox)){
 
           odf <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
         }else{
           if(areasOverlap(DataSet=dataset, bBox=bBox)){
+
             odfAll <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
             odf <- getWindow(odfAll,bBox )
           }else{
-            cat(paste0('   Requested area and dataset extent do not overlap - skipping\n'))
+            cat(paste0(dataset, ' -  Requested area and dataset extent do not overlap - skipping\n'))
             odf <- blankResponseDF()
           }
         }
@@ -145,6 +146,9 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
 
 
 getSiteLocations <- function(DataSets=NULL, bBox=NULL, usr='Demo', key='Demo'){
+
+  print('#########')
+    print(bBox)
 
 
   authDataSets <- getDataSets(usr=usr, key=key)
@@ -338,20 +342,25 @@ plotObservationLocationsImage <- function(DF){
 
 getWindow <- function(outDF, bBox){
 
-  bits <- str_split(bBox, ';')
-  l <- as.numeric(bits[[1]][1])
-  r <- as.numeric(bits[[1]][2])
-  t <- as.numeric(bits[[1]][4])
-  b <- as.numeric(bits[[1]][3])
-  bboxExt <- extent(l, r, b, t)
+  # bits <- str_split(bBox, ';')
+  # l <- as.numeric(bits[[1]][1])
+  # r <- as.numeric(bits[[1]][2])
+  # t <- as.numeric(bits[[1]][4])
+  # b <- as.numeric(bits[[1]][3])
+  # bboxExt <- extent(l, r, b, t)
 
+<<<<<<< HEAD
+=======
+  bboxExt = bBox
+  print(bBox)
+
+>>>>>>> 5955f90ea66e4911674c68aca3e4bf0d99ba0675
   #outdf <- outDF[(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax), ]
 
   idx <- which(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax)
   outdf <- outDF[idx, ]
 
-
-
+  #print(head(outdf))
 
    return(outdf)
 }

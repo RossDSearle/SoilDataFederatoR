@@ -187,7 +187,7 @@ apiGetSoilData<- function(res, usr='Demo', key='Demo', DataSet=NULL, observedPro
   tryCatch({
 
     if(!is.null(bbox)){
-      bits <- str_split(wext, ';')
+      bits <- str_split(bbox, ';')
       l <- as.numeric(bits[[1]][1])
       r <- as.numeric(bits[[1]][2])
       t <- as.numeric(bits[[1]][4])

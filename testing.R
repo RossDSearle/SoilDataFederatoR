@@ -170,6 +170,8 @@ bbox <- '130.3488;130.8577;-12.4212;-11.4207'
 
 bbox <- '130.8488;130.9577;-12.7212;-12.5207'
 
+bbox <- extent(130, 134, -20, -12)
+
 # bits <- str_split(wext, ';')
 # l <- as.numeric(bits[[1]][1])
 # r <- as.numeric(bits[[1]][2])
@@ -183,9 +185,21 @@ coordinates(sdf) <- ~Longitude+Latitude
 plot(sdf)
 
 
-df <- getSoilData(DataSets='NTGovernment', observedProperty='4A1', bBox=bboxExt, usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='NTGovernment', observedProperty='4A1', bBox=bbox, usr='ross.searle@csiro.au', key='a')
 nrow(df)
 df <- getSoilData(DataSets='NTGovernment', observedProperty='h_texture', bBox=bboxExt, usr='ross.searle@csiro.au', key='a')
+nrow(df)
+
+df <- getSoilData(DataSets=NULL, observedProperty='4A1', bBox=bbox, usr='ross.searle@csiro.au', key='a')
+nrow(df)
+
+df <- getSoilData(DataSets='NTGovernment', observedProperty='4A1', bBox=bbox, usr='ross.searle@csiro.au', key='a')
+nrow(df)
+
+df <- getSoilData(DataSets='SCARP', observedProperty='4A1', bBox=bboxExt, usr='ross.searle@csiro.au', key='a')
+nrow(df)
+
+df <- getSoilData()
 nrow(df)
 
 
