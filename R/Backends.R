@@ -41,6 +41,31 @@ source(paste0('R/Dev/TestingLocationSpecificOnAsris.R'))
 PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', FieldMeasurement='FieldMeasurement', stringsAsFactors = F)
 
 
+doChecks <- function(DataSets, observedProperty, observedPropertyGroup, bBox){
+
+  if(is.null(observedProperty) & is.null(observedPropertyGroup))
+    return('You need to specify a value for either the "observedProperty" parameter or the "observedPropertyGroup" parameter')
+
+  if(!is.null(DataSets)){
+    bits <- str_split(DataSets, ';')
+    availDataSets <- bits[[1]]
+
+      for(i in 1:length(availDataSets)) {
+        dataset <- availDataSets[[i]]
+       sql <- paste0("Select * from DataSets where DataSet = '", dataset, "'")
+        prov = doQueryFromFed(sql)
+         if(nrow(prov)==0){
+          return(paste0('DataSet "', dataset, '" is not known to the system' ))
+         }
+      }
+
+  }
+
+
+   return('OK')
+}
+
+
 #' Returns Observed Soil Properties
 #'
 #' This function will query all the available data providers to return all of the available soil observed property data
@@ -52,6 +77,12 @@ PropertyTypes <- data.frame(LaboratoryMeasurement='LaboratoryMeasurement', Field
 
 
 getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGroup=NULL, bBox=NULL, usr='Demo', key='Demo', verbose=F){
+
+  error <- doChecks(DataSets, observedProperty, observedPropertyGroup, bBox)
+
+  if(error!='OK'){
+    stop(error)
+  }
 
  auth  <- AuthenticateAPIKey(usr, key)
 
@@ -349,12 +380,6 @@ getWindow <- function(outDF, bBox){
   # b <- as.numeric(bits[[1]][3])
   # bboxExt <- extent(l, r, b, t)
 
-<<<<<<< HEAD
-=======
-  bboxExt = bBox
-  print(bBox)
-
->>>>>>> 5955f90ea66e4911674c68aca3e4bf0d99ba0675
   #outdf <- outDF[(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax), ]
 
   idx <- which(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax)

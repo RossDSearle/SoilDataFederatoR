@@ -81,7 +81,7 @@ prop <- '4A1'
 
 
 ###  From the package directly
-df <- getSoilData(providers='TERNSurveillance', observedProperty=prop, usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets = 'TERNSurveillance', observedProperty=prop, usr='ross.searle@csiro.au', key='a')
 df <- getSoilData(providers='CSIRO', observedProperty=prop, usr='ross.searle@csiro.au', key='a')
 df <- getSoilData(observedProperty=prop, usr='ross.searle@csiro.au', key='a')
 

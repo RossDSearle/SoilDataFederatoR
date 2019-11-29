@@ -60,10 +60,14 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
     return(blankResponseDF())
   }
 
-  lodfs <- list(length(nativeProps))
+  samples <- fromJSON(paste0("https://soil-chem.information.qld.gov.au/odata/Samples"))
+  NBsamples <- samples[samples$bulkFlag=='N',]
+
+
+  lodfs <- vector("list", length(nativeProps))
 
     for (i in 1:length(nativeProps)) {
-
+      print(i)
       prop <- nativeProps[i]
 
       propertyType <- getPropertyType(prop)
@@ -71,20 +75,24 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
       if(propertyType == 'LaboratoryMeasurement'){
 
-      samples <- fromJSON(paste0("https://soil-chem.information.qld.gov.au/odata/Samples"))
+      url <- URLencode(paste0("https://soil-chem.information.qld.gov.au/odata/SiteLabMethodResults?$filter=LabMethodCode eq '", prop, "'"))
+      print(prop)
+      sd <- fromJSON(url)
+      if (length(sd)>0){
+          if(nrow(sd) > 0){
+              fdf <- merge(sd, NBsamples,  by=c("projectCode","siteId", "observationNumber", "sampleNumber"), all.x = T)
 
-      sd <- fromJSON(URLencode(paste0("https://soil-chem.information.qld.gov.au/odata/SiteLabMethodResults?$filter=LabMethodCode eq '", prop, "'")))
-      if(nrow(sd) > 0){
-          fdf <- merge(sd, samples,  by=c("projectCode","siteId", "observationNumber", "sampleNumber"), all.x = T)
-
-          oOutDF <- generateResponseDF(DataSet, paste0('QLD_', fdf$projectCode , '_', fdf$siteId, '_', fdf$observationNumber ),
-                                       fdf$sampleNumber, fdf$analysisDate, fdf$longitude , fdf$latitude,
-                                       fdf$upperDepth, fdf$lowerDepth, propertyType, prop, fdf$formattedValue , units)
-          lodfs[[i]] <- oOutDF
-      }else{
-        return(blankResponseDF())
+              oOutDF <- generateResponseDF(DataSet, paste0('QLD_', fdf$projectCode , '_', fdf$siteId, '_', fdf$observationNumber ),
+                                           fdf$sampleNumber, fdf$analysisDate, fdf$longitude , fdf$latitude,
+                                           fdf$upperDepth, fdf$lowerDepth, propertyType, prop, fdf$formattedValue , units)
+              lodfs[[i]] <- oOutDF
+          }else{
+            lodfs[[i]]<-blankResponseDF()
       }
+        }else{
+          lodfs[[i]]<-blankResponseDF()
 
+}
       }else{
   #### extract Morpholgy data
         ObsProp <-  prop

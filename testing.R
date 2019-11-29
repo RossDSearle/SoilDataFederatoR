@@ -1,7 +1,7 @@
 library(rgdal)
 library(sf)
 library(aqp)
-
+library(jsonlite)
 
 machineName <- as.character(Sys.info()['nodename'])
 #if(!asPkg){
@@ -155,6 +155,19 @@ getSoilData(DataSets='QLDGovernment', observedProperty='4A1', usr='ross.searle@c
 getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
+df <- getSoilData(DataSets='QLDGovernment', observedPropertyGroup='PSA', usr='ross.searle@csiro.au', key='a')
+
+
+url<-"https://soil-chem.information.qld.gov.au/odata/SiteLabMethods?$expand=SiteLabMethodResults($expand=Sample($select=UpperDepth,LowerDepth);$select=NumericValue)&$filter=LabMethodCode eq 'P10_Grav'"
+
+df <- fromJSON(URLencode(url))
+nrow(df)
+str(df)
+
+
+
+
+
 #########  spatial extent clipping   ###########################
 provider = 'LawsonGrains'
 areasOverlap(provider)
@@ -200,6 +213,7 @@ df <- getSoilData(DataSets='SCARP', observedProperty='4A1', bBox=bboxExt, usr='r
 nrow(df)
 
 df <- getSoilData()
+df <- getSoilData(DataSets='NTGovernment;Test', observedProperty='4A1')
 nrow(df)
 
 

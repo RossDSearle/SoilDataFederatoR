@@ -60,12 +60,14 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
     return(blankResponseDF())
   }
 
-  lodfs <- list(length(propList))
+  #lodfs <- list(length(propList))
+  lodfs <- vector("list", length(propList))
 
 
   for (i in 1:length(propList)) {
 
     ObsProp <- propList[i]
+    print(ObsProp)
     propertyType <- getPropertyType(ObsProp)
     units <- getUnits(propertyType = propertyType, prop = ObsProp)
 
@@ -82,9 +84,11 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
 
 
       fdfRaw <- fromJSON(url)
+
+
       if(length(fdfRaw)==0){
-        return(blankResponseDF())
-      }
+        lodfs[[i]] <- blankResponseDF()
+      }else{
      print(url)
 
 
@@ -104,8 +108,10 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
                                        fdf$samp_upper_depth , fdf$samp_lower_depth , propertyType, ObsProp, fdf$labr_value , units)
           lodfs[[i]] <- oOutDF
         }else{
-          return(blankResponseDF())
+          lodfs[[i]] <- blankResponseDF()
         }
+
+      }
     }else{
 
     ### Hit the morpholgy endpoint
@@ -138,7 +144,7 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
 
        lodfs[[i]] <- NoOutDF
      }else{
-       return(blankResponseDF())
+       lodfs[[i]] <- blankResponseDF()
      }
 
     }
