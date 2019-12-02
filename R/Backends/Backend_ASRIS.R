@@ -125,27 +125,33 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
 
     fdfRaw <- fromJSON(url)
 
+    if(length(fdfRaw)==0){
+      lodfs[[i]] <- blankResponseDF()
+    }else{
+
      if(nrow(fdfRaw) > 0){
 
        if(ep=='http://asris-daas02/NatSoil_restricted_Services/api'){
-         fdf <- fdfRaw[fdfRaw$proj_code == DataSet, ]
-       }else{
-           fdf <- fdfRaw
-       }
+             fdf <- fdfRaw[fdfRaw$proj_code == DataSet, ]
+           }else{
+               fdf <- fdfRaw
+           }
 
-       day <- str_sub(fdf$o_date_desc, 1,2)
-       mnth <- str_sub(fdf$o_date_desc, 3,4)
-       yr <- str_sub(fdf$o_date_desc, 5,8)
+           day <- str_sub(fdf$o_date_desc, 1,2)
+           mnth <- str_sub(fdf$o_date_desc, 3,4)
+           yr <- str_sub(fdf$o_date_desc, 5,8)
 
-       oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$samp_no ,paste0(day, '-', mnth, '-', yr,'T00:00:00' ) , fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
-                                    fdf$h_upper_depth , fdf$h_lower_depth , propertyType, ObsProp, fdf$morphology_attribute_value , units)
-       NoOutDF <- oOutDF[!is.na(oOutDF$Value), ]
-       NoOutDF <- oOutDF[oOutDF$Value != '', ]
+           oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$samp_no ,paste0(day, '-', mnth, '-', yr,'T00:00:00' ) , fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
+                                        fdf$h_upper_depth , fdf$h_lower_depth , propertyType, ObsProp, fdf$morphology_attribute_value , units)
+           NoOutDF <- oOutDF[!is.na(oOutDF$Value), ]
+           NoOutDF <- oOutDF[oOutDF$Value != '', ]
 
-       lodfs[[i]] <- NoOutDF
-     }else{
-       lodfs[[i]] <- blankResponseDF()
-     }
+           lodfs[[i]] <- NoOutDF
+         }else{
+           lodfs[[i]] <- blankResponseDF()
+         }
+
+    }
 
     }
   }

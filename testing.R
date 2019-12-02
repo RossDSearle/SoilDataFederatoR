@@ -174,6 +174,9 @@ str(df)
 
 f <- getSoilData(DataSets='QLDGovernment', observedProperty='O_PPF;O_GSG;O_ASC_ORD;O_ASC_SUBORD', usr='ross.searle@csiro.au', key='a')
 
+f <- getSoilData(DataSets='NTGovernment', observedProperty='O_PPF;O_GSG;O_ASC_ORD;O_ASC_SUBORD', usr='ross.searle@csiro.au', key='a')
+
+
 DataSet='TasGovernment'
 
 lodfs <- vector("list", length(ds))
