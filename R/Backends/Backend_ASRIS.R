@@ -89,7 +89,7 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
       if(length(fdfRaw)==0){
         lodfs[[i]] <- blankResponseDF()
       }else{
-     print(url)
+     #print(url)
 
 
         if(nrow(fdfRaw) > 0){

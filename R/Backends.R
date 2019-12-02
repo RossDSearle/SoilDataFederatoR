@@ -112,7 +112,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
         if(verbose){
            cat(paste0('Extracting data from ', dataset, '\n'))
         }
-        print(dataset)
+        #print(dataset)
         if(is.null(bBox)){
 
           odf <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
@@ -148,7 +148,9 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
      }
 
      if(nrow(outDF)==0){
-       return(blankResponseDF())
+       odf <- blankResponseDF()
+       ndf <-  data.frame(odf, ExtractTime=character())
+       return(ndf)
      }
 
      outDF2 <- convertToRequiredDataTypes(outDF)

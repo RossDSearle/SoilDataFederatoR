@@ -1,3 +1,6 @@
+library(jsonlite)
+library(SoilDataFeder8R)
+
 p <- 'C:/Temp/QLD/SALI_availability_summaries_20191129.rds'
 
 d <- readRDS(p)
@@ -68,6 +71,7 @@ nrow(sd)
 
 
 nm1<- paste0("https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedPropertyGroup=PSA&DataSet=QLDGovernment&usr=brendan.malone%40csiro.au&key=djwjgrpt74ld7wm")
+nm1<- paste0("https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedPropertyGroup=PSA&usr=brendan.malone%40csiro.au&key=djwjgrpt74ld7wm")
 
 df<- fromJSON(nm1)
 nrow(df)
@@ -81,6 +85,11 @@ mergeObservedProperties(df)
 
 
 df <- getSoilData(DataSets='QLDGovernment', observedProperty='O_PPF;O_GSG;O_ASC_ORD;O_ASC_SUBORD', usr='ross.searle@csiro.au', key='a')
+
+DataSet='TasGovernment'
+df <- getSoilData(DataSets='TasGovernment', observedProperty='O_ASC_ORD', usr='ross.searle@csiro.au', key='a')
+
+
 nrow(df)
 write.csv(df, 'c:/temp/class.csv')
 O_PPF

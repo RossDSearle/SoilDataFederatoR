@@ -2,6 +2,7 @@ library(rgdal)
 library(sf)
 library(aqp)
 library(jsonlite)
+library(SoilDataFeder8R)
 
 machineName <- as.character(Sys.info()['nodename'])
 #if(!asPkg){
@@ -49,13 +50,14 @@ op = 'RO_ABUN'
 op = 'S_DESC_BY'
 
 
+datase
 
 usr='Demo'; key='Demo'
 
 usr <- 'ross.searle@csiro.au'
 key <- 'a'
 
-
+datas
 
 props <- c('3A1', 'h_texture')
 
@@ -155,8 +157,12 @@ getSoilData(DataSets='QLDGovernment', observedProperty='4A1', usr='ross.searle@c
 getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
-df <- getSoilData(DataSets='QLDGovernment', observedPropertyGroup='PSA', usr='ross.searle@csiro.au', key='a')
 
+DataSet='TasGovernment'
+DataSet='WAGovernment'
+DataSet='SAGovernment'
+df <- getSoilData(DataSets=DataSet, observedPropertyGroup='PSA', usr='ross.searle@csiro.au', key='a')
+makeLocations(df, drawit = T)
 
 url<-"https://soil-chem.information.qld.gov.au/odata/SiteLabMethods?$expand=SiteLabMethodResults($expand=Sample($select=UpperDepth,LowerDepth);$select=NumericValue)&$filter=LabMethodCode eq 'P10_Grav'"
 
@@ -165,6 +171,24 @@ nrow(df)
 str(df)
 
 
+
+f <- getSoilData(DataSets='QLDGovernment', observedProperty='O_PPF;O_GSG;O_ASC_ORD;O_ASC_SUBORD', usr='ross.searle@csiro.au', key='a')
+
+DataSet='TasGovernment'
+
+lodfs <- vector("list", length(ds))
+for (i in 1:length(ds)){
+  print(ds[i])
+  df <- getSoilData(DataSets=ds[i], observedProperty='O_ASC_ORD', usr='ross.searle@csiro.au', key='a')
+  print(head(df))
+  lodfs[[i]] <- df
+}
+
+outDF = as.data.frame(data.table::rbindlist(lodfs))
+head(lodfs[[1]])
+head(lodfs[[3]])
+
+makeLocations(outDF, drawit = T)
 
 
 
