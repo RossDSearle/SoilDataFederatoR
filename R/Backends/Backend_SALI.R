@@ -118,7 +118,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           yr <- str_sub(fdf$OBS_DATE, 1,4)
 
           oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
-                                       fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'NA')
+                                       fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'None')
           lodfs[[i]] <- oOutDF
 
         }else if(tabLev == 3){
@@ -138,7 +138,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
             yr <- str_sub(fdf$OBS_DATE, 1,4)
 
             oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
-                                         fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'NA')
+                                         fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'None')
             lodfs[[i]] <- oOutDF
 
           }else{
@@ -156,7 +156,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
             yr <- str_sub(fdf$OBS_DATE, 1,4)
 
             oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
-                                         fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'NA')
+                                         fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'None')
             lodfs[[i]] <- oOutDF
           }
         }else if(tabLev == 2){
@@ -182,7 +182,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           yr <- str_sub(fdf$OBS_DATE, 1,4)
 
           oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
-                                       'NA' , 'NA' , propertyType, ObsProp, fdf[, 8] , 'NA')
+                                       'None' , 'None' , propertyType, ObsProp, fdf[, 8] , 'None')
           lodfs[[i]] <- oOutDF
 
 
@@ -208,7 +208,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           yr <- str_sub(fdf$OBS_DATE, 1,4)
 
           oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
-                                       'NA' , 'NA' , propertyType, ObsProp, fdf[, 8] , 'NA')
+                                       'None' , 'None' , propertyType, ObsProp, fdf[, 8] , 'None')
           lodfs[[i]] <- oOutDF
 
 
