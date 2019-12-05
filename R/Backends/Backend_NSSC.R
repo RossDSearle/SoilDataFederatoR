@@ -118,7 +118,7 @@ getData_NSSC <- function( DataSet=NULL, observedProperty=NULL, observedPropertyG
           head(fdf)
 
           oOutDF <- generateResponseDF( DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$h_no , fdf$o_date_desc , fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
-                                       fdf$h_upper_depth , fdf$h_lower_depth , propType, ObsProp, fdf[, 12] , 'NA')
+                                       fdf$h_upper_depth , fdf$h_lower_depth , propType, ObsProp, fdf[, 12] , 'None')
           lodfs[[i]] <- oOutDF
 
         }else if(tabLev == 3){
@@ -140,7 +140,7 @@ getData_NSSC <- function( DataSet=NULL, observedProperty=NULL, observedPropertyG
             head(fdf)
 
             oOutDF <- generateResponseDF( DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$h_no , fdf$o_date_desc , fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
-                                         fdf$h_upper_depth , fdf$h_lower_depth , propType, ObsProp, fdf[, 12] , 'NA')
+                                         fdf$h_upper_depth , fdf$h_lower_depth , propType, ObsProp, fdf[, 12] , 'None')
             lodfs[[i]] <- oOutDF
 
           }else{
@@ -159,7 +159,7 @@ getData_NSSC <- function( DataSet=NULL, observedProperty=NULL, observedPropertyG
             head(fdf)
 
             oOutDF <- generateResponseDF( DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), 1 , fdf$o_date_desc , fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
-                                          'NA' , 'NA' , propType, ObsProp, fdf[, 9] , 'NA')
+                                          'None' , 'None' , propType, ObsProp, fdf[, 9] , 'None')
             lodfs[[i]] <- oOutDF
           }
         }else if(tabLev == 2){
@@ -179,7 +179,7 @@ getData_NSSC <- function( DataSet=NULL, observedProperty=NULL, observedPropertyG
           head(fdf)
 
           oOutDF <- generateResponseDF( DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id),1, fdf$o_date_desc ,
-                                        fdf$o_longitude_GDA94, fdf$o_latitude_GDA94, 'NA' , 'NA' , propType, ObsProp, fdf[, 9] , 'NA')
+                                        fdf$o_longitude_GDA94, fdf$o_latitude_GDA94, 'None' , 'None' , propType, ObsProp, fdf[, 9] , 'None')
           lodfs[[i]] <- oOutDF
 
 
@@ -201,7 +201,7 @@ getData_NSSC <- function( DataSet=NULL, observedProperty=NULL, observedPropertyG
           head(fdf)
 
           oOutDF <- generateResponseDF( DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), 1 , fdf$o_date_desc ,
-                                        fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 , 'NA' , 'NA' , propType, ObsProp, fdf[, 9] , 'NA')
+                                        fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 , 'None' , 'None' , propType, ObsProp, fdf[, 9] , 'None')
           lodfs[[i]] <- oOutDF
 
 

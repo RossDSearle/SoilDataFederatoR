@@ -317,8 +317,8 @@ convertToRequiredDataTypes <- function(df){
   df$SampleDate <- as.character(df$SampleDate)
   df$Longitude <- as.numeric(as.character(df$Longitude))
   df$Latitude <- as.numeric(as.character(df$Latitude))
-  df$UpperDepth  <- as.numeric(as.character(df$UpperDepth))
-  df$LowerDepth <- as.numeric(as.character(df$LowerDepth))
+  #df$UpperDepth  <- as.numeric(as.character(df$UpperDepth))
+  #df$LowerDepth <- as.numeric(as.character(df$LowerDepth))
   df$PropertyType <- as.character(df$PropertyType)
   df$ObservedProperty <- as.character(df$ObservedProperty)
   df$Value <- as.character(df$Value)
@@ -343,6 +343,7 @@ generateResponseDF <- function( dataset, observation_ID, sampleID, date, longitu
                       UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
                       Value=value , Units=units, QualCollection=NA, QualSpatialAgg=NA, QualManagement=NA, stringsAsFactors = F)
   oOutDF <- outDF[order(outDF$Observation_ID, outDF$Dataset, outDF$UpperDepth, outDF$SampleID),]
+  print(head(oOutDF))
   return(oOutDF)
 }
 
