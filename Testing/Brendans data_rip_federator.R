@@ -9,7 +9,7 @@ ddir<- "Z:/projects/ternlandscapes_2019/soiltexture/data/"
 avail.datasets<- fromJSON("https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/DataSets")
 
 
-### Morphology 
+### Morphology
 # texture class and qualifiers
 # search: H_TEXTURE and H_TEXTURE_QUAL
 # usr: brendan.malone@csiro.au
@@ -20,7 +20,7 @@ var.names
 
 for (i in 1:length(avail.datasets$DataSet)){
 nm1<- paste0("https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=H_TEXTURE%3BH_TEXTURE_QUAL&DataSet=",avail.datasets$DataSet[i],"&usr=brendan.malone%40csiro.au&key=djwjgrpt74ld7wm")
-assign(var.names[i], fromJSON(nm1)) 
+assign(var.names[i], fromJSON(nm1))
 print(i)}
 
 # Dont appear to be data for: NatGeoChemicalSurvey
@@ -46,7 +46,7 @@ var.names
 
 for (i in 1:length(avail.datasets$DataSet)){
   nm1<- paste0("https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedPropertyGroup=PSA&DataSet=",avail.datasets$DataSet[i],"&usr=brendan.malone%40csiro.au&key=djwjgrpt74ld7wm")
-  assign(var.names[i], fromJSON(nm1)) 
+  assign(var.names[i], fromJSON(nm1))
   print(i)}
 
 # Dont appear to be data for: TERNSurveillance, QLDGovernment, NTGovernment, NatGeoChemicalSurvey
@@ -68,7 +68,7 @@ var.names
 for (i in 1:length(avail.datasets$DataSet)){
   nm1<- paste0("https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=O_PPF%3BO_GSG%3BO_ASC_ORD%3BO_ASC_SUBORD&DataSet=",avail.datasets$DataSet[i],"&usr=brendan.malone%40csiro.au&key=djwjgrpt74ld7wm")
   df <- fromJSON(nm1)
-  assign(var.names[i], df) 
+  assign(var.names[i], df)
   print(i)
   print(head(df))}
 

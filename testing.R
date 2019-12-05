@@ -122,7 +122,7 @@ getLocations(usr=usr, key=key)
 
 
 getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getSiteLocations(DataSets='TERNSurveillance', usr='ross.searle@csiro.au', key='a')
+locsDF <- getSiteLocations(DataSets='TERNSurveillance', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='LawsonGrains_AgCatalyst', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='LawsonGrains_AgCatalyst', usr='ross.searle@csiro.au', key='a')
@@ -161,6 +161,7 @@ getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 DataSet='TasGovernment'
 DataSet='WAGovernment'
 DataSet='SAGovernment'
+DataSet=NULL
 df <- getSoilData(DataSets=DataSet, observedPropertyGroup='PSA', usr='ross.searle@csiro.au', key='a')
 makeLocations(df, drawit = T)
 
@@ -278,4 +279,28 @@ write.csv(df2, 'c:/temp/locs.csv')
 #12499
 
 getDataForASite('12499')
+
+
+sql <- 'select * from Datasets where Active=1'
+dSets <- doQueryFromFed(sql)
+
+ds <- dSets$DataSet
+
+
+lodfs <- vector("list", length(ds))
+for (i in 1:length(ds)){
+  print(ds[i])
+  df <- getSoilData(DataSets=ds[i], observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+  print(head(df))
+  lodfs[[i]] <- df
+}
+
+outDF = as.data.frame(data.table::rbindlist(lodfs))
+
+write.csv(outDF, 'c:/temp/soilDF.csv', row.names = F)
+soilDF <- read.csv('c:/temp/soilDF.csv')
+
+
+
+
 

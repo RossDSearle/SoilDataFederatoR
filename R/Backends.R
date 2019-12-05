@@ -156,7 +156,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
      outDF2 <- convertToRequiredDataTypes(outDF)
      outDF2$ExtractTime<- format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
      outDF2 <- outDF2[!is.na(outDF2$Value),]
-     outDF2[!is.na(outDF2$UpperDepth),]
+     #outDF2[!is.na(outDF2$UpperDepth),]
 
 
      DT <- as.data.table(outDF2)
@@ -180,8 +180,8 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
 
 getSiteLocations <- function(DataSets=NULL, bBox=NULL, usr='Demo', key='Demo'){
 
-  print('#########')
-    print(bBox)
+  #print('#########')
+  #  print(bBox)
 
 
   authDataSets <- getDataSets(usr=usr, key=key)
