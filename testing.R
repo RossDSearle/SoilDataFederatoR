@@ -14,7 +14,10 @@ machineName <- as.character(Sys.info()['nodename'])
 #}
 
 
-usr <- 'ross.searle@csiro.au'; key <- 'a'
+usr <- 'ross.searle@csiro.au'; key <- 'a';
+
+
+
 usr='Public'; pwd='Public'
 
 ##########  Key authentication
@@ -121,7 +124,8 @@ for (i in 1:length(ds)) {
 getLocations(usr=usr, key=key)
 
 
-getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+write.csv(df, 'c:/temp/df.csv')
 locsDF <- getSiteLocations(DataSets='TERNSurveillance', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='LawsonGrains_AgCatalyst', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
@@ -157,6 +161,11 @@ getSoilData(DataSets='QLDGovernment', observedProperty='4A1', usr='ross.searle@c
 getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
+getSoilData(DataSets='NSWGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NSWGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+getSiteLocations(DataSets='NSWGovernment', usr='ross.searle@csiro.au', key='a')
+
+
 
 DataSet='TasGovernment'
 DataSet='WAGovernment'
@@ -180,15 +189,31 @@ f <- getSoilData(DataSets='NTGovernment', observedProperty='O_PPF;O_GSG;O_ASC_OR
 
 DataSet='TasGovernment'
 
-lodfs <- vector("list", length(ds))
-for (i in 1:length(ds)){
-  print(ds[i])
-  df <- getSoilData(DataSets=ds[i], observedProperty='O_ASC_ORD', usr='ross.searle@csiro.au', key='a')
+obs <- fromJSON('http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/Properties?PropertyGroup=PSA')
+
+lodfs <- vector("list", nrow(obs))
+for (i in 1:nrow(obs)){
+  prop <- obs[i]
+  print(obs[i])
+  df <- getSoilData(DataSets='WAGovernment', observedProperty=prop, usr='ross.searle@csiro.au', key='a')
   print(head(df))
   lodfs[[i]] <- df
 }
 
-outDF = as.data.frame(data.table::rbindlist(lodfs))
+
+lodfs <- vector("list", nrow(obs))
+for (i in 1:nrow(obs)){
+  prop <- obs$Property[i]
+  url <- paste0('http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?DataSet=WAGovernment&observedProperty=', prop, '&usr=ross.searle@csiro.au&key=a')
+  df <- fromJSON(url)
+  print(head(df))
+  lodfs[[i]] <- df
+}
+outDF = as.data.frame(data.table::rbindlist(lodfs, use.names = T))
+
+
+nrow(outDF)
+
 head(lodfs[[1]])
 head(lodfs[[3]])
 
@@ -301,6 +326,37 @@ write.csv(outDF, 'c:/temp/soilDF.csv', row.names = F)
 soilDF <- read.csv('c:/temp/soilDF.csv')
 
 
+
+
+
+
+
+url <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=O_PPF;O_GSG;O_ASC_ORD;O_ASC_SUBORD&DataSet=WAGovernment&usr=brendan.malone%40csiro.au&key=djwjgrpt74ld7wm'
+fromJSON(url)
+
+
+df <- getSoilData(DataSets='WAGovernment', observedProperty=prop, usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='WAGovernment', observedProperty='O_PPF', usr='ross.searle@csiro.au', key='a')
+nrow(df)
+
+
+url <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=P10_PB_C&DataSet=WAGovernment&usr=brendan.malone%40csiro.au&key=djwjgrpt74ld7wm'
+df <- fromJSON(url)
+
+
+
+observedProperty='P10_PB_C'
+
+df <- getSoilData(DataSets='WAGovernment', observedProperty='P10106_150', usr='ross.searle@csiro.au', key='a')
+
+
+
+df <- getSoilData(DataSets='SAGovernment', observedProperty='P10_GRAV', usr='ross.searle@csiro.au', key='a')
+
+url <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=P10_GRAV&DataSet=SAGovernment&usr=brendan.malone%40csiro.au&key=djwjgrpt74ld7wm'
+df <- fromJSON(url)
+
+length(which(is.na(df$Latitude)))
 
 
 

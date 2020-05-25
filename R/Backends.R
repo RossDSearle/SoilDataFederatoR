@@ -30,6 +30,7 @@ source(paste0('R/Backends/Backend_LawsonGrains.R'))
 source(paste0('R/Backends/Backend_ASRIS.R'))
 source(paste0('R/Backends/Backend_TERNLandscapesDB.R'))
 source(paste0('R/Backends/Backend_NSSC.R'))
+source(paste0('R/Backends/Backend_ASRISHostedAPI.R'))
 
 source(paste0('R/Dev/TestingLocationSpecificOnAsris.R'))
 
@@ -236,6 +237,7 @@ getSiteLocations <- function(DataSets=NULL, bBox=NULL, usr='Demo', key='Demo'){
 sendRequest<- function(DataSet, DataStore, observedProperty, observedPropertyGroup){
   tryCatch(
     expr = {
+      print(DataStore)
       odf <- getDataSetFunctions[[DataStore]](DataSet=DataSet, observedProperty, observedPropertyGroup)
     },
     error = function(e){
@@ -278,6 +280,8 @@ getDataSetFunctions <-  c(
                           NSSC=getData_NSSC,
                           ASRIS=getData_ASRIS,
                           TERNLandscapesDB=getData_TERNLandscapesDB
+                          #ASRISHostedNSWGovt=getData_NSWGovt
+
 )
 
 getLocationDataFunctions <- c(
@@ -287,6 +291,7 @@ getLocationDataFunctions <- c(
                       NSSC=getLocationData_NSSC,
                       ASRIS=getLocationData_ASRIS,
                       TERNLandscapesDB=getLocationData_TERNLandscapesDB
+                      #ASRISHostedNSWGovt=getLocationData_NSWGovt
 )
 
 

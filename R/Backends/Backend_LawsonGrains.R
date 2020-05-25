@@ -81,7 +81,7 @@ if(length(nativeProps) == 0){
 
     sd$`Lab Number`[is.na(sd$`Lab Number`)] <- "1"
 
-    fdf <- data.frame(sd$Aggregation, sd$Year, sd$`Sample No.`, sd$`Lab Number`, ud, ld, sd[, nativeProps[i]], sd$Lat, sd$Lon)
+    fdf <- data.frame(sd$Aggregation, sd$Year, sd$`Sample No.`, sd$`Lab Number`, ud/100, ld/100, sd[, nativeProps[i]], sd$Lat, sd$Lon)
     colnames(fdf) <- c('Aggregation', 'Year',  'SampleNo', 'LabNumber', 'ud', 'ld', 'Value', 'Lat', 'Lon')
 
     propertyType <- getPropertyType(prop)

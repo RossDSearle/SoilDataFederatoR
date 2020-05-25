@@ -53,6 +53,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
   OrgName <- getOrgName(DataSet)
 
+  propList <- getPropertiesList(observedProperty, observedPropertyGroup)
   mappings <- doQueryFromFed(paste0("Select * from Mappings where Organisation = '", OrgName, "'" ))
   nativeProps <- getNativeProperties(OrgName, mappings, observedProperty, observedPropertyGroup)
 
@@ -69,12 +70,13 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
     for (i in 1:length(nativeProps)) {
       print(i)
       prop <- nativeProps[i]
+      propStd <- propList[i]
 
-      propertyType <- getPropertyType(prop)
-      units <- getUnits(propertyType = propertyType, prop = prop)
+      propertyType <- getPropertyType(propStd)
+
 
       if(propertyType == 'LaboratoryMeasurement'){
-
+        units <- NULL # getUnits(propertyType = propertyType, prop = prop)
       url <- URLencode(paste0("https://soil-chem.information.qld.gov.au/odata/SiteLabMethodResults?$filter=LabMethodCode eq '", prop, "'"))
       print(prop)
       sd <- fromJSON(url)
@@ -96,11 +98,11 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
       }else{
   #### extract Morpholgy data
         ObsProp <-  prop
-        nativePropRec <- (doQueryFromSALI(paste0("select * from Mappings WHERE SITESfld = '",ObsProp, "' COLLATE NOCASE")))
+        nativePropRec <- doQueryFromSALI(paste0("select * from Mappings WHERE SALIfld = '", ObsProp, "' COLLATE NOCASE"))
         nativeProp <- nativePropRec$SALIfld
         nativeTable <- nativePropRec$SALItblName
         tabLev <- as.numeric(doQueryFromSALI(paste0("select Level from TableLevels WHERE TableName = '", nativeTable, "' COLLATE NOCASE")))
-        propertyType <- getPropertyType(prop)
+        #propertyType <- 'FieldMeasuremen'
 
         if(tabLev == 4){
 
@@ -143,7 +145,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
           }else{
 
-            sqlTemplate <- paste0('SELECT SIT.PROJECT_CODE, OBS.SITE_ID, OBS.OBS_NO, OBS.OBS_DATE, OLC.DATUM, OLC.LONGITUDE, OLC.LATITUDE, HOR.HORIZON_NO, xxxx.yyyy, "NA" AS UPPER_DEPTH, "NA" AS LOWER_DEPTH
+            sqlTemplate <- paste0('SELECT SIT.PROJECT_CODE, OBS.SITE_ID, OBS.OBS_NO, OBS.OBS_DATE, OLC.DATUM, OLC.LONGITUDE, OLC.LATITUDE, xxxx.yyyy
                                     FROM ((SIT INNER JOIN OBS ON (SIT.SITE_ID = OBS.SITE_ID) AND (SIT.PROJECT_CODE = OBS.PROJECT_CODE)) INNER JOIN OLC ON (OBS.OBS_NO = OLC.OBS_NO) AND (OBS.SITE_ID = OLC.SITE_ID) AND (OBS.PROJECT_CODE = OLC.PROJECT_CODE)) INNER JOIN xxxx ON (OBS.OBS_NO = xxxx.OBS_NO) AND (OBS.SITE_ID = xxxx.SITE_ID) AND (OBS.PROJECT_CODE = xxxx.PROJECT_CODE)
                                     WHERE (((OLC.DATUM)="3")) COLLATE NOCASE')
 
@@ -155,10 +157,10 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
             mnth <- str_sub(fdf$OBS_DATE, 6,7)
             yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-            oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
-                                         fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, ObsProp, fdf[, 11] , 'None')
+            oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1', paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
+                                         'None' , 'None' , propertyType, ObsProp, fdf[, 8] , 'None')
             lodfs[[i]] <- oOutDF
-          }
+          c}
         }else if(tabLev == 2){
           # Observations table only
 

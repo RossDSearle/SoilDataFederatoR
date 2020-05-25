@@ -1,0 +1,1076 @@
+AGENCY_CODE,LABM_CODE,LABP_CODE,LABMT_CODE,LABM_NAME,LABM_SHORT_NAME,LABM_UNITS,LABM_LOW_VALUE,LABM_HIGH_VALUE
+999,10_BC,SULFUR,10.03,"Bicarbonate-extractable sulfur. Keay, Menage and Dean (1972)",Extractable S,?,NA,NA
+999,10A_NR,SULFUR,10.013,Total sulfur - S(%) - Not recorded,Total S,%,NA,NA
+999,10A1,SULFUR,10.01,Total sulfur - S(%) - X-ray fluorescence,Total S,%,NA,NA
+303,10A3,NA,NA,C N S; Dumas,CNS,NA,NA,NA
+999,10B,SULFUR,10.02,Extractable sulfur (mg/kg) - Phosphate extractable sulfur,Extractable S,mg/kg,NA,NA
+999,10B_NR,SULFUR,10.020,Extractable sulfur (mg/kg) - Not recorded,Extractable S,mg/kg,NA,NA
+999,10B1,SULFUR,10.02,Calcium phosphate-extractable sulfur - manual distillation,Extractable S,mg/kg,NA,NA
+999,10B2,SULFUR,10.02,Calcium phosphate-extractable sulfur - automated distillation,Extractable S,mg/kg,NA,NA
+999,10B3,SULFUR,10.02,Calcium phosphate-extractable sulfur - ICPAES,Extractable S,mg/kg,NA,NA
+999,10B4,SULFUR,NA,Calcium phosphate-extractable sulfur - ion chromatography,Extractable S,mg/kg,NA,NA
+999,10C1,SULFUR,NA,"Calcium phosphate-extractable sulfur - ICPAES, + charcoal (CPC-S)",Extractable S,mg/kg,NA,NA
+999,10D1,SULFUR,10.04,Potassium chloride - 40 sulfur (KCl-40)-S,Extractable S,mg/kg,NA,NA
+303,10Z1,NA,NA,4M HCL extr. ICP finish,HCl Extr S,NA,NA,NA
+999,11A1,GYPSUM,11.01,Total gypsum,Total Gypsum,%,NA,NA
+999,11A2,GYPSUM,NA,Total gypsum - MIR reflectance spectroscopy,Total Gypsum,%,NA,NA
+999,12_HCL_CU,TOTAL_ELEMENTS,12.061,Total element - Cu(mg/kg) - Total acid(HCl),Total Cu,mg/kg,NA,NA
+999,12_HCL_FE,TOTAL_ELEMENTS,12.064,Total element - Fe(%) - Total acid(HCl) extractable Fe,Total Fe,%,NA,NA
+999,12_HCL_FEO,TOTAL_ELEMENTS,12.065,Total element - Fe(%) - Total acid(HCl) extractable Fe2O3,Total Fe2O3,%,NA,NA
+999,12_HCL_MN,TOTAL_ELEMENTS,12.053,Total element - Mn(mg/kg) - Total acid(HCl),Total Mn,mg/kg,NA,NA
+999,12_HCL_ZN,TOTAL_ELEMENTS,12.062,Total element - Zn(mg/kg) - Total acid(HCl),Total Zn,mg/kg,NA,NA
+999,12_HF_CU,TOTAL_ELEMENTS,12.041,Total element - Cu(mg/kg) - HF/HClO4 Digest,Total Cu,mg/kg,NA,NA
+999,12_HF_FE,TOTAL_ELEMENTS,12.044,Total element - Fe(%) - HF/HClO4 Digest,Total Fe,%,NA,NA
+999,12_HF_MN,TOTAL_ELEMENTS,12.043,Total element - Mn(mg/kg) - HF/HClO4 Digest,Total Mn,mg/kg,NA,NA
+999,12_HF_ZN,TOTAL_ELEMENTS,12.042,Total element - Zn(mg/kg) - HF/HClO4 Digest,Total Zn,mg/kg,NA,NA
+999,12_HF+_FEO,TOTAL_ELEMENTS,12.044,Total element - Fe(%) - HF/HClO4 Digest(Fe2O3),Total Fe,%,NA,NA
+999,12_NR_CU,TOTAL_ELEMENTS,12.001,Total element - Cu(mg/kg) - Not recorded,Total Cu,mg/kg,NA,NA
+999,12_NR_FE,TOTAL_ELEMENTS,12.004,Total element - Fe(%) - Not recorded,Total Fe,%,NA,NA
+999,12_NR_MN,TOTAL_ELEMENTS,12.003,Total element - Mn(mg/kg) - Not recorded,Total Mn,mg/kg,NA,NA
+999,12_NR_ZN,TOTAL_ELEMENTS,12.002,Total element - Zn(mg/kg) - Not recorded,Total Zn,mg/kg,NA,NA
+999,12_XRF_CU,TOTAL_ELEMENTS,12.051,Total element - Cu(mg/kg) - X-Ray Fuoresence,Total Cu,mg/kg,NA,NA
+999,12_XRF_FE,TOTAL_ELEMENTS,12.054,Total element - Fe(%) - X-Ray Fuoresence,Total Fe,%,NA,NA
+999,12_XRF_FEO,TOTAL_ELEMENTS,12.055,Total element - Fe(%) - X-Ray Fuoresence (Fe2O3),Total Fe2O3,%,NA,NA
+999,12_XRF_MN,TOTAL_ELEMENTS,12.053,Total element - Mn(mg/kg) - X-Ray Fuoresence,Total Mn,mg/kg,NA,NA
+999,12_XRF_ZN,TOTAL_ELEMENTS,12.052,Total element - Zn(mg/kg) - X-Ray Fuoresence,Total Zn,mg/kg,NA,NA
+999,12A1_AL,AL,12.014,"DTPA - extractable copper, zinc, manganese,aluminium and iron",Extractable Al,mg/kg,NA,NA
+999,12A1_CU,CU,12.011,"DTPA - extractable copper, zinc, manganese and iron",Extractable Cu,mg/kg,NA,NA
+999,12A1_FE,FE,12.014,"DTPA - extractable copper, zinc, manganese and iron",Extractable Fe,mg/kg,NA,NA
+999,12A1_MN,MN,12.013,"DTPA - extractable copper, zinc, manganese and iron",Extractable Mn,mg/kg,NA,NA
+999,12A1_ZN,ZN,12.012,"DTPA - extractable copper, zinc, manganese and iron",Extractable Zn,mg/kg,NA,NA
+999,12B1_CU,CU,12.021,Ammonium bicarbonate/EDTA - extractable copper,Extractable Cu,mg/kg,NA,NA
+999,12B1_FE,FE,12.024,Ammonium bicarbonate/EDTA - extractable Iron,Extractable Fe,mg/kg,NA,NA
+999,12B1_MN,MN,12.023,Ammonium bicarbonate/EDTA - extractable manganese,Extractable Mn,mg/kg,NA,NA
+999,12B1_ZN,ZN,12.022,Ammonium bicarbonate/EDTA - extractable zinc,Extractable Zn,mg/kg,NA,NA
+999,12C1,BORON,12.03,Calcium chloride extractable boron - manual colour,Extractable B,mg/kg,NA,NA
+999,12C2,BORON,12.03,Calcium chloride extractable boron - ICPAES,Extractable B,mg/kg,NA,NA
+303,12C3,NA,NA,"Water extract, ICP",Water Extr B,NA,NA,NA
+999,12D1_CU,CU,NA,"0.1 M HCl - extractable copper, zinc, manganese and iron",Extractable Cu,mg/kg,NA,NA
+999,12D1_FE,FE,NA,"0.1 M HCl - extractable copper, zinc, manganese and iron",Extractable Fe,mg/kg,NA,NA
+999,12D1_MN,MN,NA,"0.1 M HCl - extractable copper, zinc, manganese and iron",Extractable Mn,mg/kg,NA,NA
+999,12D1_ZN,ZN,NA,"0.1 M HCl - extractable copper, zinc, manganese and iron",Extractable Zn,mg/kg,NA,NA
+999,12E1,MO,NA,Calcium chloride - extractable Mo,Extractable Mo,mg/kg,NA,NA
+999,13_C_FE,TOTAL_ELEMENTS,13.0011,Extractable Fe(%) - Method recorded as C,Extractable Fe,%,NA,NA
+999,13_NR_AL,TOTAL_ELEMENTS,13.0021,Extractable Al(%) - Not recorded,Extractable Al,%,NA,NA
+999,13_NR_FE,TOTAL_ELEMENTS,13.001,Extractable Fe(%) - Not recorded,Extractable Fe,%,NA,NA
+999,13_NR_MN,TOTAL_ELEMENTS,13.0021,Extractable Mn(%) - Not recorded,Extractable Mn,%,NA,NA
+303,13A1,NA,NA,Si,Si,NA,NA,NA
+999,13A1_AL,AL,13.012,Oxalate-extractable aluminium,Extractable Al,%,NA,NA
+999,13A1_FE,FE,13.011,Oxalate-extractable iron,Extractable Fe,%,NA,NA
+999,13A1_MN,MN,13.013,Oxalate-extractable manganese,Extractable Mn,%,NA,NA
+999,13A1_SI,SI,13.014,Oxalate-extractable silicon,Extractable Si,%,NA,NA
+999,13B1_AL,AL,13.022,Pyrophosphate-extractable aluminium,Extractable Al,%,NA,NA
+999,13B1_FE,FE,13.021,Pyrophosphate-extractable iron,Extractable Fe,%,NA,NA
+999,13C_C_FE,TOTAL_ELEMENTS,13.03 ,Extractable Fe (Free) % - Method recorded as C,Extractable Fe(Free),%,NA,NA
+999,13C1_AL,AL,13.032,"Citrate/dithionite-extractable iron, aluminium, Manganese and Silicon",Extractable Al,%,NA,NA
+999,13C1_FE,FE,13.031,"Citrate/dithionite-extractable iron, aluminium, Manganese and Silicon",Extractable Fe,%,NA,NA
+999,13C1_FE203,TOTAL_ELEMENTS,13.0311,Extractable Fe(Free) % - Citrate/Dithionite Extractable Fe2O3,Extractable Fe(Free),%,NA,NA
+999,13C1_MN,MN,13.033,"Citrate/dithionite-extractable iron, aluminium, Manganese and Silicon",Extractable Mn,%,NA,NA
+999,13C1_SI,SI,13.034,"Citrate/dithionite-extractable iron, aluminium, Manganese and Silicon",Extractable Si,%,NA,NA
+999,13D1,SI,NA,Acid-extractable soil silicon - automated colour,Extractable Si,mg/kg,NA,NA
+999,13D2,SI,NA,Acid-extractable soil silicon - ICPAES,Extractable Si,mg/kg,NA,NA
+501,14_NR_S,NA,NA,NA,NA,NA,NA,NA
+999,14A1,SE,14.01,Saturation extract - filter suction,Saturation extract,NA,NA,NA
+999,14A2,SE,14.01,Saturation extract - automatic extractor,Saturation extract,NA,NA,NA
+999,14A3,SE,14.01,"Saturation extract - centrifuge, closed system",Saturation extract,NA,NA,NA
+999,14A4,SE,14.01,"Saturation extract - centrifuge, Gillman",Saturation extract,NA,NA,NA
+999,14B1,EC,14.02,Electrical conductivity/SE,Ecx,dS/m,NA,NA
+999,14C1,PH/SE,14.03,pH/SE,pH/SE,NA,NA,NA
+999,14D1_BC,BICARB/SE,14.041,Bicarbonate/SE and carbonate/SE - potentiometric titration,Bicarbonate/SE,mequiv/L,NA,NA
+303,14D1_BiCar,BICARB/SE,NA,Bicarbonate/SE - potentiometric titration,Bicarb/SE - titratio,NA,NA,NA
+999,14D1_C,CARB/SE,14.042,Bicarbonate/SE and carbonate/SE - potentiometric titration,Carbonate/SE,mequiv/L,NA,NA
+303,14D1_Carb,CARBONATES,NA,Carbonate/SE - potentiometric titration,Carb/SE - titration,NA,NA,NA
+999,14D2_BC,BICARB/SE,14.041,Bicarbonate/SE and carbonate/SE - indicator method,Bicarbonate/SE,mequiv/L,NA,NA
+303,14D2_BiCar,BICARB/SE,NA,Bicarbonate/SE  - indicator method,BiCarb/SE - indicato,NA,NA,NA
+999,14D2_C,CARB/SE,14.042,Bicarbonate/SE and carbonate/SE - indicator method,Carbonate/SE,mequiv/L,NA,NA
+303,14D2_Carb,CARBONATES,NA,Carbonate/SE - indicator method,Carb/SE - indicator,NA,NA,NA
+999,14E1,CHLORIDE/SE,NA,Chloride/SE - potentiometric titration,Chloride/SE,mequiv/L,NA,NA
+999,14E2,CHLORIDE/SE,14.05,Chloride/SE - ion chromatography,Chloride/SE,mequiv/L,NA,NA
+999,14E2a,CHLORIDE/SE,NA,Chloride/SE - ion chromatography (chemical suppression of eluent conductivity),Chloride/SE,mequiv/L,NA,NA
+999,14E2b,CHLORIDE/SE,NA,Chloride/SE - ion chromatography (single column with electronic suppression of eluent conductivity),Chloride/SE,mequiv/L,NA,NA
+999,14E3,CHLORIDE/SE,14.06,Chloride/SE - ICPAES,Chloride/SE,mequiv/L,NA,NA
+999,14F1,SULFATE/SE,14.06,Sulfate/SE - ICPAES,Sulfate/SE,mequiv/L,NA,NA
+999,14F2,SULFATE/SE,14.06,Sulfate/SE - turbidimetric,Sulfate/SE,mequiv/L,NA,NA
+999,14F3,SULFATE/SE,14.06,Sulfate/SE - gravimetric,Sulfate/SE,mequiv/L,NA,NA
+999,14F4,SULFATE/SE,14.06,Sulfate/SE - automated colour,Sulfate/SE,mequiv/L,NA,NA
+999,14F5,SULFATE/SE,14.06,Sulfate/SE - ion chromatography,Sulfate/SE,mequiv/L,NA,NA
+999,14F5a,SULFATE/SE,NA,Sulfate/SE - ion chromatography (chemical suppression of eluent conductivity),Sulfate/SE,mequiv/L,NA,NA
+999,14F5b,SULFATE/SE,NA,Sulfate/SE - ion chromatography (single column with electronic suppression of eluent conductivity),Sulfate/SE,mequiv/L,NA,NA
+999,14G1,FLUORIDE/SE,14.07,Fluoride/SE - specific ion electrode,Fluoride/SE,mequiv/L,NA,NA
+999,14G2,FLUORIDE/SE,14.07,Fluoride/SE - ion chromatography,Fluoride/SE,mequiv/L,NA,NA
+999,14H1_CA,SOL_BASES_CA,14.081,"Soluble bases/SE (Ca,Mg,K,Na)",Soluble bases Ca,mg/L,NA,NA
+999,14H1_K,SOL_BASES_K,14.083,"Soluble bases/SE (Ca,Mg,K,Na)",Soluble bases K,mg/L,NA,NA
+999,14H1_MG,SOL_BASES_MG,14.082,"Soluble bases/SE (Ca,Mg,K,Na)",Soluble bases Mg,mg/L,NA,NA
+999,14H1_NA,SOL_BASES_NA,14.084,"Soluble bases/SE (Ca,Mg,K,Na)",Soluble bases Na,mg/L,NA,NA
+999,15_BASES,ECEC,15.131,Sum of Ex. cations + Ex. acidity - Sum of basic exch. cations,ECEC,meq/100g,NA,NA
+999,15_HSK_CEC,CEC,15.00,CEC - meq per 100g of soil - HOSK,CEC,meq/100g,NA,NA
+999,15_NR,ECEC,15.13,Sum of Ex. cations + Ex. acidity - Not recorded,ECEC,meq/100g,NA,NA
+999,15_NR_AL,EXCH_AL,15.07,Aluminium Cation - meq per 100g of soil - Not recorded,Exch. Al++,meq/100g,NA,NA
+501,15_NR_BSa,NA,NA,NA,NA,NA,NA,NA
+999,15_NR_CA,EXCH_BASES_CA,15.001,Exch. basic cations (Ca++) - meq per 100g of soil - Not recorded,Exch. Ca++,meq/100g,NA,NA
+999,15_NR_CEC,EXCH_BASES_CEC,15.0451,CEC - meq per 100g of soil - Not recorded,CEC,meq/100g,NA,NA
+501,15_NR_CMR,NA,NA,NA,NA,NA,NA,NA
+999,15_NR_H,EXCH_H,15.09,Hydrogen Cation - meq per 100g of soil - Not recorded,Exch. H+,meq/100g,NA,NA
+999,15_NR_K,EXCH_BASES_K,15.003,Exch. basic cations (K++) - meq per 100g of soil - Not recorded,Exch. K++,meq/100g,NA,NA
+999,15_NR_MG,EXCH_BASES_MG,15.002,Exch. basic cations (Mg++) - meq per 100g of soil - Not recorded,Exch. Mg++,meq/100g,NA,NA
+501,15_NR_MN,NA,NA,NA,NA,NA,NA,NA
+999,15_NR_NA,EXCH_BASES_NA,15.004,Exch. basic cations (Na++) - meq per 100g of soil - Not recorded,Exch. Na++,meq/100g,NA,NA
+999,15A1_CA,EXCH_BASES_CA,15.011,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+303,15A1_Ca_MQ,NA,NA,Exchangeable calcium,Exchangeable calcium,NA,NA,NA
+501,15A1_CEC,NA,NA,Exchangeable bases,CEC,meq/100g,NA,NA
+999,15A1_K,EXCH_BASES_K,15.013,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15A1_MG,EXCH_BASES_MG,15.012,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+303,15A1_Mg_MQ,NA,NA,Exchangeable magnesium,Exchangeable magnesi,NA,NA,NA
+501,15A1_MN,NA,NA,NA,NA,NA,NA,NA
+999,15A1_NA,EXCH_BASES_NA,15.014,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15A2_CA,EXCH_BASES_CA,15.021,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+999,15A2_CEC,EXCH_BASES_CEC,15.025,"Exchangeable bases- 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",CEC,meq/100g,NA,NA
+999,15A2_K,EXCH_BASES_K,15.023,"Exchangeable bases- 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15A2_MG,EXCH_BASES_MG,15.022,"Exchangeable bases- 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+999,15A2_NA,EXCH_BASES_NA,15.024,"Exchangeable bases- 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15A3_CA,EXCH_BASES_CA,15.021,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",Exch. Ca++,meq/100g,NA,NA
+999,15A3_CEC,EXCH_BASES_CEC,15.025,"Exchangeable bases- 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",CEC,meq/100g,NA,NA
+999,15A3_K,EXCH_BASES_K,15.023,"Exchangeable bases- 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",Exch. K++,meq/100g,NA,NA
+999,15A3_MG,EXCH_BASES_MG,15.022,"Exchangeable bases- 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",Exch. Mg++,meq/100g,NA,NA
+999,15A3_NA,EXCH_BASES_NA,15.024,"Exchangeable bases- 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",Exch. Na++,meq/100g,NA,NA
+999,15B1_CA,EXCH_BASES_CA,15.011,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+999,15B1_CEC,EXCH_BASES_CEC,15.013,"CEC - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",CEC,meq/100g,NA,NA
+999,15B1_K,EXCH_BASES_K,15.013,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15B1_MG,EXCH_BASES_MG,15.012,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+999,15B1_NA,EXCH_BASES_NA,15.014,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15B2_CA,EXCH_BASES_CA,15.021,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+999,15B2_CEC,EXCH_BASES_CEC,15.025,"CEC - 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",CEC,meq/100g,NA,NA
+999,15B2_K,EXCH_BASES_K,15.023,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15B2_MG,EXCH_BASES_MG,15.022,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+999,15B2_NA,EXCH_BASES_NA,15.024,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15B3_CA,EXCH_BASES_CA,15.021,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",Exch. Ca++,meq/100g,NA,NA
+999,15B3_CEC,EXCH_BASES_CEC,15.025,"CEC - 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",CEC,meq/100g,NA,NA
+999,15B3_K,EXCH_BASES_K,15.023,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",Exch. K++,meq/100g,NA,NA
+999,15B3_MG,EXCH_BASES_MG,15.022,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",Exch. Mg++,meq/100g,NA,NA
+999,15B3_NA,EXCH_BASES_NA,15.024,"Exchangeable bases and CEC - 1M ammonium chloride at pH 7.0, adjusted for soluble sodium",Exch. Na++,meq/100g,NA,NA
+999,15C1_CA,EXCH_BASES_CA,15.031,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - alcoholic 1M ammonium chloride at pH 8.5, pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+303,15C1_Ca_MQ,NA,NA,Exchangeable calcium,Exchangeable calcium,NA,NA,NA
+999,15C1_CEC,EXCH_BASES_CEC,15.035,"CEC - alcoholic 1M ammonium chloride at pH 8.5, pretreatment for soluble salts",CEC,meq/100g,NA,NA
+999,15C1_K,EXCH_BASES_K,15.033,"Exchangeable bases and CEC - alcoholic 1M ammonium chloride at pH 8.5, pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15C1_MG,EXCH_BASES_MG,15.032,"Exchangeable bases and CEC - alcoholic 1M ammonium chloride at pH 8.5, pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+303,15C1_Mg_MQ,NA,NA,Exchangeable magnesium,Exchangeable magnesi,NA,NA,NA
+999,15C1_NA,EXCH_BASES_NA,15.034,"Exchangeable bases and CEC - alcoholic 1M ammonium chloride at pH 8.5, pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15C2_CA,EXCH_BASES_CA,NA,Exchangeable divalent cations and CEC - MIR diffuse reflectance spectroscopy,Exch. Ca++,meq/100g,NA,NA
+303,15C2_Ca_MQ,NA,NA,Exchangeable calcium - MIR QLD Calibration 1,Exchangeable calcium,NA,NA,NA
+999,15C2_CEC,EXCH_BASES_CEC,NA,Exchangeable divalent cations and CEC - MIR diffuse reflectance spectroscopy,CEC,meq/100g,NA,NA
+303,15C2_CEC_M,CEC,NA,Cation exchange capacity - MIR QLD Calibration 1,Cation exchange capa,NA,NA,NA
+999,15C2_MG,EXCH_BASES_MG,NA,Exchangeable divalent cations and CEC - MIR diffuse reflectance spectroscopy,Exch. Mg++,meq/100g,NA,NA
+303,15C2_Mg_MQ,NA,NA,Exchangeable magnesium - MIR QLD Calibration 1,Exchangeable magnesi,NA,NA,NA
+501,15D1_AL,NA,NA,NA,NA,NA,NA,NA
+999,15D1_CA,EXCH_BASES_CA,15.021,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; manual leach",Exch. Ca++,meq/100g,NA,NA
+999,15D1_CEC,EXCH_BASES_CEC,15.025,"CEC - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; manual leach",CEC,meq/100g,NA,NA
+999,15D1_K,EXCH_BASES_K,15.023,"Exchangeable bases and CEC - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; manual leach",Exch. K++,meq/100g,NA,NA
+999,15D1_MG,EXCH_BASES_MG,15.022,"Exchangeable bases and CEC - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; manual leach",Exch. Mg++,meq/100g,NA,NA
+999,15D1_NA,EXCH_BASES_NA,15.024,"Exchangeable bases and CEC - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; manual leach",Exch. Na++,meq/100g,NA,NA
+999,15D2_CA,EXCH_BASES_CA,15.021,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; automatic extractor",Exch. Ca++,meq/100g,NA,NA
+999,15D2_CEC,EXCH_BASES_CEC,15.025,"CEC - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; automatic extractor",CEC,meq/100g,NA,NA
+999,15D2_K,EXCH_BASES_K,15.023,"Exchangeable bases and CEC - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; mautomatic",Exch. K++,meq/100g,NA,NA
+999,15D2_MG,EXCH_BASES_MG,15.022,"Exchangeable bases and CEC - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; mautomatic",Exch. Mg++,meq/100g,NA,NA
+999,15D2_NA,EXCH_BASES_NA,15.024,"Exchangeable bases and CEC - 1M ammonium acetate at pH 7.0, pretreatment for soluble salts; mautomatic",Exch. Na++,meq/100g,NA,NA
+999,15D3_CA,EXCH_BASES_CA,15.011,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium acetate at pH 7.0, rapid method with no pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+999,15D3_K,EXCH_BASES_K,15.013,"Exchangeable bases - 1M ammonium acetate at pH 7.0, rapid method with no pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15D3_MG,EXCH_BASES_MG,15.012,"Exchangeable bases - 1M ammonium acetate at pH 7.0, rapid method with no pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+999,15D3_NA,EXCH_BASES_NA,15.014,"Exchangeable bases - 1M ammonium acetate at pH 7.0, rapid method with no pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15E1,NA,NA,Exchangeable bases,CEC,meq/100g,NA,NA
+999,15E1_AEC,EXCH_BASES_AEC,15.046,"Exchangeable bases , CEC and AEC by compulsive exchange, no pretreatment for soluble salts",AEC,meq/100g,NA,NA
+999,15E1_AL,EXCH_AL,15.047,"Exchangeable Al - by compulsive exchange, no pretreatment for soluble salts",Exch. Al++,meq/100g,NA,NA
+999,15E1_CA,EXCH_BASES_CA,15.041,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) by compulsive exchange, no pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+999,15E1_CEC,EXCH_BASES_CEC,15.045,"CEC by compulsive exchange, no pretreatment for soluble salts",CEC,meq/100g,NA,NA
+999,15E1_H,EXCH_H,15.048,"Exchangeable H - by compulsive exchange, no pretreatment for soluble salts",Exch. H+,meq/100g,NA,NA
+999,15E1_K,EXCH_BASES_K,15.043,"Exchangeable bases, CEC and AEC by compulsive exchange, no pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15E1_MG,EXCH_BASES_MG,15.042,"Exchangeable bases, CEC and AEC by compulsive exchange, no pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+501,15E1_MN,NA,NA,NA,NA,NA,NA,NA
+999,15E1_NA,EXCH_BASES_NA,15.044,"Exchangeable bases, CEC and AEC by compulsive exchange, no pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15E2_AEC,EXCH_BASES_AEC,15.056,"Exchangeable bases, CEC and AEC by compulsive exchange, pretreatment for soluble salts",AEC,meq/100g,NA,NA
+999,15E2_CA,EXCH_BASES_CA,15.051,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) by compulsive exchange, pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+999,15E2_CEC,EXCH_BASES_CEC,15.055,"CEC by compulsive exchange, pretreatment for soluble salts",CEC,meq/100g,NA,NA
+999,15E2_K,EXCH_BASES_K,15.053,"Exchangeable bases, CEC and AEC by compulsive exchange, pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15E2_MG,EXCH_BASES_MG,15.052,"Exchangeable bases, CEC and AEC by compulsive exchange, pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+999,15E2_NA,EXCH_BASES_NA,15.054,"Exchangeable bases, CEC and AEC by compulsive exchange, pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15E3_AEC,EXCH_BASES_AEC,15.056,"Exchangeable bases, CEC and AEC by compulsive exchange, adjusted for soluble sodium",AEC,meq/100g,NA,NA
+999,15E3_CA,EXCH_BASES_CA,15.051,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) by compulsive exchange, adjusted for soluble sodium",Exch. Ca++,meq/100g,NA,NA
+999,15E3_CEC,EXCH_BASES_CEC,15.055,"CEC by compulsive exchange, adjusted for soluble sodium",CEC,meq/100g,NA,NA
+999,15E3_K,EXCH_BASES_K,15.053,"Exchangeable bases, CEC and AEC by compulsive exchange, adjusted for soluble sodium",Exch. K++,meq/100g,NA,NA
+999,15E3_MG,EXCH_BASES_MG,15.052,"Exchangeable bases, CEC and AEC by compulsive exchange, adjusted for soluble sodium",Exch. Mg++,meq/100g,NA,NA
+999,15E3_NA,EXCH_BASES_NA,15.054,"Exchangeable bases, CEC and AEC by compulsive exchange, adjusted for soluble sodium",Exch. Na++,meq/100g,NA,NA
+999,15F1_CA,EXCH_BASES_CA,15.061,"Exchangeable bases by 0.01M silver-thiourea (AgTU)+, no pretreatment for soluble salts",Exch. Ca++,meq/100g,NA,NA
+999,15F1_CEC,EXCH_BASES_CEC,15.065,"Exchangeable bases by 0.01m (AgTU)+, no pretreatment for soluble salts",CEC,meq/100g,NA,NA
+999,15F1_K,EXCH_BASES_K,15.063,"Exchangeable bases by 0.01m (AgTU)+, no pretreatment for soluble salts",Exch. K++,meq/100g,NA,NA
+999,15F1_MG,EXCH_BASES_MG,15.062,"Exchangeable bases by 0.01m (AgTU)+, no pretreatment for soluble salts",Exch. Mg++,meq/100g,NA,NA
+999,15F1_NA,EXCH_BASES_NA,15.064,"Exchangeable bases by 0.01m (AgTU)+, no pretreatment for soluble salts",Exch. Na++,meq/100g,NA,NA
+999,15F2,EXCH_AL,15.07,Exchangeable aluminium by 0.01m (AgTU)+,Exch. Al++,meq/100g,NA,NA
+999,15F2_AL,EXCH_AL,15.07,Exchangeable Al (%) - Silver Thiorea,Exch. Al++,%,NA,NA
+999,15F3,CEC,15.08,CEC by 0.01M silver-thiourea (AgTU)+,CEC,meq/100g,NA,NA
+999,15F4,EXCH_AL,15.075,Exchangeable aluminium by 1M ammonium acetate (pH5.8). Abdullah and Riley (1966).,Exch. Al++,?,NA,NA
+999,15G_C,EXCH_ACIDITY,15.093,Exchange acidity (hydrogen and aluminium) - meq per 100g of soil - By 1M KCl exch. acidity by titration to pH 8.4,Exch. acidity (H+Al),meq/100g,NA,NA
+999,15G_C_AL1,EXCH_AL,15.092,Exchangeable aluminium - meq per 100g of soil - Aluminium By difference of C and A or B,Exch. Al++,meq/100g,NA,NA
+999,15G_C_AL2,EXCH_AL,15.092,Exchangeable aluminium - meq per 100g of soil - Aluminium By KCl extraction and detremination By AAS,Exch. Al++,meq/100g,NA,NA
+999,15G_C_H1,EXCH_H,15.091,Exchangeable hydrogen - meq per 100g of soil - Hydrogen By back titration of A or B,Exch. H+,meq/100g,NA,NA
+999,15G_H,EXCH_H,15.091,Hydrogen Cation - meq per 100g of soil - 1M KCl Exch. acidity By titration to pH 8.4,Exch. H+,meq/100g,NA,NA
+999,15G1,EXCH_ACIDITY,15.09,Exchange acidity (hydrogen and aluminium) by 1M potassium chloride,Exch. Acidity (H+Al),meq/100g,NA,NA
+303,15G1_Acid,NA,NA,Exchange acidity (hydrogen and aluminium) by 1M potassium chloride - Exchange Acidity,Exchange Acidity - K,NA,NA,NA
+999,15G1_AL,EXCH_AL,15.092,Aluminium Cation - meq per 100g of soil - 1M KCl Exch. Acidity By titration to pH 8.0,Exch. H+,meq/100g,NA,NA
+999,15G1_H,EXCH_H,15.091,Hydrogen Cation - meq per 100g of soil - 1M KCl Exch. Acidity By titration to pH 8.0,Exch. H+,meq/100g,NA,NA
+303,15G2,NA,NA,Exch. Al saturation,Exchange Al Sat - ca,NA,NA,NA
+303,15G2_Al_MQ,NA,NA,Exchangeable aluminium,Exchangeable alumini,NA,NA,NA
+999,15H1,EXCH_ACIDITY,15.10,Exchange acidity by TEA,Exch. Acidity (H+Al),meq/100g,NA,NA
+999,15I1,CEC,15.11,CEC measurement - distillation of ammonium ions,CEC,meq/100g,NA,NA
+999,15I2,CEC,15.11,CEC measurement - automated determination of ammonium ions,CEC,meq/100g,NA,NA
+999,15I3,CEC,15.12,CEC measurement - automated determination of ammonium and chloride ions,CEC,meq/100g,NA,NA
+999,15I4,CEC,15.12,CEC measurement - titration of ammonium and chloride ions,CEC,meq/100g,NA,NA
+999,15J_BASES,BASES,15.172,Sum of Bases,Sum of Bases,meq/100g,NA,NA
+999,15J_H,ECEC,15.131,Sum of Ex. cations + Ex. acidity - Sum of basic exch. cations and exch. (Hydrogen),ECEC,meq/100g,NA,NA
+999,15J1,ECEC,15.13,Effective CEC,ECEC,meq/100g,NA,NA
+303,15J2_MQ02,ECEC,NA,Effective cation exchange capacity,ECEC,meq/100g,NA,NA
+999,15K1,CEC,15.14,CEC - pH 8.2,CEC,meq/100g,NA,NA
+999,15L1,BSP,15.15,Base saturation percentage (BSP),BSP,%,NA,NA
+501,15L1_a,NA,NA,NA,NA,NA,NA,NA
+999,15M1,CATION_RATIO,15.16,Cation ratio,Cation ratio,NA,NA,NA
+303,15M1_Ca/CE,CA,NA,Calcium to cation exchange capacity ratio,Calcium to cation ex,NA,NA,NA
+303,15M1_Ca/Mg,CA/MG,NA,Cation ratio Ca/Mg,Ca/Mg ratio,NA,NA,NA
+303,15M1_K/CEC,NA,NA,Potassium to cation exchange capacity ratio,Potassium to cation ,NA,NA,NA
+303,15M1_Mg/Ca,NA,NA,Magnesium to calcium ratio,Magnesium to calcium,NA,NA,NA
+303,15M1_Mg/CE,NA,NA,Magnesium to cation exchange capacity ratio,Magnesium to cation ,NA,NA,NA
+303,15M1_Mg/K,MG/K,NA,Cation ratio Mg/K,Mg/K ratio,NA,NA,NA
+303,15M1_Na/K,NA/K,NA,Cation ratio Na/K,Na/K ratio,NA,NA,NA
+999,15N1,ESP,15.17,Exchangeable sodium percentage (ESP),ESP,%,NA,NA
+501,15N1_a,NA,NA,NA,NA,NA,NA,NA
+501,15N1_b,NA,NA,NA,NA,NA,NA,NA
+999,15O1,AL_SAT,15.18,Percenatge aluminium saturation,Al saturation,%,NA,NA
+303,15P1,CEC/CLAY,NA,CEC/Clay ratio,CEC/Clay ratio,NA,NA,NA
+303,15Z1,NA,NA,H,H,NA,NA,NA
+303,15Z1_CEC/c,CEC,NA,Cation exchange capacity:clay,Cation exchange capa,NA,NA,NA
+999,16A1,LIME_RATE,16.01,Calculated lime rate - from exchangeable aluminium,Calculated lime rate,kg/ha 10cm,NA,NA
+999,16B1,LIME_RATE,16.02,Calculated lime rate - Cregan,Calculated lime rate,kg/ha 10cm,NA,NA
+999,16C1,LIME_REQ,16.03,Lime requirement - Mehlich single buffer,Lime requirement,t/ha 20cm,NA,NA
+303,16C1_5.5,NA,NA,Lime requirement at pH 5.5,Lime Requirement - p,NA,NA,NA
+303,16C1_6.0,NA,NA,Lime requirement at pH 6.0,Lime Requirement - p,NA,NA,NA
+303,16C1_6.5,NA,NA,Lime requirement at pH 6.5,Lime Requirement - p,NA,NA,NA
+999,16D1,LIME_REQ,16.04,Lime requirement - Dunn titration curves,Lime requirement,t/ha 20cm,NA,NA
+999,17A_HF+,POTASSIUM,17.14,Total element - K (%) - HF/HCl04 Digest,Total K,%,NA,NA
+999,17A_NR,POTASSIUM,17.001,Total element - K (%) - Not recorded,Total K,%,NA,NA
+999,17A1,POTASSIUM,17.01,Total Potassium - X-ray fluorescence,Total K,%,NA,NA
+999,17A1_K,TOTAL_ELEMENTS,NA,Total Potassium - X-ray fluorescence,Total K,%,NA,NA
+303,17A1_K_MQ0,NA,NA,Total potassium - MIR QLD Calibration 1,Total potassium - MI,NA,NA,NA
+303,17A2_Cu,NA,NA,Total element - Cu(mg/kg) - HF/HClO4 Digest,Total Cu,NA,NA,NA
+303,17A2_Fe,NA,NA,Total element - Fe(%) - HF/HClO4 Digest,Total Fe,NA,NA,NA
+999,17A2_K,TOTAL_ELEMENTS,NA,"Total Potassium - microwave assisted digestion, determination by AAS",Total K,%,NA,NA
+303,17A2_Mn,NA,NA,Total element - Mn(mg/kg) - HF/HClO4 Digest,Total Mn,NA,NA,NA
+303,17A2_Zn,NA,NA,Total element - Zn(mg/kg) - HF/HClO4 Digest,Total Zn,NA,NA,NA
+303,17B1,NA,NA,"0.01M CaCl2 extractable K, ICP",0.01M CaCl2 extracta,NA,NA,NA
+999,17B1_K,TOTAL_ELEMENTS,NA,"Psuedo-total Potassium - reverse aqua regia block digestion, determination by AAS",Total K,%,NA,NA
+303,17B2_Al,AL,NA,Aluminium,Aluminium,NA,NA,NA
+303,17B2_As,AS,NA,Arsenic,Arsenic,NA,NA,NA
+303,17B2_Ca,CA,NA,Calcium,Calcium,NA,NA,NA
+303,17B2_Co,NA,NA,Cobalt,Cobalt,NA,NA,NA
+303,17B2_Cr,CR,NA,Chromium,Chromium,NA,NA,NA
+303,17B2_Cu,NA,NA,Copper,Copper,NA,NA,NA
+303,17B2_Fe,NA,NA,Iron,Iron,NA,NA,NA
+999,17B2_K,TOTAL_ELEMENTS,NA,"Psuedo-total Potassium - reverse aqua regia digestion, determination by atomic spectrometry",Total K,%,NA,NA
+303,17B2_Mg,NA,NA,Magnesium,Magnesium,NA,NA,NA
+303,17B2_Mn,NA,NA,Manganese,Manganese,NA,NA,NA
+303,17B2_Mo,NA,NA,Molybdenum,Molybdenum,NA,NA,NA
+303,17B2_Na,NA,NA,Sodium,Sodium,NA,NA,NA
+303,17B2_Ni,NA,NA,Nickel,Nickel,NA,NA,NA
+303,17B2_P,NA,NA,Phosphorus,Phosphorus,NA,NA,NA
+303,17B2_Pb,NA,NA,Lead,Lead,NA,NA,NA
+303,17B2_S,NA,NA,Sulphur,Sulphur,NA,NA,NA
+303,17B2_Zn,NA,NA,Zinc,Zinc,NA,NA,NA
+999,17C1_K,TOTAL_ELEMENTS,NA,"Psuedo-total Potassium - conventional aqua regia block digestion, determination by atomic spectrometry",Total K,%,NA,NA
+303,17X1_Al,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_As,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Ca,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Co,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Cr,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Cu,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Fe,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_K,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Mg,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Mn,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Mo,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Na,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Ni,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_P,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Pb,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_S,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17X1_Zn,NA,NA,Soil: Elements; HNO3+HClO4+H2O2 microwave; ICP,Soil: Elements; HNO3,NA,NA,NA
+303,17Z1,NA,NA,Total P,Total P,NA,NA,NA
+501,18_NR,NA,NA,NA,NA,NA,NA,NA
+999,18A1,POTASSIUM,18.01,Bicarbonate-extractable potassium,Extractable K,mg/kg,NA,NA
+501,18A1_NR,NA,NA,NA,NA,NA,NA,NA
+999,18B1,POTASSIUM,18.02,Hydrochloric acid - extractable potassium,Extractable K,mg/kg,NA,NA
+999,18B2,POTASSIUM,18.04,Sulfuric acid (10%)- extractable potassium,Extractable K,mg/kg,NA,NA
+999,18C1,POTASSIUM,NA,Boiling 1 M nitric acid  - extractable potassium,Extractable K,mg/kg,NA,NA
+999,18D1,CADMIUM,NA,0.1 M calcium chloride - extractable Cadmium,Extractable Cd,mg/kg,NA,NA
+999,18E1,CADMIUM,NA,0.01 M calcium chloride - extractable Cadmium,Extractable Cd,mg/kg,NA,NA
+999,18E2,POTASSIUM,18.03,Fluoride-extractable potassium (Bray 1-K) - AAS,Extractable K,mg/kg,NA,NA
+999,18F1_AL,AL,NA,Mehlich 3 - extractable Aluminium,Extractable Al,mg/kg,NA,NA
+999,18F1_B,BORON,NA,Mehlich 3 - extractable Boron,Extractable B,mg/kg,NA,NA
+999,18F1_CA,CALCIUM,NA,Mehlich 3 - extractable Calcium,Extractable Ca,mg/kg,NA,NA
+303,18F1_Cd,CD,NA,Cadmium,Cadmium,NA,NA,NA
+999,18F1_CU,CU,NA,Mehlich 3 - extractable Copper,Extractable Cu,mg/kg,NA,NA
+999,18F1_FE,FE,NA,Mehlich 3 - extractable Iron,Extractable Fe,mg/kg,NA,NA
+999,18F1_K,POTASSIUM,NA,Mehlich 3 - extractable Potassium,Extractable K,mg/kg,NA,NA
+999,18F1_MG,MG,NA,Mehlich 3 - extractable Magnesium,Extractable Mg,mg/kg,NA,NA
+999,18F1_MN,MN,NA,Mehlich 3 - extractable Manganese,Extractable Mn,mg/kg,NA,NA
+999,18F1_NA,NA,NA,Mehlich 3 - extractable Sodium,Extractable Na,mg/kg,NA,NA
+999,18F1_P,PHORPHORUS,NA,Mehlich 3 - extractable Phosporus,Extractable P,mg/kg,NA,NA
+999,18F1_S,SULFUR,NA,Mehlich 3 - extractable Sulfur,Extractable S,mg/kg,NA,NA
+999,18F1_ZN,ZN,NA,Mehlich 3 - extractable Zinc,Extractable Zn,mg/kg,NA,NA
+999,18F2,POTASSIUM,NA,Mehlich 3 - extractable Potassium - colour finish,Extractable K,mg/kg,NA,NA
+999,18G1,POTASSIUM,NA,Reserve soil K+ by copper-modified sodium tetraphenylboron extraction,Extractable K,mg/kg,NA,NA
+999,19_COL,CARBONATES,19.01,Carbonates - Collins Calcimeter,Carbonates,%,NA,NA
+999,19A1,CARBONATES,19.01,Carbonates - rapid titration,Carbonates,%,NA,NA
+303,19A2,CARBONATES,NA,Acid Neutralizing Capacity - 0.1 M HCl digest & back titration,ANC 0.1 M HCl,NA,NA,NA
+999,19B_NR,CARBONATES,19.00,Calcium Carbonate (CaCO3) - Not recorded,Carbonates,%,NA,NA
+999,19B1,CARBONATES,19.01,Carbonates - manometric,Carbonates,%,NA,NA
+999,19B2,CARBONATES,NA,Carbonates - transducer,Carbonates,%,NA,NA
+999,19C1,CARBONATES,NA,Spot field test for the presence of soil carbonates with dilute HCl,Carbonates,%,NA,NA
+999,19D1,CARBONATES,NA,Field test for soil carbonates with dilute HCl and effervescence class assessment,Carbonates,%,NA,NA
+303,1A1,NA,NA,Field sampling - soil and land use surveys,Field sampling - sur,NA,NA,NA
+303,1A2,NA,NA,Field sampling - diagnositc,Field sampling - dia,NA,NA,NA
+303,1B1,NA,NA,Laboratory preperation,Laboratory preperati,NA,NA,NA
+303,1X1_Al,NA,NA,Total Al XRF,Total Al XRF,NA,NA,NA
+303,1X1_As,NA,NA,Total As XRF,Total As XRF,NA,NA,NA
+303,1X1_Ba,NA,NA,Total Ba XRF,Total Ba XRF,NA,NA,NA
+303,1X1_Br,NA,NA,Total Br XRF,Total Br XRF,NA,NA,NA
+303,1X1_Ca,NA,NA,Total Ca XRF,Total Ca XRF,NA,NA,NA
+303,1X1_Cd,NA,NA,Total Cd XRF,Total Cd XRF,NA,NA,NA
+303,1X1_Co,NA,NA,Total Co XRF,Total Co XRF,NA,NA,NA
+303,1X1_Cr,NA,NA,Total Cr XRF,Total Cr XRF,NA,NA,NA
+303,1X1_Cu,NA,NA,Total Cu XRF,Total Cu XRF,NA,NA,NA
+303,1X1_Fe,NA,NA,Total Fe XRF,Total Fe XRF,NA,NA,NA
+303,1X1_Hg,NA,NA,Total Hg XRF,Total Hg XRF,NA,NA,NA
+303,1X1_Mg,NA,NA,Total Mg XRF,Total Mg XRF,NA,NA,NA
+303,1X1_Mn,NA,NA,Total Mn XRF,Total Mn XRF,NA,NA,NA
+303,1X1_Na,NA,NA,Total Na XRF,Total Na XRF,NA,NA,NA
+303,1X1_Ni,NA,NA,Total Ni XRF,Total Ni XRF,NA,NA,NA
+303,1X1_Pb,NA,NA,Total Pb XRF,Total Pb XRF,NA,NA,NA
+303,1X1_Si,NA,NA,Total Si XRF,Total Si XRF,NA,NA,NA
+303,1X1_Sr,NA,NA,Total Sr XRF,Total Sr XRF,NA,NA,NA
+303,1X1_Ti,NA,NA,Total Ti XRF,Total Ti XRF,NA,NA,NA
+303,1X1_V,NA,NA,Total V XRF,Total V XRF,NA,NA,NA
+303,1X1_Zn,NA,NA,Total Zn XRF,Total Zn XRF,NA,NA,NA
+999,2_LOI,LOSS_ON_IGNITION,2.00,Loss on Ignition (%),Loss on Ignition,%,NA,NA
+999,20A1,SULFUR,NA,Chromium reducible S,Reducible S,%,NA,NA
+303,20A2,NA,NA,Total Sulfur - Leco,Total S Leco,NA,NA,NA
+303,20A3,NA,NA,"Total Sulfur - Combustion, titration end point","Total S comb, titrat",NA,NA,NA
+303,20A4,NA,NA,"Total Sulfur - Combustion, dry ashing NaCO3, AgBr","Total S comb, dry as",NA,NA,NA
+303,20A5,NA,NA,Total Sulfur - Alkaline Na hypobromite oxidation + reduction hydroiodic acid reduction,Total S alk Na ox + ,NA,NA,NA
+303,20A6,NA,NA,"Total Sulfur - Acid oxidation using nitric, perchloric, phosphoric, hydrochloric acids",Total S acid ox,NA,NA,NA
+303,20A7,NA,NA,Total Sulfur - Bromine-Nitric Acid oxidation (Vogel's quantitative inorganic analysis),Total S Br-Nitric Ac,NA,NA,NA
+303,20A9,NA,NA,Total Sulfur - Summation from procedure 20D,Total S summ 20D,NA,NA,NA
+999,20B1,TAA,NA,SPOCAS acid trail - titratable actual acidity (TAA),TAA,mol(H+)/t,NA,NA
+303,20Ba,SU,NA,"4M HCl extractable Sulfur - sulfate, turbidmetric","HCl extr S - SO4, tu",NA,NA,NA
+303,20Bb,SU,NA,"4M HCl extractable Sulfur - sulfate, gravimetric","HCl extr S - SO4, gr",NA,NA,NA
+303,20Bc,SU,NA,"4M HCl extractable Sulfur - sulfate, automated colour","HCl extr S - SO4, au",NA,NA,NA
+303,20Bd,SU,NA,"4M HCl extractable Sulfur - sulfate, ion chromatography","HCl extr S - SO4, io",NA,NA,NA
+303,20Be,SU,NA,"4M HCl extractable Sulfur - sulfur, ICPAES","HCl extr S - S, ICPA",NA,NA,NA
+303,20Bf,SU,NA,"4M HCl extractable Sulfur - sulfate, automated turbidmetric","HCl extr S - SO4, au",NA,NA,NA
+303,20Bg,SU,NA,"4M HCl extractable Sulfur - sulfate, indirect, barium remaining by AAS","HCl extr S - SO4, in",NA,NA,NA
+303,20Bh,CA,NA,"4M HCl extractable calcium, ICPAES","HCl extr S - Ca, ICP",NA,NA,NA
+303,20Bj,CA,NA,"4M HCl extractable calcium, atomic absorption (AAS)","HCl extr S - Ca, AAS",NA,NA,NA
+303,20Bk,CA,NA,"4M HCl extractable calcium, titration EDTA","HCl extr S - Ca, EDT",NA,NA,NA
+303,20Bm,MG,NA,"4M HCl extractable magnesium, ICPAES","HCl extr S - Mg, ICP",NA,NA,NA
+303,20Bn,MG,NA,"4M HCl extractable magnesium, atomic absorption (AAS)","HCl extr S - Mg, AAS",NA,NA,NA
+303,20Bp,MG,NA,"4M HCl extractable magnesium, titration EDTA","HCl extr S - Mg, EDT",NA,NA,NA
+303,20Bs,NA,NA,"4M HCl extractable sodium, ICPAES","HCl extr S - Na, ICP",NA,NA,NA
+303,20Bt,NA,NA,"4M HCl extractable sodium, atomic absorption (AAS)","HCl extr S - Na, AAS",NA,NA,NA
+303,20Bu,NA,NA,"4M HCl extractable sodium, flame emission","HCl extr S - Na, fla",NA,NA,NA
+303,20Bv,K,NA,"4M HCl extractable potassium, ICPAES","HCl extr S - K, ICPA",NA,NA,NA
+303,20Bw,MG,NA,"4M HCl extractable potassium, atomic absorption (AAS)","HCl extr S - K, AAS",NA,NA,NA
+303,20Bx,K,NA,"4M HCl extractable potassium, flame emission","HCl extr S - K, flam",NA,NA,NA
+999,20C1_ANC,ANC,NA,SPOCAS acid trail - Net Acid Neutralising Capacity (ANC),ANC,mol(H+)/t,NA,NA
+999,20C1_TPA,TPA,NA,SPOCAS acid trail - titratable peroxide acidity (TPA),TPA,mol(H+)/t,NA,NA
+303,20C1a,NA,NA,"Total Oxidisable Sulfur by XRF and turbidmetric, SO4",TOS  XRF-Turbimetric,NA,NA,NA
+303,20C1b,NA,NA,"Total Oxidisable Sulfur by XRF and Gravimetric, SO4",TOS  XRF-Gravimetric,NA,NA,NA
+303,20C1c,NA,NA,"Total Oxidisable Sulfur by XRF and Auto colour, SO4",TOS  XRF-Auto colour,NA,NA,NA
+303,20C1d,NA,NA,"Total Oxidisable Sulfur by XRF and Ion chromo, SO4","TOS  XRF-Ion chromo,",NA,NA,NA
+303,20C1e,NA,NA,"Total Oxidisable Sulfur by XRF and ICPAES, S","TOS  XRF-ICPAES, S",NA,NA,NA
+303,20C1f,NA,NA,"Total Oxidisable Sulfur by XRF and Auto turbidmetric, SO4",TOS  XRF-Auto turbim,NA,NA,NA
+303,20C1g,NA,NA,"Total Oxidisable Sulfur by XRF and Indirect Ba by AAS, SO4",TOS  XRF-Indirect Ba,NA,NA,NA
+303,20C2a,NA,NA,"Total Oxidisable Sulfur by Leco and turbidmetric, SO4",TOS  Leco-Turbimetri,NA,NA,NA
+303,20C2b,NA,NA,"Total Oxidisable Sulfur by Leco and Gravimetric, SO4",TOS  Leco-Gravimetri,NA,NA,NA
+303,20C2c,NA,NA,"Total Oxidisable Sulfur by Leco and Auto colour, SO4",TOS  Leco-Auto colou,NA,NA,NA
+303,20C2d,NA,NA,"Total Oxidisable Sulfur by Leco and Ion chromo, SO4",TOS  Leco-Ion chromo,NA,NA,NA
+303,20C2e,NA,NA,"Total Oxidisable Sulfur by Leco and ICPAES, S","TOS  Leco-ICPAES, S",NA,NA,NA
+303,20C2f,NA,NA,"Total Oxidisable Sulfur by Leco and Auto turbidmetric, SO4",TOS  Leco-Auto turbi,NA,NA,NA
+303,20C2g,NA,NA,"Total Oxidisable Sulfur by Leco and Indirect Ba by AAS, SO4",TOS  Leco-Indirect B,NA,NA,NA
+303,20C3a,NA,NA,"Total Oxidisable Sulfur by Combustion, titration and turbidmetric, SO4","TOS  Combustion, tit",NA,NA,NA
+303,20C3b,NA,NA,"Total Oxidisable Sulfur by Combustion, titration and Gravimetric, SO4","TOS  Combustion, tit",NA,NA,NA
+303,20C3c,NA,NA,"Total Oxidisable Sulfur by Combustion, titration and Auto colour, SO4","TOS  Combustion, tit",NA,NA,NA
+303,20C3d,NA,NA,"Total Oxidisable Sulfur by Combustion, titration and Ion chromo, SO4","TOS  Combustion, tit",NA,NA,NA
+303,20C3e,NA,NA,"Total Oxidisable Sulfur by Combustion, titration and ICPAES, S","TOS  Combustion, tit",NA,NA,NA
+303,20C3f,NA,NA,"Total Oxidisable Sulfur by Combustion, titration and Auto turbidmetric, SO4","TOS  Combustion, tit",NA,NA,NA
+303,20C3g,NA,NA,"Total Oxidisable Sulfur by Combustion, titration and Indirect Ba by AAS, SO4","TOS  Combustion, tit",NA,NA,NA
+303,20C4a,NA,NA,"Total Oxidisable Sulfur by Combustion, dry ashing and turbidmetric, SO4","TOS  Combustion, dry",NA,NA,NA
+303,20C4b,NA,NA,"Total Oxidisable Sulfur by Combustion, dry ashing and Gravimetric, SO4","TOS  Combustion, dry",NA,NA,NA
+303,20C4c,NA,NA,"Total Oxidisable Sulfur by Combustion, dry ashing and Auto colour, SO4","TOS  Combustion, dry",NA,NA,NA
+303,20C4d,NA,NA,"Total Oxidisable Sulfur by Combustion, dry ashing and Ion chromo, SO4","TOS Combustion, dry ",NA,NA,NA
+303,20C4e,NA,NA,"Total Oxidisable Sulfur by Combustion, dry ashing and ICPAES, S","TOS Combustion, dry ",NA,NA,NA
+303,20C4f,NA,NA,"Total Oxidisable Sulfur by Combustion, dry ashing and Auto turbidmetric, SO4","TOS Combustion, dry ",NA,NA,NA
+303,20C4g,NA,NA,"Total Oxidisable Sulfur by Combustion, dry ashing and Indirect Ba by AAS, SO4","TOS Combustion, dry ",NA,NA,NA
+303,20C5a,NA,NA,"Total Oxidisable Sulfur by Alkaline Na ox + HI red and turbidmetric, SO4",TOS  Alkaline Na ox ,NA,NA,NA
+303,20C5b,NA,NA,"Total Oxidisable Sulfur by Alkaline Na ox + HI red and Gravimetric, SO4",TOS  Alkaline Na ox ,NA,NA,NA
+303,20C5c,NA,NA,"Total Oxidisable Sulfur by Alkaline Na ox + HI red and Auto colour, SO4",TOS  Alkaline Na ox ,NA,NA,NA
+303,20C5d,NA,NA,"Total Oxidisable Sulfur by Alkaline Na ox + HI red and Ion chromo, SO4",TOS  Alkaline Na ox ,NA,NA,NA
+303,20C5e,NA,NA,"Total Oxidisable Sulfur by Alkaline Na ox + HI red and ICPAES, S",TOS  Alkaline Na ox ,NA,NA,NA
+303,20C5f,NA,NA,"Total Oxidisable Sulfur by Alkaline Na ox + HI red and Auto turbidmetric, SO4",TOS  Alkaline Na ox ,NA,NA,NA
+303,20C5g,NA,NA,"Total Oxidisable Sulfur by Alkaline Na ox + HI red and Indirect Ba by AAS, SO4",TOS  Alkaline Na ox ,NA,NA,NA
+303,20C6a,NA,NA,"Total Oxidisable Sulfur by Acid ox and turbidmetric, SO4",TOS  Acid ox-Turbime,NA,NA,NA
+303,20C6b,NA,NA,"Total Oxidisable Sulfur by Acid ox and Gravimetric, SO4",TOS  Acid ox-Gravime,NA,NA,NA
+303,20C6c,NA,NA,"Total Oxidisable Sulfur by Acid ox and Auto colour, SO4",TOS  Acid ox-Auto co,NA,NA,NA
+303,20C6d,NA,NA,"Total Oxidisable Sulfur by Acid ox and Ion chromo, SO4",TOS  Acid ox-Ion chr,NA,NA,NA
+303,20C6e,NA,NA,"Total Oxidisable Sulfur by Acid ox and ICPAES, S","TOS  Acid ox-ICPAES,",NA,NA,NA
+303,20C6f,NA,NA,"Total Oxidisable Sulfur by Acid ox and Auto turbidmetric, SO4",TOS  Acid ox-Auto tu,NA,NA,NA
+303,20C6g,NA,NA,"Total Oxidisable Sulfur by Acid ox and Indirect Ba by AAS, SO4",TOS  Acid ox-Indirec,NA,NA,NA
+303,20C7a,NA,NA,"Total Oxidisable Sulfur by Br-Nitric ox and turbidmetric, SO4",TOS  Br-Nitric ox-Tu,NA,NA,NA
+303,20C7b,NA,NA,"Total Oxidisable Sulfur by Br-Nitric ox and Gravimetric, SO4",TOS  Br-Nitric ox-Gr,NA,NA,NA
+303,20C7c,NA,NA,"Total Oxidisable Sulfur by Br-Nitric ox and Auto colour, SO4",TOS  Br-Nitric ox-Au,NA,NA,NA
+303,20C7d,NA,NA,"Total Oxidisable Sulfur by Br-Nitric ox and Ion chromo, SO4",TOS  Br-Nitric ox-Io,NA,NA,NA
+303,20C7e,NA,NA,"Total Oxidisable Sulfur by Br-Nitric ox and ICPAES, S",TOS  Br-Nitric ox-IC,NA,NA,NA
+303,20C7f,NA,NA,"Total Oxidisable Sulfur by Br-Nitric ox and Auto turbidmetric, SO4",TOS  Br-Nitric ox-Au,NA,NA,NA
+303,20C7g,NA,NA,"Total Oxidisable Sulfur by Br-Nitric ox and Indirect Ba by AAS, SO4",TOS  Br-Nitric ox-In,NA,NA,NA
+303,20D1,NA,NA,Total oxidisable sulfur prewash 4M HCl and H2O - XRF,TOS prewash - XRF,NA,NA,NA
+999,20D1_CA,CA,NA,1 M KCl - extractable Ca,Extractable Ca,%,NA,NA
+999,20D1_MG,MG,NA,1 M KCl - extractable Mg,Extractable Mg,%,NA,NA
+999,20D1_S,SULFUR,NA,1 M KCl - extractable S,Extractable S,%,NA,NA
+303,20D2,NA,NA,Total oxidisable sulfur prewash 4M HCl and H2O - Leco,TOS prewash - Leco,NA,NA,NA
+303,20D3,NA,NA,"Total oxidisable sulfur prewash 4M HCl and H2O - Combustion, titration end point","TOS prewash - comb, ",NA,NA,NA
+303,20D4,NA,NA,"Total oxidisable sulfur prewash 4M HCl and H2O - Combustion, dry ashing NaCO3, AgBr","TOS prewash - comb, ",NA,NA,NA
+303,20D5,NA,NA,Total oxidisable sulfur prewash 4M HCl and H2O - Alkaline Na hypobromite oxidation + reduction hydroiodic acid reduction,TOS prewash - alk Na,NA,NA,NA
+303,20D6,NA,NA,"Total oxidisable sulfur prewash 4M HCl and H2O - Acid oxidation using nitric, perchloric, phosphoric, hydrochloric acids",TOS prewash - acid o,NA,NA,NA
+999,20E1_CA,CA,NA,1 M KCl - extractable Ca after peroxide oxidation,Extractable Ca,%,NA,NA
+999,20E1_MG,MG,NA,1 M KCl - extractable Mg after peroxide oxidation,Extractable Mg,%,NA,NA
+999,20E1_S,SULFUR,NA,1 M KCl - extractable S after peroxide oxidation,Extractable S,%,NA,NA
+999,20F1,SULFUR,NA,"Sulfur - 4 M HCl extraction, ICPAES",Sulfur,%,NA,NA
+999,20F2,SULFUR,NA,"Sulfur - 4 M HCl extraction, ion chromatography",Sulfur,%,NA,NA
+999,20G1,SULFUR,NA,Peroxide residual acid soluble sulfur,Residual S,%,NA,NA
+999,20H1,ANC,NA,Acid neutralising capacity - acid reacted and back titration,ANC,%,NA,NA
+999,20I1,ANC,NA,Acid neutralising capacity - from SPOCAS,ANC,%,NA,NA
+303,20J,NA,NA,S nas,Net acid soluble sul,NA,NA,NA
+999,20J1_RQNC,ASS_HAZARD,NA,Field approximation of ASS hazard,ASS hazard,mol/m3,NA,NA
+999,20J1_TAA,ASS_HAZARD,NA,Field approximation of ASS hazard,ASS hazard,mol/m3,NA,NA
+999,20J1_TSA,ASS_HAZARD,NA,Field approximation of ASS hazard,ASS hazard,mol/m3,NA,NA
+999,20K1,ASS_PRESENCE,NA,Quick field approximation of ASS presence and associated lime reqirement for drain spoil,ASS presence,NA,NA,NA
+303,21A,NA,NA,"pH of filtered 1:20 1M KCl extract, overnight shake (TAA)",pH 1M KCl,NA,NA,NA
+303,21Af,NA,NA,pH done in field on saturated soil sample using pH probe,pH field - probe,NA,NA,NA
+303,21B,NA,NA,pH of filtered 1:20 1M KCl after peroxide digestion,pH 1M KCl after pero,NA,NA,NA
+303,21Bf,NA,NA,pH done in field of 30% peroxide reaction,pH field - 30% perox,NA,NA,NA
+303,21C,NA,NA,KCl extractable S,"1M KCl,1:20,before o",NA,NA,NA
+303,21Ca,NA,NA,"KCL extractable S - sulfate, turbidmetric","KCL extr S - SO4, tu",NA,NA,NA
+303,21Cb,NA,NA,"KCL extractable S - sulfate, gravimetric","KCL extr S - SO4, gr",NA,NA,NA
+303,21Cc,NA,NA,"KCL extractable S - sulfate, automated colour","KCL extr S - SO4, au",NA,NA,NA
+303,21Cd,NA,NA,"KCL extractable S - sulfate, ion chromatography","KCL extr S - SO4, io",NA,NA,NA
+303,21Ce,NA,NA,"KCL extractable S - sulfur, ICPAES","KCL extr S - S, ICPA",NA,NA,NA
+303,21Cf,NA,NA,"KCL extractable S - sulfate, automated turbidmetric","KCL extr S - SO4, au",NA,NA,NA
+303,21Cg,NA,NA,"KCL extractable S - sulfate, indirect, barium remaining by AAS","KCL extr S - SO4, in",NA,NA,NA
+303,21Ch,NA,NA,"KCL extractable S - calcium, ICPAES","KCL extr S - Ca, ICP",NA,NA,NA
+303,21Cj,NA,NA,"KCL extractable S - calcium, atomic absorption (AAS)","KCL extr S - Ca, AAS",NA,NA,NA
+303,21Ck,NA,NA,"KCL extractable S - calcium, titration EDTA","KCL extr S - Ca, EDT",NA,NA,NA
+303,21Cm,NA,NA,"KCL extractable S - magnesium, ICPAES","KCL extr S - Mg, ICP",NA,NA,NA
+303,21Cn,NA,NA,"KCL extractable S - magnesium, atomic absorption (AAS)","KCL extr S - Mg, AAS",NA,NA,NA
+303,21Cp,NA,NA,"KCL extractable S - magnesium, titration EDTA","KCL extr S - Mg, EDT",NA,NA,NA
+303,21Cs,NA,NA,"KCL extractable S - sodium, ICPAES","KCL extr S - Na, ICP",NA,NA,NA
+303,21Ct,NA,NA,"KCL extractable S - sodium, atomic absorption (AAS)","KCL extr S - Na, AAS",NA,NA,NA
+303,21Cu,NA,NA,"KCL extractable S - sodium, flame emission","KCL extr S - Na, fla",NA,NA,NA
+303,21D,NA,NA,Peroxide sulfur after peroxide digestion,Peroxide S after dig,NA,NA,NA
+303,21Da,NA,NA,"KCl Extractable sulfur after ox - sulfate, turbidmetric","1M KCl,1:20,after ox",NA,NA,NA
+303,21Db,NA,NA,"KCl Extractable sulfur after ox - sulfate, gravimetric","1M KCl,1:20,after ox",NA,NA,NA
+303,21Dc,NA,NA,"KCl Extractable sulfur after ox - sulfate, automated colour","1M KCl,1:20,after ox",NA,NA,NA
+303,21Dd,NA,NA,"KCl Extractable sulfur after ox - sulfate, ion chromatography","1M KCl,1:20,after ox",NA,NA,NA
+303,21De,NA,NA,"1M KCL,1:20,after ox.,ICP","1M KCL,1:20,after ox",NA,NA,NA
+303,21Df,NA,NA,KCl Extractable sulfur after ox - automated turbidmetric,"1M KCl,1:20,after ox",NA,NA,NA
+303,21Dg,NA,NA,"KCl Extractable sulfur after ox - sulfate, indirect, barium remaining by AAS","1M KCl,1:20,after ox",NA,NA,NA
+303,21E,NA,NA,Peroxide oxidisable S - 21D minus 21C,Peroxide oxidisable ,NA,NA,NA
+303,21Ee,NA,NA,Peroxide oxidisable S - 21De minus 21Ce,Peroxide oxidisable ,NA,NA,NA
+303,21F,NA,NA,Total Actual Acidity (TAA) in 1M KCl titrated to pH 5.5,TAA - 1M KCl,NA,NA,NA
+303,21G,NA,NA,Total Potential Acidity (TPA) in 1M KCl peroxide digestion titrated to pH 5.5,"TPA - 1M KCl, peroxi",NA,NA,NA
+303,21H,NA,NA,Total Sulfidic Acidity (TSA) - 21G minus 21F,TSA,NA,NA,NA
+303,21J,NA,NA,TAA - calculated as equivalent pyrite S%,TAA - pyrite equiv,NA,NA,NA
+303,21K,NA,NA,TPA -calculated as equivalent pyrite S%,TPA - pyrite equiv,NA,NA,NA
+303,21L,NA,NA,TSA - calculated as equivalent pyrite S%,TSA - pyrite equiv,NA,NA,NA
+303,21M,NA,NA,Na extracted in 1M KCl (TAA),Na extracted 1M KCl,NA,NA,NA
+303,21Ms,NA,NA,"Sodium, before ox. - ICPAES","1M KCl,1:20,before o",NA,NA,NA
+303,21Mt,NA,NA,"Sodium, before ox. - atomic absorption (AAS)","1M KCl,1:20,before o",NA,NA,NA
+303,21Mu,NA,NA,"Sodium, before ox. - flame emission","1M KCl,1:20,before o",NA,NA,NA
+303,21N,NA,NA,Na in peroxide digest (TPA),Na peroxide digest,NA,NA,NA
+303,21Ns,NA,NA,"Sodium, after ox. - ICPAES","1M KCl,1:20,after ox",NA,NA,NA
+303,21Nt,NA,NA,"Sodium, after ox. - atomic absorption (AAS)","1M KCl,1:20,after ox",NA,NA,NA
+303,21Nu,NA,NA,"Sodium, after ox. - flame emission","1M KCl,1:20,after ox",NA,NA,NA
+303,21P,NA,NA,Na difference (21N minus 21M),Na difference,NA,NA,NA
+303,21Ps,NA,NA,Na difference (21Ns minus 21Ms)  - ICPAES,"Na difference, ICP",NA,NA,NA
+303,21Q,NA,NA,Quick residual neutralising capacity,Quick residual neutr,NA,NA,NA
+303,21R,NA,NA,"Quick residual neutralising capacity (21Q), calculated as equivalent S%",Quick residual neutr,NA,NA,NA
+303,21S,NA,NA,Mg extracted in 1M KCl (TAA),Mg extracted 1M KCl,NA,NA,NA
+303,21Sm,NA,NA,"Magnesium, before ox. - ICPAES","1M KCl,1:20,before o",NA,NA,NA
+303,21Sn,NA,NA,"Magnesium, before ox. - atomic absorption (AAS)","1M KCl,1:20,before o",NA,NA,NA
+303,21Sp,NA,NA,"Magnesium, before ox. - titration EDTA","1M KCl,1:20,before o",NA,NA,NA
+303,21T,NA,NA,Mg in peroxide digest (TPA),Mg peroxide digest,NA,NA,NA
+303,21Tm,NA,NA,"Magnesium, after ox. - ICPAES","1M KCl,1:20,after ox",NA,NA,NA
+303,21Tn,NA,NA,"Magnesium, after ox. - atomic absorption (AAS)","1M KCl,1:20,after ox",NA,NA,NA
+303,21Tp,NA,NA,"Magnesium, after ox.  - titration EDTA","1M KCl,1:20,after ox",NA,NA,NA
+303,21U,NA,NA,Mg reacted with acid generated by peroxide digestion (21T minus 21S),Mg reacted with acid,NA,NA,NA
+303,21Um,NA,NA,Mg reacted with acid generated by peroxide digestion (21Tm minus 21Sm) - ICPAES,Mg reacted with acid,NA,NA,NA
+303,21V,CA,NA,Ca extracted in 1M KCl (TAA),Ca extracted 1M KCl,NA,NA,NA
+303,21Vh,CA,NA,"Calcium, before ox. - ICPAES","1M KCl,1:20,before o",NA,NA,NA
+303,21Vj,CA,NA,"Calcium, before ox. - atomic absorption (AAS)","1M KCl,1:20,before o",NA,NA,NA
+303,21Vk,CA,NA,"Calcium, before ox.  - titration EDTA","1M KCl,1:20,before o",NA,NA,NA
+303,21W,CA,NA,Ca in peroxide digest (TPA),Ca peroxide digest,NA,NA,NA
+303,21Wh,CA,NA,"Calcium, after ox. - ICPAES","1M KCl,1:20,after ox",NA,NA,NA
+303,21Wj,CA,NA,"Calcium, after ox. - atomic absorption (AAS)","1M KCl,1:20,after ox",NA,NA,NA
+303,21Wk,CA,NA,"Calcium, after ox. - titration EDTA","1M KCl,1:20,after ox",NA,NA,NA
+303,21X,CA,NA,Ca reacted with acid generated by peroxide digestion (21W minus 21V),Ca reacted with acid,NA,NA,NA
+303,21Xh,CA,NA,Ca reacted with acid generated by peroxide digestion (21Wh minus 21Vh) - ICPAES,Ca reacted with acid,NA,NA,NA
+303,22A,NA,NA,"Sulfur, Acid Volitile",Conc. HCl Reducible/,NA,NA,NA
+303,22B,S,NA,Chromium Reducible Sulfur,Chromium Reducible S,NA,NA,NA
+303,23A,NA,NA,"pH of 1:40 1M KCl suspension 4h shake, overnight stand (TAA)",pH 1M KCl,NA,NA,NA
+303,23A1,NA,NA,Tri-Acid Digest (Heavy metal) AAS hydride,Tri-Acid Digest (Hea,NA,NA,NA
+303,23Af,NA,NA,pH done in field on saturated soil sample using pH probe,pH field - probe,NA,NA,NA
+303,23B,NA,NA,pH of  1:25 suspension after peroxide digestion,pH 1M KCl after pero,NA,NA,NA
+303,23Bf,NA,NA,pH done in field of 30% peroxide reaction,pH field - 30% perox,NA,NA,NA
+303,23C,NA,NA,KCl Extractable sulfur before ox,"1M KCl,1:40,before o",NA,NA,NA
+303,23Ca,NA,NA,"KCl Extractable sulfur before ox - sulfate, turbidmetric","1M KCl,1:40,before o",NA,NA,NA
+303,23Cb,NA,NA,"KCl Extractable sulfur before ox - sulfate, gravimetric","1M KCl,1:40,before o",NA,NA,NA
+303,23Cc,NA,NA,"KCl Extractable sulfur before ox - sulfate, automated colour","1M KCl,1:40,before o",NA,NA,NA
+303,23Cd,NA,NA,"KCl Extractable sulfur before ox - sulfate, ion chromatography","1M KCl,1:40,before o",NA,NA,NA
+303,23Ce,NA,NA,KCl Extractable sulfur before ox - ICPAES,"1M KCl,1:40,before o",NA,NA,NA
+303,23Cf,NA,NA,KCl Extractable sulfur before ox - automated turbidmetric,"1M KCl,1:40,before o",NA,NA,NA
+303,23Cg,NA,NA,"KCl Extractable sulfur before ox - sulfate, indirect, barium remaining by AAS","1M KCl,1:40,before o",NA,NA,NA
+303,23D,NA,NA,KCl Extractable sulfur after ox - sulfate,"1M KCl,1:40,after ox",NA,NA,NA
+303,23Da,NA,NA,"KCl Extractable sulfur after ox - sulfate, turbidmetric","1M KCl,1:40,after ox",NA,NA,NA
+303,23Db,NA,NA,"KCl Extractable sulfur after ox - sulfate, gravimetric","1M KCl,1:40,after ox",NA,NA,NA
+303,23Dc,NA,NA,"KCl Extractable sulfur after ox - sulfate, automated colour","1M KCl,1:40,after ox",NA,NA,NA
+303,23Dd,NA,NA,"KCl Extractable sulfur after ox - sulfate, ion chromatography","1M KCl,1:40,after ox",NA,NA,NA
+303,23De,NA,NA,KCl Extractable sulfur after ox - ICPAES,"1M KCl,1:40,after ox",NA,NA,NA
+303,23Df,NA,NA,KCl Extractable sulfur after ox - automated turbidmetric,"1M KCl,1:40,after ox",NA,NA,NA
+303,23Dg,NA,NA,"KCl Extractable sulfur after ox - sulfate, indirect, barium remaining by AAS","1M KCl,1:40,after ox",NA,NA,NA
+303,23E,NA,NA,Peroxide oxidisable S - 21D minus 21C,Peroxide oxidisable ,NA,NA,NA
+303,23Ee,NA,NA,Peroxide oxidisable S - 21D minus 21C- ICPAES,Peroxide oxidisable ,NA,NA,NA
+303,23F,NA,NA,Titratable Actual Acidity (TAA) in 1M KCl titrated to pH 6.5,TAA - 1M KCl,NA,NA,NA
+303,23G,NA,NA,Titratable Peroxide Acidity (TPA) in 1M KCl peroxide digestion titrated to pH 6.5,"TPA - 1M KCl, peroxi",NA,NA,NA
+303,23H,NA,NA,Titratable Sulfidic Acidity (TSA) - 23G minus 23F,TSA,NA,NA,NA
+303,23Q,NA,NA,Excess Acid Neutralising Capacity Back Tit to pH 4.0 minus TPA tit to pH  6.5,Excess ANC,NA,NA,NA
+303,23R,NA,NA,Residual acid extractable S after peroxide,Sulfur - RAS,NA,NA,NA
+303,23Re,NA,NA,Residual acid extractable S after peroxide -ICP,"Sulfur - RAS, ICP",NA,NA,NA
+303,23S,NA,NA,"Magnesium extracted in 1M KCl, after TAA Titration","1M KCl,1:40,after TA",NA,NA,NA
+303,23Sm,NA,NA,"Magnesium extracted in 1M KCl, after TAA Titration - ICPAES","1M KCl,1:40,after TA",NA,NA,NA
+303,23Sn,NA,NA,"Magnesium extracted in 1M KCl, after TAA Titration - atomic absorption (AAS)","1M KCl,1:40,after TA",NA,NA,NA
+303,23Sp,NA,NA,"Magnesium extracted in 1M KCl, after TAA Titration - titration EDTA","1M KCl,1:40,after TA",NA,NA,NA
+303,23T,NA,NA,Magnesium in peroxide digest (after TPA digestion and titration),"1M KCl,1:40,after TP",NA,NA,NA
+303,23Tm,NA,NA,Magnesium in peroxide digest (after TPA digestion and titration) - ICPAES,"1M KCl,1:40,after TP",NA,NA,NA
+303,23Tn,NA,NA,Magnesium in peroxide digest (after TPA digestion and titration) - atomic absorption (AAS),"1M KCl,1:40,after TP",NA,NA,NA
+303,23Tp,NA,NA,Magnesium in peroxide digest (after TPA digestion and titration) - titration EDTA,"1M KCl,1:40,after TP",NA,NA,NA
+303,23U,NA,NA,Magnesium reacted with acid generated by peroxide digest (23T minus 23S),Mg reacted with acid,NA,NA,NA
+303,23Um,NA,NA,Magnesium reacted with acid generated by peroxide digest (23Tm minus 23Sm) - ICPAES,Mg reacted with acid,NA,NA,NA
+303,23V,C/S,NA,"Calcium extracted in 1M KCl, after TAA Titration","1M KCl,1:40,after TA",NA,NA,NA
+303,23Vh,CA,NA,"Calcium extracted in 1M KCl, after TAA Titration - ICPAES","1M KCl,1:40,after TA",NA,NA,NA
+303,23Vj,CA,NA,"Calcium extracted in 1M KCl, after TAA Titration - atomic absorption (AAS)","1M KCl,1:40,after TA",NA,NA,NA
+303,23Vk,CA,NA,"Calcium extracted in 1M KCl, after TAA Titration - titration EDTA","1M KCl,1:40,after TA",NA,NA,NA
+303,23W,CA,NA,Calcium in peroxide digest (after TPA digestion and titration),"1M KCl,1:40,after TP",NA,NA,NA
+303,23Wh,CA,NA,Calcium in peroxide digest (after TPA digestion and titration)- ICPAES,"1M KCl,1:40,after TP",NA,NA,NA
+303,23Wj,CA,NA,Calcium in peroxide digest (after TPA digestion and titration) - atomic absorption (AAS),"1M KCl,1:40,after TP",NA,NA,NA
+303,23Wk,CA,NA,Calcium in peroxide digest (after TPA digestion and titration) - titration EDTA,"1M KCl,1:40,after TP",NA,NA,NA
+303,23X,CA,NA,Calcium reacted with acid generated by peroxide digest (23W minus 23V),Ca reacted with acid,NA,NA,NA
+303,23Xh,CA,NA,Calcium reacted with acid generated by peroxide digest (23Wh minus 23Vh) - ICPAES,Ca reacted with acid,NA,NA,NA
+999,2A1,MOISTURE_CONTENT,2.01,Air-dry moisture content,Moisture content,%,NA,NA
+303,2A1_MQ01,MOISTURE_CONTENT,NA,Air dry moisture - MIR QLD Calibration 1,Air dry moisture - M,NA,NA,NA
+303,2A1_MQ02,MOISTURE_CONTENT,NA,Air dry moisture,Air dry moisture,NA,NA,NA
+999,2B1,MOISTURE_CONTENT,2.01,As received moisture content,Moisture content,%,NA,NA
+999,2C1,MOISTURE_CONTENT,2.02,Moisture content - 10 mm tension,Moisture content,%,NA,NA
+999,2D1,MOISTURE_CONTENT,2.02,Moisture content - approximate saturation paste,Moisture content,%,NA,NA
+303,2E1,MOISTURE_RELEASE,NA,"15 Bar, pressure plate",Moisture content - 1,NA,NA,NA
+303,2E1_MQ01,MOISTURE_RELEASE,NA,15 bar moisture - MIR QLD Calibration 1,15 bar moisture - MI,NA,NA,NA
+303,2E1_MQ02,MOISTURE_RELEASE,NA,15 Bar moisture,15 Bar moisture,NA,NA,NA
+303,2E2,MOISTURE_RELEASE,NA,"1/3 Bar, pressure plate",Moisture content - 1,NA,NA,NA
+303,2E3,MOISTURE_RELEASE,NA,"1/10 Bar, pressure plate",Moisture content - 1,NA,NA,NA
+303,2E4,MOISTURE_RELEASE,NA,"1 Bar, pressure plate",Moisture content - 1,%,NA,NA
+303,2Y1,NA,NA,Available water capacity - calc (diff 2E2 and 2E1),Available water capa,NA,NA,NA
+303,2Y2,NA,NA,PAWC,Plant available wate,NA,NA,NA
+303,2Z1_R1,NA,NA,Aqu. Silt+Clay/Total Silt+Clay,Silt+Clay/Total Silt,NA,NA,NA
+303,2Z1_R2,DISPERSION_INDEX,NA,Dispersion ratio,Dispersion ratio (R2,NA,NA,NA
+303,2Z2_Clay,PSA,NA,Clay fraction,Clay,%,NA,NA
+303,2Z2_Clay_C,PSA,NA,Clay (%) - Coventry and Fett pipette method,Clay,%,NA,NA
+303,2Z2_Clay_M,PSA,NA,Clay - MIR QLD Calibration 1,Clay - MIR,%,NA,NA
+303,2Z2_Clay_N,PSA,NA,Clay (%) - Not recorded,Clay,%,NA,NA
+303,2Z2_Clay_P,PSA,NA,Clay (%) - Plummet balance,Clay,%,NA,NA
+303,2Z2_CS,PSA,NA,Coarse sand fraction,Coarse sand,%,NA,NA
+303,2Z2_CS_CF,PSA,NA,Coarse sand (%) - Coventry and Fett pipette method,Coarse sand,%,NA,NA
+303,2Z2_CS_NR,PSA,NA,Coarse sand (%) - Not recorded,Coarse sand,%,NA,NA
+303,2Z2_CS_PB,PSA,NA,Coarse sand (%) - Plummet balance,Coarse sand,%,NA,NA
+303,2Z2_FS,PSA,NA,Fine sand fraction,Fine sand,%,NA,NA
+303,2Z2_FS_CF,PSA,NA,Fine sand (%) - Coventry and Fett pipette method,Fine sand,%,NA,NA
+303,2Z2_FS_NR,PSA,NA,Fine sand (%) - Not recorded,Fine sand,%,NA,NA
+303,2Z2_FS_PB,PSA,NA,Fine sand (%) - Plummet balance,Fine sand,%,NA,NA
+303,2Z2_Grav,PSA,NA,Gravel (%),Gravel,%,NA,NA
+303,2Z2_Silt,PSA,NA,Silt fraction,Silt,%,NA,NA
+303,2Z2_Silt_C,PSA,NA,Silt (%) - Coventry and Fett pipette method,Silt,%,NA,NA
+303,2Z2_Silt_M,PSA,NA,Silt - MIR QLD Calibration 1,Silt - MIR,%,NA,NA
+303,2Z2_Silt_N,PSA,NA,Silt (%) - Not recorded,Silt,%,NA,NA
+303,2Z2_Silt_P,PSA,NA,Silt (%) - Plummet balance,Silt,%,NA,NA
+303,2Z2_TotSan,PSA,NA,Total sand - MIR QLD Calibration 1,Total sand - MIR,%,NA,NA
+303,2Z3,DENSITY,NA,Bulk Density,Bulk Density,g/cm3,NA,NA
+303,2Z3_CS,NA,NA,CS,CS,NA,NA,NA
+303,2Z3_FS,NA,NA,FS,FS,NA,NA,NA
+999,3_C_B,EC,3.00,Electrical conductivity or soluble salts - Total soluble salts %,Ecx,%,NA,NA
+999,3_NR,EC,3.00,Electrical conductivity or soluble salts - Not recorded,EC,?,NA,NA
+999,3A_C_2.5,EC,3.011,EC of 1:2.5 soil/water extract,Ecx,dS/m,NA,NA
+999,3A_TSS,EC,3.02,Electrical conductivity or soluble salts - Total soluble salts %,Ecx,%,NA,NA
+999,3A1,EC,3.01,EC of 1:5 soil/water extract,EC,dS/m,NA,NA
+999,3B1,SOLUBLE_SALT,NA,Estimation of soluble salt concentration,Soluble salt,%,NA,NA
+999,3C1,IONIC_STRENGTH,NA,Estimation of soil ionic strength,Ionic strength,nM,NA,NA
+999,3D1,REDOX_POTENTIAL,NA,Redox potential (Eh; field),Redox Potential,mV,NA,NA
+999,4_NR,PH,4.00,pH of soil - Not recorded,pH,NA,NA,NA
+999,4A_C_1,PH,4.012,pH of soil - pH of 1:1 soil/water suspension,pH Soil/water,NA,NA,NA
+999,4A_C_2.5,PH,4.011,pH of soil - pH of 1:2.5 soil/water suspension,pH Soil/water,NA,NA,NA
+999,4A1,PH,4.01,pH of 1:5 soil/water suspension,pH Soil/water,NA,NA,NA
+303,4A1_MQ01,NA,NA,pH aqueous - MIR QLD Calibration 1,pH aqueous - MIR,NA,NA,NA
+303,4A1_MQ02,NA,NA,pH aqueous,pH aqueous,NA,NA,NA
+501,4B_AL,NA,NA,NA,NA,NA,NA,NA
+501,4B_AL_NR,NA,NA,NA,NA,NA,NA,NA
+999,4B_C_2.5,PH,4.021,pH of soil - pH of 1:2.5 Soil/0.1M CaCl2 suspension,pH Soil/CaCl2,NA,NA,NA
+999,4B1,PH,4.02,pH of 1:5 soil/0.01M calcium chloride extract - direct,pH Soil/CaCl2,NA,NA,NA
+999,4B2,PH,4.02,pH of 1:5 soil/0.01M calcium chloride extract - following Method 4A1,pH Soil/CaCl2,NA,NA,NA
+999,4C_C_1,PH,4.031,pH of 1:1 soil/1M potassium chloride suspension,pH Soil/KCl,NA,NA,NA
+999,4C1,PH,4.03,pH of 1:5 soil/1M potassium chloride extract - direct,pH Soil/KCl,NA,NA,NA
+999,4C2,PH,4.03,pH of 1:5 soil/1M potassium chloride extract - following Method 4A1,pH Soil/KCl,NA,NA,NA
+999,4D1,PH,4.04,pH of sodium fluoride suspension,pH (NaF),NA,NA,NA
+999,4E1,PH,4.05,pH of hydrogen peroxide extract,pH (H2O2),NA,NA,NA
+999,4F1,PH_CHANGE,4.06,pH change,pH Change,NA,NA,NA
+501,4G_NR,NA,NA,NA,NA,NA,NA,NA
+999,4G1,PH,NA,Field determination of pH,Field pH,NA,NA,NA
+999,5_C_B,CHLORIDE,5.00,Water soluble Chloride - Method recorded as B,Water soluble Cl,mg/kg,NA,NA
+999,5_NR,CHLORIDE,5.00,Water soluble Chloride - Cl(%) - Not recordede,Water soluble Cl,%,NA,NA
+303,503.01a,DENSITY,NA,Bulk Density of small intact soil core (see report ERA2004-01),Bulk Density,g/cm3,NA,NA
+303,503.05a,DENSITY,NA,Bulk Density fine earth + gravel (see report ERA2004-01),BD (fine earth + gravel),g/cm3,NA,NA
+303,503.08a,DENSITY,NA,Bulk Density fine earth only (see report ERA2004-01),Bulk Density,g/cm3,NA,NA
+999,5A_C_2.5,CHLORIDE,5.011,Chloride - 1:2.5 soil/water extract,Water soluble Cl,mg/kg,NA,NA
+999,5A1,CHLORIDE,5.01,"Chloride - 1:5 soil/water extract, potentiometric titration",Water soluble Cl,mg/kg,NA,NA
+999,5A2,CHLORIDE,5.01,"Chloride - 1:5 soil/water extract, automated colour",Water soluble Cl,mg/kg,NA,NA
+999,5A2a,CHLORIDE,NA,"Chloride - 1:5 soil/water extract, automated colour",Water soluble Cl,mg/kg,NA,NA
+999,5A2b,CHLORIDE,NA,"Chloride - 1:5 soil/water extract, FIA",Water soluble Cl,mg/kg,NA,NA
+999,5A3a,CHLORIDE,NA,"Chloride - 1:5 soil/water extract, ion chromatography (chemical suppression of eluent conductivity)",Water soluble Cl,mg/kg,NA,NA
+999,5A3b,CHLORIDE,NA,"Chloride - 1:5 soil/water extract, ion chromatography (single column with electronic suppression of eluent conductivity)",Water soluble Cl,mg/kg,NA,NA
+999,5A4,CHLORIDE,NA,"Chloride - 1:5 soil/water extract, ICPAES",Water soluble Cl,mg/kg,NA,NA
+303,5M1_Ca/Mg,CA/MG,NA,Ca:Mg,Calcium to magnesium,NA,NA,NA
+303,5Z1,NACL,NA,Calculation based on chloride,NaCl,NA,NA,NA
+999,6_DC,ORGANIC_CARBON,6.00,Organic carbon (%) - Dry combustion,Organic carbon,%,NA,NA
+999,6A1,ORGANIC_CARBON,6.01,Organic carbon - Walkley and Black,Organic carbon,%,NA,NA
+999,6A1_UC,ORGANIC_CARBON,6.011,Organic carbon (%) - Uncorrected Walkley and Black method,Organic carbon,%,NA,NA
+999,6B1,ORGANIC_CARBON,6.02,Total organic carbon - Heanes wet oxidation,Organic carbon,%,NA,NA
+999,6B2,ORGANIC_CARBON,6.02,"Total organic carbon - high frequency induction furnace, volumetric",Organic carbon,%,NA,NA
+999,6B2a,ORGANIC_CARBON,NA,"Total organic carbon - high frequency induction furnace, volumetric (no soil pretreatment)",Organic carbon,%,NA,NA
+999,6B2b,ORGANIC_CARBON,NA,"Total organic carbon - high frequency induction furnace, infared/thermal (no soil pretreatment)",Organic carbon,%,NA,NA
+999,6B3,ORGANIC_CARBON,6.02,"Total organic carbon - high frequency induction furnace, infrared",Organic carbon,%,NA,NA
+999,6B4,ORGANIC_CARBON,NA,Total organic carbon - infared diffuse reflectance spectroscopy,Organic carbon,%,NA,NA
+999,6B4a,ORGANIC_CARBON,NA,Total organic carbon - NIR reflectance spectroscopy,Organic carbon,%,NA,NA
+999,6B4b,ORGANIC_CARBON,NA,Total organic carbon - MIR reflectance spectroscopy,Organic carbon,%,NA,NA
+303,6B4b_MQ01,NA,NA,Total organic carbon,Total organic carbon,NA,NA,NA
+303,6B4b_MQ02,NA,NA,Total organic carbon,Total organic carbon,NA,NA,NA
+303,6B5,NA,NA,"Total Organic Carbon, (2)","Organic Carbon, LECO",NA,NA,NA
+999,6C1,ORGANIC_CARBON,6.03,Particulate organic C (POC),Organic carbon,%,NA,NA
+999,6D1,ORGANIC_CARBON,6.03,Pyrophosphate-extractable carbon,Organic carbon,%,NA,NA
+999,6E1,ORGANIC_CARBON,NA,Potassium permanganate oxidisable C (PPOC),Organic carbon,%,NA,NA
+999,6F1,CARBON,NA,Charcoal-C,Carbon,%,NA,NA
+999,6G1,CARBON,NA,"Total organic matter, organic C and carbonate by loss-on-ignition",Carbon,%,NA,NA
+999,6Z,ORGANIC_CARBON,6.00,Organic carbon (%) - Not recorded,Organic carbon,%,NA,NA
+999,7_C_B,NITROGEN,7.01,Total Nitrogen - method description not recorded,Total Nitrogen,%,NA,NA
+999,7_NR,NITROGEN,7.00,Total nitrogen (%) - Not recorded,Total Nitrogen,%,NA,NA
+999,7A1,NITROGEN,7.01,"Total nitrogen - semimicro Kjeldahl, steam distillation",Total Nitrogen,%,NA,NA
+999,7A2,NITROGEN,7.01,"Total nitrogen - semimicro Kjeldahl , automated colour",Total Nitrogen,%,NA,NA
+999,7A2a,NITROGEN,NA,"Total nitrogen - semimicro Kjeldahl , automated colour, continuous segmented flow",Total Nitrogen,%,NA,NA
+999,7A2b,NITROGEN,NA,"Total nitrogen - semimicro Kjeldahl , automated colour, FIA",Total Nitrogen,%,NA,NA
+999,7A3,NITROGEN,7.02,Total nitrogen (where nitrate > 20 mg N kg-1) - steam distillation,Total Nitrogen,%,NA,NA
+999,7A4,NITROGEN,7.02,Total nitrogen (where nitrate > 20 mg N kg-1) - automated colour,Total Nitrogen,%,NA,NA
+999,7A5,NITROGEN,7.03,"Total nitrogen - high frequency induction furnace, thermal conductivity",Total Nitrogen,%,NA,NA
+999,7A6,NITROGEN,NA,Total nitrogen - infared diffuse reflectance spectroscopy,Total Nitrogen,%,NA,NA
+999,7A6a,NITROGEN,NA,Total nitrogen - NIR reflectance spectroscopy,Total Nitrogen,%,NA,NA
+999,7A6b,NITROGEN,NA,Total nitrogen - MIR reflectance spectroscopy,Total Nitrogen,%,NA,NA
+303,7A6B_MQ01,NA,NA,Total nitrogen - MIR QLD Calibration 1,Total nitrogen - MIR,NA,NA,NA
+303,7A6B_MQ02,NA,NA,Total nitrogen,Total nitrogen,NA,NA,NA
+303,7A7,NA,NA,"Total Nitrogen, (3)","Total N, Leco Furnac",NA,NA,NA
+999,7B1,NITRATE,7.03,Water soluble nitrate - automated colour,Water soluble NO3,mg/kg,NA,NA
+999,7B1a,NITRATE,NA,"Water soluble nitrate - automated colour, continuous segmented flow",Water soluble NO3,mg/kg,NA,NA
+999,7B1b,NITRATE,NA,"Water soluble nitrate - automated colour, FIA",Water soluble NO3,mg/kg,NA,NA
+999,7B2,NITRATE,NA,Water soluble nitrate - ion chromatography,Water soluble NO3,mg/kg,NA,NA
+999,7C_CASO4,NITRATE,7.12,CaSO4 extractable nitrate. O'Brien and Fiore (1962),CaSO4 Extr. NO3,mg/kg,NA,NA
+999,7C1,MIN_NITROGEN,7.03,Mineral nitrogen with 2M KCl - steam distillation,Mineral nitrogen,mg/kg,NA,NA
+999,7C1a,AMMONIUM-N,7.04,"Ammonium-N, in presence or absence of nitrite",Ammonium-N,mg/kg,NA,NA
+999,7C1b,(NITRATE+NITRITE)-N,7.05,"(Nitrate+nitrite)-N, in presence of nitrite",(Nitrate+nitrite)-N,mg/kg,NA,NA
+999,7C1c,(AMMONIUM+NO3+NO2)-N,7.06,"(Ammonium+nitrate+nitrite)-N, in presence of nitrite",(NH4+NO2+NO3)-N,mg/kg,NA,NA
+999,7C1d,(AMMONIUM+NITRATE)-N,7.07,"(Ammonium+nitrate)-N, in presence of nitrite",(NH4+NO3)-N,mg/kg,NA,NA
+999,7C1e,NITRATE-N,7.08,"Nitrate-N, in presence of nitrite",Nitrate-N,mg/kg,NA,NA
+999,7C1f,NITRATE-N,7.09,"Nitrate-N, in absence of nitrite",Nitrate-N,mg/kg,NA,NA
+999,7C1g,(AMMONIUM+NITRATE)-N,7.10,"(Ammonium+nitrate)-N, in absence of nitrite",(NH4+NO3)-N,mg/kg,NA,NA
+999,7C1h,NITRITE-N,7.11,Nitrite-N,Nitrate-N,mg/kg,NA,NA
+999,7C2,MIN_NITROGEN,7.03,Mineral nitrogen with 2M KCl - automated colour,Mineral nitrogen,mg/kg,NA,NA
+303,7C2_NH4,NA,NA,"NH4-N - 2M KCl extractable,colorimetry",NH4-N - 2M KCl,NA,NA,NA
+303,7C2_NO2,NA,NA,"NO2-N - 2M KCl extractable,colorimetry",NO2-N - 2M KCl,NA,NA,NA
+303,7C2_NO3,NA,NA,"NO3-N - 2M KCl extractable,colorimetry",NO3-N - 2M KCl,NA,NA,NA
+999,7C2a,MIN_NITROGEN,NA,"Mineral nitrogen with 2M KCl - automated colour, continuous segmented flow",Mineral nitrogen,mg/kg,NA,NA
+999,7C2b,MIN_NITROGEN,NA,"Mineral nitrogen with 2M KCl - automated colour, FIA",Mineral nitrogen,mg/kg,NA,NA
+303,7D1,NA,NA,Nitrogen/Sulphur ratio,N/S ratio,NA,NA,NA
+999,7D1a,MIN_NITROGEN,NA,"Potentially mineralisable N, hot KCl extraction - automated colour, continuous segmented flow",Mineral nitrogen,mg/kg,NA,NA
+999,7D1b,MIN_NITROGEN,NA,"Potentially mineralisable N, hot KCl extraction - automated colour, FIA",Mineral nitrogen,mg/kg,NA,NA
+999,7D1c,MIN_NITROGEN,NA,"Potentially mineralisable N, hot KCl extraction - NIR diffuse reflectance spectroscopy",Mineral nitrogen,mg/kg,NA,NA
+999,7D2a,MIN_NITROGEN,NA,"Potentially mineralisable N, anerobic incubation - automated colour, continuous segmented flow",Mineral nitrogen,mg/kg,NA,NA
+999,7D2b,MIN_NITROGEN,NA,"Potentially mineralisable N, anerobic incubation - automated colour, FIA",Mineral nitrogen,mg/kg,NA,NA
+999,8A1,C/N_RATIO,8.01,Total organic carbon/total nitrogen ratio,Total Organic C/N,NA,NA,NA
+999,8B1,C/N_RATIO,NA,Organic carbon - Walkley and Black/total nitrogen ratio,Total Organic C/N,NA,NA,NA
+303,8C1,NA,NA,Carbon/Sulphur ratio,C/S ratio,NA,NA,NA
+501,9_E_NR,NA,NA,NA,NA,NA,NA,NA
+999,9_NR,PHOSPHORUS,9.99,Available P (mg/kg) - Not recorded,Available P,mg/kg,NA,NA
+999,9A_HCL,PHOSPHORUS,9.011,Total element - P(%) - By boiling HCl,Total P,%,NA,NA
+999,9A_HCLP2O5,PHOSPHORUS,9.012,Total element - P(%) - By boiling HCl(P2O5),Total P,%,NA,NA
+999,9A_HF+,PHOSPHORUS,9.014,Total element - P(%) - HF/HCl04 Digest,Total P,%,NA,NA
+999,9A_NR,PHOSPHORUS,9.001,Total element - P(%) - Not recorded,Total P,%,NA,NA
+501,9A_S14,PHOSPHORUS,NA,NA,Total P,%,NA,NA
+999,9A1,PHOSPHORUS,9.01,Total phosphorus - X-ray fluorescence,Total P,%,NA,NA
+999,9A2,PHOSPHORUS,9.01,Total phosphorus - sodium carbonate fusion,Total P,%,NA,NA
+999,9A3,PHOSPHORUS,9.015,"Total Phosphorus (ppm) - semimicro kjeldahl, automated colour",Total P,mg/kg,NA,NA
+999,9A3a,PHOSPHORUS,NA,"Total Phosphorus (ppm) - semimicro kjeldahl, automated colour, FIA/continuous segmented flow",Total P,mg/kg,NA,NA
+999,9A3b,PHOSPHORUS,NA,"Total Phosphorus (ppm) - semimicro kjeldahl, ICPAES",Total P,mg/kg,NA,NA
+999,9B_9C,PHOSPHORUS,9.99,Available P (mg/kg) - Bicarbonate P - 0.5M NaHCO3 extractable,Available P,mg/kg,NA,NA
+501,9B_NR,NA,NA,NA,NA,NA,NA,NA
+999,9B1,PHOSPHORUS,9.02,Bicarbonate-extractable phosphorus - manual colour,Extractable P,mg/kg,NA,NA
+999,9B2,PHOSPHORUS,9.02,Bicarbonate-extractable phosphorus - automated colour,Extractable P,mg/kg,NA,NA
+999,9B2_COL,PHOSPHORUS,9.02,Bicarbonate-extractable phosphorus - automated colour. Based on Colwell (1965). Method no longer recommended,Extractable P,mg/kg,NA,NA
+999,9BUFF_0,PHOSPHORUS,9.095,"Buffering Capacity by 0.01M CaCl2, solution of 0 ppm phosphorus added (CSIRO Div of Soil Tech Mem 63/1972)",Buffering Capacity,NA,NA,NA
+999,9BUFF_0.5,PHOSPHORUS,9.095,"Buffering Capacity by 0.01M CaCl2, solution of 0.5 ppm phosphorus added (CSIRO Div of Soil Tech Mem 63/1972)",Buffering Capacity,NA,NA,NA
+999,9BUFF_1,PHOSPHORUS,9.095,"Buffering Capacity by 0.01M CaCl2, solution of 1 ppm phosphorus added (CSIRO Div of Soil Tech Mem 63/1972)",Buffering Capacity,NA,NA,NA
+999,9BUFF_2,PHOSPHORUS,9.095,"Buffering Capacity by 0.01M CaCl2, solution of 2 ppm phosphorus added (CSIRO Div of Soil Tech Mem 63/1972)",Buffering Capacity,NA,NA,NA
+999,9BUFF_4,PHOSPHORUS,9.095,"Buffering Capacity by 0.01M CaCl2, solution of 4 ppm phosphorus added (CSIRO Div of Soil Tech Mem 63/1972)",Buffering Capacity,NA,NA,NA
+999,9C1,PHOSPHORUS,9.03,Olsen-extractable phosphorus - manual colour,Extractable P,mg/kg,NA,NA
+999,9C2,PHOSPHORUS,9.03,Olsen-extractable phosphorus - automated colour,Extractable P,mg/kg,NA,NA
+999,9D1,PHOSPHORUS,9.04,Lactate-extractable phosphorus - manual colour,Extractable P,mg/kg,NA,NA
+999,9D2,PHOSPHORUS,9.04,Lactate-extractable phosphorus - automated colour,Extractable P,mg/kg,NA,NA
+999,9E,PHOSPHORUS,9.99,Fluoride-extractable phosphorus (Bray 1-P),Extractable P,mg/kg,NA,NA
+999,9E1,PHOSPHORUS,9.05,Fluoride-extractable phosphorus (Bray 1-P) - manual colour,Extractable P,mg/kg,NA,NA
+999,9E2,PHOSPHORUS,9.05,Fluoride-extractable phosphorus (Bray 1-P) - automated colour,Extractable P,mg/kg,NA,NA
+999,9F1,PHOSPHORUS,9.06,Calcium chloride-extractable phosphorus - manual colour,Extractable P,mg/kg,NA,NA
+999,9F2,PHOSPHORUS,9.06,Calcium chloride-extractable phosphorus - automated colour,Extractable P,mg/kg,NA,NA
+999,9G_BSES,PHOSPHORUS,9.99,Available P (mg/kg) - Acid P - 0.005M H2SO4 (BSES),Available P,mg/kg,NA,NA
+999,9G1,PHOSPHORUS,9.07,Acid-extractable phosphorus - manual colour,Extractable P,mg/kg,NA,NA
+999,9G2,PHOSPHORUS,9.07,Acid-extractable phosphorus - automated colour,Extractable P,mg/kg,NA,NA
+999,9H_NR,PHOSPHORUS,9.080,Posphate retention % - Not recorded,P retention,%,NA,NA
+999,9H1,ANION_STORAGE,9.08,Anion storage capacity,Anion Storage,%,NA,NA
+999,9I1,PHOSPHATE_SORPTION,9.09,Phosphate sorption index,PO4 sorption index,NA,NA,NA
+303,9I2,NA,NA,Phosphorus buffer index (Colwell),Phosphorus buffer in,NA,NA,NA
+999,9I2a,P_BUFFER_INDEX,NA,P buffer index - PBI (+ColP) - Murphy and Riley,P Buffer Index,NA,NA,NA
+999,9I2b,P_BUFFER_INDEX,NA,P buffer index - PBI (+ColP) - ICPAES,P Buffer Index,NA,NA,NA
+999,9I2c,P_BUFFER_INDEX,NA,P buffer index - PBI (+ColP) - Vanadate,P Buffer Index,NA,NA,NA
+303,9I3,NA,NA,PBI,Phosphorous buffer i,NA,NA,NA
+999,9I3a,P_BUFFER_INDEX,NA,P buffer index - PBI (+OlsenP) - Murphy and Riley,P Buffer Index,NA,NA,NA
+999,9I3b,P_BUFFER_INDEX,NA,P buffer index - PBI (+OlsenP) - ICPAES,P Buffer Index,NA,NA,NA
+999,9I3c,P_BUFFER_INDEX,NA,P buffer index - PBI (+OlsenP) - Vanadate,P Buffer Index,NA,NA,NA
+303,9I4,NA,NA,Phosphorus buffer index (unadjusted),Phosphorus buffer in,NA,NA,NA
+999,9I4a,P_BUFFER_INDEX,NA,P buffer index - PBI (unadj) - Murphy and Riley,P Buffer Index,NA,NA,NA
+999,9I4b,P_BUFFER_INDEX,NA,P buffer index - PBI (unadj) - ICPAES,P Buffer Index,NA,NA,NA
+999,9I4c,P_BUFFER_INDEX,NA,P buffer index - PBI (unadj) - Vanadate,P Buffer Index,NA,NA,NA
+999,9J1,PHOSPHATE_SORPTION,9.10,Phosphate sorption curve - manual colour,PO4 sorption curve,NA,NA,NA
+303,9J1_EPC,NA,NA,Equilibrium P concentration - manual colour,P sorption curve - m,NA,NA,NA
+303,9J1_P,NA,NA,Phosphate sorption curve - manual colour,P sorption curve - m,NA,NA,NA
+303,9J1_PBC,NA,NA,Phosphorus buffer capacity - manual colour,P buffer capacity - ,NA,NA,NA
+999,9J2,PHOSPHATE_SORPTION,9.11,Phosphate sorption curve - automated colour,PO4 sorption curve,NA,NA,NA
+303,9J2_EPC,NA,NA,Equilibrium P concentration - automated colour,P equilibrium - auto,NA,NA,NA
+303,9J2_P,NA,NA,Phosphate sorption curve - automated colour,P sorption curve - a,NA,NA,NA
+303,9J2_PBC,NA,NA,Phosphorus buffer capacity - automated colour,P buffer capacity - ,NA,NA,NA
+999,9K1a,PHOSPHORUS_RATIO,NA,Mehlich 3-P saturation ratio - colorimetric estimate of P,P Ratio,NA,NA,NA
+999,9K1b,PHOSPHORUS_RATIO,NA,Mehlich 3-P saturation ratio - ICPAES estimate of P,P Ratio,NA,NA,NA
+999,9K2,PHOSPHORUS_RATIO,NA,Colwell-P/PBI(+ColP) ratio,P Ratio,NA,NA,NA
+999,9M,PHOSPHORUS,9.99,Available P (mg/kg) - Mehlich P,Available P,mg/kg,NA,NA
+999,9R1,PHOSPHORUS,9.075,Resin extractable phosphorus - automated colour (CSIRO Div of Soil Tech Mem 63/1972),Extractable P,NA,NA,NA
+303,a-23E,NA,NA,Peroxide oxidisable S calculated as equalivent acidity units,Peroxide oxidisable ,NA,NA,NA
+303,a-23Q,NA,NA,Excess Acid Neutralising Capacity calculated as equilavent acid neutralising units.,ANC equiv acidity,NA,NA,NA
+303,a-23R,NA,NA,Residual acid extractable S after peroxide expressed in equivalent acidity units,RAS equiv acidity,NA,NA,NA
+303,a-23U,NA,NA,Magnesium reacted calculated as equilavent acid neutralising units.,Mg equiv acidity,NA,NA,NA
+303,a-23Um,NA,NA,Magnesium reacted calculated as equilavent acid neutralising units.- ICPAES,"Mg equiv acidity, IC",NA,NA,NA
+303,a-23X,CA,NA,Calcium reacted calaulated as equilavent acid neutralising units.,Ca eqiuv acidity,NA,NA,NA
+303,a-23Xh,CA,NA,Calcium reacted calaulated as equilavent acid neutralising units. - ICPAES,"Ca eqiuv acidity, IC",NA,NA,NA
+999,M1a,SAR,M.01,Sodium absorption ratio (SAR),SAR,NA,NA,NA
+999,MIN_EC,CLAY_MINERAL,XRD,Exchange Capacity - Minerology,NA,NA,NA,NA
+999,MIN_NR_K2O,CLAY_MINERAL,MIN,Kaolin minerals,Kaolin minerals,NA,NA,NA
+501,P10_1m2m,NA,NA,NA,NA,NA,NA,NA
+501,P10_20_100,NA,NA,NA,NA,NA,NA,NA
+501,P10_20_75,NA,NA,NA,NA,NA,NA,NA
+501,P10_20_75a,NA,NA,NA,NA,NA,NA,NA
+501,P10_75_106,NA,NA,NA,NA,NA,NA,NA
+999,P10_CF_C,PSA,P10.04,Clay (%) - Coventry and Fett pipette method,Clay,%,NA,NA
+999,P10_CF_CS,PSA,P10.01,Coarse sand (%) - Coventry and Fett pipette method,Coarse sand,%,NA,NA
+999,P10_CF_FS,PSA,P10.02,Fine sand (%) - Coventry and Fett pipette method,Fine sand,%,NA,NA
+999,P10_CF_S,PSA,P10.015,Sand (%) - Coventry and Fett pipette method,Sand,%,NA,NA
+999,P10_CF_Z,PSA,P10.03,Silt (%) - Coventry and Fett pipette method,Silt,%,NA,NA
+999,P10_GRAV,PSA,P10.05,Gravel (%),Gravel,%,NA,NA
+501,P10_gt2m,NA,NA,NA,NA,NA,NA,NA
+501,P10_gt2MI,NA,NA,NA,NA,NA,NA,NA
+501,P10_gt2OM,NA,NA,NA,NA,NA,NA,NA
+999,P10_HYD_C,PSA,P10.04,Clay (%) - Hydrometer Method,Clay,%,NA,NA
+999,P10_HYD_CS,PSA,P10.01,Coarse Sand (%) - Hydrometer Method,Coarse Sand,%,NA,NA
+999,P10_HYD_FS,PSA,P10.02,Fine Sand (%) - Hydrometer Method,Fine Sand,%,NA,NA
+999,P10_HYD_S,PSA,P10.015,Sand (%) - Hydrometer Method,Sand,%,NA,NA
+999,P10_HYD_Z,PSA,P10.03,Silt (%) - Hydrometer Method,Silt,%,NA,NA
+999,P10_NR_C,PSA,P10.04,Clay (%) - Not recorded,Clay,%,NA,NA
+999,P10_NR_CS,PSA,P10.01,Coarse sand (%) - Not recorded,Coarse sand,%,NA,NA
+999,P10_NR_FS,PSA,P10.02,Fine sand (%) - Not recorded,Fine sand,%,NA,NA
+999,P10_NR_S,PSA,P10.015,Sand (%) - Not recorded,Sand,%,NA,NA
+501,P10_NR_Saa,NA,NA,NA,NA,NA,NA,NA
+999,P10_NR_Z,PSA,P10.03,Silt (%) - Not recorded,Silt,%,NA,NA
+501,P10_NR_ZC,NA,NA,NA,NA,NA,NA,NA
+999,P10_PB_C,PSA,P10.04,Clay (%) - Plummet balance,Clay,%,NA,NA
+999,P10_PB_CS,PSA,P10.01,Coarse sand (%) - Plummet balance,Coarse sand,%,NA,NA
+999,P10_PB_FS,PSA,P10.02,Fine sand (%) - Plummet balance,Fine sand,%,NA,NA
+999,P10_PB_S,PSA,P10.015,Sand (%) - Plummet balance,Sand,%,NA,NA
+999,P10_PB_Z,PSA,P10.03,Silt (%) - Plummet balance,Silt,%,NA,NA
+999,P10_PB1_C,PSA,P10.04,Clay (%) - Plummet balance (Acid digestion pretreatment),Clay,%,NA,NA
+999,P10_PB1_CS,PSA,P10.01,Coarse sand (%) - Plummet balance (Acid digestion pretreatment),Coarse sand,%,NA,NA
+999,P10_PB1_FS,PSA,P10.02,Fine sand (%) - Plummet balance (Acid digestion pretreatment),Fine sand,%,NA,NA
+999,P10_PB1_Z,PSA,P10.03,Silt (%) - Plummet balance (Acid digestion pretreatment),Silt,%,NA,NA
+999,P10_S_0.20,PSA,P10.10,0.20 micron (cumulative %) - Sedigraph,0.20 micron,%,NA,NA
+999,P10_S_0.48,PSA,P10.11,0.48 micron (cumulative %) - Sedigraph,0.48 micron,%,NA,NA
+999,P10_S_1,PSA,P10.12,1 micron (cumulative %) - Sedigraph,1 micron,%,NA,NA
+999,P10_S_1000,PSA,P10.24,1000 micron (cumulative %) - Sedigraph,1000 micron,%,NA,NA
+999,P10_S_125,PSA,P10.21,125 micron (cumulative %) - Sedigraph,125 micron,%,NA,NA
+999,P10_S_15.6,PSA,P10.16,15.6 micron (cumulative %) - Sedigraph,15.6 micron,%,NA,NA
+999,P10_S_2,PSA,P10.13,2 micron (cumulative %) - Sedigraph,2 micron,%,NA,NA
+999,P10_S_20,PSA,P10.17,20 micron (cumulative %) - Sedigraph,20 micron,%,NA,NA
+999,P10_S_2000,PSA,P10.25,2000 micron (cumulative %) - Sedigraph,2000 micron,%,NA,NA
+999,P10_S_250,PSA,P10.22,250 micron (cumlative %) - Sedigraph,250 micron,%,NA,NA
+999,P10_S_3.9,PSA,P10.14,3.9 micron (cumulative %) - Sedigraph,3.9 micron,%,NA,NA
+999,P10_S_31.2,PSA,P10.18,31.2 micron (cumulative %) - Sedigraph,31.2 micron,%,NA,NA
+999,P10_S_500,PSA,P10.23,500 micron (cumulative %) - Sedigraph,500 micron,%,NA,NA
+999,P10_S_53,PSA,P10.19,53 micron (cumulative %) - Sedigraph,53 micron,%,NA,NA
+999,P10_S_63,PSA,P10.20,63 micron (cumulative %) - Sedigraph,63 micron,%,NA,NA
+999,P10_S_7.8,PSA,P10.15,7.8 micron (cumulative %) - Sedigraph,7.8 micron,%,NA,NA
+501,P10100_200,NA,NA,NA,NA,NA,NA,NA
+501,P10106_150,NA,NA,NA,NA,NA,NA,NA
+501,P10150_180,NA,NA,NA,NA,NA,NA,NA
+501,P10180_300,NA,NA,NA,NA,NA,NA,NA
+501,P10200_500,NA,NA,NA,NA,NA,NA,NA
+501,P10200_600,NA,NA,NA,NA,NA,NA,NA
+501,P102002000,NA,NA,NA,NA,NA,NA,NA
+501,P10300_600,NA,NA,NA,NA,NA,NA,NA
+501,P105002000,NA,NA,NA,NA,NA,NA,NA
+501,P106001000,NA,NA,NA,NA,NA,NA,NA
+501,P106002000,NA,NA,NA,NA,NA,NA,NA
+999,P10A1_C,PSA,P10.04,Clay (%) - Pipette,Clay,%,NA,NA
+999,P10A1_CS,PSA,P10.01,Coarse sand (%) - Pipette,Coarse sand,%,NA,NA
+999,P10A1_FS,PSA,P10.02,Fine sand (%) - Pipette,Fine sand,%,NA,NA
+999,P10A1_Z,PSA,P10.03,Silt (%) - Pipette,Silt,%,NA,NA
+999,P3A_NR,DENSITY,P3.01,Bulk density - Not recorded,Bulk density,g/cm3,NA,NA
+999,P3A1,DENSITY,P3.01,Bulk density - g/cm3,Bulk density,g/cm3,NA,NA
+501,P3A1_C4,NA,NA,NA,NA,NA,NA,NA
+999,P3A1_CLOD,DENSITY,P3.01,"Bulk density  g/cm3 - Clods at 0.1 Bar moisture content (McIntyre & Stirk, 1954, Aust. J. Agric. Res. 5:291-6)",Bulk density,g/cm3,NA,NA
+501,P3A1_e,NA,NA,NA,NA,NA,NA,NA
+999,P3A2,POROSITY,P3.03,Macro Porosity %,Macro Porosity,%,NA,NA
+999,P3A2_McK,POROSITY,P3.03,Macro Porosity (%) as determined from McKenzie pore charts,Macro Porosity,%,NA,NA
+999,P3A2_McKMP,POROSITY,P3.03,Maximum pore diameter (mm) as determined from McKenzie pore charts,Macro Porosity,%,NA,NA
+999,P3A3,POROSITY,P3.04,Total Porosity %,Total Porosity,%,NA,NA
+999,P3A4,MOISTURE_RELEASE,P3.05,Particle Density g/cm3,Particle Density,g/cm3,NA,NA
+999,P3B_GV_001,MOISTURE_RELEASE,P3.030,0.01 BAR Moisture g/g - Gravimetric using suction plate,0.01 BAR Moisture,NA,NA,NA
+999,P3B_GV_003,MOISTURE_RELEASE,P3.031,0.03 BAR Moisture g/g - Gravimetric using suction plate,0.03 BAR Moisture,NA,NA,NA
+999,P3B_GV_005,MOISTURE_RELEASE,P3.025,0.05 BAR Moisture g/g - Gravimetric using suction plate,0.05 BAR Moisture,NA,NA,NA
+999,P3B_GV_01,MOISTURE_RELEASE,P3.021,0.1 BAR Moisture g/g - Gravimetric  using suction plate,0.1 BAR Moisture,NA,NA,NA
+999,P3B_GV_03,MOISTURE_RELEASE,P3.023,0.3 BAR Moisture g/g - Gravimetric using suction plate,0.3 BAR MoistureGrav,NA,NA,NA
+501,P3B_GV_033,NA,NA,NA,NA,NA,NA,NA
+999,P3B_GV_05,MOISTURE_RELEASE,P3.028,0.5 BAR Moisture g/g - Gravimetric using suction plate,0.5 BAR Moisture,NA,NA,NA
+999,P3B_GV_1,MOISTURE_RELEASE,P3.026,1 BAR Moisture g/g - Gravimetric using pressure plate,1 BAR Moisture,NA,NA,NA
+999,P3B_GV_15,MOISTURE_RELEASE,P3.024,15 BAR Moisture g/g - Gravimetric using pressure plate,15 BAR MoistureGrav,NA,NA,NA
+999,P3B_GV_5,MOISTURE_RELEASE,P3.029,5 BAR Moisture g/g - Gravimetric using pressure plate,5 BAR Moisture,NA,NA,NA
+999,P3B_GV_SAT,MOISTURE_RELEASE,P3.027,Saturated Moisture g/g - Gravimetric using suction plate,Saturated Moisture,NA,NA,NA
+999,P3B_NR_001,MOISTURE_RELEASE,P3.030,0.01 BAR Moisture % - Not recorded,0.01 BAR Moisture,%,NA,NA
+999,P3B_NR_003,MOISTURE_RELEASE,P3.031,0.03 BAR Moisture % - Not recorded,0.03 BAR Moisture,%,NA,NA
+999,P3B_NR_005,MOISTURE_RELEASE,P3.025,0.05 BAR Moisture % - Not recorded,0.05 BAR Moisture,%,NA,NA
+999,P3B_NR_01,MOISTURE_RELEASE,P3.021,0.1 BAR Moisture % - Not recorded,0.1 BAR Moisture,%,NA,NA
+999,P3B_NR_03,MOISTURE_RELEASE,P3.023,0.3 BAR Moisture % - Not recorded,0.3 BAR Moisture,%,NA,NA
+999,P3B_NR_05,MOISTURE_RELEASE,P3.028,0.5 BAR Moisture % - Not recorded,0.5 BAR Moisture,%,NA,NA
+999,P3B_NR_1,MOISTURE_RELEASE,P3.026,1 BAR Moisture % - Not recorded,1 BAR Moisture,%,NA,NA
+999,P3B_NR_15,MOISTURE_RELEASE,P3.024,15 BAR Moisture % - Not recorded,15 BAR Moisture,%,NA,NA
+999,P3B_NR_5,MOISTURE_RELEASE,P3.029,5 BAR Moisture % - Not recorded,5 BAR Moisture,%,NA,NA
+999,P3B_NR_SAT,MOISTURE_RELEASE,P3.027,Saturated Moisture % - Not recorded,Saturated Moisture,%,NA,NA
+999,P3B_VL_001,MOISTURE_RELEASE,P3.030,0.01 BAR Moisture m3/m3 - Volumetric using suction plate,0.01 BAR Moisture,NA,NA,NA
+999,P3B_VL_003,MOISTURE_RELEASE,P3.031,0.03 BAR Moisture m3/m3 - Volumetric using suction plate,0.03 BAR Moisture,NA,NA,NA
+999,P3B_VL_005,MOISTURE_RELEASE,P3.025,0.05 BAR Moisture m3/m3 - Volumetric using suction plate,0.05 BAR Moisture,NA,NA,NA
+999,P3B_VL_01,MOISTURE_RELEASE,P3.021,0.1 BAR Moisture m3/m3 - Volumetric using suction plate,0.1 BAR Moisture,NA,NA,NA
+999,P3B_VL_03,MOISTURE_RELEASE,P3.023,0.3 BAR Moisture m3/m3 - Volumetric using suction plate,0.3 BAR Moisture,NA,NA,NA
+999,P3B_VL_05,MOISTURE_RELEASE,P3.028,0.5 BAR Moisture m3/m3 - Volumetric using suction plate,0.5 BAR Moisture,NA,NA,NA
+999,P3B_VL_1,MOISTURE_RELEASE,P3.026,1 BAR Moisture m3/m3 - Volumetric using pressure plate,1 BAR Moisture,NA,NA,NA
+999,P3B_VL_15,MOISTURE_RELEASE,P3.024,15 BAR Moisture m3/m3 - Volumetric using pressure plate,15 BAR Moisture,NA,NA,NA
+999,P3B_VL_5,MOISTURE_RELEASE,P3.029,5 BAR Moisture m3/m3 - Volumetric using pressure plate,5 BAR Moisture,NA,NA,NA
+999,P3B_VL_SAT,MOISTURE_RELEASE,P3.027,Saturated Moisture m3/m3 - Volumetric using suction plate,Saturated Moisture,NA,NA,NA
+999,P3B1GV_15,MOISTURE_RELEASE,P3.024,15 BAR Moisture g/g - Gravimetric of ground sample (<2mm) using pressure plate,15 BAR MoistureGrav,NA,NA,NA
+999,P3B1VL_1,MOISTURE_RELEASE,P3.026,1 BAR Moisture m3/m3 - Volumetric using <2mm sample on pressure plate,1 BAR Moisture,NA,NA,NA
+999,P3B1VL_15,MOISTURE_RELEASE,P3.024,15 BAR Moisture m3/m3 - Volumetric using <2mm sample on pressure plate,15 BAR Moisture,NA,NA,NA
+999,P3B2GV_1,MOISTURE_RELEASE,P3.026,1 BAR Moisture m3/m3 - Volumetric using disturbed sample on pressure plate,1 BAR Moisture,NA,NA,NA
+999,P3B2GV_15,MOISTURE_RELEASE,P3.024,15 BAR Moisture m3/m3 - Volumetric using disturbed sample on pressure plate,15 BAR MoistureGrav,NA,NA,NA
+999,P3B2GV_5,MOISTURE_RELEASE,P3.029,5 BAR Moisture m3/m3 - Volumetric using disturbed sample on pressure plate,1 BAR Moisture,NA,NA,NA
+999,P3B2VL_03,MOISTURE_RELEASE,P3.023,0.3 BAR Moisture m3/m3 - Volumetric using disturbed sample on pressure plate,0.3 BAR Moisture,NA,NA,NA
+999,P3B2VL_1,MOISTURE_RELEASE,P3.026,1 BAR Moisture m3/m3 - Volumetric using disturbed sample on pressure plate,1 BAR Moisture,NA,NA,NA
+999,P3B2VL_15,MOISTURE_RELEASE,P3.024,15 BAR Moisture m3/m3 - Volumetric using disturbed sample on pressure plate,15 BAR Moisture,NA,NA,NA
+999,P3B2VL_5,MOISTURE_RELEASE,P3.029,5 BAR Moisture m3/m3 - Volumetric using disturbed sample on pressure plate,1 BAR Moisture,NA,NA,NA
+999,P3B3VLa001,MOISTURE_RELEASE,P3.030,0.01 BAR Moisture m3/m3 - Volumetric using undisturbed 76mm diameter core on suction plate,0.05 BAR Moisture,NA,NA,NA
+999,P3B3VLa005,MOISTURE_RELEASE,P3.025,0.05 BAR Moisture m3/m3 - Volumetric using undisturbed 76mm diameter core on suction plate,0.05 BAR Moisture,NA,NA,NA
+999,P3B3VLa01,MOISTURE_RELEASE,P3.021,0.1 BAR Moisture m3/m3 - Volumetric using undisturbed 76mm diameter core on suction plate,0.1 BAR Moisture,NA,NA,NA
+999,P3B3VLa03,MOISTURE_RELEASE,P3.023,0.3 BAR Moisture m3/m3 - Volumetric using undisturbed 76mm diameter core on suction plate,0.05 BAR Moisture,NA,NA,NA
+999,P3B3VLa06,MOISTURE_RELEASE,P3.036,0.6 BAR Moisture m3/m3 - Volumetric using undisturbed 76mm diameter core on suction plate,0.05 BAR Moisture,NA,NA,NA
+999,P3B3VLaSAT,MOISTURE_RELEASE,P3.027,Saturated Moisture m3/m3 - Volumetric using undisturbed 76mm diameter core on suction plate,Saturated Moisture,NA,NA,NA
+999,P3B3VLb001,MOISTURE_RELEASE,P3.030,"0.01 BAR Moisture m3/m3 - Volumetric using undisturbed 73mm diameter and 75mm height core on suction plate taken from center of large core (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",0.01 BAR Moisture,NA,NA,NA
+999,P3B3VLb003,MOISTURE_RELEASE,P3.031,"0.03 BAR Moisture m3/m3 - Volumetric using undisturbed 73mm diameter and 75mm height core on suction plate taken from center of large core (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",0.03 BAR Moisture,NA,NA,NA
+999,P3B3VLb005,MOISTURE_RELEASE,P3.025,"0.05 BAR Moisture m3/m3 - Volumetric using undisturbed 73mm diameter and 75mm height core on suction plate taken from center of large core (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",0.05 BAR Moisture,NA,NA,NA
+999,P3B3VLb01,MOISTURE_RELEASE,P3.021,"0.1 BAR Moisture m3/m3 - Volumetric using undisturbed 73mm diameter and 75mm height core on suction plate taken from center of large core (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",0.1 BAR Moisture,NA,NA,NA
+999,P3B3VLb03,MOISTURE_RELEASE,P3.023,"0.33 BAR Moisture m3/m3 - Volumetric using undisturbed 73mm diameter and 75mm height core on suction plate taken from center of large core (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",0.33 BAR Moisture,NA,NA,NA
+999,P3B3VLb05,MOISTURE_RELEASE,P3.028,"0.5 BAR Moisture m3/m3 - Volumetric using undisturbed 73mm diameter and 75mm height core on suction plate taken from center of large core (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",0.5 BAR Moisture,NA,NA,NA
+999,P3B3VLb06,MOISTURE_RELEASE,P3.022,"0.66 BAR Moisture m3/m3 - Volumetric using undisturbed 73mm diameter and 75mm height core on suction plate taken from center of large core (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",0.66 BAR Moisture,NA,NA,NA
+999,P3B3VLbSAT,MOISTURE_RELEASE,P3.027,"Saturated Moisture m3/m3 - Volumetric using undisturbed 73mm diameter and 75mm height core on suction plate taken from center of large core (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",Saturated Moisture,NA,NA,NA
+999,P3B3VLc001,MOISTURE_RELEASE,P3.030,0.01 BAR Moisture m3/m3 - Volumetric using undisturbed 98mm diameter core on suction plate,0.01 BAR Moisture,NA,NA,NA
+999,P3B3VLc003,MOISTURE_RELEASE,P3.031,0.03 BAR Moisture m3/m3 - Volumetric using undisturbed 98mm diameter core on suction plate,0.03 BAR Moisture,NA,NA,NA
+999,P3B3VLc005,MOISTURE_RELEASE,P3.025,0.05 BAR Moisture m3/m3 - Volumetric using undisturbed 98mm diameter core on suction plate,0.05 BAR Moisture,NA,NA,NA
+999,P3B3VLc01,MOISTURE_RELEASE,P3.021,0.1 BAR Moisture m3/m3 - Volumetric using undisturbed 98mm diameter core on suction plate,0.1 BAR Moisture,NA,NA,NA
+999,P3B3VLc03,MOISTURE_RELEASE,P3.023,0.3 BAR Moisture m3/m3 - Volumetric using undisturbed 98mm diameter core on suction plate,0.3 BAR Moisture,NA,NA,NA
+999,P3B3VLc06,MOISTURE_RELEASE,P3.022,0.6 BAR Moisture m3/m3 - Volumetric using undisturbed 98mm diameter core on suction plate,0.6 BAR Moisture,NA,NA,NA
+999,P3B3VLcSAT,MOISTURE_RELEASE,P3.027,Saturated Moisture m3/m3 - Volumetric using undisturbed 98mm diameter core on suction plate,Saturated Moisture,NA,NA,NA
+999,P3B3VLd06,MOISTURE_RELEASE,P3.022,0.6 BAR Moisture m3/m3 - Volumetric using undisturbed 48mm diameter and 15mm height core on pressure plate,0.6 BAR Moisture,NA,NA,NA
+999,P3B3VLd1,MOISTURE_RELEASE,P3.026,1 BAR Moisture m3/m3 - Volumetric using undisturbed 48mm diameter and 15mm height core on pressure plate,1 BAR Moisture,NA,NA,NA
+999,P3B3VLd15,MOISTURE_RELEASE,P3.024,15 BAR Moisture m3/m3 - Volumetric using undisturbed 48mm diameter and 15mm height core on pressure plate,15 BAR Moisture,NA,NA,NA
+999,P3B3VLd3,MOISTURE_RELEASE,P3.032,3 BAR Moisture m3/m3 - Volumetric using undisturbed 48mm diameter and 15mm height core on pressure plate,3 BAR Moisture,NA,NA,NA
+999,P3B3VLd5,MOISTURE_RELEASE,P3.029,5 BAR Moisture m3/m3 - Volumetric using undisturbed 48mm diameter and 15mm height core on pressure plate,5 BAR Moisture,NA,NA,NA
+999,P3B3VLe004,MOISTURE_RELEASE,P3.033,0.04 BAR Moisture m3/m3 - Volumetric using undisturbed 60mm diameter and 34mm height core on suction plate,0.04 BAR Moisture,NA,NA,NA
+999,P3B3VLe01,MOISTURE_RELEASE,P3.021,0.1 BAR Moisture m3/m3 - Volumetric using undisturbed 60mm diameter and 34mm height core on suction plate,0.1 BAR Moisture,NA,NA,NA
+999,P3B3VLe03,MOISTURE_RELEASE,P3.023,0.3 BAR Moisture m3/m3 - Volumetric using undisturbed 60mm diameter and 34mm height core on suction plate,0.3 BAR Moisture,NA,NA,NA
+999,P3B3VLe06,MOISTURE_RELEASE,P3.022,0.6 BAR Moisture m3/m3 - Volumetric using undisturbed 60mm diameter and 34mm height core on pressure plate,0.6 BAR Moisture,NA,NA,NA
+999,P3B3VLe15,MOISTURE_RELEASE,P3.024,15 BAR Moisture m3/m3 - Volumetric using undisturbed 60mm diameter and 34mm height core on pressure plate,15 BAR Moisture,NA,NA,NA
+999,P3B3VLe2,MOISTURE_RELEASE,P3.034,2 BAR Moisture m3/m3 - Volumetric using undisturbed 60mm diameter and 34mm height core on pressure plate,0.6 BAR Moisture,NA,NA,NA
+999,P3B3VLe7,MOISTURE_RELEASE,P3.035,7 BAR Moisture m3/m3 - Volumetric using undisturbed 60mm diameter and 34mm height core on pressure plate,0.6 BAR Moisture,NA,NA,NA
+999,P3B4GV_01,MOISTURE_RELEASE,P3.021,"0.1 BAR Moisture g/g - Gravimetric of soil clods (Soil Survey Staff,1967)",0.1 BAR Moisture,NA,NA,NA
+999,P3B4VL_005,MOISTURE_RELEASE,P3.025,"0.05 BAR Moisture m3/m3 - Volumetric of soil clods (Soil Survey Staff,1967)",0.1 BAR Moisture,NA,NA,NA
+999,P3B5GV_01,MOISTURE_RELEASE,P3.021,0.1 BAR Moisture g/g - Gravimetric of soil clods (CSIRO Div. Of Soils TM 25/66),0.1 BAR Moisture,NA,NA,NA
+999,P3B6VL_DUL,MOISTURE_RELEASE,P3.021,Drained Upper Limit (0.1 BAR) Moisture m3/m3 - Volumetric using APSRU in situ methodology,0.1 BAR Moisture,NA,NA,NA
+999,P3B6VL_LL,MOISTURE_RELEASE,P3.024,Lower Limit (15 BAR) Moisture m3/m3 - Volumetric using APSRU in situ methodology,15 BAR Moisture,NA,NA,NA
+999,P3B6VL_SAT,MOISTURE_RELEASE,P3.027,Saturated Moisture m3/m3 - Volumetric using APSRU in situ methodology,Saturated Moisture,NA,NA,NA
+999,P4_10_McK,HYDRAULIC_COND,P4.05,"Unsaturated Hydraulic Conductivity - 10mm potential (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",K Unsat,mm/hr,NA,NA
+999,P4_100_McK,HYDRAULIC_COND,P4.05,"Unsaturated Hydraulic Conductivity - 100mm potential (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",K Unsat,mm/hr,NA,NA
+999,P4_100DMcK,HYDRAULIC_COND,P4.05,"Unsaturated Hydraulic Conductivity - 100mm potential - Using disk permeameter with method CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996",K Unsat,mm/hr,NA,NA
+999,P4_10DMcK,HYDRAULIC_COND,P4.05,"Unsaturated Hydraulic Conductivity - 10mm potential - Using disk permeameter with method CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996",K Unsat,mm/hr,NA,NA
+999,P4_30_LOV,HYDRAULIC_COND,P4.05,Unsaturated Hydraulic Conductivity - 50mm potential Loveday falling head method using 98mm diameter cores,K Unsat,mm/hr,NA,NA
+999,P4_30DMcK,HYDRAULIC_COND,P4.05,"Unsaturated Hydraulic Conductivity - 30mm potential - Using disk permeameter with method CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996",K Unsat,mm/hr,NA,NA
+999,P4_50_McK,HYDRAULIC_COND,P4.05,"Unsaturated Hydraulic Conductivity - 50mm potential (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",K Unsat,mm/hr,NA,NA
+999,P4_50DMcK,HYDRAULIC_COND,P4.05,"Unsaturated Hydraulic Conductivity - 50mm potential - Using disk permeameter with method CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996",K Unsat,mm/hr,NA,NA
+999,P4_sat,HYDRAULIC_COND,P4.04,Saturated Hydraulic Conductivity,K Sat,mm/hr,NA,NA
+999,P4_sat_FH,HYDRAULIC_COND,P4.04,"Modified Saturated Hydraulic Conductivity - falling head (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",K Sat,mm/hr,NA,NA
+999,P4_sat_For,HYDRAULIC_COND,P4.04,"Saturated Hydraulic Conductivity (Forrest et al, 1985)",K Sat,mm/hr,NA,NA
+999,P4_sat_LOV,HYDRAULIC_COND,P4.04,Saturated Hydraulic Conductivity - Modified (no de-aired water) Loveday falling head method using 98mm diameter cores,K Sat,mm/hr,NA,NA
+999,P4_sat_McK,HYDRAULIC_COND,P4.04,"Saturated Hydraulic Conductivity (CSIRO Div of Soil, DR 125, McKenzie and Jacquier, 1996)",K Sat,mm/hr,NA,NA
+999,P4D1,HYDRAULIC_COND,P4.04,Saturated Hydraulic Conductivity,K Sat,mm/hr,NA,NA
+999,P5_COLE,COLE,P5.01,Coefficient of Linear Extensibility (Grossman et al. 1968),Cole,NA,NA,NA
+999,P5_LS,LINEAR_SHRINKAGE,P5.02,Linear shrinkage (Standards Association of Australia 1977. AS 1289 C4.1),Cole,NA,NA,NA
+999,P5_LS_MOD,LINEAR_SHRINKAGE,P5.02,"Modified linear shrinkage (McKenzie, Jacquier and Ringrose-Voase, AJSR, 1994, 32, 931-8)",Cole,NA,NA,NA
+999,P6_LP,DISPERSION_INDEX,P6.01,"Dispersion Index (Loveday and Pyle, 1973)",Dispersion Index,NA,NA,NA
+999,PWS1-2mm,PSA,P10.30,1000-2000 micron fraction (%) - Wet Sieving after chemical dispersion,2000 micron,%,NA,NA
+999,PWS20-63,PSA,P10.26,20-63 micron fraction (%) - Wet Sieving after chemical dispersion,2000 micron,%,NA,NA
+999,PWS212-425,PSA,P10.28,212-425 micron fraction (%) - Wet Sieving after chemical dispersion,2000 micron,%,NA,NA
+999,PWS425-1mm,PSA,P10.29,425-1000  micron fraction (%) - Wet Sieving after chemical dispersion,2000 micron,%,NA,NA
+999,PWS63-212,PSA,P10.27,63-212 micron fraction (%) - Wet Sieving after chemical dispersion,2000 micron,%,NA,NA
+303,s-23F,NA,NA,TAA - calculated as equivalent pyrite S%,TAA - pyrite equiv,NA,NA,NA
+303,s-23G,NA,NA,TPA - calculated as equivalent pyrite S%,TPA - pyrite equiv,NA,NA,NA
+303,s-23H,NA,NA,TSA - calculated as equivalent pyrite S%,TSA - pyrite equiv,NA,NA,NA
+303,s-23R,NA,NA,Residual acid extractable S after peroxide expressed in % pyrite S,RAS - pyrite equiv,NA,NA,NA
+999,TE_CD_AL,TOTAL_ELEMENTS,TE.036,Total Element Al - by Citrate/Dithionite Extraction,Total Al,NA,NA,NA
+999,TE_CD_CA,TOTAL_ELEMENTS,TE.031,Total Element Ca - by Citrate/Dithionite Extraction,Total Ca,NA,NA,NA
+999,TE_CD_MG,TOTAL_ELEMENTS,TE.032,Total Element Mg - by Citrate/Dithionite Extraction,Total Mg,NA,NA,NA
+999,TE_CD_NA,TOTAL_ELEMENTS,TE.034,Total Element Na - by Citrate/Dithionite Extraction,Total Na,NA,NA,NA
+999,TE_CD_SI02,TOTAL_ELEMENTS,TE.035,Total Element SiO2 - by Citrate/Dithionite Extraction,Total SiO2,NA,NA,NA
+999,TE_CD_TI02,TOTAL_ELEMENTS,TE.033,Total Element TiO2 - by Citrate/Dithionite Extraction,Total TiO2,NA,NA,NA
+999,TE_HF+_MG,TOTAL_ELEMENTS,TE.012,Total Element Mg - by HF/HClO4 Digest,Total Mg,NA,NA,NA
+999,TE_HF+AL,TOTAL_ELEMENTS,TE.016,Total Element Al - by HF/HClO4 Digest,Total Al,NA,NA,NA
+999,TE_HF+CA,TOTAL_ELEMENTS,TE.011,Total Element Ca - by HF/HClO4 Digest,Total Ca,NA,NA,NA
+999,TE_HF+NA,TOTAL_ELEMENTS,TE.014,Total Element Na - by HF/HClO4 Digest,Total Na,NA,NA,NA
+999,TE_HF+SIO2,TOTAL_ELEMENTS,TE.015,Total Element SiO2 - by HF/HClO4 Digest,Total SiO2,NA,NA,NA
+999,TE_HF+TIO2,TOTAL_ELEMENTS,TE.013,Total Element TiO2 - by HF/HClO4 Digest,Total TiO2,NA,NA,NA
+999,TE_NR_AL,TOTAL_ELEMENTS,TE.046,Total Element Al - Not recorded,Total Al,NA,NA,NA
+501,TE_NR_AL2O,NA,NA,NA,NA,NA,NA,NA
+999,TE_NR_CA,TOTAL_ELEMENTS,TE.041,Total Element Ca - Not recorded,Total Ca,NA,NA,NA
+501,TE_NR_FE20,NA,NA,NA,NA,NA,NA,NA
+999,TE_NR_MG,TOTAL_ELEMENTS,TE.042,Total Element Mg - Not recorded,Total Mg,NA,NA,NA
+999,TE_NR_NA,TOTAL_ELEMENTS,TE.044,Total Element Na - Not recorded,Total Na,NA,NA,NA
+999,TE_NR_SI02,TOTAL_ELEMENTS,TE.045,Total Element SiO2 - Not recorded,Total SiO2,NA,NA,NA
+999,TE_NR_TI02,TOTAL_ELEMENTS,TE.043,Total Element TiO2 - Not recorded,Total TiO2,NA,NA,NA
+999,TE_XRF_MG,TOTAL_ELEMENTS,TE.022,Total Element Mg - By XRF,Total Mg,NA,NA,NA
+999,TE_XRFAL,TOTAL_ELEMENTS,TE.026,Total Element Al - By XRF,Total Al,NA,NA,NA
+999,TE_XRFCA,TOTAL_ELEMENTS,TE.021,Total Element Ca - By XRF,Total Ca,NA,NA,NA
+999,TE_XRFNA,TOTAL_ELEMENTS,TE.024,Total Element Na - By XRF,Total Na,NA,NA,NA
+999,TE_XRFSI02,TOTAL_ELEMENTS,TE.025,Total Element SiO2 - By XRF,Total SiO2,NA,NA,NA
+999,TE_XRFTIO2,TOTAL_ELEMENTS,TE.023,Total Element TiO2 - By XRF,Total TiO2,NA,NA,NA
+999,XRD_C_Ab,CLAY_MINERAL,XRD,Amphibole - X-Ray Diffraction,Amphibole,NA,NA,NA
+999,XRD_C_Ah,CLAY_MINERAL,XRD,Allophane - X-Ray Diffraction,Allophane,NA,NA,NA
+999,XRD_C_An,CLAY_MINERAL,XRD,Anatase - X-Ray Diffraction,Anatase,NA,NA,NA
+999,XRD_C_Ap,CLAY_MINERAL,XRD,Apatite - X-Ray Diffraction,Apatite,NA,NA,NA
+999,XRD_C_Arg,CLAY_MINERAL,XRD,Argonite - X-Ray Diffraction,Argonite,NA,NA,NA
+999,XRD_C_At,CLAY_MINERAL,XRD,Alunite - X-Ray Diffraction,Alunite,NA,NA,NA
+999,XRD_C_Bd,CLAY_MINERAL,XRD,Beidellite - X-Ray Diffraction,Beidellite,NA,NA,NA
+999,XRD_C_Bm,CLAY_MINERAL,XRD,Boehmite - X-Ray Diffraction,Boehmite,NA,NA,NA
+999,XRD_C_Bt,CLAY_MINERAL,XRD,Biotite - X-Ray Diffraction,Biotite,NA,NA,NA
+999,XRD_C_Cb,CLAY_MINERAL,XRD,Cristobalite - X-Ray Diffraction,Cristobalite,NA,NA,NA
+999,XRD_C_Ch,CLAY_MINERAL,XRD,Chlorite - X-Ray Diffraction,Chlorite,NA,NA,NA
+999,XRD_C_Ch2,CLAY_MINERAL,XRD,Chloritized 2:1 minerals - X-Ray Diffraction,Chloritized 2:1,NA,NA,NA
+999,XRD_C_Crn,CLAY_MINERAL,XRD,Corondum - X-Ray Diffraction,Corondum,NA,NA,NA
+999,XRD_C_Ct,CLAY_MINERAL,XRD,Calcite - X-Ray Diffraction,Calcite,NA,NA,NA
+999,XRD_C_Dr,CLAY_MINERAL,XRD,Dravite - X-Ray Diffraction,Dravite,NA,NA,NA
+999,XRD_C_Dt,CLAY_MINERAL,XRD,Dolomite - X-Ray Diffraction,Dolomite,NA,NA,NA
+999,XRD_C_Fd,CLAY_MINERAL,XRD,Feldspar - X-Ray Diffraction,Feldspar,NA,NA,NA
+999,XRD_C_Fh,CLAY_MINERAL,XRD,Ferrihydrite - X-Ray Diffraction,Ferrihydrite,NA,NA,NA
+999,XRD_C_Fl,CLAY_MINERAL,XRD,Flourite - X-Ray Diffraction,Flourite,NA,NA,NA
+999,XRD_C_Fo,CLAY_MINERAL,XRD,Feroxyhite - X-Ray Diffraction,Feroxyhite,NA,NA,NA
+999,XRD_C_Gb,CLAY_MINERAL,XRD,Gibbsite - X-Ray Diffraction,Gibbsite,NA,NA,NA
+999,XRD_C_Gl,CLAY_MINERAL,XRD,Glauconite - X-Ray Diffraction,Glauconite,NA,NA,NA
+999,XRD_C_Gt,CLAY_MINERAL,XRD,Geothite - X-Ray Diffraction,Geothite,NA,NA,NA
+999,XRD_C_Gy,CLAY_MINERAL,XRD,Gypsum - X-Ray Diffraction,Gypsum,NA,NA,NA
+999,XRD_C_Hl,CLAY_MINERAL,XRD,Halite - X-Ray Diffraction,Halite,NA,NA,NA
+999,XRD_C_Hm,CLAY_MINERAL,XRD,Hematite - X-Ray Diffraction,Hematite,NA,NA,NA
+999,XRD_C_Hn,CLAY_MINERAL,XRD,Huntite - X-Ray Diffraction,Huntite,NA,NA,NA
+999,XRD_C_Ht0,CLAY_MINERAL,XRD,Halloysite (10 A`) - X-Ray Diffraction,Halloysite (10 A`),NA,NA,NA
+999,XRD_C_Ht7,CLAY_MINERAL,XRD,Halloysite (7 A`) - X-Ray Diffraction,Halloysite (7 A`),NA,NA,NA
+999,XRD_C_Ig,CLAY_MINERAL,XRD,Imogolite - X-Ray Diffraction,Imogolite,NA,NA,NA
+999,XRD_C_Il,CLAY_MINERAL,XRD,Illite - X-Ray Diffraction,Illite,NA,NA,NA
+999,XRD_C_Im,CLAY_MINERAL,XRD,Ilmenite - X-Ray Diffraction,Ilmenite,NA,NA,NA
+999,XRD_C_Is,CLAY_MINERAL,XRD,Interstratified clay minerals - X-Ray Diffraction,Interstratified clay,NA,NA,NA
+999,XRD_C_Jr,CLAY_MINERAL,XRD,Jarosite - X-Ray Diffraction,Jarosite,NA,NA,NA
+999,XRD_C_K2O,CLAY_MINERAL,XRD,K2O - X-Ray Diffraction or Clay Fraction (air dry),K2O,NA,NA,NA
+999,XRD_C_Ka,CLAY_MINERAL,XRD,Kaolin - X-Ray Diffraction,Kaolin,NA,NA,NA
+999,XRD_C_Kt,CLAY_MINERAL,XRD,Kaolinite - X-Ray Diffraction,Kaolinite,NA,NA,NA
+999,XRD_C_Lp,CLAY_MINERAL,XRD,Lepidocrosite - X-Ray Diffraction,Lepidocrosite,NA,NA,NA
+999,XRD_C_Mh,CLAY_MINERAL,XRD,Meghemite - X-Ray Diffraction,Meghemite,NA,NA,NA
+999,XRD_C_Mi,CLAY_MINERAL,XRD,Mica - X-Ray Diffraction,Mica,NA,NA,NA
+303,XRD_C_MIN_,NA,NA,Exchange Capacity - Minerology,CEC,NA,NA,NA
+999,XRD_C_Mm,CLAY_MINERAL,XRD,Montmorillonite - X-Ray Diffraction,Montmorillonite,NA,NA,NA
+999,XRD_C_Ms,CLAY_MINERAL,XRD,Magnesite - X-Ray Diffraction,Magnesite,NA,NA,NA
+999,XRD_C_Mt,CLAY_MINERAL,XRD,Magnetite - X-Ray Diffraction,Magnetite,NA,NA,NA
+999,XRD_C_Mu,CLAY_MINERAL,XRD,Muscovite - X-Ray Diffraction,Muscovite,NA,NA,NA
+999,XRD_C_Mz,CLAY_MINERAL,XRD,Monozite - X-Ray Diffraction,Monozite,NA,NA,NA
+999,XRD_C_Nt,CLAY_MINERAL,XRD,Nontronite - X-Ray Diffraction,Nontronite,NA,NA,NA
+999,XRD_C_Ol,CLAY_MINERAL,XRD,Olivine - X-Ray Diffraction,Olivine,NA,NA,NA
+999,XRD_C_Or,CLAY_MINERAL,XRD,Orthoclase - X-Ray Diffraction,Orthoclase,NA,NA,NA
+999,XRD_C_Pg,CLAY_MINERAL,XRD,Plagioclase - X-Ray Diffraction,Plagioclase,NA,NA,NA
+999,XRD_C_Pk,CLAY_MINERAL,XRD,Palygorskite - X-Ray Diffraction,Palygorskite,NA,NA,NA
+999,XRD_C_Pl,CLAY_MINERAL,XRD,Plombogummite - X-Ray Diffraction,Plombogummite,NA,NA,NA
+999,XRD_C_Pp,CLAY_MINERAL,XRD,Phlogopite - X-Ray Diffraction,Phlogopite,NA,NA,NA
+999,XRD_C_Ps,CLAY_MINERAL,XRD,Pseudorutile - X-Ray Diffraction,Pseudorutile,NA,NA,NA
+999,XRD_C_Px,CLAY_MINERAL,XRD,Pyroxene - X-Ray Diffraction,Pyroxene,NA,NA,NA
+999,XRD_C_Py,CLAY_MINERAL,XRD,Pyrophyllite - X-Ray Diffraction,Pyrophyllite,NA,NA,NA
+999,XRD_C_Qz,CLAY_MINERAL,XRD,Quartz - X-Ray Diffraction,Quartz,NA,NA,NA
+999,XRD_C_Rt,CLAY_MINERAL,XRD,Rutile - X-Ray Diffraction,Rutile,NA,NA,NA
+999,XRD_C_Sd,CLAY_MINERAL,XRD,Siderite - X-Ray Diffraction,Siderite,NA,NA,NA
+999,XRD_C_Sl,CLAY_MINERAL,XRD,Saponite - X-Ray Diffraction,Saponite,NA,NA,NA
+999,XRD_C_Sp,CLAY_MINERAL,XRD,Saponite - X-Ray Diffraction,Saponite,NA,NA,NA
+999,XRD_C_Spn,CLAY_MINERAL,XRD,Sphene - X-Ray Diffraction,Sphene,NA,NA,NA
+999,XRD_C_Srp,CLAY_MINERAL,XRD,Serpentine - X-Ray Diffraction,Serpentine,NA,NA,NA
+999,XRD_C_St,CLAY_MINERAL,XRD,Smectite - X-Ray Diffraction,Smectite,NA,NA,NA
+999,XRD_C_Tc,CLAY_MINERAL,XRD,Talc - Tourmaline - X-Ray Diffraction,Talc - Tourmaline,NA,NA,NA
+999,XRD_C_Tr,CLAY_MINERAL,XRD,Tridymite - X-Ray Diffraction,Tridymite,NA,NA,NA
+999,XRD_C_Un,CLAY_MINERAL,XRD,Unidentified - X-Ray Diffraction,Unidentified,NA,NA,NA
+999,XRD_C_Vm,CLAY_MINERAL,XRD,Vermiculte - X-Ray Diffraction,Vermiculte,NA,NA,NA
+999,XRD_C_Zi,CLAY_MINERAL,XRD,Zircon - X-Ray Diffraction,Zircon,NA,NA,NA
+999,XRD_C_Zt,CLAY_MINERAL,XRD,Zeolite - X-Ray Diffraction,Zeolite,NA,NA,NA

@@ -11,7 +11,7 @@ library(jsonlite)
 source(paste0('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/R/Backends.R'))
 
 #serverLoc <- 'http://127.0.0.1:6902'
-serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
+serverLoc  <- 'http://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
 
 drawLeafletMap <- function(pts, title){
 
