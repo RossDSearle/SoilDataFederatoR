@@ -158,6 +158,7 @@ getSoilData(DataSets='WAGovernment', observedProperty='h_texture', usr='ross.sea
 getSiteLocations(DataSets='WAGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='QLDGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='QLDGovernment', observedProperty='DIST_TYPE', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
