@@ -61,9 +61,6 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
     return(blankResponseDF())
   }
 
-  samples <- fromJSON(paste0("https://soil-chem.information.qld.gov.au/odata/Samples"))
-  NBsamples <- samples[samples$bulkFlag=='N',]
-
 
   lodfs <- vector("list", length(nativeProps))
 
@@ -76,6 +73,11 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
 
       if(propertyType == 'LaboratoryMeasurement'){
+
+        samples <- fromJSON(paste0("https://soil-chem.information.qld.gov.au/odata/Samples"))
+        NBsamples <- samples[samples$bulkFlag=='N',]
+
+
         units <- getUnits(propertyType = propertyType, prop = prop)
       url <- URLencode(paste0("https://soil-chem.information.qld.gov.au/odata/SiteLabMethodResults?$filter=LabMethodCode eq '", prop, "'"))
       print(prop)
@@ -126,7 +128,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           mnth <- str_sub(fdf$OBS_DATE, 6,7)
           yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-          oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
+          oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
                                        fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, propStd, fdf[, 11] , 'None')
           lodfs[[i]] <- oOutDF
 
@@ -146,7 +148,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
             mnth <- str_sub(fdf$OBS_DATE, 6,7)
             yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-            oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
+            oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO , paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
                                          fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, propStd, fdf[, 11] , 'None')
             lodfs[[i]] <- oOutDF
 
@@ -164,7 +166,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
             mnth <- str_sub(fdf$OBS_DATE, 6,7)
             yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-            oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1', paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
+            oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1', paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
                                          'None' , 'None' , propertyType, propStd, fdf[, 8] , 'None')
             lodfs[[i]] <- oOutDF
           c}
@@ -190,7 +192,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           mnth <- str_sub(fdf$OBS_DATE, 6,7)
           yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-          oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
+          oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
                                        'None' , 'None' , propertyType, propStd, fdf[, 8] , 'None')
           lodfs[[i]] <- oOutDF
 
@@ -216,7 +218,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           mnth <- str_sub(fdf$OBS_DATE, 6,7)
           yr <- str_sub(fdf$OBS_DATE, 1,4)
 
-          oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , paste0(day, '-', mnth, '-', yr,'T00:00:00') , fdf$LONGITUDE, fdf$LATITUDE ,
+          oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), '1' , paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
                                        'None' , 'None' , propertyType, propStd, fdf[, 8] , 'None')
           lodfs[[i]] <- oOutDF
 
