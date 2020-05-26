@@ -87,7 +87,7 @@ if(length(nativeProps) == 0){
     propertyType <- getPropertyType(prop)
     units <- getUnits(propertyType = propertyType, prop = prop)
 
-    oOutDF <- generateResponseDF(DataSet, paste0(fdf$Aggregation , '_', fdf$SampleNo ), fdf$LabNumber, paste0('01-04-', sd$Year,'T00:00:00' ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, prop, fdf$Value, units)
+    oOutDF <- generateResponseDF(DataSet, paste0(fdf$Aggregation , '_', fdf$SampleNo ), fdf$LabNumber, paste0('01-04-', sd$Year ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, prop, fdf$Value, units)
 
     lodfs[[i]] <- oOutDF
   }

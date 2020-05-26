@@ -76,7 +76,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
 
       if(propertyType == 'LaboratoryMeasurement'){
-        units <- NULL # getUnits(propertyType = propertyType, prop = prop)
+        units <- getUnits(propertyType = propertyType, prop = prop)
       url <- URLencode(paste0("https://soil-chem.information.qld.gov.au/odata/SiteLabMethodResults?$filter=LabMethodCode eq '", prop, "'"))
       print(prop)
       sd <- fromJSON(url)
@@ -84,8 +84,15 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           if(nrow(sd) > 0){
               fdf <- merge(sd, NBsamples,  by=c("projectCode","siteId", "observationNumber", "sampleNumber"), all.x = T)
 
+              bits1<-str_split(fdf$analysisDate, 'T')
+              bits <- str_split(sapply(bits1, function (x) x[1]), '-')
+              y <- sprintf("%04d", as.numeric(sapply(bits, function (x) x[1])))
+              m <- sprintf("%02d", as.numeric(sapply(bits, function (x) x[2])))
+              d <-sprintf("%02d", as.numeric(sapply(bits, function (x) x[3])))
+              dateOut <- paste0(d, '-', m, '-', y)
+
               oOutDF <- generateResponseDF(DataSet, paste0('QLD_', fdf$projectCode , '_', fdf$siteId, '_', fdf$observationNumber ),
-                                           fdf$sampleNumber, fdf$analysisDate, fdf$longitude , fdf$latitude,
+                                           fdf$sampleNumber, dateOut, fdf$longitude , fdf$latitude,
                                            fdf$upperDepth, fdf$lowerDepth, propertyType, prop, fdf$formattedValue , units)
               lodfs[[i]] <- oOutDF
           }else{

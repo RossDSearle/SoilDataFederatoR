@@ -3,7 +3,9 @@ library(XML)
 library(xml2)
 library(htmlTable)
 
-#projectRoot <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
+#To start in supervisorctl on easoil use this - "sudo supervisorctl -c /etc/supervisor/supervisord.conf start plumber_SoilFed"
+
+
 
 machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){

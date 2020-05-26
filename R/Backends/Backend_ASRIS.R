@@ -42,7 +42,9 @@ getLocationData_ASRIS<- function(DataSet){
   day <- str_sub(fdf$o_date_desc, 1,2)
   mnth <- str_sub(fdf$o_date_desc, 3,4)
   yr <- str_sub(fdf$o_date_desc, 5,8)
-  oOutDF <-  generateResponseAllLocs(DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$o_longitude_GDA94, fdf$o_latitude_GDA94, paste0(day, '-', mnth, '-', yr,'T00:00:00' ) )
+  outDate <- paste0(day, '-', mnth, '-', yr)
+
+  oOutDF <-  generateResponseAllLocs(DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$o_longitude_GDA94, fdf$o_latitude_GDA94, outDate )
   return(oOutDF)
 }
 
@@ -103,8 +105,9 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
           day <- str_sub(fdf$o_date_desc, 1,2)
           mnth <- str_sub(fdf$o_date_desc, 3,4)
           yr <- str_sub(fdf$o_date_desc, 5,8)
+          outDate <- paste0(day, '-', mnth, '-', yr)
 
-          oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$samp_no ,paste0(day, '-', mnth, '-', yr,'T00:00:00' ) , fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
+          oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$samp_no , outDate, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 ,
                                        fdf$samp_upper_depth , fdf$samp_lower_depth , propertyType, ObsProp, fdf$labr_value , units)
           lodfs[[i]] <- oOutDF
         }else{

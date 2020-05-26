@@ -71,7 +71,12 @@ getData_TERNLandscapesDB <- function(DataSet, ObserverdProperties=NULL, observed
     fdf <- doHostedQuery(sql)
 
     if(nrow(fdf) >0){
-    oOutDF <- generateResponseDF(DataSet, fdf$Observation_ID, fdf$SampleID ,fdf$Date , fdf$Longitude, fdf$Latitude ,
+      bits<-str_split(fdf$Date, '/')
+      y <- sprintf("%04d", as.numeric(sapply(bits, function (x) x[3])))
+      m <- sprintf("%02d", as.numeric(sapply(bits, function (x) x[2])))
+      d <-sprintf("%02d", as.numeric(sapply(bits, function (x) x[1])))
+      fdf$DateOut <- paste0(d, '-', m, '-', y)
+    oOutDF <- generateResponseDF(DataSet, fdf$Observation_ID, fdf$SampleID ,fdf$DateOut , fdf$Longitude, fdf$Latitude ,
                                  fdf$UpperDepth , fdf$LowerDepth ,propertyType, ps[i], fdf$Value , fdf$Units)
     lodfs[[i]] <- oOutDF
     }else{

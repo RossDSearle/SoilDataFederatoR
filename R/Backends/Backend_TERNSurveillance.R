@@ -16,7 +16,14 @@ getLocationData_TERNSurveillance <- function(DataSet){
   OrgName <- getOrgName(DataSet)
   locs <- fromJSON("http://swarmapi.ausplots.aekos.org.au/ross" )
 
-  dfl <- data.frame(paste0( locs$site_location_name, '_', locs$site_location_visit_id), locs$visit_date, locs$latitude, locs$longitude )
+  bits1<-str_split(locs$visit_date, 'T')
+  bits <- str_split(sapply(bits1, function (x) x[1]), '-')
+  y <- sprintf("%04d", as.numeric(sapply(bits, function (x) x[1])))
+  m <- sprintf("%02d", as.numeric(sapply(bits, function (x) x[2])))
+  d <-sprintf("%02d", as.numeric(sapply(bits, function (x) x[3])))
+  DateOut <- paste0(d, '-', m, '-', y)
+
+  dfl <- data.frame(paste0( locs$site_location_name, '_', locs$site_location_visit_id), DateOut, locs$latitude, locs$longitude )
   colnames(dfl) <- c('ObsID', 'Date',  'Lat', 'Lon')
   df <- distinct(dfl)
   oOutDF <-  generateResponseAllLocs(DataSet, df$ObsID, df$Lon, df$Lat, df$Date )
@@ -51,9 +58,16 @@ getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observ
 
     if(nrow(fdf) > 0){
 
+      bits1<-str_split(fdf$visit_date, 'T')
+      bits <- str_split(sapply(bits1, function (x) x[1]), '-')
+      y <- sprintf("%04d", as.numeric(sapply(bits, function (x) x[1])))
+      m <- sprintf("%02d", as.numeric(sapply(bits, function (x) x[2])))
+      d <-sprintf("%02d", as.numeric(sapply(bits, function (x) x[3])))
+      fdf$DateOut <- paste0(d, '-', m, '-', y)
+
       propertyType <- getPropertyType(prop)
       units <- getUnits(propertyType = propertyType, prop = prop)
-      oOutDF <- generateResponseDF(DataSet, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), fdf$site_location_visit_id, fdf$visit_date, fdf$longitude, fdf$latitude,
+      oOutDF <- generateResponseDF(DataSet, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), fdf$site_location_visit_id, fdf$DateOut, fdf$longitude, fdf$latitude,
                                    fdf$upper_depth, fdf$lower_depth, propertyType, prop, fdf$value, units = units)
 
       lodfs[[i]] <- oOutDF
