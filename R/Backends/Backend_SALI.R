@@ -42,7 +42,7 @@ WHERE (((OLC.DATUM)="3"))')
   day <- str_sub(fdf$OBS_DATE, 9,10)
   mnth <- str_sub(fdf$OBS_DATE, 6,7)
   yr <- str_sub(fdf$OBS_DATE, 1,4)
-  oOutDF <- generateResponseAllLocs(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ) , fdf$LONGITUDE, fdf$LATITUDE, paste0(day, '-', mnth, '-', yr,'T00:00:00'))
+  oOutDF <- generateResponseAllLocs(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ) , fdf$LONGITUDE, fdf$LATITUDE, paste0(day, '-', mnth, '-', yr))
 
   return(oOutDF)
 

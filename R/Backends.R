@@ -113,7 +113,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
         if(verbose){
            cat(paste0('Extracting data from ', dataset, '\n'))
         }
-        #print(dataset)
+
         if(is.null(bBox)){
 
           odf <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)

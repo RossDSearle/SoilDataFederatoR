@@ -2,3 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+testing.R
+/Logs
+*.sqlite
+*.RD
+*.Rd
+man/

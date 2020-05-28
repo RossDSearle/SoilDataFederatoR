@@ -33,7 +33,7 @@ getLocationData_LawsonGrains <- function(DataSet){
 
     sd <- merge(lg, locs,  by.x=c("Sample No."),by.y=c("Site ID"), all.x = T)
 
-    dfl <- data.frame(paste0(sd$Aggregation , '_', sd$`Sample No.` ), paste0('01-04-', sd$Year,'T00:00:00' ), sd$Lat, sd$Lon )
+    dfl <- data.frame(paste0(sd$Aggregation , '_', sd$`Sample No.` ), paste0('01-04-', sd$Year ), sd$Lat, sd$Lon )
     colnames(dfl) <- c('ObsID', 'Date',  'Lat', 'Lon')
     df <- distinct(dfl)
     oOutDF <-  generateResponseAllLocs(DataSet, df$ObsID, df$Lon, df$Lat, df$Date )
