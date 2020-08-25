@@ -53,6 +53,8 @@ hDB_getDatasets <- function(DataSet=NULL, verbose=F){
   }
 }
 
+
+
 getData_TERNLandscapesDB <- function(DataSet, ObserverdProperties=NULL, observedPropertyGroup=NULL){
 
   OrgName <- getOrgName(DataSet)
@@ -94,7 +96,12 @@ getLocationData_TERNLandscapesDB <- function(DataSet){
     OrgName <- getOrgName(DataSet)
     sql <- paste0("select DISTINCT Provider, Dataset, Observation_ID, Longitude, Latitude, Date from ObservedProperties where DataSet = '", DataSet, "' order by Dataset, Observation_ID")
     fdf <- doHostedQuery(sql)
-    oOutDF <- generateResponseAllLocs(DataSet, fdf$Observation_ID, fdf$Longitude, fdf$Latitude, fdf$Date )
+    bits<-str_split(fdf$Date, '/')
+    y <- sprintf("%04d", as.numeric(sapply(bits, function (x) x[3])))
+    m <- sprintf("%02d", as.numeric(sapply(bits, function (x) x[2])))
+    d <-sprintf("%02d", as.numeric(sapply(bits, function (x) x[1])))
+    fdf$DateOut <- paste0(d, '-', m, '-', y)
+    oOutDF <- generateResponseAllLocs(DataSet, fdf$Observation_ID, fdf$Longitude, fdf$Latitude, fdf$DateOut )
 
   return(oOutDF)
 
