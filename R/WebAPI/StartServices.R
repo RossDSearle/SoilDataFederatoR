@@ -6,9 +6,10 @@ machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){
 
   deployDir <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR/R'
-  server <- 'http://esoil.io'
-  options("plumber.host" = "0.0.0.0")
-  options("plumber.apiHost" = "0.0.0.0")
+  #server <- 'http://esoil.io'
+  server <- '0.0.0.0'
+  #options("plumber.host" = "0.0.0.0")
+  #options("plumber.apiHost" = "0.0.0.0")
   portNum <- 8074
   #portNum <- 8073
 }else{
@@ -29,7 +30,6 @@ source(paste0(deployDir, '/Backends.R'))
 r <- plumb(paste0(deployDir, "/WebAPI/apiEndPoints.R"))
 
 #server <- 'http://esoil.io'
-
 #portNum <- 8079
 
 print(r)
