@@ -118,7 +118,7 @@ getNativeProperties <- function(DataSet, observedProperty, observedPropertyGroup
         sql <- paste0("Select * from Mappings where Dataset = '", DataSet, "' and ObservedProperty = '", recs[i], "' COLLATE NOCASE")
         codes = doQueryFromFed(sql)
         #nativeProps <- c(nativeProps, codes$OrigPropertyCode)
-        rdf <- data.frame(nativeProp=codes$OrigPropertyCode, standardProp=codes$ObservedProperty,propertyType=codes$DataType, StandardCode=codes$StandardCode)
+        rdf <- data.frame(nativeProp=codes$OrigPropertyCode, standardProp=codes$ObservedProperty,propertyType=codes$DataType, StandardCode=codes$StandardCode, stringsAsFactors = F)
         rdf$propertyType[rdf$propertyType=='L'] <- 'LaboratoryMeasurement'
         rdf$propertyType[rdf$propertyType=='M'] <- 'FieldMeasurement'
         outDF <- rbind(outDF, rdf)
