@@ -103,7 +103,7 @@ apiGetDataSets <- function(req, res, usr=NULL, key=NULL, format='json'){
 
 
 
-#* Returns a listing of the available properties
+#* Returns a listing of the Standard properties
 
 
 #* @param format (Optional) format of the response to return. Either json, csv, or xml. Default = json
@@ -116,8 +116,8 @@ apiGetProperties <- function( res,PropertyGroup=NULL, verbose=T, format='json'){
 
   tryCatch({
 
-    DF <-getProperties(PropertyGroup, verbose)
-    label <- 'Properties'
+    DF <-getStandardProperties(PropertyGroup, verbose)
+    label <- 'StandardProperties'
     resp <- cerealize(DF, label, format, res)
     return(resp)
 
@@ -157,6 +157,35 @@ apiGetPropetyGroups <- function( res, verbose=T, format='json'){
   })
 }
 
+
+#* Returns a listing of the Available properties for a dataset. This is a list of properties known to the SoilDataFederator for a particular data set. It does not mean that there is actual data avialbale for each of the listed properties.
+
+
+#* @param format (Optional) format of the response to return. Either json, csv, or xml. Default = json
+#* @param verbose (Optional) return just the property codes or the full descriptions. Default = True
+#* @param PropertyGroup (Optional) return just the properties for a given PropertyGroup. Default = All
+#* @param StandardTypes (Optional) which properties to return. Options are ony the standard properties (STANDARD), only the non standard properties (NONSTANDARD) or all the properties (ALL). Default = All
+#* @param DataSet (Required) return the available properties for a given Dataset Default = All
+
+#* @tag Soil Data Federator
+#* @get /SoilDataAPI/AvialableProperties
+apiGetAvailableProperties <- function( res, DataSet=NULL, StandardTypes='ALL', PropertyGroup=NULL, verbose=T, format='json'){
+
+  tryCatch({
+
+    DF <-getAvailableProperties(DataSet, StandardTypes, PropertyGroup, verbose)
+    print(head((DF)))
+    label <- 'AvailableProperties'
+    resp <- cerealize(DF, label, format, res)
+    return(resp)
+
+  }, error = function(res)
+  {
+    print(geterrmessage())
+    res$status <- 400
+    list(error=jsonlite::unbox(geterrmessage()))
+  })
+}
 
 
 bob <- function(){

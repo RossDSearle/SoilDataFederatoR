@@ -106,6 +106,12 @@ Mottlessubdominantmottleabundance
 
 
 
+df <- getWebData('http://asris-daas02/TAS_Services/api/MorphResults?morphology_attribute=s_desc_by')
+head(df)
+
+
+
+
 
 nrow(df)
 nrow(df2)

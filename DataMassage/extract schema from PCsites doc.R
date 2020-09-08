@@ -14,4 +14,20 @@ saveRDS(out, 'c:/temp/shema.rds')
 
 schema <- readRDS('c:/temp/shema.rds')
 str(schema)
-schema[[10]]
+schema[[9]]
+length(schema)
+
+
+for(i in 1:length(schema)){
+  df <- schema[[i]]
+  write.csv(df, paste0('c:/temp/Tables/', i, '.csv'))
+}
+
+
+outdf <- data.frame(column_name=character(), Domain_name=character(), Description=character(), Data_type=character(), Length=character(), isNull=character(), stringsAsFactors = F)
+for (i in 6:46) {
+  df <- read.csv(paste0('c:/temp/Tables/', i, '.csv'))
+  outdf<-rbind(outdf, df)
+}
+
+write.csv(outdf, paste0('c:/temp/Tables/AllFields.csv'))

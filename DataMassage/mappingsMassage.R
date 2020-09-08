@@ -165,3 +165,122 @@ sendStatement(conn, sql)
 mdf <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/QLD/SALImappings.csv')
 nrow(mdf)
 dbAppendTable(conn, 'Mappings', mdf)
+
+
+
+
+###########    EastCentral_Australia
+
+
+Hosted_dbPath <- paste0('C:/Projects/TernLandscapes/Site Data/HostedDBs/SoilDataFederatorDatabase.db3')
+cone <- DBI::dbConnect(RSQLite::SQLite(), Hosted_dbPath)
+
+sql <-"select * from ObservedProperties WHERE Dataset = 'EastCentral_Australia';"
+df <- doQuery(cone, sql)
+head(df)
+
+unique(df$ObservedProperty)
+
+df <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/EastAust/EastMapping.csv')
+copyTable(conn, 'Mappings', 'Mappings_V8')
+sql <-"select * from Mappings where DataSet = 'EastCentral_Australia'"
+sql <-"select * from Mappings where DataSet = 'QLDGovernment'"
+df <- doQuery(conn, sql)
+head(df)
+
+dbAppendTable(conn, 'Mappings', df)
+
+
+###########    GA
+
+
+Hosted_dbPath <- paste0('C:/Projects/TernLandscapes/Site Data/HostedDBs/SoilDataFederatorDatabase.db3')
+cone <- DBI::dbConnect(RSQLite::SQLite(), Hosted_dbPath)
+
+sql <-"select * from ObservedProperties WHERE Dataset = 'NatGeoChemicalSurvey';"
+sql <-"select * from ObservedProperties WHERE Dataset = 'NatGeoChemicalSurvey' and ObservedProperty = 'PH_VALUE';"
+df <- doQuery(cone, sql)
+head(df)
+
+unique(df$ObservedProperty)
+
+df <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/GA/GeoChemMapping.csv')
+copyTable(conn, 'Mappings', 'Mappings_V8')
+sql <-"select * from Mappings where DataSet = 'NatGeoChemicalSurvey'"
+sql <-"select * from Mappings where DataSet = 'QLDGovernment'"
+df <- doQuery(conn, sql)
+head(df)
+
+dbAppendTable(conn, 'Mappings', df)
+
+
+
+sql <-"select * from ObservedProperties WHERE Dataset = 'EcologicalProjects';"
+df <- doQuery(cone, sql)
+head(df)
+
+
+
+
+
+
+
+
+
+
+####### generate the new format Properties table
+
+dfSS <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/StandardSchema.csv')
+dbWriteTable(conn, 'StandardSchema', df)
+
+sql <-"select * from StandardSchema"
+dfSS <- doQuery(conn, sql)
+head(dfSS)
+
+sql <-"select * from properties"
+dfProp <- doQuery(conn, sql)
+head(dfProp)
+
+dfm <- merge(dfProp, dfSS, by.x = 'Property', by.y='ColumnName', all.y = T)
+str(dfm)
+head(dfm)
+write.csv(dfm, 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/StandardSchema2.csv')
+
+
+
+
+
+df <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/StandardSchema2.csv')
+head(df)
+df2 <- df[df$PropertyType=='LaboratoryMeasurement',]
+nrow(df)
+nrow(df2)
+
+
+url <- paste0('http://registry.it.csiro.au/def/soil/au/scma/',df2$Property[1], 'x' )
+
+url <- 'http://registry.it.csiro.au/def/soil/au/scma/9G2x?_format=jsonld'
+
+
+for (i in 1:nrow(df)) {
+
+  if(df[i, 3] =='LaboratoryMeasurement'){
+        print(i)
+        u <- paste0('http://registry.it.csiro.au/def/soil/au/scma/',df2[i, 2])
+        url <- paste0(u, '?_format=jsonld')
+        resp <- GET(url, timeout = 300)
+        resp$status_code
+        response <- content(resp, "text", encoding = 'UTF-8')
+
+        if(response==''){
+
+        }else{
+          md <- fromJSON(response)
+          md$`dct:source`
+          df2[i,9] <- u
+        }
+
+  }
+}
+
+write.csv(df2, 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/StandardSchema3.csv')

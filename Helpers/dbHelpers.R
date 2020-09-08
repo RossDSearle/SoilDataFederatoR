@@ -264,19 +264,20 @@ getOrgName<- function(Dataset){
 }
 
 
-getObservedProperties <- function(verbose=F){
-  sql <- paste0("Select * from LabMethods")
-  methods = doQueryFromFed(sql)
+# getObservedProperties <- function(verbose=F){
+#   sql <- paste0("Select * from LabMethods")
+#   methods = doQueryFromFed(sql)
+#
+#   if(verbose){
+#     return(methods)
+#   }else{
+#     return(methods$LABM_CODE)
+#   }
+#
+# }
 
-  if(verbose){
-    return(methods)
-  }else{
-    return(methods$LABM_CODE)
-  }
 
-}
-
-getProperties <- function(PropertyGroup=NULL, verbose=F){
+getStandardProperties <- function(PropertyGroup=NULL, verbose=F){
 
   if(is.null(PropertyGroup)){
     sql <- paste0("Select * from Properties")
@@ -288,6 +289,50 @@ getProperties <- function(PropertyGroup=NULL, verbose=F){
     return(props)
   }else{
     return(props$Property)
+  }
+
+}
+
+getAvailableProperties <- function(DataSet=NULL, StandardTypes = 'ALL', PropertyGroup=NULL, verbose=F){
+
+
+  if(is.null(DataSet)){stop('Value for "DataSet" needs to be suplied')}
+  sql <- "SELECT Mappings.Dataset, Mappings.OrigPropertyCode, Mappings.ObservedProperty, Properties.PropertyType, Properties.PropertyGroup, Properties.Description, Properties.TableName, Properties.DataType, Properties.VocabURL FROM Mappings LEFT JOIN Properties ON Mappings.ObservedProperty = Properties.Property COLLATE NOCASE"
+
+  if (!is.null(DataSet) | !is.null(PropertyGroup)) {sql <- paste0(sql," WHERE ")}
+
+  if(!is.null(PropertyGroup)) {sql <- paste0(sql," Properties.PropertyGroup = '", PropertyGroup, "' COLLATE NOCASE ")}
+
+  if(!is.null(DataSet))
+  {
+    if(!is.null(PropertyGroup)){sql <- paste0(sql," AND ")}
+    sql <- paste0(sql," Mappings.Dataset = '", DataSet, "' COLLATE NOCASE ")
+  }
+
+
+
+  sql <- paste0(sql, " ;")
+  print(sql)
+  props = doQueryFromFed(sql)
+
+
+
+  if(str_to_upper(StandardTypes) == 'STANDARD')
+  {
+    idxs <- which(!is.na(props$PropertyType))
+    propsOut <- props[idxs,]
+  }else if(str_to_upper(StandardTypes) == 'NONSTANDARD'){
+    idxs <- which(is.na(props$PropertyType))
+    propsOut <- props[idxs,]
+  }else{
+    propsOut <- props
+  }
+  print(head((props)))
+
+  if(verbose){
+    return(propsOut)
+  }else{
+    return(propsOut$ObservedProperty)
   }
 
 }
@@ -357,11 +402,11 @@ doQueryFromFed <- function(sql){
 }
 
 
-# getPropertyType <- function(Org, PropCode){
-#    sql <- paste0("Select * from Properties where Property = '", propCode, "' COLLATE NOCASE")
-#    r <- doQueryFromFed(sql)
-#   return(r$PropertyType)
-# }
+getPropertyType <- function(PropCode){
+   sql <- paste0("Select * from Properties where Property = '", PropCode, "' COLLATE NOCASE")
+   r <- doQueryFromFed(sql)
+  return(r$PropertyType)
+}
 
 getPropertiesInGroup <- function(PropertyGroup){
   #PropertyGroup = 'PSA'

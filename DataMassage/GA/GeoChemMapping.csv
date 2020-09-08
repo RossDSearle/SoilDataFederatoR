@@ -1,0 +1,7 @@
+Dataset,OrigPropertyCode,ObservedProperty,DataType,StandardCode
+NatGeoChemicalSurvey,PH_VALUE,PH_VALUE,M,TRUE
+NatGeoChemicalSurvey,4A1,4A1,L,TRUE
+NatGeoChemicalSurvey,3A1,3A1,L,TRUE
+NatGeoChemicalSurvey,P10_NR_S,P10_NR_S,L,TRUE
+NatGeoChemicalSurvey,P10_NR_Z,P10_NR_Z,L,TRUE
+NatGeoChemicalSurvey,P10_NR_C,P10_NR_C,L,TRUE

@@ -55,31 +55,50 @@ hDB_getDatasets <- function(DataSet=NULL, verbose=F){
 
 
 
-getData_TERNLandscapesDB <- function(DataSet, ObserverdProperties=NULL, observedPropertyGroup=NULL){
+getData_TERNLandscapesDB <- function(DataSet, observedProperty=NULL, observedPropertyGroup=NULL){
+
+  #OrgName <- getOrgName(DataSet)
+  #ps <- hDB_getPropertiesList(ObserverdProperties, observedPropertyGroup)
 
   OrgName <- getOrgName(DataSet)
-  ps <- hDB_getPropertiesList(ObserverdProperties, observedPropertyGroup)
-  propertyType <- getPropertyType(ps)
-  lodfs <- vector("list", length(ps))
+  propRecs <- getNativeProperties(DataSet=DataSet, observedProperty, observedPropertyGroup)
+
+  if(nrow(propRecs) == 0){
+    return(blankResponseDF())
+  }
+
+  lodfs <- vector("list", nrow(propRecs))
+
   if(is.null(DataSet)){
     provsql <- ''
   }else{
     provsql <- paste0(" and DataSet = '", DataSet, "'")
   }
 
-  for (i in 1:length(ps)) {
-    prop <- ps[i]
-    sql <- paste0("select * from ObservedProperties where ObservedProperty = '", prop, "'", provsql, ' order by Dataset, Observation_ID, UpperDepth, SampleID')
+  for (i in 1:nrow(propRecs)) {
+
+    nProp <- propRecs$nativeProp[i]
+    sProp <- propRecs$standardProp[i]
+
+    propertyType <- propRecs$propertyType[i]
+    units <- getUnits(propertyType = propertyType, prop = sProp)
+    if(length(units) == 0){units = NA}
+
+    prop <- nProp
+    sql <- paste0("select * from ObservedProperties where ObservedProperty = '", nProp, "'", provsql, ' order by Dataset, Observation_ID, UpperDepth, SampleID')
     fdf <- doHostedQuery(sql)
 
     if(nrow(fdf) >0){
       bits<-str_split(fdf$Date, '/')
-      y <- sprintf("%04d", as.numeric(sapply(bits, function (x) x[3])))
+      yt <- sapply(bits, function (x) x[3])
+      idx <- which((yt=='NA'))
+      yt[idx] <- '9999'
+      y <- sprintf("%04d", as.numeric(yt))
       m <- sprintf("%02d", as.numeric(sapply(bits, function (x) x[2])))
       d <-sprintf("%02d", as.numeric(sapply(bits, function (x) x[1])))
       fdf$DateOut <- paste0(d, '-', m, '-', y)
     oOutDF <- generateResponseDF(DataSet, fdf$Observation_ID, fdf$SampleID ,fdf$DateOut , fdf$Longitude, fdf$Latitude ,
-                                 fdf$UpperDepth , fdf$LowerDepth ,propertyType, ps[i], fdf$Value , fdf$Units)
+                                 fdf$UpperDepth , fdf$LowerDepth ,propertyType, sProp, fdf$Value , fdf$Units)
     lodfs[[i]] <- oOutDF
     }else{
       lodfs[[i]] <- blankResponseDF()

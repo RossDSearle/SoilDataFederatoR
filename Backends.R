@@ -303,8 +303,9 @@ getDataQualityInfo <- function(dataSetName, dataset){
 
    quals <-  doQueryFromFed(paste0('select * from DataSets where DataSet = "', dataSetName, '"'))
    dataset$QualCollection <- quals$QualCollection[1]
-   dataset$QualSpatialAgg <- quals$QualSpatialAgg[1]
+   dataset$QualSpatialAggregation <- quals$QualSpatialAggregation[1]
    dataset$QualManagement <- quals$QualManagement[1]
+   dataset$QualSpatialAccuracy <- quals$QualSpatialAccuracy[1]
 
   }
   return (dataset)
@@ -333,7 +334,7 @@ blankResponseDF <- function(){
   outDF <- data.frame(DataStore=character(), Dataset=character(), Provider=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
                       Longitude=numeric() , Latitude= numeric(),
                       UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
-                      Units= character(),   QualCollection=integer(), QualSpatialAgg=integer(), QualManagement=integer(), stringsAsFactors = F)
+                      Units= character(),   QualCollection=integer(), QualSpatialAggregation=integer(), QualManagement=integer(),QualSpatialAccuracy=integer(), stringsAsFactors = F)
 }
 
 generateResponseDF <- function( dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units ){
@@ -343,7 +344,7 @@ generateResponseDF <- function( dataset, observation_ID, sampleID, date, longitu
   outDF <- data.frame(DataStore=datastore, Dataset=dataset,Provider=provider, Observation_ID=observation_ID, SampleID=sampleID , SampleDate=date ,
                       Longitude=longitude, Latitude=latitude ,
                       UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
-                      Value=value , Units=units, QualCollection=NA, QualSpatialAgg=NA, QualManagement=NA, stringsAsFactors = F)
+                      Value=value , Units=units, QualCollection=NA, QualSpatialAggregation=NA, QualManagement=NA, QualSpatialAccuracy=NA, stringsAsFactors = F)
   oOutDF <- outDF[order(outDF$Observation_ID, outDF$Dataset, outDF$UpperDepth, outDF$SampleID),]
   print(head(oOutDF))
   return(oOutDF)
