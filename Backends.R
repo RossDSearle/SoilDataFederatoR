@@ -34,6 +34,7 @@ source(paste0('Backends/Backend_ASRIS.R'))
 source(paste0('Backends/Backend_TERNLandscapesDB.R'))
 source(paste0('Backends/Backend_NSSC.R'))
 source(paste0('Backends/Backend_ASRISHostedAPI.R'))
+source(paste0('Backends/Backend_ASRISSQLTas.R'))
 
 source(paste0('Dev/TestingLocationSpecificOnAsris.R'))
 
@@ -278,7 +279,8 @@ getDataSetFunctions <-  c(
                           TERNSurveillance=getData_TERNSurveillance,
                           NSSC=getData_NSSC,
                           ASRIS=getData_ASRIS,
-                          TERNLandscapesDB=getData_TERNLandscapesDB
+                          TERNLandscapesDB=getData_TERNLandscapesDB,
+                          ASRISSQLTas=getData_TasGov
                           #ASRISHostedNSWGovt=getData_NSWGovt
 
 )
@@ -289,7 +291,8 @@ getLocationDataFunctions <- c(
                       TERNSurveillance=getLocationData_TERNSurveillance,
                       NSSC=getLocationData_NSSC,
                       ASRIS=getLocationData_ASRIS,
-                      TERNLandscapesDB=getLocationData_TERNLandscapesDB
+                      TERNLandscapesDB=getLocationData_TERNLandscapesDB,
+                      ASRISSQLTas=getLocationData_TasGov
                       #ASRISHostedNSWGovt=getLocationData_NSWGovt
 )
 
@@ -346,7 +349,7 @@ generateResponseDF <- function( dataset, observation_ID, sampleID, date, longitu
                       UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
                       Value=value , Units=units, QualCollection=NA, QualSpatialAggregation=NA, QualManagement=NA, QualSpatialAccuracy=NA, stringsAsFactors = F)
   oOutDF <- outDF[order(outDF$Observation_ID, outDF$Dataset, outDF$UpperDepth, outDF$SampleID),]
-  print(head(oOutDF))
+ # print(head(oOutDF))
   return(oOutDF)
 }
 

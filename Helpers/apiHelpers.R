@@ -1,3 +1,6 @@
+library(dplyr)
+library(lubridate)
+
 #######     Some utilities    ###########################
 
 
@@ -208,3 +211,23 @@ cerealize <- function(DF, label, format, res){
 
 
 }
+
+
+
+writeLog <- function(df, usr){
+
+  if(!dir.exists(logDir)){dir.create(logDir)}
+  logFile <- paste0(logDir,'/soilDataFederatorUsage.csv')
+  if(!file.exists(logFile)){
+    cat('DateTime,User,Dataset,Attribute,Count\n', sep = '', file = logFile, append = F)
+  }
+
+  sdf <- df %>% group_by(Dataset, ObservedProperty) %>% summarise(n = n())
+  odf <- data.frame(DateTime=now(),User=usr,Dataset=sdf$Dataset, Attribute=sdf$ObservedProperty,Count=sdf$n, stringsAsFactors = F)
+  write.table(odf, logFile,append = TRUE,sep = ",",col.names = FALSE, row.names = FALSE,  quote = FALSE)
+}
+
+
+
+
+

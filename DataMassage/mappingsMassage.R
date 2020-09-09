@@ -221,6 +221,78 @@ head(df)
 
 
 
+#########  Tassie
+
+df <- read.csv('C:/Projects/TernLandscapes/Site Data/Tas/Tas/20191127/soil_lab_result.csv')
+str(df)
+
+meths <- unique(df$LAB_METHOD)
+write.csv(meths, 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/Tassie/LabMeths.csv')
+
+methCodes <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/Tassie/LabMeths.csv')
+
+sql <-"select * from Mappings where DataSet = 'TasGovernment'"
+df <- doQuery(conn, sql)
+head(df)
+copyTable(conn, 'Mappings', 'Mappings_V9')
+sql <- "delete from Mappings where Dataset = 'TasGovernment'"
+sendStatement(conn, sql)
+
+odf <- data.frame(Dataset='TasGovernment', OrigPropertyCode=methCodes$OriginalCode, ObservedProperty=methCodes$StandardCode, DataType='L', StandardCode=TRUE )
+dbAppendTable(conn, 'Mappings', odf)
+
+tcon <- DBI::dbConnect(odbc::odbc(),
+                       Driver   = "SQL Server",
+                       Server   = "asris-sql-stage.it.csiro.au\\sql2017",
+                       Database = "tasmania_json_services",
+                       UID      = 'NEXUS\\sea084',
+                       PWD      = 'Chas4066',
+                       Trusted_Connection = "True"
+)
+
+tbls <- dbListTables(tcon, schema='dbo')
+
+fName <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/Tassie/morpFields.csv'
+
+cat('table,fld\n', file = fName, sep = '', append = F)
+for (i in 1:length(tbls)) {
+
+  t <- tbls[i]
+  flds <- dbListFields(tcon, t)
+  for (j in 1:length(flds)) {
+    f <- flds[j]
+    cat(t,',',f,'\n', file = fName, sep = '', append = T)
+  }
+}
+
+
+tdf <- data.frame(tbls)
+dput(tdf)
+
+
+inDF <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/Tassie/morpFields2.csv')
+
+
+odf <- data.frame(Dataset='TasGovernment', OrigPropertyCode=inDF$Fld, ObservedProperty=inDF$StdCode, DataType='M', StandardCode=TRUE )
+dbAppendTable(conn, 'Mappings', odf)
+
+
+
+bob <- structure(list(tbls = c("soil_coarse_fragment", "soil_colour",
+                               "soil_crack", "soil_cutan", "soil_erosion", "soil_fabric", "soil_horizon",
+                               "soil_lab_result", "soil_layer", "soil_mottle", "soil_observation",
+                               "soil_pan", "soil_ph", "soil_pore", "soil_rock_outcrop", "soil_root",
+                               "soil_segregation", "soil_site", "soil_site_bak", "soil_strength",
+                               "soil_structure", "soil_surface_coarse_fragment")), class = "data.frame", row.names = c(NA,
+                                                                                                                       -22L))
+
+
+
+
+
+
+
+
 
 
 

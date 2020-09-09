@@ -6,6 +6,8 @@ library(stringr)
 library(dplyr)
 
 
+# \\nexus.csiro.au\Fileservers\fsact01-cdc\LW\Share1\Mud-bu\store1\aclep\Natsoil\sourceData
+
 #1)	Lab Results endpoint (can be filtered on method_code, horizon_num, spec_id, upper_bound_lat, lower_bound_lat, upper_bound_lon and lower_bound_lon. The results can also be PAGED using page_num and page_size)
 #3)	Morphology results endpoint (can be filtered on morphology_attribute, agency_code, proj_code, s_id and o_id. The results can also be PAGED using page_num and page_size)
 
@@ -57,7 +59,7 @@ getLocationData_ASRIS<- function(DataSet){
 
 
 
-getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
+getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
 
   OrgName <- getOrgName(DataSet)
   propRecs <- getNativeProperties(DataSet=DataSet, observedProperty, observedPropertyGroup)
@@ -86,6 +88,8 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
         odf <- get_NSWLab(nProp, DataSet)
       }else if(DataSet=='VicGovernment'){
           odf <- get_VicData(nProp, DataSet, propertyType)
+      }else if(DataSet=='TasGovernment'){
+          odf <- get_TasLab(nProp, DataSet)
       }else{odf <- blankResponseDF()}
 
     }else{
@@ -114,6 +118,36 @@ getData_ASRIS<- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
   outDF = as.data.frame(data.table::rbindlist(lodfs))
   return(outDF)
 }
+
+
+get_TasLab <- function(nProp, DataSet){
+
+  ep <- getASRISService(DataSet)
+  url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
+  fdfRaw <- getWebDataDF(url)
+
+  if(length(fdfRaw)==0){
+    oOutDF <- blankResponseDF()
+  }else{
+    if(nrow(fdfRaw) > 0){
+      fdf <- fdfRaw
+      d <- str_split( fdfRaw$sample_date, ' ')
+      d2 <- sapply(d, function (x) x[1])
+      d3 <- as.Date(d2, format = "%m/%d/%y")
+      outDate <- format(d3, '%d-%m-%Y')
+
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_1'), '1' , outDate, fdf$longitude, fdf$latitude,
+                                   fdf$bound_upper , fdf$bound_lower, 'LaboratoryMeasurement', fdf$labm_code, fdf$labr_value , 'NA')
+    }else{
+      oOutDF <- blankResponseDF()
+    }
+  }
+  return(oOutDF)
+}
+
+
+
+
 
 
 get_VicData <- function(nProp, DataSet,propertyType){

@@ -1,0 +1,32 @@
+StandardCode,OriginalCode
+15N1,Exchangeable Na+ percentage (ESP)
+15L1,Base saturation percentage (BSP)
+15C1_CEC,"Exchangeable bases and CEC - alcoholic 1M ammonium chloride at pH 8.5, pretreatment for soluble salts"
+15C1,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - alcoholic 1M ammonium chloride at pH 8.5, pretreatment for soluble salts"
+6A1,Organic C ? W&B
+15A1,"Exchangeable bases (Ca2+,Mg2+,Na+,K+) - 1M ammonium chloride at pH 7.0, no pretreatment for soluble salts"
+15C1,Total S ? X-ray fluorescence
+4A1,pH of 1:5 soil/water suspension
+P10_NR_Z,Silt (%) - Not recorded
+9A1,Total P ? X-ray fluorescence
+9B2,"Bicarbonate-extractable P (Colwell-P) ? automated colour, continuous segmented flow/FIA"
+5_NR,Unknown chlorides
+P10_NR_C,Clay (%) - Not recorded
+P10_NR_CS,Coarse sand (%) - Not recorded
+P10_NR_FS,Fine sand (%) - Not recorded
+3A1,Electrical conductivity (EC) of 1:5 soil/water extract
+7A2,"Total nitrogen - semimicro Kjeldahl , automated colour"
+6C1,Particulate organic C (POC)
+2A1,Air-dry moisture content
+15G1,Exchange acidity (H+ + Al3+) by 1 M potassium chloride
+6B1,Total organic C ? Heanes wet oxidation
+12_NR_FE,Total element - Fe(%) - Not recorded
+P10_GRAV,Gravel (%)
+19A1,Carbonates ? rapid titration
+19B1,Carbonates by pressure change ? manometric
+12_XRF,Total elemental analysis of soils and sediments ? X-ray fluorescence spectroscopy
+4B1,pH of 1:5 soil/0.01 M calcium chloride extract ?
+13C1_SI,"Citrate/dithionite-extractable iron, aluminium, Manganese and Silicon"
+13A1_FE,Oxalate-extractable iron
+P6_LP,"Dispersion Index (Loveday and Pyle, 1973)"
+15F2,Exchangeable aluminium by 0.01 M AgTU+

@@ -2,6 +2,7 @@ library(stringr)
 library(XML)
 library(xml2)
 library(htmlTable)
+library(lubridate)
 
 #To start in supervisorctl on esoil use this - "sudo supervisorctl -c /etc/supervisor/supervisord.conf start plumber_SoilFed"
 
@@ -11,9 +12,11 @@ machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){
 
   deployDir <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
+  logDir <- '/mnt/data/APILogs/SoilDataFederator/'
   #server <- 'http://esoil.io'
 }else{
   deployDir <-'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
+  logDir <- 'c:/temp/Logs'
   #server <- '0.0.0.0'
 }
 
@@ -21,7 +24,7 @@ source(paste0(deployDir, '/Helpers/apiHelpers.R'))
 source(paste0(deployDir, '/Backends.R'))
 
 #* @apiTitle TERN SoilDataFederatoR Web API
-#* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the SoilDataFederatoR service can be found <a href='http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/help/index.html' > HERE </a>
+#* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the SoilDataFederatoR service can be found <a href='http://esoil.io/TERNLandscapes/SoilDataFederatoR/help/index.html' > HERE </a>
 #* <h2>API Key Registration</h2>
 #* You need to register for an API Key to be able to use the API to access the soil data. You can quickly register <a
 #* href="https://shiny.esoil.io/SoilDataFederator/Register/"
@@ -33,7 +36,7 @@ source(paste0(deployDir, '/Backends.R'))
 #' @filter logger
 function(req, res){
 
-  logentry <- paste0(as.character(Sys.time()), ",",
+  logentry <- paste0(as.character(now()), ",",
        machineName, ",",
        req$REQUEST_METHOD, req$PATH_INFO, ",",
        str_replace_all( req$HTTP_USER_AGENT, ",", ""), ",",
@@ -43,13 +46,14 @@ function(req, res){
 
   dt <- format(Sys.time(), "%d-%m-%Y")
 
-  logDir <- paste0(deployDir, "/Logs")
+ # logDir <- paste0(deployDir, "/Logs")
 
   if(!dir.exists(logDir)){
      dir.create(logDir , recursive = T)
     }
 
-  logfile <- paste0(deployDir, "/Logs/SoilFederationAPI_logs_", dt, ".csv")
+  logfile <- paste0(logDir, "/SoilFederationAPI_logs_", dt, ".csv")
+  print(logfile)
   #try(writeLogEntry(logfile, logentry), silent = TRUE)
   try(writeLogEntry(logfile, logentry), silent = TRUE)
   plumber::forward()
@@ -82,8 +86,8 @@ apiGetDataSets <- function(req, res, usr=NULL, key=NULL, format='json'){
 
   tryCatch({
     library(rlang)
-    env_print(req)
-    print(env_get(req, 'QUERY_STRING'))
+   # env_print(req)
+   # print(env_get(req, 'QUERY_STRING'))
 
     DF <- getDataSets(usr, key)
     label <- 'DataSets'
@@ -240,6 +244,7 @@ apiGetSoilData<- function(res, usr='Demo', key='Demo', DataSet=NULL, observedPro
     }
 
     label <- 'SoilProperty'
+    writeLog(oDF, usr)
     resp <- cerealize(oDF, label, format, res)
   }, error = function(res)
   {
@@ -330,6 +335,7 @@ apiGetDataQualityDescriptions <- function(res, DataSet=NULL, bbox=NULL, format='
 #* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
 #* @param SiteID Site identifier
 
+
 #* @tag Soil Data Federator Development
 #* @get /SoilDataAPI/getSite
 apiGetSiteData <- function(res, SiteID, format='json'){
@@ -354,8 +360,8 @@ apiGetSiteData <- function(res, SiteID, format='json'){
 
 
 
-#* @assets /srv/plumber/TERNLandscapes/SoilDataFederatoR/R/Docs /help
-list()
+#* @assets /srv/plumber/TERNLandscapes/SoilDataFederatoR/Docs /help
+
 
 
 
