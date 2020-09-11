@@ -35,6 +35,7 @@ source(paste0('Backends/Backend_TERNLandscapesDB.R'))
 source(paste0('Backends/Backend_NSSC.R'))
 source(paste0('Backends/Backend_ASRISHostedAPI.R'))
 source(paste0('Backends/Backend_ASRISSQLTas.R'))
+source(paste0('Backends/Backend_SAsqlLite.R'))
 
 source(paste0('Dev/TestingLocationSpecificOnAsris.R'))
 
@@ -280,7 +281,8 @@ getDataSetFunctions <-  c(
                           NSSC=getData_NSSC,
                           ASRIS=getData_ASRIS,
                           TERNLandscapesDB=getData_TERNLandscapesDB,
-                          ASRISSQLTas=getData_TasGov
+                          ASRISSQLTas=getData_TasGov,
+                          SAsqlLite=getData_SADB
                           #ASRISHostedNSWGovt=getData_NSWGovt
 
 )
@@ -292,7 +294,8 @@ getLocationDataFunctions <- c(
                       NSSC=getLocationData_NSSC,
                       ASRIS=getLocationData_ASRIS,
                       TERNLandscapesDB=getLocationData_TERNLandscapesDB,
-                      ASRISSQLTas=getLocationData_TasGov
+                      ASRISSQLTas=getLocationData_TasGov,
+                      SAsqlLite=getLocationData_SADB
                       #ASRISHostedNSWGovt=getLocationData_NSWGovt
 )
 

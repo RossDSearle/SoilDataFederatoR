@@ -93,6 +93,9 @@ head(df)
 
 df2 <- getWebData('http://asris-daas02/NSW_Services/api/MorphResults?morphology_attribute=Colourmoistmunsellcolourchroma')
 df3 <- getWebData('http://asris-daas02/NSW_Services/api/MorphResults?morphology_attribute=Stationnumber')
+df3 <- getWebData('http://asris-daas02/NSW_Services/api/MorphResults?morphology_attribute=Location')
+
+
 
 df <- getWebData('http://asris-daas02/NSW_Services/api/LabResults?method_code=Naswat')
 head(df)

@@ -88,8 +88,6 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
         odf <- get_NSWLab(nProp, DataSet)
       }else if(DataSet=='VicGovernment'){
           odf <- get_VicData(nProp, DataSet, propertyType)
-      }else if(DataSet=='TasGovernment'){
-          odf <- get_TasLab(nProp, DataSet)
       }else{odf <- blankResponseDF()}
 
     }else{
@@ -281,7 +279,8 @@ get_NSWLocation <- function(Dataset){
 get_NSWLab <- function(nProp, DataSet){
 
   ep <- getASRISService(DataSet)
-  url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
+  nProp <- 'Location'
+  url <- paste0(ep, '/MorphResults?morphology_attribute=', paste0(nProp ))
   fdfRaw <- getWebDataDF(url)
 
   if(length(fdfRaw)==0){

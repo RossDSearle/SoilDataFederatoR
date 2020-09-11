@@ -70,61 +70,8 @@ usr='Demo'; key='Demo'
 datas
 
 props <- c('3A1', 'h_texture')
+props <- c('3A1', 'ph_value')
 
-sql <- 'select * from Datasets where Active=1'
-dSets <- doQueryFromFed(sql)
-
-ds <- dSets$DataSet
-
-
-for (j in 1:length(props)) {
-
-  OP <- props[j]
-
-  if(j==1){
-    cat(crayon::yellow('\n\nTesting Lab Data EndPoints', sep=''))
-    cat(crayon::yellow('\n===============================', sep=''))
-  }else{
-    cat(crayon::yellow('\n\nTesting Morphology Data EndPoints', sep=''))
-    cat(crayon::yellow('\n=====================================', sep=''))
-  }
-
-    for (i in 1:length(ds)) {
-      dSt <- ds[i]
-
-      cat(crayon::blue('\n', dSt,' : ', sep=''))
-      r1 <- getSoilData(DataSets=dSt,observedProperty=OP, usr='ross.searle@csiro.au', key='a', verbose=F)
-      #r2 <- getLocations(DataSets=dSt, usr='ross.searle@csiro.au', key='a')
-
-      if(nrow(r1) > 0){
-        cat(crayon::green('SUCCESS', sep=''))
-        cat(' -  returned ', nrow(r1), ' records', sep='')
-      }else{
-        cat(crayon::red('POSSIBLE PROBLEM', sep=''))
-      }
-    }
-}
-
-
-
-####  Test the getLocations EndPoints
-
-cat(crayon::yellow('\n\nTesting LOcations EndPoints', sep=''))
-cat(crayon::yellow('\n=====================================', sep=''))
-for (i in 1:length(ds)) {
-  dSt <- ds[i]
-
-  cat(crayon::blue('\n', dSt,' : ', sep=''))
-
-  r2 <- getSiteLocations(DataSets=dSt, usr='ross.searle@csiro.au', key='a')
-
-  if(nrow(r2) > 0){
-    cat(crayon::green('SUCCESS', sep=''))
-    cat(' -  returned ', nrow(r2), ' records', sep='')
-  }else{
-    cat(crayon::red('POSSIBLE PROBLEM', sep=''))
-  }
-}
 
 
 
@@ -168,7 +115,9 @@ getSoilData(DataSets='SCARP',observedProperty='h_notes', usr='ross.searle@csiro.
 getSoilData(DataSets='SCARP',observedProperty='o_asc_ord', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='SCARP', usr='ross.searle@csiro.au', key='a')
 
-getSoilData(DataSets='SAGovernment', observedProperty='4A2', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='SAGovernment', observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='SAGovernment', observedProperty='O_DESC_BY', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='SAGovernment', observedProperty='S_SLOPE', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='SAGovernment', usr='ross.searle@csiro.au', key='a')
 

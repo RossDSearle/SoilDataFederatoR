@@ -17,9 +17,9 @@ getLocationData_TasGov <- function(DataSet){
                          Driver   = "SQL Server",
                          Server   = "asris-sql-stage.it.csiro.au\\sql2017",
                          Database = "tasmania_json_services",
-                         UID      = 'NEXUS\\sea084',
-                         PWD      = 'Chas4066',
-                         Trusted_Connection = "True"
+                         UID      = 'rosssearle',
+                         PWD      = 'Ads@2*&5cv'
+
   )
 
   OrgName <- getOrgName(DataSet)

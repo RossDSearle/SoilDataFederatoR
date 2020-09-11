@@ -1,0 +1,24 @@
+DataSet,Lab,Morph
+LawsonGrains_AgCatalyst,3A1,h_texture
+TERNSurveillance,3A1,h_texture
+QLDGovernment,3A1,h_texture
+NatSoil,3A1,h_texture
+TasGovernment,3A1,h_texture
+WAGovernment,3A1,h_texture
+SAGovernment,3A1,h_texture
+VicGovernment,3A1,h_texture
+NSWGovernment,3A1,h_texture
+NTGovernment,3A1,h_texture
+EastCentral_Australia,3A1,h_texture
+NatGeoChemicalSurvey,3A1,PH_VALUE
+SCARP,3A1,o_asc_ord
+Salinity_Action_Plan_Flora_Survey,3A1,NA
+South West Australian Transitional Transect (SWATT),7_NR,NA
+Fire_gimlet_woodlands_flora,3A1,NA
+Kimberley_Rainforest_Survey_1990,3A1,NA
+Little Sandy Desert survey,3A1,NA
+Biological Survey of the Ravensthorpe Range (Phase 1),7_NR,NA
+Pilbara_Regional_Survey_Riparian_Flora,3A1,NA
+Kimberley_Islands_Biodiversity_Survey,3A1,NA
+Nullarbor_Regional_Survey,3A1,NA
+Transects for Environmental Monitoring and Decision Making (TREND),3_NR,PH_VALUE
