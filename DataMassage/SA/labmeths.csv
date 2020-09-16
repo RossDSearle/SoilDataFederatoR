@@ -1,0 +1,33 @@
+Dataset,ObservedProperty,OrigPropertyCode,DataType,StandardCode
+SAGovernment,12A1_AL,12A1_AL-Extractable Al-mg/kg,L,TRUE
+SAGovernment,12A1_CU,12A1_CU-Extractable Cu-mg/kg,L,TRUE
+SAGovernment,12A1_FE,12A1_FE-Extractable Fe-mg/kg,L,TRUE
+SAGovernment,12A1_MN,12A1_MN-Extractable Mn-mg/kg,L,TRUE
+SAGovernment,12A1_ZN,12A1_ZN-Extractable Zn-mg/kg,L,TRUE
+SAGovernment,12B1_CU,12B1_CU-Extractable Cu-mg/kg,L,TRUE
+SAGovernment,12B1_FE,12B1_FE-Extractable Fe-mg/kg,L,TRUE
+SAGovernment,12B1_MN,12B1_MN-Extractable Mn-mg/kg,L,TRUE
+SAGovernment,12B1_ZN,12B1_ZN-Extractable Zn-mg/kg,L,TRUE
+SAGovernment,12C1,12C1-Extractable B-mg/kg,L,TRUE
+SAGovernment,12D1_FE,12D1_FE-Extractable Fe-mg/kg,L,TRUE
+SAGovernment,14B1,14B1-EC-dS/m,L,TRUE
+SAGovernment,14H1_CA,14H1_CA-Soluble bases Ca-mg/L,L,TRUE
+SAGovernment,14H1_K,14H1_K-Soluble bases K-mg/L,L,TRUE
+SAGovernment,14H1_MG,14H1_MG-Soluble bases Mg-mg/L,L,TRUE
+SAGovernment,14H1_NA,14H1_NA-Soluble bases Na-mg/L,L,TRUE
+SAGovernment,15F3,15F3-CEC-meq/100g,L,TRUE
+SAGovernment,15_NR_AL,15_NR_AL-Exchangeable Al+++-meq/100g,L,TRUE
+SAGovernment,15_NR_CA,15_NR_CA-Exchangeable Ca++-meq/100g,L,TRUE
+SAGovernment,15_NR_K,15_NR_K-Exchangeable K+-meq/100g,L,TRUE
+SAGovernment,15_NR_MG,15_NR_MG-Exchangeable Mg++-meq/100g,L,TRUE
+SAGovernment,15_NR_NA,15_NR_NA-Exchangeable Na+-meq/100g,L,TRUE
+SAGovernment,18A1,18A1-Extractable K-mg/kg,L,TRUE
+SAGovernment,19A1,19A1-Carbonates-%,L,TRUE
+SAGovernment,3A1,3A1-EC-dS/m,L,TRUE
+SAGovernment,4A1,4A1-pH Soil/water-,L,TRUE
+SAGovernment,4B2,4B2-pH Soil/CaCl2-,L,TRUE
+SAGovernment,5_NR,5_NR-Water soluble Cl-%,L,TRUE
+SAGovernment,6A1,6A1-Organic carbon-%,L,TRUE
+SAGovernment,7B1,7B1-Water soluble NO3-mg/kg,L,TRUE
+SAGovernment,7C1a,7C1a-Ammonium-N-mg/kg,L,TRUE
+SAGovernment,9_NR,9_NR-Available P-mg/kg,L,TRUE

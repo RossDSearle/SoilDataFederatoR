@@ -288,6 +288,68 @@ bob <- structure(list(tbls = c("soil_coarse_fragment", "soil_colour",
 
 
 
+#######   SA
+
+
+sql <-"select * from Mappings where DataSet = 'SAGovernment'"
+df <- doQuery(conn, sql)
+head(df)
+nrow(df)
+copyTable(conn, 'Mappings', 'Mappings_V10')
+sql <- "delete from Mappings where Dataset = 'SAGovernment'"
+sendStatement(conn, sql)
+
+dbPath <- 'C:/Projects/TernLandscapes/Site Data/HostedDBs/SASoils.db'
+conSA <- dbConnect(RSQLite::SQLite(), dbPath)
+
+
+
+sql <- 'SELECT method_name FROM labresults GROUP BY method_name;'
+df <- doQuery(conSA, sql)
+df
+write.csv(df, 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/SA/labmeths.csv')
+
+df <-read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/SA/labmeths.csv')
+head(df)
+dbAppendTable(conn, 'Mappings', df)
+
+
+tbls <- dbListTables(conSA)
+tbls2 <- tbls[-3]
+
+fName <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/SA/morpFields.csv'
+cat('Dataset,TableName,ObservedProperty,OrigPropertyCode,DataType,StandardCode\n', file = fName, sep = '', append = F)
+for (i in 1:length(tbls2)) {
+  t <- tbls2[i]
+  flds <- dbListFields(conSA, t)
+  for (j in 1:length(flds)) {
+    f <- flds[j]
+    cat(paste0('SAGovernment,', t,',,', f ,',L,TRUE\n'), file = fName, sep = '', append = T)
+  }
+}
+
+df <-read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/SA/morpFields.csv')
+head(df)
+dfin <- df[,c(1,3,4,5,6)]
+dbAppendTable(conn, 'Mappings', dfin)
+
+morphMaps <-read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/SA/morpFields.csv')
+dput(morphMaps)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

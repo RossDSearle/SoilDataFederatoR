@@ -90,6 +90,9 @@ apiGetDataSets <- function(req, res, usr=NULL, key=NULL, format='json'){
    # print(env_get(req, 'QUERY_STRING'))
 
     DF <- getDataSets(usr, key)
+
+    DF <- within(DF, rm('NativeAPIURL'))
+
     label <- 'DataSets'
     resp <- cerealize(DF, label, format, res)
     return(resp)
