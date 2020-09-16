@@ -27,7 +27,7 @@ source(paste0(deployDir, '/Backends.R'))
 #* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the SoilDataFederatoR service can be found <a href='https://esoil.io/TERNLandscapes/SoilDataFederatoR/help/SoilDataFederatorHelp.html' > HERE </a>
 #* <h2>API Key Registration</h2>
 #* You need to register for an API Key to be able to use the API to access the soil data. You can quickly register <a
-#* href="https://shiny.esoil.io/SoilDataFederator/Register/"
+#* href="https://shiny.esoil.io/SoilDataFederator/Pages/Register/"
 #* target="_blank">HERE</a>. Just supply your email address, name and organisation and you are good to go.
 
 

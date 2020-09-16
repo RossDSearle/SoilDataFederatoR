@@ -4,12 +4,14 @@ library(DBI)
 library(stringr)
 
 
+
+
 machineName <- as.character(Sys.info()['nodename'])
 
 if(machineName=='soils-discovery'){
   dbPathSoilsFed <- '/srv/plumber/TERNLandscapes/SoilDataFederatoR/DB/soilsFederator.sqlite'
 }else{
-  dbPathSoilsFed <- system.file("extdata", "soilsFederator.sqlite", package = "SoilDataFederatoR")
+  dbPathSoilsFed <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DB/soilsFederator.sqlite'
 }
 
 doQueryFromFed <- function(sql){
@@ -62,7 +64,7 @@ addUser <- function(email, firstName, lastName, organisation){
 
     if(allGood){
 
-      url <-URLencode(paste0('https://shiny.esoil.io/SoilDataFederator/RegisterConfirm/?&email=', email, '&firstname=', firstName, '&lastname=', lastName, '&organisation=',organisation, '&tkey=', apiKey ))
+      url <-URLencode(paste0('https://shiny.esoil.io/SoilDataFederator/Pages/RegisterConfirm/?&email=', email, '&firstname=', firstName, '&lastname=', lastName, '&organisation=',organisation, '&tkey=', apiKey ))
       print(url)
       emailInfo <- paste0('echo "<p> Dear ', firstName, ',</p><p><br></p><p>Thanks for registering with the TERN SoilDataFederator. Click <a href=', url, '> HERE </a> to confirm your registration and obtain an API key</p><p><br></p><p>Regards</p><p>The TERN SoilDataFederator" | mail -s "$(echo "SoilDataFederator API Key Request\nContent-Type: text/html")" ', email,' -r no-reply@soils-discovery.csiro.au')
       system(emailInfo)
