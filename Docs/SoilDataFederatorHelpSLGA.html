@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>TERN SoilDataFederator Information</title>
+  <meta content="Ross Searle" name="author">
+  <style type="text/css">
+
+
+
+  </style>
+  <link href="styles/styles.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    @import url("styles/styles.css");
+  </style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<div class="headertext1">Soil and Landscape Grid</div>
+<div class="headertext2">of Australia</div>
+</div>
+<h1><big style="color: rgb(153, 153, 153);"><big>SoilDataFederator</big></big></h1>
+<h1>About</h1>
+The SoilDataFederator is a web API that brings together soil site data
+from a range of disparate data sources. It allows the user to query
+soils data stores across Australia in a consistent manner and the data
+returned is a consistent
+format. Users do not need to know the details of each of the individual
+data stores structures and querying mechanisms. The data in the system
+is historical soil survey data and is composed of both soil morphological
+description data and laboratory analysis data. The SoilDataFederator will return
+all available data for a specified soil property<br>
+<br>
+The SoilDataFederator web API is designed to be as simple as possible.
+Users can query API end point to return information about<br>
+<ul>
+  <li><span style="font-weight: bold;">DataSets </span>- which
+DataSets are available in the system. </li>
+  <li><span style="font-weight: bold;">Properties</span> - which soil
+properties are available in the system. </li>
+  <li><span style="font-weight: bold;">PropertyGroups </span>- defined
+groupings of Properties (a convenience for querying)</li>
+</ul>
+and then return data using the <br>
+<ul>
+  <li><span style="font-weight: bold;">SoilData</span> end point.</li>
+</ul>
+The currently available datasets and their contributors are listed <a
+ href="http://shiny.esoil.io/SoilDataFederator/Pages/Datasets/"
+ target="_blank">HERE</a><br>
+<br>
+The code for the SoilDataFederator system is written in R and can be found <a
+ href="https://github.com/RossDSearle/SoilDataFederatoR" target="_blank">HERE</a><br>
+<br>
+<h1>API Key Registration</h1>
+You need to register for an API Key to be able to use the API to access
+the soil data. You can quickly register <a
+ href="https://shiny.esoil.io/SoilDataFederator/Pages/Register/"
+ target="_blank">HERE</a>. Just supply your email address, name and
+organisation and you are good to go. We might get in touch once in a
+while to ask for feedback or let you know about changes etc. All of the
+current endpoints will work without an API Key, except for the
+"GetSoilData" endpoint - the one you'll actually want to use. If you
+don't want to register, but instead you just want to check out how the
+API works you can use usr=Demo &amp; key=Demo authentication. Only the
+first 5 records will be returned.<br>
+<br>
+<h1>Licensing</h1>
+All data in SoilDataFederator system are publicly available, typically under a <a
+ href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0 license</a>
+, meaning you are free to use this data as is but you must attribute the original source.
+No guarantee of accuracy or quality is made. Explicit licensing information for
+each data set can be obtained from the "Dataset" endpoint<br> <br>
+
+<h1>Examples</h1>
+The <span style="font-weight: bold;">Swagger UI </span>for the API is
+located <a
+ href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/__swagger__/#">HERE</a>.
+The Swagger UI allows users to quickly test the functionality of the
+API.<br>
+Below are some examples for the various endpoints in the API. You can
+click on these links to see what information is returned. <br>
+<br>
+An <span style="font-weight: bold;">R</span> script which demonstrates
+how to access these endpoints can be
+downloaded <a href="SoilDataFederatorR_Examples.R">HERE</a>.<br>
+<br>
+The endpoint can return data in either, json, xml or csv formats. The
+json format is by far the most efficient format for big data queries.<br>
+The API uses authentication (user name &amp; password) to restrict
+access to data that is not publicly available. By default, only
+publicly available data sets are returned from queries. <br>
+<br>
+
+<br>
+<br>
+The following endpoints are currently available in the SoilDataFederator<br>
+<br>
+<h2 style="font-weight: bold;">DataSets</h2>
+The DataSets endpoint returns
+all of the DataSets available in the SoilDataFederator. Examples of the
+3 different
+returned formats are listed below. After this, only the json example
+will be provided but other formats can be returned using the same query
+parameters.<br>
+<br>
+<h4>Endpoint Parameters</h4>
+<ul>
+  <li><span style="font-style: italic;">format</span> -&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+</ul>
+<h4>Endpoint Syntax</h4>
+<span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"></span>
+<ul>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets&nbsp;</a>
+- Returns data as json format</li>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets?format=xml"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets</a><a
+ target="_blank"
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets?format=xml">?format=xml</a><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets?format=xml"
+ target="_blank">
+    </a>- Returns data as xml format</li>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets?format=csv"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets</a><a
+ target="_blank"
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets?format=csv">?format=csv</a>
+-
+Returns data as csv file download</li>
+</ul>
+<h3><br>
+</h3>
+<h3><br>
+</h3>
+<h2 style="font-weight: bold;">Properties</h2>
+The <span style="font-weight: bold;">Properties</span> endpoint
+returns all of the soil properties known to the SoilDataFederator.
+Properties are broken down into two groups. ""FieldMeasurement" and
+"LaboratoryMeasurement" or more commonly known as Morphology and Lab
+data. <br>
+<br>
+<h4>Endpoint Parameters</h4>
+<ul>
+  <li><span style="font-style: italic;">PropertyGroup (string) </span>-
+filter on predefined groups of properties. The available PropertyGroups can be queried in
+the "PropertyGroups" endpoint. Default = All</li>
+  <li><span style="font-style: italic;">verbose</span> <span
+ style="font-style: italic;">(string) </span>- The "Verbose" parameter can be used to
+restrict the amount of information returned for each individual
+property. If False (F) just a list of soil properties is returned. If
+True (T) a full description of each property is returned. The default
+is Verbose=T.</li>
+  <li><span style="font-style: italic;">format</span> <span
+ style="font-style: italic;">(string) </span>-&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+</ul>
+&nbsp;
+<br>
+<h4>Endpoint Syntax</h4>
+<ul>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties
+    </a> - Returns a verbose list of soil properties<br>
+  </li>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?verbose=F"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?verbose=F
+    </a> - Returns just a list of soil properties</li>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=Soil pH"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=Soil&nbsp;pH
+    </a> - Returns a list of soil properties for the "Soil pH"
+PropertyGroup. This is analagous to the traditonal "Lab Method Groups"<br>
+  </li>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=COARSE_FRAGS"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=COARSE_FRAGS</a>&nbsp;
+- Returns a list of soil properties for the "<a
+ href="http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=COARSE_FRAGS"
+ target="_blank">COARSE_FRAGS</a>" PropertyGroup. This is analagous to
+the traditonal Morpholgy Tables in the PC_Sites database schema.</li>
+</ul>
+<h3><br>
+</h3>
+<h3><br>
+</h3>
+<h2 style="font-weight: bold;">PropertyGroups</h2>
+The <span style="font-weight: bold;">PropertyGroups</span> endpoint
+returns all of the soil PropertyGroups known to the SoilDataFederator
+as described in the "Propeties" endpoint. <br>
+<br>
+<h4>Endpoint Parameters</h4>
+<ul>
+  <li><span style="font-style: italic;">format</span> <span
+ style="font-style: italic;">(string) </span>-&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+</ul>
+<h4>Endpoint Syntax</h4>
+<ul>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/PropertyGroups"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/PropertyGroups
+    </a> - Returns a list of soil PropertyGroups</li>
+</ul>
+<br>
+<h3><br>
+</h3>
+<h2 style="font-weight: bold;">SoilData</h2>
+The SoilData endpoint returns soil property data from all of the
+datasets in a consistent format. The SoilDataFederator queries the
+datasets individual datastore and translates the disparate data on the
+fly into a consistent format. Each dataset datastore is queried
+in turn, so it can take a long time for this endpoint to return data,
+depending on the amount of data to be retrieved. The examples below use
+the <span
+ style="color: rgb(59, 65, 81); font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">"numToReturn"
+parameter to reduce the number of records to be returned purely to
+speed up the demonstration. Remove this parameter to see the full
+dataset</span>. The standard fields returned from this end point are
+listed below.<br>
+<br>
+<h4>Endpoint Parameters</h4>
+<ul>
+  <li><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">observedProperty</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">-
+the soil property to query on. eg '3A1" or 'h_texture'. Either this
+or the "observedPropertyGroup" parameter is required. </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">This
+can be a single provider code or a semi colon delimited
+text string eg "3A1;4A1"<br>
+    </span></li>
+  <li><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">observedPropertyGroup</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">-
+    </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">the
+soil </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">PropertyGroup</span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+to query on. eg 'pH" or 'SURF_COARSE_FRAGS'. Either this
+or the "observedProperty" parameter is required.</span></li>
+
+
+  <li><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">DataSet</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+- filter on specific data sets. This can be a single DataSet code or a
+semi colon delimited
+text string eg "TasGovernment;SAGovernment". If this parameter is not
+provided all the data Providers will be queried.</span></li>
+
+
+ <li><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">bbox</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+- The rectangular bounding box of the area to query in the form minx;maxx;miny;maxy - semicolon delimited
+ If this parameter is not provided all the data will be queried.</span></li>
+
+
+  <li><span style="font-style: italic;">format</span> <span
+ style="font-style: italic;">(string) </span> -&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+  <li><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">numToReturn </span></span><span
+ style="font-style: italic;">(numeric) </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;"> </span>- specify</span><span
+ style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+the maximum number of records to be returned. If not supplied all
+records will be returned</span></li>
+  <li><span
+ style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">usr</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">-
+username to access the API<br>
+    </span></li>
+  <li><span
+ style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">key</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">-
+the API key</span><span
+ style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+to
+access the API<br>
+    </span></li>
+</ul>
+<span
+ style="font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">Further
+filter parameters can potentially be added on request by asking a <a
+ href="mailto:ross.searle@csiro.au?subject=SoilDataFederator">developer<br>
+</a></span><br>
+<h4>Endpoint Syntax</h4>
+<ul>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=3A1&amp;DataSet=TasGovernment&amp;usr=Demo&amp;key=Demo"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=3A1&amp;DataSet=TasGovernment</a><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&amp;DataSet=TasGovernment&amp;usr=Demo&amp;key=Demo"
+ target="_blank">&amp;usr=Demo&amp;key=Demo</a>
+- returns soil propery data filtered by a specifc Provider code. Only 5
+records will be returned for demonstration purposes unless you have a
+registered API key</li>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=4A1&amp;usr=Demo&amp;key=Demo"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=4A1&amp;usr=Demo&amp;key=Demo</a>
+- returns ALL the data for requested soil Property. However, only 5
+records will be returned for demonstration purposes unless you have a
+registered API key<br>
+  </li>
+  <li><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedPropertyGroup=DENSITY&amp;usr=Demo&amp;key=Demo"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedPropertyGroup=DENSITY</a><a
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedPropertyGroup=DENSITY&amp;usr=Demo&amp;key=Demo"
+ target="_blank">&amp;usr=Demo&amp;key=Demo</a>
+- returns the data for requested soil PropertyGroup. Looks like this
+might be brocken at the moment<br>
+  </li>
+</ul>
+<br>
+<br>
+
+
+
+
+
+
+<h2 style="font-weight: bold;">ObservationLocations</h2>
+The <span style="font-weight: bold;">ObservationLocations</span> endpoint
+Returns all locations for which there is any data. ie soil sample location. Data for a specific property may or may not exist at these locations <br>
+<br>
+<h4>Endpoint Parameters</h4>
+<ul>
+  <li><span style="font-style: italic;">DataSet</span> <span
+ style="font-style: italic;">(string) </span>-&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+
+ <li><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">bbox</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+- The rectangular bounding box of the area to query in the form minx;maxx;miny;maxy - semicolon delimited
+ If this parameter is not provided all the data will be queried.</span></li>
+
+   <li><span style="font-style: italic;">format</span> <span
+ style="font-style: italic;">(string) </span> -&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+
+</ul>
+<h4>Endpoint Syntax</h4>
+<ul>
+   <li><a  href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/ObservationLocations?DataSet=TasGovernment"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/ObservationLocations?DataSet=TasGovernment
+    </a> - Returns a list of soil sample locations</li>
+</ul>
+<br>
+
+
+
+
+
+<h2 style="font-weight: bold;">DataQualityDescriptions</h2>
+
+Returns the descriptions of the data quality codes<br>
+<br>
+<h4>Endpoint Parameters</h4>
+<ul>
+
+   <li><span style="font-style: italic;">format</span> <span
+ style="font-style: italic;">(string) </span> -&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+
+</ul>
+<h4>Endpoint Syntax</h4>
+<ul>
+   <li><a  href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataQualityDescriptions"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataQualityDescriptions
+    </a> - Returns a list of soil sample locations</li>
+</ul>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<h2 style="font-weight: bold;">Output Data Format</h2>
+The fields returned from the SoilDataFederator for the "SoilData"
+endpont are<br>
+<ul>
+  <li>DataStore<br>
+  </li>
+  <li>Dataset&nbsp;&nbsp; <br>
+  </li>
+  <li>Provider <br>
+  </li>
+  <li>Observation_ID&nbsp;&nbsp;&nbsp; </li>
+  <li>SampleID&nbsp;&nbsp;&nbsp; </li>
+  <li>SampleDate&nbsp;&nbsp;&nbsp; </li>
+  <li>Longitude&nbsp;&nbsp;&nbsp; </li>
+  <li>Latitude&nbsp;&nbsp;&nbsp; </li>
+  <li>UpperDepth&nbsp;&nbsp;&nbsp; </li>
+  <li>LowerDepth&nbsp;&nbsp;&nbsp; </li>
+  <li>PropertyType&nbsp;&nbsp;&nbsp; </li>
+  <li>ObservedProperty&nbsp;&nbsp;&nbsp; </li>
+  <li>Value&nbsp;&nbsp;&nbsp; </li>
+  <li>Units&nbsp;&nbsp;&nbsp; </li>
+  <li>QualCollection</li>
+  <li>QualSpatialAgg</li>
+  <li>QualManagement<br>
+  </li>
+  <li>ExtractTime&nbsp;&nbsp;&nbsp; </li>
+</ul>
+<div id="message-bar" class="swagger-ui-wrap" data-sw-translate="">&nbsp;<br>
+<H2>An example of what the returned data looks like</H2><br>
+</div>
+<br>
+<img style="width: 1663px; height: 628px;" alt="Output format"
+ src="images/OutputFomat.PNG"><br>
+<div id="footer">
+<h1 class="textinbar">SLGA Funders<span style="margin-left: 22%;">Partners</span></h1>
+<div id="partners"> <a href="http://www.ga.gov.au/" target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/AustGovtGSA_stack.gif"
+ alt="Australian Government Geosciences Australia logo" height="59"
+ width="90"></a> <a href="http://www.csiro.au/" target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/CSIRO.gif"
+ alt="CSIRO logo" height="54" width="55"></a> <a
+ href="http://www.environment.nsw.gov.au/" target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/NSWOEH.gif"
+ alt="NSW Office of Environment and Heritage logo" height="44"
+ width="120"></a> <a href="http://www.lrm.nt.gov.au/" target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/NTGovt.gif"
+ alt="Northern Territory Government logo" height="55" width="59"></a> <a
+ href="http://www.qld.gov.au/dsitia/" target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/QLDGovt.gif"
+ alt="Queensland Government logo" height="69" width="55"></a> <a
+ href="http://www.environment.sa.gov.au/Home" target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/SAGovt_DEWNR.gif"
+ alt="South Australian Department of Environment, Water and Natural Resources logo"
+ height="67" width="85"></a> <a href="http://dpipwe.tas.gov.au/"
+ target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/TasGov.png"
+ style="margin-right: 0%;" alt="Tasmanian Government logo" height="56"
+ width="68"></a> <a href="http://sydney.edu.au/agriculture/"
+ target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/Uni-of-Sydney.gif"
+ alt="University of Sydney logo" height="44" width="112"></a> <a
+ href="http://www.depi.vic.gov.au/" target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/VICGovt_DEPI.gif"
+ alt="Victorian Government Department of Environment and Primary Industries logo"
+ height="32" width="137"></a> <a href="https://www.agric.wa.gov.au/"
+ target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/WAGovt_DAF.gif"
+ alt="Western Australian Government Department of Agriculture and Food logo"
+ height="38" width="168"></a> <a href="http://www.clw.csiro.au/aclep/"
+ target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/ACLEP.gif"
+ alt="ACLEP logo" height="44" width="165"></a> </div>
+</div>
+<div id="funder">
+<p> <a href="http://www.tern.org.au/" target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/TERNLogo.gif"
+ alt="TERN logo" height="83" width="90"></a><a
+ href="https://education.gov.au/national-collaborative-research-infrastructure-strategy-ncris"
+ target="_blank"><img
+ src="http://www.clw.csiro.au/aclep/soilandlandscapegrid/logos/NCRIS.gif"
+ style="margin-left: 8%;" alt="NCRIS logo" height="62" width="130"></a></p>
+<p>TERN is supported by the Australian Government through the National
+Collaborative Research Infrastructure Strategy and the Super Science
+Initiative.</p>
+</div>
+</div>
+</body>
+</html>
