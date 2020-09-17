@@ -6,7 +6,7 @@ machineName <- as.character(Sys.info()['nodename'])
 if(machineName=='soils-discovery'){
 
   deployDir <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
-  #server <- 'http://esoil.io'
+  server <- 'http://esoil.io'
   server <- '0.0.0.0'
   #options("plumber.host" = "0.0.0.0")
   #options("plumber.apiHost" = "0.0.0.0")
