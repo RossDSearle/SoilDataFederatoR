@@ -13,7 +13,7 @@ if(machineName=='soils-discovery'){
 
   deployDir <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
   logDir <- '/mnt/data/APILogs/SoilDataFederator/'
-  server <- 'http://esoil.io'
+  #server <- 'http://esoil.io'
 }else{
   deployDir <-'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
   logDir <- 'c:/temp/Logs'
