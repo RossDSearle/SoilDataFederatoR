@@ -29,14 +29,15 @@ soils data stores across Australia in a consistent manner and the data
 returned is a consistent
 format. Users do not need to know the details of each of the individual
 data stores structures and querying mechanisms. The data in the system
-is historical soil survey data and is composed of both morphological
-description data and Laboratory analysis data.<br>
+is historical soil survey data and is composed of both soil morphological
+description data and laboratory analysis data. The SoilDataFederator will return
+all available data for a specified soil property<br>
 <br>
 The SoilDataFederator web API is designed to be as simple as possible.
 Users can query API end point to return information about<br>
 <ul>
   <li><span style="font-weight: bold;">DataSets </span>- which
-DataSets are avialable in the system. </li>
+DataSets are available in the system. </li>
   <li><span style="font-weight: bold;">Properties</span> - which soil
 properties are available in the system. </li>
   <li><span style="font-weight: bold;">PropertyGroups </span>- defined
@@ -46,26 +47,33 @@ and then return data using the <br>
 <ul>
   <li><span style="font-weight: bold;">SoilData</span> end point.</li>
 </ul>
-The current contributors to the Federator are listed <a
+The currently available datasets and their contributors are listed <a
  href="http://shiny.esoil.io/SoilDataFederator/Pages/Datasets/"
  target="_blank">HERE</a><br>
 <br>
-The code for the SoilDataFederator is written in R and can be found <a
+The code for the SoilDataFederator system is written in R and can be found <a
  href="https://github.com/RossDSearle/SoilDataFederatoR" target="_blank">HERE</a><br>
 <br>
 <h1>API Key Registration</h1>
 You need to register for an API Key to be able to use the API to access
 the soil data. You can quickly register <a
- href="https://shiny.esoil.io/SoilDataFederator/Register/"
+ href="https://shiny.esoil.io/SoilDataFederator/Pages/Register/"
  target="_blank">HERE</a>. Just supply your email address, name and
 organisation and you are good to go. We might get in touch once in a
 while to ask for feedback or let you know about changes etc. All of the
-current endpoint will work without an API Key, except for the
+current endpoints will work without an API Key, except for the
 "GetSoilData" endpoint - the one you'll actually want to use. If you
 don't want to register, but instead you just want to check out how the
 API works you can use usr=Demo &amp; key=Demo authentication. Only the
 first 5 records will be returned.<br>
 <br>
+<h1>Licensing</h1>
+All data in SoilDataFederator system are publicly available, typically under a <a
+ href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0 license</a>
+, meaning you are free to use this data as is but you must attribute the original source.
+No guarantee of accuracy or quality is made. Explicit licensing information for
+each data set can be obtained from the "Dataset" endpoint<br> <br>
+
 <h1>Examples</h1>
 The <span style="font-weight: bold;">Swagger UI </span>for the API is
 located <a
@@ -82,10 +90,10 @@ downloaded <a href="SoilDataFederatorR_Examples.R">HERE</a>.<br>
 The endpoint can return data in either, json, xml or csv formats. The
 json format is by far the most efficient format for big data queries.<br>
 The API uses authentication (user name &amp; password) to restrict
-access to data that is not publically available. By default, only
-publically available data sets are returned from queries. <br>
+access to data that is not publicly available. By default, only
+publicly available data sets are returned from queries. <br>
 <br>
-Some licencing info should go here when we sort it out.<br>
+
 <br>
 <br>
 The following endpoints are currently available in the SoilDataFederator<br>
@@ -142,15 +150,12 @@ data. <br>
 <h4>Endpoint Parameters</h4>
 <ul>
   <li><span style="font-style: italic;">PropertyGroup (string) </span>-
-filter
-on predifined
-groups of properties. The available PropertyGroups can be queried in
+filter on predefined groups of properties. The available PropertyGroups can be queried in
 the "PropertyGroups" endpoint. Default = All</li>
   <li><span style="font-style: italic;">verbose</span> <span
- style="font-style: italic;">(string) </span>- The "Verbose"
-parameter can be used to
+ style="font-style: italic;">(string) </span>- The "Verbose" parameter can be used to
 restrict the amount of information returned for each individual
-property. If Fallse (F) just a list of soil properties is returned. If
+property. If False (F) just a list of soil properties is returned. If
 True (T) a full description of each property is returned. The default
 is Verbose=T.</li>
   <li><span style="font-style: italic;">format</span> <span
@@ -172,9 +177,9 @@ of the response to return. Either json, csv, or xml. Default = json</span></li>
  target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?verbose=F
     </a> - Returns just a list of soil properties</li>
   <li><a
- href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=pH"
- target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=pH
-    </a> - Returns a list of soil properties for the "pH"
+ href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=Soil pH"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/Properties?PropertyGroup=Soil&nbsp;pH
+    </a> - Returns a list of soil properties for the "Soil pH"
 PropertyGroup. This is analagous to the traditonal "Lab Method Groups"<br>
   </li>
   <li><a
@@ -213,16 +218,16 @@ of the response to return. Either json, csv, or xml. Default = json</span></li>
 </h3>
 <h2 style="font-weight: bold;">SoilData</h2>
 The SoilData endpoint returns soil property data from all of the
-providers in a consistent format. The SoilDataFederator queries the
-providers individual datastore and translates the disparate data on the
-fly into a consistent format. Each&nbsp; provider datastore is queried
+datasets in a consistent format. The SoilDataFederator queries the
+datasets individual datastore and translates the disparate data on the
+fly into a consistent format. Each dataset datastore is queried
 in turn, so it can take a long time for this endpoint to return data,
 depending on the amount of data to be retrieved. The examples below use
 the <span
  style="color: rgb(59, 65, 81); font-family: sans-serif; font-size: 16px; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">"numToReturn"
 parameter to reduce the number of records to be returned purely to
-speed up the demonstration. Remove this paremeter to see the full
-dataset</span>. The standard field returned from this end point are
+speed up the demonstration. Remove this parameter to see the full
+dataset</span>. The standard fields returned from this end point are
 listed below.<br>
 <br>
 <h4>Endpoint Parameters</h4>
@@ -250,6 +255,8 @@ soil </span><span
  style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
 to query on. eg 'pH" or 'SURF_COARSE_FRAGS'. Either this
 or the "observedProperty" parameter is required.</span></li>
+
+
   <li><span
  style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
  style="font-style: italic;">DataSet</span> </span><span
@@ -259,6 +266,17 @@ or the "observedProperty" parameter is required.</span></li>
 semi colon delimited
 text string eg "TasGovernment;SAGovernment". If this parameter is not
 provided all the data Providers will be queried.</span></li>
+
+
+ <li><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">bbox</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+- The rectangular bounding box of the area to query in the form minx;maxx;miny;maxy - semicolon delimited
+ If this parameter is not provided all the data will be queried.</span></li>
+
+
   <li><span style="font-style: italic;">format</span> <span
  style="font-style: italic;">(string) </span> -&nbsp; <span
  style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
@@ -323,6 +341,58 @@ might be brocken at the moment<br>
 </ul>
 <br>
 <br>
+
+
+
+
+
+
+<h2 style="font-weight: bold;">ObservationLocations</h2>
+The <span style="font-weight: bold;">ObservationLocations</span> endpoint
+Returns all locations for which there is any data. ie soil sample location. Data for a specific property may or may not exist at these locations <br>
+<br>
+<h4>Endpoint Parameters</h4>
+<ul>
+  <li><span style="font-style: italic;">DataSet</span> <span
+ style="font-style: italic;">(string) </span>-&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+
+ <li><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span
+ style="font-style: italic;">bbox</span> </span><span
+ style="font-style: italic;">(string) </span><span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;">
+- The rectangular bounding box of the area to query in the form minx;maxx;miny;maxy - semicolon delimited
+ If this parameter is not provided all the data will be queried.</span></li>
+
+   <li><span style="font-style: italic;">format</span> <span
+ style="font-style: italic;">(string) </span> -&nbsp; <span
+ style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: medium; font-style: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; display: inline ! important; float: none;"><span></span>format
+of the response to return. Either json, csv, or xml. Default = json</span></li>
+
+</ul>
+<h4>Endpoint Syntax</h4>
+<ul>
+   <li><a  href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/ObservationLocations?DataSet=TasGovernment"
+ target="_blank">https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/ObservationLocations?DataSet=TasGovernment
+    </a> - Returns a list of soil sample locations</li>
+</ul>
+<br>
+<h3><br>
+</h3>
+
+
+
+
+
+
+
+
+
+
+
+
 <br>
 <h2 style="font-weight: bold;">Output Data Format</h2>
 The fields returned from the SoilDataFederator for the "SoilData"
@@ -352,8 +422,7 @@ endpont are<br>
   <li>ExtractTime&nbsp;&nbsp;&nbsp; </li>
 </ul>
 <div id="message-bar" class="swagger-ui-wrap" data-sw-translate="">&nbsp;<br>
-<span style="text-decoration: underline;">An example of what the
-returned data</span><br>
+<H2>An example of what the returned data looks like</H2><br>
 </div>
 <br>
 <img style="width: 1663px; height: 628px;" alt="Output format"

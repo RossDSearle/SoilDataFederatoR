@@ -24,8 +24,8 @@ source(paste0(deployDir, '/Helpers/apiHelpers.R'))
 source(paste0(deployDir, '/Backends.R'))
 
 #* @apiTitle TERN SoilDataFederatoR Web API
-#* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the SoilDataFederatoR service can be found <a href='https://esoil.io/TERNLandscapes/SoilDataFederatoR/help/SoilDataFederatorHelp.html' > HERE </a>
-#* <h2>API Key Registration</h2>
+#* @apiDescription These services allow <b>unified</b> and <b>standardised</b> access to a range of disparate soil database systems.<br><br> More detail about the SoilDataFederatoR service can be found <a href="https://esoil.io/TERNLandscapes/SoilDataFederatoR/help/SoilDataFederatorHelp.html">HERE</a>
+#* <br><br><H2>API Key Registration</H2>
 #* You need to register for an API Key to be able to use the API to access the soil data. You can quickly register <a
 #* href="https://shiny.esoil.io/SoilDataFederator/Pages/Register/"
 #* target="_blank">HERE</a>. Just supply your email address, name and organisation and you are good to go.
@@ -333,30 +333,7 @@ apiGetDataQualityDescriptions <- function(res, DataSet=NULL, bbox=NULL, format='
 }
 
 
-#* Returns the codes and descriptions for the SoilDataFederator data quality descriptors.
 
-#* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
-#* @param SiteID Site identifier
-
-
-#* @tag Soil Data Federator Development
-#* @get /SoilDataAPI/getSite
-apiGetSiteData <- function(res, SiteID, format='json'){
-
-  tryCatch({
-
-    DF <- getDataForASite(SiteID)
-    print(DF)
-    label <- 'SiteData'
-    resp <- cerealize(DF, label, format, res)
-
-  }, error = function(res)
-  {
-    res$status <- 400
-    list(error=jsonlite::unbox(geterrmessage()))
-
-  })
-}
 
 
 

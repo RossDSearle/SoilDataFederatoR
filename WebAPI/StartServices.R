@@ -29,6 +29,10 @@ source(paste0(deployDir, '/Backends.R'))
 
 r <- plumb(paste0(deployDir, "/WebAPI/apiEndPoints.R"))
 
+prf <- plumb(paste0(deployDir, "/WebAPI/apiEndPoints_Development.R"))
+r$mount("/Dev/", prf)
+
+
 #server <- 'http://esoil.io'
 #portNum <- 8079
 
