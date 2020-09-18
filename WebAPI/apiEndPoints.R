@@ -13,11 +13,9 @@ if(machineName=='soils-discovery'){
 
   deployDir <-'/srv/plumber/TERNLandscapes/SoilDataFederatoR'
   logDir <- '/mnt/data/APILogs/SoilDataFederator/'
-  #server <- 'http://esoil.io'
 }else{
   deployDir <-'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
   logDir <- 'c:/temp/Logs'
-  #server <- '0.0.0.0'
 }
 
 source(paste0(deployDir, '/Helpers/apiHelpers.R'))
@@ -208,7 +206,7 @@ bob <- function(){
 #* Returns soil observation data
 
 #* @param key (Required)  API key for accessing the API.
-#* @param usr (Required) User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Register/ You can use usr=Demo & key=Demo but only the first 5 records will be returned
+#* @param usr (Required) User name for accessing the API. To register for an API key go to - https://shiny.esoil.io/SoilDataFederator/Pages/Register/ You can use usr=Demo & key=Demo but only the first 5 records will be returned
 #* @param numToReturn (Optional) The number of records to be returned. Default = All
 #* @param format (Optional) Format of the response to return. Either json, csv, or xml. Default = json
 #* @param bbox (Optional) The  rectangular bounding box of the area in the form minx;maxx;miny;maxy - semicolon delimited
@@ -247,7 +245,7 @@ apiGetSoilData<- function(res, usr='Demo', key='Demo', DataSet=NULL, observedPro
     }
 
     label <- 'SoilProperty'
-    writeLog(oDF, usr)
+    writeLog(oDF, usr, logDir )
     resp <- cerealize(oDF, label, format, res)
   }, error = function(res)
   {

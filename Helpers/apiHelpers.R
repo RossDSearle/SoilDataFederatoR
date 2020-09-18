@@ -214,7 +214,7 @@ cerealize <- function(DF, label, format, res){
 
 
 
-writeLog <- function(df, usr){
+writeLog <- function(df, usr, logDir){
 
   if(!dir.exists(logDir)){dir.create(logDir)}
   logFile <- paste0(logDir,'/soilDataFederatorUsage.csv')
