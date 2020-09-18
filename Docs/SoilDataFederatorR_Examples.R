@@ -16,7 +16,7 @@ json_tree_view(rawJson)
 
 # Get the raw json from the Providers endpoint and create a dataframe - This is probably the best way to use the SoilDataFederator endpoint in R
 df <- fromJSON('http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets')
-
+head(df)
 
 # Get the Providers data as XML
 rawXML <- content(GET('http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets?format=xml'), "text")
@@ -25,8 +25,8 @@ xml_view(rawXML)
 
 # Get the Providers data as XML and create a dataframe
 doc<-xmlParse(rawXML)
-xmldf <- xmlToDataFrame(nodes = getNodeSet(doc, "//DataProvider"))
-
+xmldf <- xmlToDataFrame(nodes = getNodeSet(doc, "//DataSetsRecord"))
+head(xmldf)
 
 # Get the Providers data as a CSV file
 csvf <- tempfile()

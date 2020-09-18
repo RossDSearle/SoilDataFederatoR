@@ -128,17 +128,7 @@ ui <- fluidPage(
                                        tags$td(width = "30%", uiOutput("T3"))),
                                tags$tr(width = "60%",
                                        tags$td(width = "30%", div(style = "font-size:14px; font-weight:bold; text-align: right;", "Organisation : ")),
-                                       tags$td(width = "30%", uiOutput("T4")),
-                               tags$tr(width = "60%",
-                                       tags$td(width = "30%", HTML("<P></P>"))),
-                                       tags$td(width = "30%", "")),
-                               tags$tr(width = "60%",
-                                       tags$td(width = "30%", ""),
-                                       tags$td(width = "30%", "")),
-                               tags$tr(width = "60%",
-                                       tags$td(width = "30%", HTML("<P>&nbsp</P>")),
-                                       tags$td(width = "30%", HTML("&nbsp")))
-
+                                       tags$td(width = "30%", uiOutput("T4")))
                     ),
 
 
