@@ -13,15 +13,18 @@ library(sf)
 library(ggplot2)
 library(data.table)
 
-
+DEBUG <- T
 
 source("helpers.R")
 
 #testdf <- read.csv('c:/temp/df.csv', stringsAsFactors = F)
 #serverLoc <- 'http://127.0.0.1:6902'
-serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
+serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR'
 
-url <- paste0(serverLoc, '/SoilDataAPI/Providers')
+DefPropGrp <- 'Nitrogen'
+DefProp <- '7A1'
+
+url <- paste0(serverLoc, '/SoilDataAPI/DataSets')
 providerList <- fromJSON(url)
 
 print(getwd())
@@ -33,12 +36,30 @@ insertRow <- function(existingDF, newrow, r) {
   existingDF
 }
 
+
+
+getWebDataJSON <- function(url){
+  ue <- URLencode(url)
+  print(ue)
+  resp <- GET(ue, timeout = 300)
+  print(resp)
+  response <- content(resp, "text", encoding = 'UTF-8')
+  return(response)
+}
+
+getWebDataDF <- function(url){
+  r <- getWebDataJSON(url)
+  md <- fromJSON(r)
+  return(md)
+}
+
+
 blankResponseDF <- function(){
 
-  outDF <- data.frame(Provider=character(), Dataset=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+  outDF <- data.frame(DataStore=character(), Dataset=character(), Provider=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
                       Longitude=numeric() , Latitude= numeric(),
                       UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
-                      Units= character(), Quality=integer(), stringsAsFactors = F)
+                      Units= character(),   QualCollection=integer(), QualSpatialAggregation=integer(), QualManagement=integer(),QualSpatialAccuracy=integer(), stringsAsFactors = F)
 }
 
 
@@ -127,7 +148,7 @@ server <- function(session, input, output) {
 
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste('TERNSoilsFederator-', Sys.Date(), '.csv', sep='')
+      paste('TERNSoilsFederator-', input$propObs, '-', Sys.Date(), '.csv', sep='')
     },
     content = function(con) {
       write.csv(RV$currentdata, con)
@@ -136,7 +157,7 @@ server <- function(session, input, output) {
 
   output$contributorsTab = renderRHandsontable({
     url <- paste0(serverLoc, '/SoilDataAPI/Providers')
-    contribs <- fromJSON(url)
+    contribs <- getWebDataDF(url)
     contribs$ContactEmail <- paste0('<a href=mailto:', contribs$ContactEmail, '?subject=Soil%20Data%20on%20TERN-Landscapes%20SoilDataFederator>', contribs$ContactEmail, '</a>'  )
     contribs$OrgURL <- paste0('<a href=', contribs$OrgURL, ' target="_blank">', contribs$OrgURL, '</a>'  )
     rhandsontable(contribs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F) %>%
@@ -225,15 +246,9 @@ server <- function(session, input, output) {
 
   output$dataTab = renderRHandsontable({
     req(RV$currentdata )
-    # dfs<-setDT(as.data.table(RV$currentdata ))[ , list(mean = mean(Value) ,median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9)) , by = .(Provider)]
-
     dsub <- RV$currentdata[1:100, ]
     rhandsontable(dsub , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
   })
-
-  # output$dataTab = DT::renderDataTable({
-  #     RV$currentdata
-  # })
 
 
   observe({
@@ -241,9 +256,11 @@ server <- function(session, input, output) {
     req(input$propTypes)
     url <- paste0(serverLoc, '/SoilDataAPI/PropertyGroups')
     RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
-    resp <- fromJSON(url)
+    print(url)
+    resp <- getWebDataDF(url)
+    print(resp)
     vals <- resp[resp$PropertyType == input$propTypes, ]
-    updateSelectInput(session, "propGrps", choices = sort(vals$PropertyGroup), selected = 'PH')
+    updateSelectInput(session, "propGrps", choices = sort(vals$PropertyGroup), selected = DefPropGrp)
   })
 
 
@@ -254,44 +271,49 @@ server <- function(session, input, output) {
     url <- paste0(serverLoc, '/SoilDataAPI/Properties?PropertyGroup=', input$propGrps)
     RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
     print(url)
-    resp <- fromJSON(url)
+    resp <- getWebDataDF(url)
     print(head(resp))
 
-    updateSelectInput(session, "propObs", choices = paste0(resp$Property), selected = '4A1')
+    updateSelectInput(session, "propObs", choices = paste0(resp$Property), selected = DefProp)
   })
 
 
   observeEvent(input$getData2, {
 
     if(input$currentProvider == 'All'){
-      provs <- providerList$OrgName
+      dSets <- providerList$DataSet
     }
     else{
-      provs = providerList[providerList$OrgFullName == input$currentProvider, 1]
+      dSets = providerList[providerList$OrgFullName == input$currentProvider, 1]
     }
-    #outDF <- data.frame(stringsAsFactors = f)
 
-    outdfs <- list(length(provs))
+    outdfs <- list(length(dSets))
 
-    for(i in 1:length(provs)){
+
+
+    for(i in 1:length(dSets)){
 
       updateProgressBar(
         session = session,
         id = "pb",
-        value = i, total = length(provs),
-        title = paste("Getting data from ", provs[i])
+        value = i, total = length(dSets),
+        title = paste("Getting data from ", dSets[i])
       )
 
-      url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', input$propObs, '&providers=', provs[i], '&usr=', input$authusr, '&key=', input$authkey)
+      url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', input$propObs, '&DataSet=', dSets[i], '&usr=', input$authusr, '&key=', input$authkey)
       RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
-      # url <- paste0('http://esoil.io/TERNLandscapes/SoilDataFederatoR/R/SoilDataAPI/SoilData?observedProperty=3A1&providers=', provs[i])
-
-      print(url)
-      odf <- fromJSON(url)
-
+odf<-NULL
+      if(DEBUG){
+        if(dSets[i] == "NatSoil"){
+          odf <- getWebDataDF(url)
+        }
+        }else{
+          odf <- getWebDataDF(url)
+        }
 
       if(is.data.frame(odf))
       {
+        print(head(odf))
         outdfs[[i]] <- odf
       }else{
         outdfs[[i]] <- blankResponseDF()
@@ -310,12 +332,13 @@ server <- function(session, input, output) {
     outdf <- df[df$Longitude >= xmin & df$Longitude <= xmax & df$Latitude >= ymin & df$Latitude <= ymax, ]
 
     # Is within reasonable value range
-    outDF <- outdf[outdf$Value > 0 & outdf$Value < 12, ]
+  #  outDF <- outdf[outdf$Value > 0 & outdf$Value < 12, ]
+    outDF<- outdf
 
     updateProgressBar(
       session = session,
       id = "pb",
-      value = 0, total = length(provs),
+      value = 0, total = length(dSets),
       title = paste("Done")
     )
 
