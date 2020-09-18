@@ -14,11 +14,12 @@ doQuery <- function(con, sql){
 getLocationData_TasGov <- function(DataSet){
 
   tcon <- DBI::dbConnect(odbc::odbc(),
-                         Driver   = "SQL Server",
+                         Driver   = "ODBC Driver 17 for SQL Server",
                          Server   = "asris-sql-stage.it.csiro.au\\sql2017",
                          Database = "tasmania_json_services",
                          UID      = 'rosssearle',
                          PWD      = 'Ads@2*&5cv'
+
 
   )
 
@@ -45,12 +46,13 @@ getLocationData_TasGov <- function(DataSet){
 getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL){
 
   tcon <- DBI::dbConnect(odbc::odbc(),
-                         Driver   = "SQL Server",
+                         Driver   = "ODBC Driver 17 for SQL Server",
                          Server   = "asris-sql-stage.it.csiro.au\\sql2017",
                          Database = "tasmania_json_services",
-                         UID      = 'NEXUS\\sea084',
-                         PWD      = 'Chas4066',
-                         Trusted_Connection = "True"
+                         UID      = 'rosssearle',
+                         PWD      = 'Ads@2*&5cv'
+
+
   )
 
 
