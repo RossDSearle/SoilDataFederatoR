@@ -14,13 +14,15 @@ doQuery <- function(con, sql){
 getLocationData_TasGov <- function(DataSet){
 
   tcon <- DBI::dbConnect(odbc::odbc(),
-                         Driver   = "SQL Server",
+                         Driver   = "ODBC Driver 17 for SQL Server",
                          Server   = "asris-sql-stage.it.csiro.au\\sql2017",
                          Database = "tasmania_json_services",
                          UID      = 'rosssearle',
                          PWD      = 'Ads@2*&5cv'
 
+
   )
+
 
   OrgName <- getOrgName(DataSet)
 
