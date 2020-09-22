@@ -8,10 +8,11 @@ library(DT)
 library(shinyWidgets)
 library(rhandsontable)
 library(leaflet)
-
+library(leafgl)
 library(sf)
 library(ggplot2)
 library(data.table)
+library(colourvalues)
 
 DEBUG <- T
 
@@ -40,9 +41,7 @@ insertRow <- function(existingDF, newrow, r) {
 
 getWebDataJSON <- function(url){
   ue <- URLencode(url)
-  print(ue)
   resp <- GET(ue, timeout = 300)
-  print(resp)
   response <- content(resp, "text", encoding = 'UTF-8')
   return(response)
 }
@@ -76,14 +75,14 @@ ui <- fluidPage(
   theme = shinytheme("flatly"),
 
 
-  titlePanel(HTML("<img src=Header.PNG style='vertical-align: top;'>")),
+  titlePanel(HTML("<img src=HeaderWithTern2.png style='vertical-align: top;'>")),
 
 
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
 
     # Sidebar panel for inputs
-    sidebarPanel(
+    sidebarPanel( width=2,
       fluidRow(textInput('authusr', 'User Name', value='ross.searle@csiro.au' )),
       fluidRow(passwordInput('authkey', 'API key', value='a')),
       fluidRow(selectInput('currentProvider', 'Select a Provider', choices = c('All', providerList$OrgFullName))),
@@ -113,8 +112,8 @@ ui <- fluidPage(
       # Output: Tabset w/ plot, summary, and table ----
       tabsetPanel(type = "tabs",
                   tabPanel("Data",
-                           rHandsontableOutput("dataTab")
-                           #DT::dataTableOutput("dataTab")
+                           #rHandsontableOutput("dataTab")
+                          tags$div(DT::dataTableOutput("dataTab"), style = "font-size:80%" )
                   ),
 
                   tabPanel("Summary", verbatimTextOutput("summary"),
@@ -125,7 +124,7 @@ ui <- fluidPage(
                            rHandsontableOutput("perProvTab")
                   ),
                   tabPanel("Map",
-                           leafletOutput("sitesMap", width = "750", height = "550")
+                           leafletOutput("sitesMap", width = "800", height = "600")
                   ),
                   tabPanel("Data Contibutors",
                            rHandsontableOutput("contributorsTab")
@@ -139,13 +138,17 @@ ui <- fluidPage(
   )
 )
 
-# Define server logic for random distribution app ----
+
+
+
 server <- function(session, input, output) {
 
   RV <- reactiveValues()
   RV$currentdata = NULL
   RV$apiDF <- data.frame(Time=as.character(Sys.time()), Request=paste0(serverLoc, '/SoilDataAPI/Providers'), stringsAsFactors = F)
 
+
+#####  Download Data     ##########
   output$downloadData <- downloadHandler(
     filename = function() {
       paste('TERNSoilsFederator-', input$propObs, '-', Sys.Date(), '.csv', sep='')
@@ -155,6 +158,7 @@ server <- function(session, input, output) {
     }
   )
 
+  #####  Output Contributors Table    ##########
   output$contributorsTab = renderRHandsontable({
     url <- paste0(serverLoc, '/SoilDataAPI/Providers')
     contribs <- getWebDataDF(url)
@@ -175,46 +179,59 @@ server <- function(session, input, output) {
     #RV$currentdata <- testdf
   })
 
+
+#####  Draw Map  ##########
   output$sitesMap <- renderLeaflet({
 
     req(RV$currentdata )
 
     df <- as.data.frame(RV$currentdata)
-    frows <- df %>% group_by(Provider, Dataset, Observation_ID) %>% filter(row_number()==1)
-    df.SP <- st_as_sf(frows, coords = c("Longitude", "Latitude"), crs = 4326)
+    idxs <- which(!is.na(df$Longitude))
+    frows <- as.data.frame(df[idxs,] %>% group_by(Provider, Dataset, Observation_ID) %>% filter(row_number()==1))
+    df.SP <- st_as_sf(frows, coords = c("Longitude", "Latitude"), crs = 4326, na.fail=F)
 
-    head(df.SP)
+isNum <- all(!is.na(as.numeric(df.SP$Value)))
 
-    pal <- colorNumeric(c("red", "green", "blue"), domain = df.SP$Value)
+print(isNum)
+    if(isNum){
+         pal <- colorNumeric( "viridis", domain = as.numeric(df.SP$Value))
+         cols = colour_values_rgb(df.SP$Value, include_alpha = FALSE,  palette = "viridis", na_colour = "#808080FF") / 255
 
-    leaflet() %>%
+    }
+
+
+     leaflet() %>%
       addTiles() %>%
       addProviderTiles("Esri.WorldTopoMap", group = "Topo") %>%
       addProviderTiles("Esri.WorldImagery", group = "ESRI Aerial") %>%
-      addCircleMarkers(data=df.SP, group='Soil pH', radius = 2, opacity=1,
-                       stroke=F,
-                       fillOpacity = 1,
-                       weight=1,
-                       #fillColor = "yellow",
-                       color = ~pal(df.SP$Value),
-                       popup = paste0("Site ID : ", df.SP$Observation_ID ,
-                                      "<br> Attribute : ", df.SP$ObservedProperty ,
-                                      "<br> Value : ", df.SP$Value )) %>%
-      addLegend("topright", pal = pal, values = df.SP$Value,
+       addLayersControl(
+         baseGroups = c("Topo","ESRI Aerial"),
+         overlayGroups = c("Soil Data"),
+         options = layersControlOptions(collapsed = T)) -> L1
+
+     if(isNum){
+       L1  %>% addGlPoints(data = df.SP, group = 'Soil Data',  fillColor = cols, layerId=paste0(df.SP$Observation_ID)) %>%
+      addLegend("topright", pal = pal, values = as.numeric(df.SP$Value),
                 title = "Soil Data",
                 #labFormat = labelFormat(prefix = "$"),
                 opacity = 1
-      ) %>%
-      addLayersControl(
-        baseGroups = c("Topo","ESRI Aerial"),
-        overlayGroups = c("Soil Data"),
-        options = layersControlOptions(collapsed = T))
+      )
+     }else{
+       L1  %>% addGlPoints(data = df.SP, group = 'Soil Data', layerId=paste0(df.SP$Observation_ID))
+     }
+
+
   })
+
+
+#####  Output Summary text   ##########
 
   output$SummaryText <- renderText({
     req(input$propObs)
     paste0('<p></p><p style="color:green;font-weight: bold;">Summary Statistics for ',   input$propObs, '</p>' )
   })
+
+#####  Output Summary table   ##########
 
   output$summaryTab = renderRHandsontable({
     req(RV$currentdata )
@@ -237,28 +254,39 @@ server <- function(session, input, output) {
     rhandsontable(dfs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
   })
 
-  output$perProvTab = renderRHandsontable({
+
+
+  # output$perProvTab = renderRHandsontable({
+  #   req(RV$currentdata )
+  #   dfs<-setDT(as.data.table(RV$currentdata ))[ , list(mean = mean(Value) ,median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9)) , by = .(Provider)]
+  #   rhandsontable(dfs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
+  # })
+
+
+#####  Output Data Table    ##########
+  # output$dataTab = renderRHandsontable({
+  #   req(RV$currentdata )
+  #   dsub <- RV$currentdata[1:100, ]
+  #   rhandsontable(dsub , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
+  # })
+
+  output$dataTab = renderDT({
+
     req(RV$currentdata )
-    dfs<-setDT(as.data.table(RV$currentdata ))[ , list(mean = mean(Value) ,median = median(Value), q10 = quantile(Value, 0.1), q90 = quantile(Value, 0.9)) , by = .(Provider)]
-    rhandsontable(dfs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
-  })
 
+    datatable(RV$currentdata, filter='none', selection = "none", rownames=F, options = list(searching = FALSE))%>%
+      formatStyle(columns = names(RV$currentdata), target = "cell",backgroundColor = "white")
 
-  output$dataTab = renderRHandsontable({
-    req(RV$currentdata )
-    dsub <- RV$currentdata[1:100, ]
-    rhandsontable(dsub , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
-  })
+  }
+  )
 
-
+  #####  Update Lists    ##########
   observe({
 
     req(input$propTypes)
     url <- paste0(serverLoc, '/SoilDataAPI/PropertyGroups')
     RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
-    print(url)
     resp <- getWebDataDF(url)
-    print(resp)
     vals <- resp[resp$PropertyType == input$propTypes, ]
     updateSelectInput(session, "propGrps", choices = sort(vals$PropertyGroup), selected = DefPropGrp)
   })
@@ -270,9 +298,7 @@ server <- function(session, input, output) {
 
     url <- paste0(serverLoc, '/SoilDataAPI/Properties?PropertyGroup=', input$propGrps)
     RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
-    print(url)
     resp <- getWebDataDF(url)
-    print(head(resp))
 
     updateSelectInput(session, "propObs", choices = paste0(resp$Property), selected = DefProp)
   })
@@ -302,7 +328,8 @@ server <- function(session, input, output) {
 
       url <- paste0(serverLoc, '/SoilDataAPI/SoilData?observedProperty=', input$propObs, '&DataSet=', dSets[i], '&usr=', input$authusr, '&key=', input$authkey)
       RV$apiDF <- insertRow( isolate(RV$apiDF) , c(as.character(Sys.time()), url),1)
-odf<-NULL
+
+      odf<-NULL
       if(DEBUG){
         if(dSets[i] == "NatSoil"){
           odf <- getWebDataDF(url)
@@ -313,7 +340,6 @@ odf<-NULL
 
       if(is.data.frame(odf))
       {
-        print(head(odf))
         outdfs[[i]] <- odf
       }else{
         outdfs[[i]] <- blankResponseDF()
@@ -324,7 +350,7 @@ odf<-NULL
     df = as.data.frame(data.table::rbindlist(outdfs, fill=T))
 
 
-    df$Value <- as.numeric(as.character(df$Value))
+    #df$Value <- as.numeric(as.character(df$Value))
     df <- df[!is.na(df$Value),]
 
     # Is With Australia Bounding Box
@@ -343,7 +369,6 @@ odf<-NULL
     )
 
     RV$currentdata <- outDF
-    # print(resp)
 
   })
 
