@@ -1,0 +1,63 @@
+
+<br>
+We are using this site to distrubute the new draft TERN
+Landscapes soil data products for review as they become available.
+Please do not distrubute them further than amongst the members of the
+DSM Working Group at this stage.<br>
+<br>
+<h2>How to use this site</h2>
+The main map displays The New products for review (SLGA_V2), the
+observed data used to generate the maps and where available the
+corresponsing original SLGA maps. These map layers can be turned on and
+of in&nbsp; the layer control on the top right of the map.<br>
+<br>
+In the left panel you can chose the map to display by selecting the
+Product (Attributes), Product Type (where applicable) and depth (where
+relevant).<br>
+<br>
+You can view information about the methods used to generate the new
+products and the statistical summary for the new product by clicking
+on the links in the left panel<br>
+<br>
+You can download the data in the current map by clicking on the links
+in the bottom left panel. "Download Entire DataSet" will download the
+entire national geotiff raster - up to 4GB in size. If you just want to
+download a small section of the map you can just zoom in to the area of
+interest and click the "Download Current Extent" link. This link will
+only be displayed when you have zoomed in sufficiently. The raw site data 
+used to generate the model can also be downloaded from here.<br>
+<br>
+To view the actual pixel data check the "Info" box in "Map Operations" control. 
+The cursor will turn into a question mark. Then  just click on the map and the values will
+pop up. The same applies if you click on the observed data icons on the
+map<br>
+<br>
+To send in you comments to the appropriate person simply click on the
+"Send Comments" link and an eamil addressed to the correct person/s
+will appear.<br>
+<br>
+Please feel free to contact <a href="mailto:ross.searle@csiro.au">Ross
+Searle</a> if you have any questions or problems with this site.<br>
+<br>
+
+<br>
+<h2>Accessing the data in R</h2>
+The review data is being made available via OGC web services. Thus we
+can access the data directly in R. Use this <a href='demos/OGCDemo.R'>Demo R script</a> to see how to 
+download and view the data via the OGC web services<br>
+<br>
+<img style="width: 800px; height: 410px;" alt="RDemo"
+src="images/RLeaflet.PNG"><br>
+
+
+
+<br>
+<h2>Accessing the data in QGIS</h2>
+As above we can use the same OGC web services to access the data directly 
+in QGIS via the WCS endpoints. Go to "WCS" in the "Browser" panel and add 
+a new connection. This is an example endpoint - 
+http://www.asris.csiro.au/ArcGIS/services/TERN/CLY_ACLEP_AU_NAT_C/MapServer/WCSServer <br>
+Then drag one of the layers into your map panel. You can define your own styles for the map. 
+You can also zoom in to an area and download teh data just for your area of interest
+<br>
+

@@ -47,6 +47,7 @@ getWebDataJSON <- function(url){
 }
 
 getWebDataDF <- function(url){
+
   r <- getWebDataJSON(url)
   md <- fromJSON(r)
   return(md)
@@ -75,7 +76,7 @@ ui <- fluidPage(
   theme = shinytheme("flatly"),
 
 
-  titlePanel(HTML("<img src=HeaderWithTern2.png style='vertical-align: top;'>")),
+  titlePanel(HTML("<img src=HeaderWithTern3.png style='vertical-align: top;'>")),
 
 
   # Sidebar layout with input and output definitions ----
@@ -85,8 +86,8 @@ ui <- fluidPage(
     sidebarPanel( width=2,
       fluidRow(textInput('authusr', 'User Name', value='ross.searle@csiro.au' )),
       fluidRow(passwordInput('authkey', 'API key', value='a')),
-      fluidRow(selectInput('currentProvider', 'Select a Provider', choices = c('All', providerList$OrgFullName))),
-      fluidRow(selectInput('propTypes', 'Select a Provider', choices = c('FieldMeasurement', 'LaboratoryMeasurement'), selected='LaboratoryMeasurement')),
+      fluidRow(selectInput('currentProvider', 'Select a Dataset', choices = c('All', providerList$OrgFullName))),
+      fluidRow(selectInput('propTypes', 'Select a Data Type', choices = c('FieldMeasurement', 'LaboratoryMeasurement'), selected='LaboratoryMeasurement')),
       fluidRow(selectInput('propGrps', 'Property Groups', choices = NULL)),
       fluidRow(selectInput('propObs', 'Observed Property', choices = NULL)),
       tags$br(),
@@ -118,20 +119,24 @@ ui <- fluidPage(
 
                   tabPanel("Summary", verbatimTextOutput("summary"),
                            htmlOutput("SummaryText"),
-                           rHandsontableOutput("summaryTab"),
-                           plotOutput('dplot'),
-                           plotOutput('bplot'),
+                           rHandsontableOutput("summaryTab"),HTML('<BR>,<BR>'),
+                           plotOutput('dplot', width = 1000),HTML('<BR>,<BR>'),
+                           plotOutput('bplot', width = 700),HTML('<BR>,<BR>'),
                            rHandsontableOutput("perProvTab")
                   ),
                   tabPanel("Map",
                            leafletOutput("sitesMap", width = "800", height = "600")
                   ),
-                  tabPanel("Data Contibutors",
+                  tabPanel("Available Datasets",
+                           HTML('<BR><BR>'),
+                           downloadButton("DownloadDatasetsTable","Download Datasets Table"),
+                           HTML('<BR><BR>'),
                            rHandsontableOutput("contributorsTab")
                   ),
                   tabPanel("API Requests",
                            rHandsontableOutput("apiTab")
-                  )
+                  ),
+                  tabPanel("Help", div(style = "valign:top; height: 90vh; overflow-y: auto;",  includeHTML("SoilDataFederatorAppHelp.html")) )
       )
 
     )
@@ -145,28 +150,46 @@ server <- function(session, input, output) {
 
   RV <- reactiveValues()
   RV$currentdata = NULL
+  RV$currentdataType = NULL
   RV$apiDF <- data.frame(Time=as.character(Sys.time()), Request=paste0(serverLoc, '/SoilDataAPI/Providers'), stringsAsFactors = F)
 
 
 #####  Download Data     ##########
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste('TERNSoilsFederator-', input$propObs, '-', Sys.Date(), '.csv', sep='')
+      paste('TERNSoilDataFederator-', input$propObs, '-', Sys.Date(), '.csv', sep='')
     },
     content = function(con) {
       write.csv(RV$currentdata, con)
     }
   )
 
-  #####  Output Contributors Table    ##########
+  output$DownloadDatasetsTable <- downloadHandler(
+    filename = function() {
+      paste('TERNSoilDataFederator-Available_Datasets', '-', Sys.Date(), '.csv', sep='')
+    },
+    content = function(con) {
+       url <- paste0(serverLoc, '/SoilDataAPI/DataSets?verbose=T')
+       ds <- getWebDataDF(url)
+      ds$Description <- gsub("\r?\n|\r", " ", ds$Description)
+      #ds <- read.csv('C:/Temp/7a1.csv')
+      write.csv(ds, con)
+    }
+  )
+
+  #####  Output Datasets Table    ##########
   output$contributorsTab = renderRHandsontable({
-    url <- paste0(serverLoc, '/SoilDataAPI/Providers')
+    url <- paste0(serverLoc, '/SoilDataAPI/DataSets?verbose=T')
     contribs <- getWebDataDF(url)
+
     contribs$ContactEmail <- paste0('<a href=mailto:', contribs$ContactEmail, '?subject=Soil%20Data%20on%20TERN-Landscapes%20SoilDataFederator>', contribs$ContactEmail, '</a>'  )
     contribs$OrgURL <- paste0('<a href=', contribs$OrgURL, ' target="_blank">', contribs$OrgURL, '</a>'  )
+    contribs$MetaDataURI <- paste0('<a href=', contribs$MetaDataURI, ' target="_blank">', contribs$MetaDataURI, '</a>'  )
+    contribs$Description <- gsub("\r?\n|\r", " ", contribs$Description)
     rhandsontable(contribs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F) %>%
       hot_col('ContactEmail', renderer = htmlwidgets::JS("safeHtmlRenderer")) %>%
-      hot_col('OrgURL', renderer = htmlwidgets::JS("safeHtmlRenderer"))
+      hot_col('OrgURL', renderer = htmlwidgets::JS("safeHtmlRenderer")) %>%
+      hot_col('MetaDataURI', renderer = htmlwidgets::JS("safeHtmlRenderer"))
   })
 
   output$apiTab = renderRHandsontable({
@@ -190,13 +213,14 @@ server <- function(session, input, output) {
     frows <- as.data.frame(df[idxs,] %>% group_by(Provider, Dataset, Observation_ID) %>% filter(row_number()==1))
     df.SP <- st_as_sf(frows, coords = c("Longitude", "Latitude"), crs = 4326, na.fail=F)
 
-isNum <- all(!is.na(as.numeric(df.SP$Value)))
-
-print(isNum)
-    if(isNum){
-         pal <- colorNumeric( "viridis", domain = as.numeric(df.SP$Value))
+    if(RV$currentdataType=='numeric'){
+         pal <- colorNumeric( "viridis", domain = df.SP$Value)
          cols = colour_values_rgb(df.SP$Value, include_alpha = FALSE,  palette = "viridis", na_colour = "#808080FF") / 255
-
+    }else{
+         colCnt <- length(unique(df.SP$Value))
+         #pal <- colorFactor(RColorBrewer::brewer.pal(colCnt, 'Spectral'), df.SP$Value)
+         pal <- colorFactor("viridis", df.SP$Value)
+         cols = colour_values_rgb(df.SP$Value, include_alpha = FALSE,  palette = "viridis", na_colour = "#808080FF") / 255
     }
 
 
@@ -209,7 +233,7 @@ print(isNum)
          overlayGroups = c("Soil Data"),
          options = layersControlOptions(collapsed = T)) -> L1
 
-     if(isNum){
+     if(RV$currentdataType=='numeric'){
        L1  %>% addGlPoints(data = df.SP, group = 'Soil Data',  fillColor = cols, layerId=paste0(df.SP$Observation_ID)) %>%
       addLegend("topright", pal = pal, values = as.numeric(df.SP$Value),
                 title = "Soil Data",
@@ -217,7 +241,12 @@ print(isNum)
                 opacity = 1
       )
      }else{
-       L1  %>% addGlPoints(data = df.SP, group = 'Soil Data', layerId=paste0(df.SP$Observation_ID))
+      # L1  %>% addGlPoints(data = df.SP, group = 'Soil Data', layerId=paste0(df.SP$Observation_ID))
+       L1  %>% addGlPoints(data = df.SP, group = 'Soil Data',  fillColor = cols, layerId=paste0(df.SP$Observation_ID)) %>%
+         addLegend("topright", pal = pal, values = as.numeric(df.SP$Value),
+                   title = "Soil Data",
+                   #labFormat = labelFormat(prefix = "$"),
+                   opacity = 1)
      }
 
 
@@ -231,28 +260,6 @@ print(isNum)
     paste0('<p></p><p style="color:green;font-weight: bold;">Summary Statistics for ',   input$propObs, '</p>' )
   })
 
-#####  Output Summary table   ##########
-
-  output$summaryTab = renderRHandsontable({
-    req(RV$currentdata )
-
-    s<- RV$currentdata$Value
-    dfs <- data.frame(label=character(6), other=character(6), stringsAsFactors = F)
-    dfs[1,] <- c('Min Value ',s[1])
-    dfs[2,] <- c('1st Quartile ',s[2])
-    dfs[3,] <- c('Median ' ,s[3])
-    dfs[4,] <- c('Mean ' ,s[4])
-    dfs[5,] <- c('3rd Quartile ' ,s[5])
-    dfs[6,] <- c('Max value ',s[6])
-    validCnt <- length(which(!is.na(dfs$Value)))
-    naCnt <- length(which(is.na(dfs$Value)))
-    dfs[7,] <- c('Locations', length(unique(dfs$Observation_ID)))
-    dfs[8,] <- c('Records', nrow(dfs))
-    dfs[9,] <- c('Valid Vals', validCnt)
-    dfs[10,] <- c('NA Vals', naCnt)
-
-    rhandsontable(dfs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
-  })
 
 
 
@@ -303,6 +310,7 @@ print(isNum)
     updateSelectInput(session, "propObs", choices = paste0(resp$Property), selected = DefProp)
   })
 
+########    Get the data  ######
 
   observeEvent(input$getData2, {
 
@@ -315,6 +323,16 @@ print(isNum)
 
     outdfs <- list(length(dSets))
 
+    url <- paste0(serverLoc, '/SoilDataAPI/Properties?verbose=T')
+    props <- getWebDataDF(url)
+
+    rec <- props[props$Property == input$propObs, ]
+
+    if(rec$DataType == 'FLOAT'){
+      RV$currentdataType <- 'numeric'
+    }else{
+      RV$currentdataType <- 'categorical'
+    }
 
 
     for(i in 1:length(dSets)){
@@ -349,17 +367,19 @@ print(isNum)
 
     df = as.data.frame(data.table::rbindlist(outdfs, fill=T))
 
-
-    #df$Value <- as.numeric(as.character(df$Value))
-    df <- df[!is.na(df$Value),]
-
     # Is With Australia Bounding Box
     xmin=113.3;ymin=-43.7;xmax=153.6;ymax=-10.6
     outdf <- df[df$Longitude >= xmin & df$Longitude <= xmax & df$Latitude >= ymin & df$Latitude <= ymax, ]
 
     # Is within reasonable value range
-  #  outDF <- outdf[outdf$Value > 0 & outdf$Value < 12, ]
-    outDF<- outdf
+    # outDF <- outdf[outdf$Value > 0 & outdf$Value < 12, ]
+    outDF <- outdf
+
+    if(RV$currentdataType=='numeric'){
+        idxs <- which(!grepl('^[0-9.]',outDF$Value))
+        outDF <- outDF[-idxs,]
+        outDF$Value <- as.numeric(outDF$Value)
+      }
 
     updateProgressBar(
       session = session,
@@ -373,20 +393,80 @@ print(isNum)
   })
 
 
-  output$bplot<-renderPlot({
+
+
+
+
+  #####  Output Summary table   ##########
+
+  output$summaryTab = renderRHandsontable({
+
+
+    req(RV$currentdata )
+
     df <- RV$currentdata
-    ggplot(df, aes(x=Provider, y=Value)) + geom_boxplot() + theme(axis.text.x  = element_text(angle=90, vjust=0.5))
+
+    if(RV$currentdataType=='numeric'){
+
+      s <- summary(as.numeric(df$Value))
+      dfs <- data.frame(Statistic=character(), Value=character(), stringsAsFactors = F)
+
+      dfs[1,] <- c('Min Value ',s[1])
+      dfs[2,] <- c('1st Quartile ',s[2])
+      dfs[3,] <- c('Median ' ,s[3])
+      dfs[4,] <- c('Mean ' ,s[4])
+      dfs[5,] <- c('3rd Quartile ' ,s[5])
+      dfs[6,] <- c('Max value ',s[6])
+      dfs[7,] <- c('Locations', length(unique(df$Observation_ID)))
+      dfs[8,] <- c('Records', nrow(df))
+
+    }else{
+
+      agg <- count(df, Value)
+      colnames(agg) <- c('Categories','Count')
+      nr <- nrow(agg)
+      agg[nr+1, ] <-  c('', '')
+      agg[nr+2, ] <-  c('Locations', length(unique(df$Observation_ID)))
+      agg[nr+3, ] <-  c('Records', nrow(df))
+      dfs <- agg
+
+    }
+
+    rhandsontable(dfs , manualColumnResize = T, readOnly = TRUE, rowHeaders = F)
   })
 
+
+
+  ####    Render summary plots #####
+
+  #### Box plots or or stacked bars
+  output$bplot<-renderPlot({
+
+    req(RV$currentdata )
+    df <- RV$currentdata
+
+    if(RV$currentdataType=='numeric'){
+
+      ggplot(df, aes(x=Dataset, y=Value)) + geom_boxplot() + theme(axis.text.x  = element_text(angle=90, vjust=0.5))
+    }else{
+      ggplot(df) + geom_bar(aes(x = Dataset, fill = Value)) + scale_x_discrete( expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
+    }
+  })
+
+
+  # #### Denisty or Single bars
   output$dplot<-renderPlot({
 
+    req(RV$currentdata )
     df <- RV$currentdata
-    d <- density(df$Value)
-    plot(d, main=paste0("Data Distribution for ",  input$propObs))
-    polygon(d, col="blue", border="blue")
 
-
+    if(RV$currentdataType=='numeric'){
+      ggplot(df, aes(x=Value))+ geom_density(color="darkblue", fill="lightblue", adjust = 0.5)+ scale_x_continuous( expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
+      }else{
+          ggplot(df) + geom_bar(aes(x = Value, fill = Value)) + scale_x_discrete( expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
+        }
   })
+
 
 }
 
