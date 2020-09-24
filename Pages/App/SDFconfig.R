@@ -1,6 +1,6 @@
 
 
-DEBUG <- T
+DEBUG <- F
 
 
 serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR'
