@@ -7,8 +7,43 @@ url <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?o
 url <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=7A1&usr=ross.searle@csiro.au&key=a'
 url <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=CUTAN_TYPE&DataSet=NatSoil&usr=ross.searle@csiro.au&key=a'
 url <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=CUTAN_TYPE&usr=ross.searle@csiro.au&key=a'
-
+url <- "https://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=7A1&DataSet=NatSoil&usr=Demo&key=Demo"
 df <-fromJSON(url)
+
+
+
+
+    which(!grepl('^[0-9][.]','.001'))
+    outDF <- outDF[-idxs,]
+    outDF$Value <- as.numeric(outDF$Value)
+
+    which(! grepl("^[[:digit:]]+$","0.9933"))
+
+
+    outDF <- df
+    outDF$Value <- as.numeric(outDF$Value)
+    idxs <- which(!is.na(outDF$Value))
+    outDF <- outDF[idxs,]
+
+
+jn <-fromJSON(url)
+jn <- getWebDataJSON(url)
+if(is.null(jn$error)){
+  odf <- fromJSON(jn)
+}else{
+  print('HHHHHHHHHH')
+  break
+}
+
+if(is.null(df$error)){
+  #odf <- fromJSON(jn)
+}else{
+
+  break
+}
+
+
+
 nrow(df)
 head(df)
 write.csv(df, 'c:/temp/7a1')
