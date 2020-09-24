@@ -137,14 +137,17 @@ ui <- fluidPage(
                            HTML('<BR><BR>'),
                            downloadButton("DownloadDatasetsTable","Download Datasets Table"),
                            HTML('<BR><BR>'),
-                           rHandsontableOutput("contributorsTab")
+                           rHandsontableOutput("contributorsTab", width = "1200", height = "500")
+
                   ),
                   tabPanel("Available Soil Properties",
                            HTML('<BR>'),
-                           rHandsontableOutput("propertiesTab", width = "1200", height = "600")
+                           downloadButton("DownloadPropertiesTable","Download Soil Properties Table"),
+                           HTML('<BR><BR>'),
+                           rHandsontableOutput("propertiesTab", width = "1200", height = "500")
                   ),
                   tabPanel("API Requests",
-                           rHandsontableOutput("apiTab")
+                           rHandsontableOutput("apiTab", width = "1200", height = "600")
                   ),
                   tabPanel("Help", div(style = "valign:top; height: 90vh; overflow-y: auto;",  includeHTML("SoilDataFederatorAppHelp.html")) )
       )
@@ -186,6 +189,16 @@ server <- function(session, input, output) {
       ds$Description <- gsub("\r?\n|\r", " ", ds$Description)
       #ds <- read.csv('C:/Temp/7a1.csv')
       write.csv(ds, con)
+    }
+  )
+
+
+  output$DownloadPropertiesTable <- downloadHandler(
+    filename = function() {
+      paste('TERNSoilDataFederator-SoilProperties', '-', Sys.Date(), '.csv', sep='')
+    },
+    content = function(con) {
+      write.csv(props, con)
     }
   )
 
