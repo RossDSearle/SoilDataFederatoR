@@ -17,6 +17,7 @@ library(colourvalues)
 
 
 source('SDFconfig.R')
+print(DEBUG)
 source("helpers.R")
 
 
@@ -361,10 +362,10 @@ server <- function(session, input, output) {
         dSets[1] <- 'NatSoil'
       }
       else if(input$currentProvider == 'All'){
-        dSets <- providerList$DataSet
+        dSets <- DatasetList$DataSet
        }
       else{
-        dSets = providerList[providerList$DataSet== input$currentProvider, 1]
+        dSets = DatasetList[DatasetList$DataSet== input$currentProvider, 1]
       }
 
     outdfs <- list(length(dSets))
