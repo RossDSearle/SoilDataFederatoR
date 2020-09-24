@@ -221,18 +221,19 @@ getDataSets <- function( usr=NULL, key=NULL){
     if(cgrp == 'Public'){
       sql <- paste0("Select * from DataSets WHERE Active = 1 and not Restricted")
       orgs = doQueryFromFed(sql)
-
+      orgs$Description <- gsub("\r?\n|\r", " ", orgs$Description)
       return(orgs)
     }else if(cgrp == 'Admin'){
       sql <- paste0("Select * from DataSets WHERE Active = 1")
       orgs = doQueryFromFed(sql)
+      orgs$Description <- gsub("\r?\n|\r", " ", orgs$Description)
       return(orgs)
     }
     else {
       sql <- paste0("Select * from DataSets
         WHERE Active = 1 and ( not Restricted or ( Restricted and DataSet IN ( SELECT access FROM AuthAccess WHERE GroupName = '", cgrp, "')))")
       orgs = doQueryFromFed(sql)
-
+      orgs$Description <- gsub("\r?\n|\r", " ", orgs$Description)
       return(orgs)
     }
     stop('Login failed')

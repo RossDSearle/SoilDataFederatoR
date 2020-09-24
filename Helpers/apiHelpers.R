@@ -4,24 +4,24 @@ library(lubridate)
 #######     Some utilities    ###########################
 
 
-writecsv <- function(DF){
-
-  s <- paste(colnames(DF), collapse = ", ")
-  s <- paste(s, '\r\n')
-  print("here")
-  for(i in 1:nrow(DF)){
-
-    for(j in 1:ncol(DF)){
-      if(j==1){
-        s <- paste0(s, as.character(DF[i,j]))
-      }else{
-        s <- paste0(s, ',', as.character(DF[i,j]))
-      }
-    }
-    s <- paste(s, '\r\n')
-  }
-  return(s)
-}
+# writecsv <- function(DF){
+#
+#   s <- paste(colnames(DF), collapse = ", ")
+#   s <- paste(s, '\r\n')
+#   print("here")
+#   for(i in 1:nrow(DF)){
+#
+#     for(j in 1:ncol(DF)){
+#       if(j==1){
+#         s <- paste0(s, as.character(DF[i,j]))
+#       }else{
+#         s <- paste0(s, ',', as.character(DF[i,j]))
+#       }
+#     }
+#     s <- paste(s, '\r\n')
+#   }
+#   return(s)
+# }
 
 
 
@@ -179,36 +179,39 @@ makeDFList <- function(DF) {
 
 
 
-cerealize <- function(DF, label, format, res){
-  if(format == 'xml'){
-
-    res$setHeader("Content-Type", "application/xml; charset=utf-8")
-    xdoc=xml_new_root(paste0(label, 's'))
-    vars_xml <- lapply(purrr::transpose(DF),
-                       function(x) {
-                         #as_xml_document(list(DataProvider = lapply(x, as.list)))
-                         as_xml_document(setNames(list(lapply(x, as.list)), label))
-                       })
-
-    for(trial in vars_xml) xml_add_child(xdoc, trial)
-    res$body <- as(xdoc, "character")
-    return(res)
-
-  }else if(format == 'csv'){
-    res$setHeader("content-disposition", "attachment; filename=FederatedSoilData.csv");
-    res$setHeader("Content-Type", "application/csv; charset=utf-8")
-    res$body <- writecsv(DF)
-    return(res)
-
-  }else if(format == 'html'){
-    res$setHeader("Content-Type", "text/html ; charset=utf-8")
-    res$body <- htmlTable(DF, align = "l", align.header = "l", caption = "Data Providers")
-    return(res)
-
-  }else{
-    return(DF)
-  }
-}
+# cerealize <- function(DF, label, format, res){
+#
+#   print('JJJJJJJJJJJJJJJJJJJJ       helper      JJJJJJJJJJJJJJJJJJJ')
+#
+#   if(format == 'xml'){
+#
+#     res$setHeader("Content-Type", "application/xml; charset=utf-8")
+#     xdoc=xml_new_root(paste0(label, 's'))
+#     vars_xml <- lapply(purrr::transpose(DF),
+#                        function(x) {
+#                          #as_xml_document(list(DataProvider = lapply(x, as.list)))
+#                          as_xml_document(setNames(list(lapply(x, as.list)), label))
+#                        })
+#
+#     for(trial in vars_xml) xml_add_child(xdoc, trial)
+#     res$body <- as(xdoc, "character")
+#     return(res)
+#
+#   }else if(format == 'csv'){
+#     res$setHeader("content-disposition", "attachment; filename=FederatedSoilData.csv");
+#     res$setHeader("Content-Type", "application/csv; charset=utf-8")
+#     res$body <- writecsv(DF)
+#     return(res)
+#
+#   }else if(format == 'html'){
+#     res$setHeader("Content-Type", "text/html ; charset=utf-8")
+#     res$body <- htmlTable(DF, align = "l", align.header = "l", caption = "Data Providers")
+#     return(res)
+#
+#   }else{
+#     return(DF)
+#   }
+# }
 
 
 
@@ -227,6 +230,68 @@ writeLog <- function(df, usr, logDir){
     odf <- data.frame(DateTime=now(),User=usr,Dataset=sdf$Dataset, Attribute=sdf$ObservedProperty,Count=sdf$n, stringsAsFactors = F)
     write.table(odf, logFile,append = TRUE,sep = ",",col.names = FALSE, row.names = FALSE,  quote = FALSE)
   }
+}
+
+
+
+
+
+
+
+cerealize <- function(DF, label, format, res){
+
+
+  if(format == 'xml'){
+    res$setHeader("Content-Type", "application/xml; charset=utf-8")
+    print(format)
+    xmlT <- writexml(DF, label)
+    res$body <- xmlT
+    return(res)
+
+  }else if(format == 'csv'){
+    res$setHeader("content-disposition", paste0("attachment; filename=", label, ".csv"));
+    res$setHeader("Content-Type", "application/csv; charset=utf-8")
+    res$body <- writecsv(DF)
+    return(res)
+
+  }else if(format == 'html'){
+    res$setHeader("Content-Type", "text/html ; charset=utf-8")
+    res$body <- htmlTable(DF, align = "l", align.header = "l", caption = label)
+    return(res)
+
+  }else{
+    return(DF)
+  }
+}
+
+
+
+writecsv <- function(DF){
+  tc <- textConnection("value_str2", open="w")
+  write.table(DF, textConnection("value_str2", open="w"), sep=",", row.names=F, col.names=T)
+  value_str2 <- paste0(get("value_str2"), collapse="\n")
+  close(tc)
+  return(value_str2)
+}
+
+writexml <- function(df, label){
+  o <- apply(df, 1, DataFrameToXmlwriter, label)
+  s <- unlist(o)
+  xml <- paste( s, collapse = '')
+  xml2 <- str_replace_all(paste0('<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>\n<', label, 'Records>\n', xml, '</', label, 'Records>'), '&', '')
+  return(xml2)
+}
+
+DataFrameToXmlwriter <- function(x, label){
+  v <- paste0('<', label, 'Record>')
+  for (i in 1:length(names(x))) {
+
+    v <- paste0(v, '<', names(x)[i], '>', str_replace(x[i], '<', 'less than'), '</', names(x)[i], '> ')
+  }
+  v <- paste0(v,'</', label, 'Record>\n')
+
+  v2 <- v
+  return(v2)
 }
 
 
