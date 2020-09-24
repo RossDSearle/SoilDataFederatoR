@@ -343,17 +343,8 @@ apiGetDataQualityDescriptions <- function(res, DataSet=NULL, bbox=NULL, format='
 
 
 
-
-
-
-
-
 cerealize <- function(DF, label, format, res){
-
-
-
   if(format == 'xml'){
-
     res$setHeader("Content-Type", "application/xml; charset=utf-8")
     print(format)
     xmlT <- writexml(DF, label)
@@ -374,38 +365,27 @@ cerealize <- function(DF, label, format, res){
   }else{
     return(DF)
   }
-
-
 }
 
 
 
 writecsv <- function(DF){
-
   tc <- textConnection("value_str2", open="w")
   write.table(DF, textConnection("value_str2", open="w"), sep=",", row.names=F, col.names=T)
   value_str2 <- paste0(get("value_str2"), collapse="\n")
   close(tc)
   return(value_str2)
-
 }
 
 writexml <- function(df, label){
-
-
-
   o <- apply(df, 1, DataFrameToXmlwriter, label)
   s <- unlist(o)
   xml <- paste( s, collapse = '')
   xml2 <- str_replace_all(paste0('<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>\n<', label, 'Records>\n', xml, '</', label, 'Records>'), '&', '')
-
-
-  #cat(xml2, file='c:/temp/x.xml')
   return(xml2)
 }
 
 DataFrameToXmlwriter <- function(x, label){
-
   v <- paste0('<', label, 'Record>')
   for (i in 1:length(names(x))) {
 
@@ -416,6 +396,14 @@ DataFrameToXmlwriter <- function(x, label){
   v2 <- v
   return(v2)
 }
+
+
+
+
+
+
+
+
 
 
 

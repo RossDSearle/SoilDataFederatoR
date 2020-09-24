@@ -208,9 +208,9 @@ cerealize <- function(DF, label, format, res){
   }else{
     return(DF)
   }
-
-
 }
+
+
 
 
 
@@ -222,9 +222,11 @@ writeLog <- function(df, usr, logDir){
     cat('DateTime,User,Dataset,Attribute,Count\n', sep = '', file = logFile, append = F)
   }
 
-  sdf <- df %>% group_by(Dataset, ObservedProperty) %>% summarise(n = n())
-  odf <- data.frame(DateTime=now(),User=usr,Dataset=sdf$Dataset, Attribute=sdf$ObservedProperty,Count=sdf$n, stringsAsFactors = F)
-  write.table(odf, logFile,append = TRUE,sep = ",",col.names = FALSE, row.names = FALSE,  quote = FALSE)
+  if(nrow(df) > 0){
+    sdf <- df %>% group_by(Dataset, ObservedProperty) %>% summarise(n = n())
+    odf <- data.frame(DateTime=now(),User=usr,Dataset=sdf$Dataset, Attribute=sdf$ObservedProperty,Count=sdf$n, stringsAsFactors = F)
+    write.table(odf, logFile,append = TRUE,sep = ",",col.names = FALSE, row.names = FALSE,  quote = FALSE)
+  }
 }
 
 

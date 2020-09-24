@@ -79,6 +79,10 @@ getLocations(usr=usr, key=key)
 
 
 df <- getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+DataSet='TERNSurveillance'
+bboxExt=NULL
+df <- getSoilData(DataSets='TERNSurveillance',observedProperty='7A1', usr='ross.searle@csiro.au', key='a')
+
 getSoilData(DataSets='TERNSurveillance',observedProperty='col_hue_val_chrom', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='TERNSurveillance', observedProperty='colour_when_dry', usr='ross.searle@csiro.au', key='a')
 
