@@ -339,7 +339,7 @@ apiGetDataQualityDescriptions <- function(res, DataSet=NULL, bbox=NULL, format='
 
 
 #* @assets /srv/plumber/TERNLandscapes/SoilDataFederatoR/Docs /help
-
+list()
 
 
 
