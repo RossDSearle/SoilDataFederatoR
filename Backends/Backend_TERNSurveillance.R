@@ -35,7 +35,7 @@ getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observ
   OrgName <- getOrgName(DataSet)
 
   ep <- getNativeAPIurl(DataSet)
-  allInfo <- fromJSON(ep )
+  allInfo <- getWebDataDF(ep )
 
   propRecs <- getNativeProperties(DataSet=DataSet, observedProperty, observedPropertyGroup)
 
@@ -44,6 +44,7 @@ getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observ
     return(blankResponseDF())
   }
 
+  lodfs <- list(nrow(propRecs))
 
   for (i in 1:nrow(propRecs)) {
 

@@ -161,6 +161,7 @@ getSoilData(DataSets='NSWGovernment', observedProperty='h_texture', usr='ross.se
 getSiteLocations(DataSets='NSWGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='VicGovernment', observedProperty='15E2_Al', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='VicGovernment', observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='VicGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='VicGovernment', usr='ross.searle@csiro.au', key='a')
 

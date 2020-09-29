@@ -1,25 +1,27 @@
+library(stringr)
+
+source('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/Backends.R')
 
 
-
-test_Functions <- function(types, showResults=F){
+test_Functions <- function(types='ALL', showResults=F, nrows=5){
 
   props <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/Testing/testProps.csv')
 
   if(str_to_upper(types)=='ALL'){
-    test_getLabData_Functions(props, showResults=T)
-    test_getMorphData_Functions(props, showResults)
-    test_getLocations_Functions(props, showResults)
+    test_getLabData_Functions(props, showResults, nrows)
+    test_getMorphData_Functions(props, showResults, nrows)
+    test_getLocations_Functions(props, showResults, nrows)
   }  else if(str_to_upper(types)=='LAB'){
-    test_getLocations_Functions(props, showResults)
+    test_getLocations_Functions(props, showResults, nrows)
   }  else if(str_to_upper(types)=='MORPH'){
-    test_getLocations_Functions(props, showResults)
+    test_getLocations_Functions(props, showResults, nrows)
   }else if(str_to_upper(types)=='LOCATIONS'){
-    test_getLocations_Functions(props, showResults)
+    test_getLocations_Functions(props, showResults, nrows)
   }
 }
 
 
-test_getMorphData_Functions <- function(props, showResults){
+test_getMorphData_Functions <- function(props, showResults, nrows){
 
      cat(crayon::yellow('\n\nTesting Morphology Data EndPoints', sep=''))
      cat(crayon::yellow('\n=====================================', sep=''))
@@ -42,7 +44,7 @@ test_getMorphData_Functions <- function(props, showResults){
         cat(crayon::green('SUCCESS', sep=''))
         cat(' -  returned ', nrow(r1), ' records', sep='')
         if(showResults){
-          print(head(r1))
+          print(head(r1, nrows))
         }
       }else{
         cat(crayon::red('POSSIBLE PROBLEM', sep=''))        }
@@ -51,7 +53,7 @@ test_getMorphData_Functions <- function(props, showResults){
 }
 
 
-test_getLabData_Functions <- function(props, showResults){
+test_getLabData_Functions <- function(props, showResults, nrows){
 
      cat(crayon::yellow('\n\nTesting Lab Data EndPoints', sep=''))
      cat(crayon::yellow('\n=====================================', sep=''))
@@ -59,32 +61,34 @@ test_getLabData_Functions <- function(props, showResults){
   ds = props$DataSet
 
   for (i in 1:length(ds)) {
+    Sys.sleep(2)
 
     OP <- props[i,2]
     dSt <-ds[i]
+    print(dSt)
 
     cat(crayon::blue('\n', dSt,' : '), crayon::cyan( OP),' : ', sep='')
     if(is.na(OP))
     {
       cat(crayon::magenta('No props available', sep=''))
     }else{
-
-      r1 <- getSoilData(DataSets=dSt,observedProperty=OP, usr='ross.searle@csiro.au', key='a', verbose=F)
-
-      if(nrow(r1) > 0){
-        cat(crayon::green('SUCCESS', sep=''))
-        cat(' -  returned ', nrow(r1), ' records', sep='')
-        if(showResults){
-          print(head(r1))
-        }
-      }else{
-        cat(crayon::red('POSSIBLE PROBLEM', sep=''))        }
+#
+#       r1 <- getSoilData(DataSets=dSt,observedProperty=OP, usr='ross.searle@csiro.au', key='a', verbose=F)
+#
+#       if(nrow(r1) > 0){
+#         cat(crayon::green('SUCCESS', sep=''))
+#         cat(' -  returned ', nrow(r1), ' records\n', sep='')
+#         if(showResults){
+#           print(head(r1, nrows))
+#         }
+#       }else{
+#         cat(crayon::red('POSSIBLE PROBLEM\n', sep=''))        }
     }
   }
 }
 
 ####  Test the getLocations EndPoints
-test_getLocations_Functions <- function(props, showResults){
+test_getLocations_Functions <- function(props, showResults, nrows){
 
   ds = props$DataSet
 
@@ -100,22 +104,22 @@ test_getLocations_Functions <- function(props, showResults){
 
             if(nrow(r2) > 0){
               cat(crayon::green('SUCCESS', sep=''))
-              cat(' -  returned ', nrow(r2), ' records', sep='')
+              cat(' -  returned ', nrow(r2), ' records\n', sep='')
               if(showResults){
-                print(head(r1))
+                print(head(r1, nrows))
               }
             }else{
-              cat(crayon::red('POSSIBLE PROBLEM', sep=''))
+              cat(crayon::red('POSSIBLE PROBLEM\n', sep=''))
             }
           }, warning = function(w) {
               #cat(crayon::red('WARNING : ', w, sep=''))
             cat(crayon::green('SUCCESS', sep=''))
-            cat(' -  returned ', nrow(r2), ' records', sep='')
+            cat(' -  returned ', nrow(r2), ' records\n', sep='')
             if(showResults){
               print(head(r1))
             }
           }, error = function(e) {
-                cat(crayon::red('ERROR : ', e, sep=''))
+                cat(crayon::red('ERROR : ', e, '\n', sep=''))
           }, finally = {}
       )
 

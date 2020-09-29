@@ -162,11 +162,11 @@ get_VicData <- function(nProp, DataSet,propertyType){
 
       fdf <- projectCoords(fdf)
 
-      d <- str_split( fdf$sample_date, ' ')
+      d <- str_split( fdf$sample_date, 'T')
       d2 <- sapply(d, function (x) x[1])
-      d3 <- as.Date(d2, format = "%m/%d/%y")
+      d3 <- as.Date(d2, format = "%Y-%m-%d")
       outDate <- format(d3, '%d-%m-%Y')
-      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$project_code, '_', fdf$feature_id , fdf$obs_no), fdf$horizon_number , outDate, fdf$Longitude, fdf$Latitude,
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$project_code, '_', fdf$feature_id , fdf$obs_no), fdf$sample_no , outDate, fdf$Longitude, fdf$Latitude,
                                    fdf$sample_min_lower , fdf$sample_max_lower, propertyType, nProp, fdf$obs_value , 'NA')
     }else{
       oOutDF <- blankResponseDF()
@@ -279,8 +279,8 @@ get_NSWLocation <- function(Dataset){
 get_NSWLab <- function(nProp, DataSet){
 
   ep <- getASRISService(DataSet)
-  nProp <- 'Location'
-  url <- paste0(ep, '/MorphResults?morphology_attribute=', paste0(nProp ))
+  #nProp <- 'Location'
+  url <- paste0(ep, '/LabResults?morphology_attribute=', paste0(nProp ))
   fdfRaw <- getWebDataDF(url)
 
   if(length(fdfRaw)==0){
@@ -364,6 +364,7 @@ get_NatSoilLab <- function(nProp, DataSet){
 
   ep <- getASRISService(DataSet)
   url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
+  print(url)
   fdfRaw <- getWebDataDF(url)
 
   if(length(fdfRaw)==0){
