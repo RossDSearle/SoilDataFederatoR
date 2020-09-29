@@ -10,5 +10,36 @@ The SoilDataFederator will return all available data for a specified soil proper
 <p>
 While the API is meant to be the primary means of accessing federated soils data we have also made this Web App available for simple manual querying of the API.
 It is a simple interface which simply delivers the data from the API as is. You need to have an API key in order to use this App. You need to 
-<a href='https://shiny.esoil.io/SoilDataFederator/Pages/Register/'  target="_blank"> register</a> to receive an API key for using this App.
+<a href='https://shiny.esoil.io/SoilDataFederator/Pages/Register/'  target="_blank"> register</a> to receive an API key for using this App. If you don't wo't to register 
+but instead just use the "Demo", "Demo" credentials, only the first 5 records from the CSIRO NatSoil dataset will be returned for demonstration purposes.
+</p>
+
+<p>
+<H3>Access</H3>
+<p> All of the datasets are publicly available from there original sources. Most commonly under a CC-BY  licence. 
+This means if you use data from the SoilDataFederator you have to acknowledge the original source. 
+This information is available under the "Available Datasets" tab.
+</p>
+
+<H3> How To Use This App</H3>
+<p><ul>
+<li>Add your user name and API key in the top of the left side bar</li>
+<li>In the first dropdown select the datasets you wish to search. The available datasets are listed under the "Available Datasets" tab</li>
+<li>Choose if the soil property you wish to search for is a laboratory measured property or a filed measured property</li>
+<li>Select wich Property Group you wich to search within</li>
+<li>Choose the specific property you which to search for</li>
+<li>Click the "Get Data" button and the SoilDataFederator will begin searching the requested datasets for data matching your query.The results will be listed in the main section</li>
+<li>Once the data is retrieved and diplayed in the main section you can download as a csv file by click the "Download" button</li>
+</ul>
+</p>
+<p>
+Once the data is retrieved some diagnostic summary information will be diplayed under the "Summary" tab. The locations of the data extracted will be displayed on a map under the "Map" tab.
+</p>
+<p>
+The available datasets are listed under the "Available Datasets" tab and the available soil properties are listed under the "Available Soil Properties"  tab. 
+This is the available soil properties known to the SoilDataFederator. Just because a property is listed here does not mean it is available in every dataset.
+</p>
+<p>
+The "API Requests" tab lists the url requests  that this App is sending to the SoilDataFederator web API. 
+You could use these as examples for coding your own requests in you programming language of choice.
 </p>
