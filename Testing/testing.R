@@ -97,7 +97,7 @@ df <- getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='3A1', usr='r
 getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='ph_value', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='NatGeoChemicalSurvey', usr='ross.searle@csiro.au', key='a')
 
-df <- getSoilData(DataSets='EastCentral_Australia',observedProperty='4A1;3A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='EastCentral_Australia',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='EastCentral_Australia',observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='EastCentral_Australia', usr='ross.searle@csiro.au', key='a')
 
@@ -114,7 +114,7 @@ getSiteLocations(DataSets='NTGovernment', usr='ross.searle@csiro.au', key='a')
 
 
 getSoilData(DataSets='SCARP',observedProperty='6B3', usr='ross.searle@csiro.au', key='a')
-getSoilData(DataSets='SCARP',observedProperty='o_date_desc', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='SCARP',observedProperty='o_date_desc', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SCARP',observedProperty='h_notes', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SCARP',observedProperty='o_asc_ord', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='SCARP', usr='ross.searle@csiro.au', key='a')
@@ -126,7 +126,7 @@ getSoilData(DataSets='SAGovernment', observedProperty='h_texture', usr='ross.sea
 getSiteLocations(DataSets='SAGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='WAGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getSoilData(DataSets='WAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='WAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='WAGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='QLDGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')

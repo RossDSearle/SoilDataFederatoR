@@ -118,30 +118,30 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
 }
 
 
-get_TasLab <- function(nProp, DataSet){
-
-  ep <- getASRISService(DataSet)
-  url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
-  fdfRaw <- getWebDataDF(url)
-
-  if(length(fdfRaw)==0){
-    oOutDF <- blankResponseDF()
-  }else{
-    if(nrow(fdfRaw) > 0){
-      fdf <- fdfRaw
-      d <- str_split( fdfRaw$sample_date, ' ')
-      d2 <- sapply(d, function (x) x[1])
-      d3 <- as.Date(d2, format = "%m/%d/%y")
-      outDate <- format(d3, '%d-%m-%Y')
-
-      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_1'), '1' , outDate, fdf$longitude, fdf$latitude,
-                                   fdf$bound_upper , fdf$bound_lower, 'LaboratoryMeasurement', fdf$labm_code, fdf$labr_value , 'NA')
-    }else{
-      oOutDF <- blankResponseDF()
-    }
-  }
-  return(oOutDF)
-}
+# get_TasLab <- function(nProp, DataSet){
+#
+#   ep <- getASRISService(DataSet)
+#   url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
+#   fdfRaw <- getWebDataDF(url)
+#
+#   if(length(fdfRaw)==0){
+#     oOutDF <- blankResponseDF()
+#   }else{
+#     if(nrow(fdfRaw) > 0){
+#       fdf <- fdfRaw
+#       d <- str_split( fdfRaw$sample_date, ' ')
+#       d2 <- sapply(d, function (x) x[1])
+#       d3 <- as.Date(d2, format = "%m/%d/%y")
+#       outDate <- format(d3, '%d-%m-%Y')
+#
+#       oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_1'), '1' , outDate, fdf$longitude, fdf$latitude,
+#                                    (fdf$bound_upper * 0.01) , (fdf$bound_lower * 0.01), 'LaboratoryMeasurement', fdf$labm_code, fdf$labr_value , 'NA')
+#     }else{
+#       oOutDF <- blankResponseDF()
+#     }
+#   }
+#   return(oOutDF)
+# }
 
 
 
@@ -214,7 +214,8 @@ VicCRSs <- function(){
 
 VicUniqueDatums <- function(sdf){
 
-  dts <- dplyr::count_(sdf, vars = c('site_zone', 'site_datum'))
+  #dts <- dplyr::count_(sdf, vars = c('site_zone', 'site_datum'))
+  dts <- sdf %>% count(site_zone, site_datum)
   dts2 <- dts[-3]
   idxs <- which(dts2$site_zone == "" & dts2$site_datum == "",)
   dts3 <- dts2[-idxs,]
@@ -260,15 +261,15 @@ projectCoords <- function(df){
 
 
 get_NSWLocation <- function(Dataset){
-  ep <- getASRISService(Dataset=DataSet)
-  OrgName <- getOrgName(DataSet)
+  ep <- getASRISService(Dataset=Dataset)
+  OrgName <- getOrgName(Dataset)
   url <- paste0(ep, '/MorphResults?morphology_attribute=latitude')
   fdf <- getWebDataDF(url)
   d <- str_split( str_trim(fdf$sample_date), ' ')
   d2 <- sapply(d, function (x) x[1])
   d3 <- as.Date(d2, format = "%m/%d/%y")
   outDate <- format(d3, '%d-%m-%Y')
-  oOutDF <-  generateResponseAllLocs(dataset=DataSet, observation_ID=paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_1'), longitude=fdf$longitude, latitude=fdf$latitude, date=outDate )
+  oOutDF <-  generateResponseAllLocs(dataset=Dataset, observation_ID=paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_1'), longitude=fdf$longitude, latitude=fdf$latitude, date=outDate )
   return(oOutDF)
 }
 
@@ -364,7 +365,6 @@ get_NatSoilLab <- function(nProp, DataSet){
 
   ep <- getASRISService(DataSet)
   url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
-  print(url)
   fdfRaw <- getWebDataDF(url)
 
   if(length(fdfRaw)==0){
@@ -390,14 +390,14 @@ get_NatSoilLab <- function(nProp, DataSet){
 }
 
 get_NatSoilLocation <- function(Dataset){
-  ep <- getASRISService(Dataset=DataSet)
-  OrgName <- getOrgName(DataSet)
+  ep <- getASRISService(Dataset=Dataset)
+  OrgName <- getOrgName(Dataset)
   url <- paste0(ep, '/MorphResults?morphology_attribute=s_date_desc')
   fdf <- getWebDataDF(url)
   day <- str_sub(fdf$o_date_desc, 1,2)
   mnth <- str_sub(fdf$o_date_desc, 3,4)
   yr <- str_sub(fdf$o_date_desc, 5,8)
   outDate <- paste0(day, '-', mnth,'-', yr)
-  oOutDF <-  generateResponseAllLocs(dataset=DataSet, observation_ID=paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), longitude=fdf$o_longitude_GDA94, latitude=fdf$o_latitude_GDA94, date=outDate )
+  oOutDF <-  generateResponseAllLocs(dataset=Dataset, observation_ID=paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), longitude=fdf$o_longitude_GDA94, latitude=fdf$o_latitude_GDA94, date=outDate )
   return(oOutDF)
 }

@@ -3,7 +3,7 @@ library(stringr)
 source('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/Backends.R')
 
 
-test_Functions <- function(types='ALL', showResults=F, nrows=5){
+test_Functions <- function(types='ALL', showResults=T, nrows=5){
 
   props <- read.csv('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/Testing/testProps.csv')
 
@@ -12,9 +12,9 @@ test_Functions <- function(types='ALL', showResults=F, nrows=5){
     test_getMorphData_Functions(props, showResults, nrows)
     test_getLocations_Functions(props, showResults, nrows)
   }  else if(str_to_upper(types)=='LAB'){
-    test_getLocations_Functions(props, showResults, nrows)
+    test_getLabData_Functions(props, showResults, nrows)
   }  else if(str_to_upper(types)=='MORPH'){
-    test_getLocations_Functions(props, showResults, nrows)
+    test_getMorphData_Functions(props, showResults, nrows)
   }else if(str_to_upper(types)=='LOCATIONS'){
     test_getLocations_Functions(props, showResults, nrows)
   }
@@ -31,6 +31,7 @@ test_getMorphData_Functions <- function(props, showResults, nrows){
   for (i in 1:length(ds)) {
 
     dSt <-ds[i]
+    OP <- props[i,3]
 
     cat(crayon::blue('\n', dSt,' : '), crayon::cyan( OP ),' : ', sep='')
     if(is.na(OP))
@@ -42,12 +43,12 @@ test_getMorphData_Functions <- function(props, showResults, nrows){
 
       if(nrow(r1) > 0){
         cat(crayon::green('SUCCESS', sep=''))
-        cat(' -  returned ', nrow(r1), ' records', sep='')
+        cat(' -  returned ', nrow(r1), ' records\n', sep='')
         if(showResults){
           print(head(r1, nrows))
         }
       }else{
-        cat(crayon::red('POSSIBLE PROBLEM', sep=''))        }
+        cat(crayon::red('POSSIBLE PROBLEM\n', sep=''))        }
     }
   }
 }
@@ -72,17 +73,17 @@ test_getLabData_Functions <- function(props, showResults, nrows){
     {
       cat(crayon::magenta('No props available', sep=''))
     }else{
-#
-#       r1 <- getSoilData(DataSets=dSt,observedProperty=OP, usr='ross.searle@csiro.au', key='a', verbose=F)
-#
-#       if(nrow(r1) > 0){
-#         cat(crayon::green('SUCCESS', sep=''))
-#         cat(' -  returned ', nrow(r1), ' records\n', sep='')
-#         if(showResults){
-#           print(head(r1, nrows))
-#         }
-#       }else{
-#         cat(crayon::red('POSSIBLE PROBLEM\n', sep=''))        }
+
+      r1 <- getSoilData(DataSets=dSt,observedProperty=OP, usr='ross.searle@csiro.au', key='a', verbose=F)
+
+      if(nrow(r1) > 0){
+        cat(crayon::green('SUCCESS', sep=''))
+        cat(' -  returned ', nrow(r1), ' records\n', sep='')
+        if(showResults){
+          print(head(r1, nrows))
+        }
+      }else{
+        cat(crayon::red('POSSIBLE PROBLEM\n', sep=''))        }
     }
   }
 }
@@ -106,7 +107,7 @@ test_getLocations_Functions <- function(props, showResults, nrows){
               cat(crayon::green('SUCCESS', sep=''))
               cat(' -  returned ', nrow(r2), ' records\n', sep='')
               if(showResults){
-                print(head(r1, nrows))
+                print(head(r2, nrows))
               }
             }else{
               cat(crayon::red('POSSIBLE PROBLEM\n', sep=''))
@@ -116,7 +117,7 @@ test_getLocations_Functions <- function(props, showResults, nrows){
             cat(crayon::green('SUCCESS', sep=''))
             cat(' -  returned ', nrow(r2), ' records\n', sep='')
             if(showResults){
-              print(head(r1))
+              print(head(r2))
             }
           }, error = function(e) {
                 cat(crayon::red('ERROR : ', e, '\n', sep=''))

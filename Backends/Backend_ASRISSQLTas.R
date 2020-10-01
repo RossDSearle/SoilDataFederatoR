@@ -51,11 +51,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
                          Server   = "asris-sql-stage.it.csiro.au\\sql2017",
                          Database = "tasmania_json_services",
                          UID      = 'rosssearle',
-                         PWD      = 'Ads@2*&5cv'
-
-
-  )
-
+                         PWD      = 'Ads@2*&5cv')
 
   OrgName <- getOrgName(DataSet)
   propRecs <- getNativeProperties(DataSet=DataSet, observedProperty, observedPropertyGroup)
@@ -95,11 +91,13 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
 
 
     if(nrow(fdf) > 0){
+      fdf <- cleanTasDepths(fdf)
+
       rd <- fdf$OBSERVATION_DATE
       date <- as.Date(rd, format = "%d-%b-%Y")
       odate <- format(date, format="%d-%m-%Y")
       c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
-      oOutDF <- generateResponseDF(DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$LAYER_NUMBER, odate, c4326$X, c4326$Y , fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, sProp,fdf$VALUE , units)
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$LAYER_NUMBER, odate, c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp,fdf$VALUE , units)
       lodfs[[i]] <- oOutDF
     }else{
       lodfs[[i]] <- blankResponseDF()
@@ -124,13 +122,16 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
       sql2 <- str_replace_all(sql1, 'yyyy', nProp)
 
       fdf = doQuery(tcon, sql2)
+
+      fdf <- cleanTasDepths(fdf)
+
       rd <- fdf$OBSERVATION_DATE
       date <- as.Date(rd, format = "%d-%b-%Y")
       odate <- format(date, format="%d-%m-%Y")
       c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
       oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), 1 , odate,
-                                    c4326$X, c4326$Y , fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, sProp, fdf[, 8] , 'None')
+                                    c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 8] , 'None')
       idxs <- which(oOutDF$Value != '')
       lodfs[[i]] <- oOutDF[idxs,]
 
@@ -147,13 +148,18 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
         sql2 <- str_replace_all(sqlTemplate, 'yyyy', nProp)
 
         fdf = doQuery(tcon, sql2)
+
+
+        fdf <- cleanTasDepths(fdf)
+
         rd <- fdf$OBSERVATION_DATE
         date <- as.Date(rd, format = "%d-%b-%Y")
         odate <- format(date, format="%d-%m-%Y")
+
         c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
         oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), 1 , odate,
-                                      c4326$X, c4326$Y , fdf$UPPER_DEPTH , fdf$LOWER_DEPTH , propertyType, sProp, fdf[, 8] , 'None')
+                                      c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 8] , 'None')
         idxs <- which(oOutDF$Value != '')
         lodfs[[i]] <- oOutDF[idxs,]
 
@@ -189,6 +195,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
       sql2 <- str_replace_all(sqlTemplate, 'yyyy', nProp)
 
       fdf = doQuery(tcon, sql2)
+
       rd <- fdf$OBSERVATION_DATE
       date <- as.Date(rd, format = "%d-%b-%Y")
       odate <- format(date, format="%d-%m-%Y")
@@ -232,6 +239,18 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
   dbDisconnect(tcon)
   return(outDF)
 
+}
+
+cleanTasDepths <- function(fdf){
+
+
+  suppressWarnings( fdf$UPPER_DEPTH <- as.numeric(fdf$UPPER_DEPTH))
+  suppressWarnings( fdf$LOWER_DEPTH<- as.numeric(fdf$LOWER_DEPTH))
+  u1 <-  which(is.na(fdf$UPPER_DEPTH))
+  u2 <-  which(is.na(fdf$LOWER_DEPTH))
+  idxs <- unique(u1, u2)
+  fdf <- fdf[-idxs,]
+  return(fdf)
 }
 
 projectTasCoords <- function(e,n){
