@@ -249,7 +249,9 @@ cleanTasDepths <- function(fdf){
   u1 <-  which(is.na(fdf$UPPER_DEPTH))
   u2 <-  which(is.na(fdf$LOWER_DEPTH))
   idxs <- unique(u1, u2)
+  if(length(idxs)>0){
   fdf <- fdf[-idxs,]
+  }
   return(fdf)
 }
 
