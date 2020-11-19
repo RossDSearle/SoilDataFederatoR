@@ -17,7 +17,7 @@ source("helpers.R")
 
 #testdf <- read.csv('c:/temp/df.csv', stringsAsFactors = F)
 #serverLoc <- 'http://127.0.0.1:6902'
-serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR/R'
+serverLoc  <- 'https://esoil.io/TERNLandscapes/SoilDataFederatoR'
 
 url <- paste0(serverLoc, '/SoilDataAPI/DataSets')
 datasetList <- fromJSON(url)
@@ -35,7 +35,7 @@ insertRow <- function(existingDF, newrow, r) {
 
 blankResponseDF <- function(){
 
-  outDF <- data.frame(DataStore=character(), Dataset=character(), Provider=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+  outDF <- data.frame(DataStore=character(), Dataset=character(), Provider=character(), Location_ID=character(), Layer_ID=character(), SampleID=character(), SampleDate=character() ,
                       Longitude=numeric() , Latitude= numeric(),
                       UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
                       Units= character(),   QualCollection=integer(), QualSpatialAgg=integer(), QualManagement=integer(), stringsAsFactors = F)
