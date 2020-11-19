@@ -336,7 +336,7 @@ generateResponseDF <- function( dataset, location_id, layer_id, sample_id, date,
                       UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
                       Value=value , Units=units, QualCollection=NA, QualSpatialAggregation=NA, QualManagement=NA, QualSpatialAccuracy=NA, stringsAsFactors = F)
 
-  oOutDF <- outDF[order(outDF$Dataset, outDF$Location_ID, outDF$UpperDepth, outDF$LowerDepth)]
+  oOutDF <- outDF[order(outDF$Dataset, outDF$Location_ID, outDF$UpperDepth, outDF$LowerDepth), ]
 
 
   return(oOutDF)
