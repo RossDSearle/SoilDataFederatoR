@@ -156,13 +156,15 @@ df <- fromJSON('http://asris-daas02/NSW_Services/api/LabResults')
 df[df$labm_code == 'N4B1',]
 unique(df$labm_code)
 
-getSoilData(DataSets='NSWGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
-getSoilData(DataSets='NSWGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='NSWGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='NSWGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NSWGovernment', observedProperty='o_date_desc', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='NSWGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='VicGovernment', observedProperty='15E2_Al', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='VicGovernment', observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='VicGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='VicGovernment', observedProperty='O_PPF', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='VicGovernment', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='TasGovernment', observedProperty='6A1', usr='ross.searle@csiro.au', key='a')
@@ -171,10 +173,11 @@ getSiteLocations(DataSets='TasGovernment', usr='ross.searle@csiro.au', key='a')
 
 DataSet='TasGovernment'
 DataSet='SAGovernment'
-DataSet=NULL
+DataSet='NatSoil'
 
 df <- getSoilData(DataSets=DataSet, observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 df <- getSoilData(DataSets=DataSet, observedPropertyGroup='PSA', usr='ross.searle@csiro.au', key='a')
+
 
 
 makeLocations(df, drawit = T)
