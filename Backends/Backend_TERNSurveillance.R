@@ -67,20 +67,20 @@ getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observ
       fdf$DateOut <- paste0(d, '-', m, '-', y)
 
 
-      dps <- paste0(fdf$upper_depth, '-', fdf$lower_depth)
-      udps <- sort(unique(dps),decreasing = F)
+      #dps <- paste0(fdf$upper_depth, '-', fdf$lower_depth)
+      #udps <- sort(unique(dps),decreasing = F)
 
-      fdf$LayerID <- NA
-      tolerance = .Machine$double.eps^0.5
+      # fdf$LayerID <- NA
+      # tolerance = .Machine$double.eps^0.5
+      #
+      # for (j in 1:length(udps)) {
+      #   depths <- str_split(udps[j], '-')
+      #   ud <- as.numeric(depths[[1]][1])
+      #   ld <- as.numeric(depths[[1]][2])
+      #   fdf$LayerID[ abs(fdf$upper_depth-ud) < tolerance &  abs(fdf$lower_depth -ld) < tolerance] <- j
+      # }
 
-      for (j in 1:length(udps)) {
-        depths <- str_split(udps[j], '-')
-        ud <- as.numeric(depths[[1]][1])
-        ld <- as.numeric(depths[[1]][2])
-        fdf$LayerID[ abs(fdf$upper_depth-ud) < tolerance &  abs(fdf$lower_depth -ld) < tolerance] <- j
-      }
-
-      oOutDF <- generateResponseDF(DataSet, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), fdf$LayerID, fdf$site_location_visit_id, fdf$DateOut, fdf$longitude, fdf$latitude,
+      oOutDF <- generateResponseDF(DataSet, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), 'NA', fdf$site_location_visit_id, fdf$DateOut, fdf$longitude, fdf$latitude,
                                    fdf$upper_depth, fdf$lower_depth, propertyType, sProp, fdf$value, units = units)
 
       lodfs[[i]] <- oOutDF
