@@ -104,6 +104,9 @@ getSiteLocations(DataSets='EastCentral_Australia', usr='ross.searle@csiro.au', k
 
 getSoilData(DataSets='NatSoil',observedProperty='o_type', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NatSoil',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+
+getSoilData(DataSets='NatSoil',observedProperty='2Z2_Clay', usr='ross.searle@csiro.au', key='a')
+
 getSoilData(DataSets='NatSoil',observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='NatSoil', usr='ross.searle@csiro.au', key='a')
 
