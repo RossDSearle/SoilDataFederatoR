@@ -97,7 +97,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
       date <- as.Date(rd, format = "%d-%b-%Y")
       odate <- format(date, format="%d-%m-%Y")
       c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
-      oOutDF <- generateResponseDF(DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$LAYER_NUMBER, odate, c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp,fdf$VALUE , units)
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$LAYER_NUMBER, fdf$LAYER_NUMBER, odate, c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp,fdf$VALUE , units)
       lodfs[[i]] <- oOutDF
     }else{
       lodfs[[i]] <- blankResponseDF()
@@ -111,7 +111,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
 
     if(tabLev == 4){
 
-      sqlTemplate <- paste0('SELECT soil_site.PROJECT, soil_site.SITE_ID, soil_observation.OBSERVATION_DATE, soil_site.EASTING, soil_site.NORTHING, soil_horizon.UPPER_DEPTH, soil_horizon.LOWER_DEPTH, xxxx.yyyy
+      sqlTemplate <- paste0('SELECT soil_site.PROJECT, soil_site.SITE_ID, soil_horizon.HORIZON_NUMBER, soil_observation.OBSERVATION_DATE, soil_site.EASTING, soil_site.NORTHING, soil_horizon.UPPER_DEPTH, soil_horizon.LOWER_DEPTH, xxxx.yyyy
                             FROM soil_site INNER JOIN
                          soil_observation ON soil_site.PROJECT = soil_observation.PROJECT AND soil_site.SITE_ID = soil_observation.SITE_ID INNER JOIN
                          soil_horizon ON soil_observation.SITE_ID = soil_horizon.SITE_ID AND soil_observation.PROJECT = soil_horizon.PROJECT AND soil_observation.OBSERVATION_NUMBER = soil_horizon.OBSERVATION_NUMBER INNER JOIN
@@ -130,7 +130,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
       odate <- format(date, format="%d-%m-%Y")
       c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
-      oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), 1 , odate,
+      oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$HORIZON_NUMBER, 1 , odate,
                                     c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 8] , 'None')
       idxs <- which(oOutDF$Value != '')
       lodfs[[i]] <- oOutDF[idxs,]
@@ -141,7 +141,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
 
       # Horizons table only
       if(str_to_upper(tabName) == "SOIL_HORIZON"){
-        sqlTemplate <- paste0('SELECT soil_site.PROJECT, soil_site.SITE_ID, soil_observation.OBSERVATION_DATE, soil_site.EASTING, soil_site.NORTHING, soil_horizon.UPPER_DEPTH, soil_horizon.LOWER_DEPTH, soil_horizon.yyyy
+        sqlTemplate <- paste0('SELECT soil_site.PROJECT, soil_site.SITE_ID, soil_horizon.HORIZON_NUMBER, soil_observation.OBSERVATION_DATE, soil_site.EASTING, soil_site.NORTHING, soil_horizon.UPPER_DEPTH, soil_horizon.LOWER_DEPTH, soil_horizon.yyyy
                               FROM soil_site INNER JOIN soil_observation ON soil_site.PROJECT = soil_observation.PROJECT AND soil_site.SITE_ID = soil_observation.SITE_ID INNER JOIN
                               soil_horizon ON soil_observation.SITE_ID = soil_horizon.SITE_ID AND soil_observation.PROJECT = soil_horizon.PROJECT AND soil_observation.OBSERVATION_NUMBER = soil_horizon.OBSERVATION_NUMBER')
 
@@ -158,7 +158,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
 
         c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
-        oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), 1 , odate,
+        oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$HORIZON_NUMBER, 1 , odate,
                                       c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 8] , 'None')
         idxs <- which(oOutDF$Value != '')
         lodfs[[i]] <- oOutDF[idxs,]
@@ -166,7 +166,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
       }else{
         # All other tables at this level
 
-        sqlTemplate <- paste0('SELECT soil_site.PROJECT, soil_site.SITE_ID, soil_observation.OBSERVATION_DATE, soil_site.EASTING, soil_site.NORTHING, soil_surface_coarse_fragment.yyyy
+        sqlTemplate <- paste0('SELECT soil_site.PROJECT, soil_site.SITE_ID, soil_horizon.HORIZON_NUMBER, soil_observation.OBSERVATION_DATE, soil_site.EASTING, soil_site.NORTHING, soil_surface_coarse_fragment.yyyy
                         FROM soil_site INNER JOIN
                          soil_observation ON soil_site.PROJECT = soil_observation.PROJECT AND soil_site.SITE_ID = soil_observation.SITE_ID INNER JOIN
                          soil_surface_coarse_fragment ON soil_observation.PROJECT = soil_surface_coarse_fragment.PROJECT AND soil_observation.SITE_ID = soil_surface_coarse_fragment.SITE_ID AND
@@ -181,7 +181,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
         odate <- format(date, format="%d-%m-%Y")
         c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
-        oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), 1 , odate, c4326$X, c4326$Y , 'None' , 'None' , propertyType, sProp, fdf[, 6] , 'None')
+        oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$HORIZON_NUMBER, 1 , odate, c4326$X, c4326$Y , 'None' , 'None' , propertyType, sProp, fdf[, 6] , 'None')
         idxs <- which(oOutDF$Value != '')
         lodfs[[i]] <- oOutDF[idxs,]
       }
@@ -201,7 +201,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
       odate <- format(date, format="%d-%m-%Y")
       c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
-      oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), 1 , odate,
+      oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID),'NA', 'NA' , odate,
                                     c4326$X, c4326$Y , 'None' , 'None' , propertyType, sProp, fdf[, 6] , 'None')
       idxs <- which(oOutDF$Value != '')
       lodfs[[i]] <- oOutDF[idxs,]
@@ -222,7 +222,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
 
       c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
-      oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), 1 , odate,
+      oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID),'NA', 'NA' , odate,
                                     c4326$X, c4326$Y , 'None' , 'None' , propertyType, sProp, fdf[, 6] , 'None')
       idxs <- which(oOutDF$Value != '')
       lodfs[[i]] <- oOutDF[idxs,]

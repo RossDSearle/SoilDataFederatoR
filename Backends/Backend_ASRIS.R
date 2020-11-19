@@ -161,13 +161,12 @@ get_VicData <- function(nProp, DataSet,propertyType){
       fdf <- fdfRaw
 
       fdf <- projectCoords(fdf)
-      print(colnames(fdf))
 
       d <- str_split( fdf$sample_date, 'T')
       d2 <- sapply(d, function (x) x[1])
       d3 <- as.Date(d2, format = "%Y-%m-%d")
       outDate <- format(d3, '%d-%m-%Y')
-      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$project_code, '_', fdf$feature_id, '_',  fdf$obs_no), fdf$sample_no , outDate, fdf$Longitude, fdf$Latitude,
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$project_code, '_', fdf$feature_id, '_',  fdf$obs_no), fdf$sample_no, fdf$sample_no , outDate, fdf$Longitude, fdf$Latitude,
                                    fdf$sample_min_lower , fdf$sample_max_lower, propertyType, nProp, fdf$obs_value , 'NA')
     }else{
       oOutDF <- blankResponseDF()
@@ -199,7 +198,7 @@ d <- str_split( fdfcm$sample_date, 'T')
   yr <- sapply(d3, function (x) x[1])
   outDate <- paste0(dy, '-', mn, '-', yr)
 
-  oOutDF <-  generateResponseAllLocs(dataset=DataSet, observation_ID=paste0(fdfcm$agency_code, '_', fdfcm$project_code, '_', fdfcm$feature_id, '_1'), longitude=fdfcm$Longitude, latitude=fdfcm$Latitude, date=outDate )
+  oOutDF <-  generateResponseAllLocs(dataset=DataSet, location_ID=paste0(fdfcm$agency_code, '_', fdfcm$project_code, '_', fdfcm$feature_id, '_1'), longitude=fdfcm$Longitude, latitude=fdfcm$Latitude, date=outDate )
 
 }
 
@@ -270,7 +269,7 @@ get_NSWLocation <- function(Dataset){
   d2 <- sapply(d, function (x) x[1])
   d3 <- as.Date(d2, format = "%m/%d/%y")
   outDate <- format(d3, '%d-%m-%Y')
-  oOutDF <-  generateResponseAllLocs(dataset=Dataset, observation_ID=paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_1'), longitude=fdf$longitude, latitude=fdf$latitude, date=outDate )
+  oOutDF <-  generateResponseAllLocs(dataset=Dataset, location_ID=paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_1'), longitude=fdf$longitude, latitude=fdf$latitude, date=outDate )
   return(oOutDF)
 }
 
@@ -296,7 +295,7 @@ get_NSWLab <- function(nProp, DataSet){
             d2 <- sapply(d, function (x) x[1])
             d3 <- as.Date(d2, format = "%m/%d/%y")
             outDate <- format(d3, '%d-%m-%Y')
-            oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_', fdf$soilprofile_layer_id),fdf$soilprofile_sample_id  , outDate, fdf$longitude, fdf$latitude,
+            oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID), fdf$soilprofile_layer_id, fdf$soilprofile_sample_id  , outDate, fdf$longitude, fdf$latitude,
                                          fdf$bound_upper , fdf$bound_lower, 'LaboratoryMeasurement', fdf$labm_code, fdf$labr_value , 'NA')
         }else{
           oOutDF <- blankResponseDF()
@@ -321,7 +320,7 @@ get_NSWMorph <- function(nProp, DataSet){
         d2 <- sapply(d, function (x) x[1])
         d3 <- as.Date(d2, format = "%m/%d/%y")
         outDate <- format(d3, '%d-%m-%Y')
-        oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID, '_', fdf$soilprofile_layer_id), 'NA' , outDate, fdf$longitude, fdf$latitude,
+        oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency, '_', fdf$survey_number, '_', fdf$profile_ID), fdf$soilprofile_layer_id, 'NA' , outDate, fdf$longitude, fdf$latitude,
                                      fdf$bound_upper , fdf$bound_lower, 'FieldMeasurement', fdf$morphology_attribute, fdf$morphology_attribute_value , 'NA')
 
     }else{
@@ -350,13 +349,14 @@ get_NatSoilMorph <- function(nProp, DataSet){
       yr <- str_sub(fdf$o_date_desc, 5,8)
       outDate <- paste0(day, '-', mnth,'-', yr)
 
-      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id, '_', fdf$h_no), fdf$samp_no , outDate, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94,
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$h_no, fdf$samp_no , outDate, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94,
                                    fdf$h_upper_depth , fdf$h_lower_depth,  'FieldMeasurement', fdf$morphology_attribute, fdf$morphology_attribute_value , 'NA')
 
     }else{
       oOutDF <- blankResponseDF()
     }
   }
+
   return(oOutDF)
 }
 
@@ -379,7 +379,7 @@ get_NatSoilLab <- function(nProp, DataSet){
       outDate <- paste0(day, '-', mnth,'-', yr)
       #outDate <- format(d3, '%d-%m-%Y')
 
-      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id, '_', fdf$h_no, '_', fdf$samp_no), fdf$samp_no , outDate, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94,
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$h_no, fdf$samp_no , outDate, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94,
                                    fdf$samp_upper_depth , fdf$samp_lower_depth, 'LaboratoryMeasurement', fdf$labm_code, fdf$labr_value , 'NA')
     }else{
       oOutDF <- blankResponseDF()
@@ -397,6 +397,6 @@ get_NatSoilLocation <- function(Dataset){
   mnth <- str_sub(fdf$o_date_desc, 3,4)
   yr <- str_sub(fdf$o_date_desc, 5,8)
   outDate <- paste0(day, '-', mnth,'-', yr)
-  oOutDF <-  generateResponseAllLocs(dataset=Dataset, observation_ID=paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), longitude=fdf$o_longitude_GDA94, latitude=fdf$o_latitude_GDA94, date=outDate )
+  oOutDF <-  generateResponseAllLocs(dataset=Dataset, location_ID=paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), longitude=fdf$o_longitude_GDA94, latitude=fdf$o_latitude_GDA94, date=outDate )
   return(oOutDF)
 }

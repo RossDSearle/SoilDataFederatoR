@@ -66,7 +66,21 @@ getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observ
       d <-sprintf("%02d", as.numeric(sapply(bits, function (x) x[3])))
       fdf$DateOut <- paste0(d, '-', m, '-', y)
 
-      oOutDF <- generateResponseDF(DataSet, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), fdf$site_location_visit_id, fdf$DateOut, fdf$longitude, fdf$latitude,
+
+      dps <- paste0(fdf$upper_depth, '-', fdf$lower_depth)
+      udps <- sort(unique(dps),decreasing = F)
+
+      fdf$LayerID <- NA
+      tolerance = .Machine$double.eps^0.5
+
+      for (j in 1:length(udps)) {
+        depths <- str_split(udps[j], '-')
+        ud <- as.numeric(depths[[1]][1])
+        ld <- as.numeric(depths[[1]][2])
+        fdf$LayerID[ abs(fdf$upper_depth-ud) < tolerance &  abs(fdf$lower_depth -ld) < tolerance] <- j
+      }
+
+      oOutDF <- generateResponseDF(DataSet, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), fdf$LayerID, fdf$site_location_visit_id, fdf$DateOut, fdf$longitude, fdf$latitude,
                                    fdf$upper_depth, fdf$lower_depth, propertyType, sProp, fdf$value, units = units)
 
       lodfs[[i]] <- oOutDF

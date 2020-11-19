@@ -93,7 +93,7 @@ getSoilData(DataSets='LawsonGrains_AgCatalyst', observedProperty='h_texture', us
 getSiteLocations(DataSets='LawsonGrains_AgCatalyst', usr='ross.searle@csiro.au', key='a')
 
 
-df <- getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='ph_value', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='NatGeoChemicalSurvey', usr='ross.searle@csiro.au', key='a')
 
@@ -110,7 +110,7 @@ getSiteLocations(DataSets='NatSoil', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NTGovernment',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NTGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NTGovernment', observedProperty='ph_value', usr='ross.searle@csiro.au', key='a')
-getSiteLocations(DataSets='NTGovernment', usr='ross.searle@csiro.au', key='a')
+df <- getSiteLocations(DataSets='NTGovernment', usr='ross.searle@csiro.au', key='a')
 
 
 getSoilData(DataSets='SCARP',observedProperty='6B3', usr='ross.searle@csiro.au', key='a')
@@ -134,7 +134,7 @@ getSoilData(DataSets='QLDGovernment', observedProperty='6A1', usr='ross.searle@c
 getSoilData(DataSets='QLDGovernment', observedProperty='DIST_TYPE', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment', observedProperty='col_hue_val_chrom', usr='ross.searle@csiro.au', key='a')
-
+getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
 unique(dfc$projectID)
 getSoilData(DataSets='Kimberley_Rainforest_Survey_1990', observedProperty='15C1_MG', usr='ross.searle@csiro.au', key='a')
@@ -167,8 +167,9 @@ getSoilData(DataSets='VicGovernment', observedProperty='h_texture', usr='ross.se
 getSoilData(DataSets='VicGovernment', observedProperty='O_PPF', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='VicGovernment', usr='ross.searle@csiro.au', key='a')
 
-getSoilData(DataSets='TasGovernment', observedProperty='6A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='TasGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='TasGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='TasGovernment', observedProperty='o_date_desc', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='TasGovernment', usr='ross.searle@csiro.au', key='a')
 
 DataSet='TasGovernment'
