@@ -88,6 +88,8 @@ getData_TERNLandscapesDB <- function(DataSet, observedProperty=NULL, observedPro
     sql <- paste0("select * from ObservedProperties where ObservedProperty = '", nProp, "'", provsql, ' order by Dataset, Observation_ID, UpperDepth, SampleID')
     fdf <- doHostedQuery(sql)
 
+
+
     if(nrow(fdf) >0){
       bits<-str_split(fdf$Date, '/')
       yt <- sapply(bits, function (x) x[3])
@@ -97,7 +99,22 @@ getData_TERNLandscapesDB <- function(DataSet, observedProperty=NULL, observedPro
       m <- sprintf("%02d", as.numeric(sapply(bits, function (x) x[2])))
       d <-sprintf("%02d", as.numeric(sapply(bits, function (x) x[1])))
       fdf$DateOut <- paste0(d, '-', m, '-', y)
-    oOutDF <- generateResponseDF(DataSet, fdf$Observation_ID, fdf$SampleID ,fdf$DateOut , fdf$Longitude, fdf$Latitude ,
+
+     dps <- paste0(fdf$UpperDepth, '-', fdf$LowerDepth)
+     udps <- sort(unique(dps),decreasing = F)
+
+     fdf$LayerID <- NA
+     tolerance = .Machine$double.eps^0.5
+
+     for (j in 1:length(udps)) {
+        depths <- str_split(udps[j], '-')
+        ud <- as.numeric(depths[[1]][1])
+        ld <- as.numeric(depths[[1]][2])
+        fdf$LayerID[ abs(fdf$UpperDepth-ud) < tolerance &  abs(fdf$LowerDepth-ld) < tolerance] <- j
+     }
+
+
+    oOutDF <- generateResponseDF(DataSet, fdf$Observation_ID, fdf$LayerID, fdf$SampleID ,fdf$DateOut , fdf$Longitude, fdf$Latitude ,
                                  fdf$UpperDepth , fdf$LowerDepth ,propertyType, sProp, fdf$Value , fdf$Units)
     lodfs[[i]] <- oOutDF
     }else{

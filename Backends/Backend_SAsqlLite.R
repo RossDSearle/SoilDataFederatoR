@@ -78,7 +78,7 @@ getData_SADB <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
         rd <- fdf$date_described
         date <- as.Date(rd, format = "%d/%b/%Y")
         odate <- format(date, format="%d-%m-%Y")
-        oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), fdf$horizon_id, odate, fdf$longitude, fdf$longitude, (fdf$`upper_depth:1` * 0.01) , (fdf$`lower_depth:1` * 0.01), propertyType, sProp,fdf$lab_result_value, units)
+        oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), fdf$horizon_id, fdf$horizon_id, odate, fdf$longitude, fdf$longitude, (fdf$`upper_depth:1` * 0.01) , (fdf$`lower_depth:1` * 0.01), propertyType, sProp,fdf$lab_result_value, units)
         lodfs[[i]] <- oOutDF
       }else{
         lodfs[[i]] <- blankResponseDF()
@@ -104,7 +104,7 @@ getData_SADB <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
         rd <- fdf$date_described
         date <- as.Date(rd, format = "%d/%b/%Y")
         odate <- format(date, format="%d-%m-%Y")
-        oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), fdf$horizon_id, odate, fdf$longitude, fdf$longitude, (fdf$upper_depth * 0.01) , (fdf$lower_depth * 0.01), propertyType, sProp, fdf[, 9], units)
+        oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), fdf$horizon_id, fdf$horizon_id, odate, fdf$longitude, fdf$longitude, (fdf$upper_depth * 0.01) , (fdf$lower_depth * 0.01), propertyType, sProp, fdf[, 9], units)
 
         idxs <- which(oOutDF$Value != '')
         lodfs[[i]] <- oOutDF[idxs,]
@@ -126,7 +126,7 @@ getData_SADB <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
           rd <- fdf$date_described
           date <- as.Date(rd, format = "%d/%b/%Y")
           odate <- format(date, format="%d-%m-%Y")
-          oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), fdf$horizon_id, odate, fdf$longitude, fdf$longitude, (fdf$upper_depth * 0.01) , (fdf$lower_depth * 0.01), propertyType, sProp, fdf[, 9], units)
+          oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), fdf$horizon_id, fdf$horizon_id, odate, fdf$longitude, fdf$longitude, (fdf$upper_depth * 0.01) , (fdf$lower_depth * 0.01), propertyType, sProp, fdf[, 9], units)
 
           idxs <- which(oOutDF$Value != '')
           lodfs[[i]] <- oOutDF[idxs,]
@@ -146,7 +146,7 @@ getData_SADB <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
         rd <- fdf$date_described
         date <- as.Date(rd, format = "%d/%b/%Y")
         odate <- format(date, format="%d-%m-%Y")
-        oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), '1', odate, fdf$longitude, fdf$longitude,  'None' , 'None' , propertyType, sProp, fdf[, 6], units)
+        oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), 'NA', 'NA', odate, fdf$longitude, fdf$longitude,  'None' , 'None' , propertyType, sProp, fdf[, 6], units)
 
         idxs <- which(oOutDF$Value != '')
         lodfs[[i]] <- oOutDF[idxs,]
@@ -164,7 +164,7 @@ getData_SADB <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
         rd <- fdf$date_described
         date <- as.Date(rd, format = "%d/%b/%Y")
         odate <- format(date, format="%d-%m-%Y")
-        oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), '1', odate, fdf$longitude, fdf$longitude,  'None' , 'None' , propertyType, sProp, fdf[, 6], units)
+        oOutDF <- generateResponseDF(DataSet, paste0(fdf$id, '_', fdf$site_id), 'NA', 'NA', odate, fdf$longitude, fdf$longitude,  'None' , 'None' , propertyType, sProp, fdf[, 6], units)
 
         idxs <- which(oOutDF$Value != '')
         lodfs[[i]] <- oOutDF[idxs,]

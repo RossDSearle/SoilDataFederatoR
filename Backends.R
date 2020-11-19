@@ -163,7 +163,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
 
 
      DT <- as.data.table(outDF2)
-     DT %>% group_by(Provider, Dataset, Observation_ID) %>% arrange(UpperDepth, LowerDepth)
+     DT %>% group_by(Provider, Dataset, Location_ID) %>% arrange(UpperDepth, LowerDepth)
 
      return(DT)
 
@@ -182,9 +182,6 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
 
 
 getSiteLocations <- function(DataSets=NULL, bBox=NULL, usr='Demo', key='Demo'){
-
-  #print('#########')
-  #  print(bBox)
 
 
   authDataSets <- getDataSets(usr=usr, key=key)
@@ -257,20 +254,6 @@ sendRequest<- function(DataSet, DataStore, observedProperty, observedPropertyGro
 
 
 
-# getData_NSSC_Wrapper <- function(DataSet=NULL,  observedProperty=NULL, observedPropertyGroup=NULL){
-#
-#   url <- paste0('http://esoil.io/TERNLandscapes/NSSCapi/SoilDataAPI/SoilData?provider=', provider, '&observedProperty=', observedProperty, '&observedPropertyGroup=', observedPropertyGroup )
-#
-#   print(provider)
-#   fdf <- fromJSON(paste0(url))
-#   if(is.data.frame(fdf)){
-#     return <- fdf
-#   }else{
-#     return(blankResponseDF())
-#   }
-# }
-
-
 
 
 ####### Functions Lists   #######################
@@ -323,7 +306,8 @@ convertToRequiredDataTypes <- function(df){
 
   df$Provider <- as.character(df$Provider)
   df$Dataset <- as.character(df$Dataset)
-  df$Observation_ID <- as.character(df$Observation_ID)
+  df$Observation_ID <- as.character(df$Location_ID)
+  df$Layer_ID <- as.character(df$Layer_ID)
   df$SampleID <- as.character(df$SampleID)
   df$SampleDate <- as.character(df$SampleDate)
   df$Longitude <- as.numeric(as.character(df$Longitude))
@@ -337,29 +321,29 @@ convertToRequiredDataTypes <- function(df){
 
 blankResponseDF <- function(){
 
-  outDF <- data.frame(DataStore=character(), Dataset=character(), Provider=character(), Observation_ID=character(), SampleID=character(), SampleDate=character() ,
+  outDF <- data.frame(DataStore=character(), Dataset=character(), Provider=character(), Location_ID=character(), Layer_ID=character(), SampleID=character(), SampleDate=character() ,
                       Longitude=numeric() , Latitude= numeric(),
                       UpperDepth=numeric() , LowerDepth=numeric() , PropertyType=character(), ObservedProperty=character(), Value=numeric(),
                       Units= character(),   QualCollection=integer(), QualSpatialAggregation=integer(), QualManagement=integer(),QualSpatialAccuracy=integer(), stringsAsFactors = F)
 }
 
-generateResponseDF <- function( dataset, observation_ID, sampleID, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units ){
+generateResponseDF <- function( dataset, location_id, layer_id, sample_id, date, longitude, latitude, upperDepth, lowerDepth, dataType, observedProp, value, units ){
 
   provider=getOrgName(dataset)
   datastore=getDataStore(dataset)
-  outDF <- data.frame(DataStore=datastore, Dataset=dataset,Provider=provider, Observation_ID=observation_ID, SampleID=sampleID , SampleDate=date ,
+  outDF <- data.frame(DataStore=datastore, Dataset=dataset, Provider=provider, Location_ID=location_id, Layer_ID=layer_id, SampleID=sample_id , SampleDate=date ,
                       Longitude=longitude, Latitude=latitude ,
                       UpperDepth=upperDepth, LowerDepth=lowerDepth, PropertyType=dataType, ObservedProperty=observedProp,
                       Value=value , Units=units, QualCollection=NA, QualSpatialAggregation=NA, QualManagement=NA, QualSpatialAccuracy=NA, stringsAsFactors = F)
-  oOutDF <- outDF[order(outDF$Observation_ID, outDF$Dataset, outDF$UpperDepth, outDF$SampleID),]
- # print(head(oOutDF))
+  oOutDF <- outDF[order(outDF$Location_ID, outDF$Dataset, outDF$UpperDepth, outDF$SampleID),]
+
   return(oOutDF)
 }
 
-generateResponseAllLocs<- function(dataset, observation_ID, longitude, latitude, date ){
+generateResponseAllLocs<- function(dataset, location_ID, longitude, latitude, date ){
   provider=getOrgName(dataset)
   datastore=getDataStore(dataset)
-  outDF <- data.frame(DataStore=datastore, Dataset=dataset, Provider=provider, Observation_ID=observation_ID, Longitude=longitude, Latitude=latitude ,SampleDate=date, stringsAsFactors = F)
+  outDF <- data.frame(DataStore=datastore, Dataset=dataset, Provider=provider, Location_ID=location_ID, Longitude=longitude, Latitude=latitude ,SampleDate=date, stringsAsFactors = F)
   return(outDF)
 }
 
@@ -400,8 +384,6 @@ getWindow <- function(outDF, bBox){
 
   idx <- which(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax)
   outdf <- outDF[idx, ]
-
-  #print(head(outdf))
 
    return(outdf)
 }
