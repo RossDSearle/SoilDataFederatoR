@@ -83,7 +83,13 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
       ### Hit the Laboratory endpoint
 
       if(DataSet=='NatSoil' | DataSet=='SCARP'| DataSet=='NTGovernment' | DataSet=='WAGovernment'){
-        odf <- get_NatSoilLab(nProp, DataSet)
+
+        if(DataSet=='NTGovernment' & str_to_upper(observedProperty)=='PH_VALUE')
+        {
+          NT_pH_Hack()
+        }else{
+          odf <- get_NatSoilLab(nProp, DataSet)
+        }
       }else if(DataSet=='NSWGovernment'){
         odf <- get_NSWLab(nProp, DataSet)
       }else if(DataSet=='VicGovernment'){
@@ -116,6 +122,42 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
   outDF = as.data.frame(data.table::rbindlist(lodfs))
   return(outDF)
 }
+
+
+NT_pH_Hack<-function(){
+
+  tcon <- DBI::dbConnect(odbc::odbc(),
+                         Driver   = "ODBC Driver 17 for SQL Server",
+                         Server   = "asris-sql-stage.it.csiro.au\\sql2017",
+                         Database = "NT_NatSoil",
+                         UID      = 'NEXUS\\sea084',
+                         PWD      = 'Merv4066',
+                         Trusted_Connection='Yes'
+
+  )
+
+
+ sql<- 'SELECT        dbo.OBSERVATIONS.agency_code, dbo.OBSERVATIONS.proj_code, dbo.OBSERVATIONS.s_id, dbo.OBSERVATIONS.o_id, dbo.HORIZONS.h_no, dbo.OBSERVATIONS.o_latitude_GDA94, dbo.OBSERVATIONS.o_longitude_GDA94,
+                         dbo.PHS.ph_value, dbo.PHS.ph_depth, dbo.PHS.ph_method, dbo.SITES.s_date_desc, dbo.HORIZONS.h_upper_depth, dbo.HORIZONS.h_lower_depth
+FROM            dbo.SITES INNER JOIN
+                         dbo.OBSERVATIONS ON dbo.SITES.agency_code = dbo.OBSERVATIONS.agency_code AND dbo.SITES.proj_code = dbo.OBSERVATIONS.proj_code AND dbo.SITES.s_id = dbo.OBSERVATIONS.s_id INNER JOIN
+                         dbo.HORIZONS ON dbo.OBSERVATIONS.agency_code = dbo.HORIZONS.agency_code AND dbo.OBSERVATIONS.proj_code = dbo.HORIZONS.proj_code AND dbo.OBSERVATIONS.s_id = dbo.HORIZONS.s_id AND
+                         dbo.OBSERVATIONS.o_id = dbo.HORIZONS.o_id INNER JOIN
+                         dbo.PHS ON dbo.HORIZONS.agency_code = dbo.PHS.agency_code AND dbo.HORIZONS.proj_code = dbo.PHS.proj_code AND dbo.HORIZONS.s_id = dbo.PHS.s_id AND dbo.HORIZONS.o_id = dbo.PHS.o_id AND
+                         dbo.HORIZONS.h_no = dbo.PHS.h_no'
+
+ fdf = doQuery(tcon, sql)
+
+ if(nrow(fdf) > 0){
+
+   oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id ),
+                                fdf$h_no, fdf$h_no, fdf$s_date_desc, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 , fdf$h_upper_depth, fdf$h_lower_depth , 'FieldMeasurement', 'PH_VALUE',fdf$ph_value , 'NA')
+    return(oOutDF)
+ }
+ return(blankResponseDF())
+
+}
+
 
 
 # get_TasLab <- function(nProp, DataSet){

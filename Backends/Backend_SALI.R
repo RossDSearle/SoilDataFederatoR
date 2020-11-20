@@ -47,6 +47,24 @@ getLocationData_QLDGovernment <- function(DataSet){
 }
 
 
+ph_Hack <- function(DataSet, observedProperty){
+
+    sql <- paste0('SELECT SIT.PROJECT_CODE, OBS.SITE_ID, OBS.OBS_NO, OBS.OBS_DATE, OLC.DATUM, OLC.LATITUDE, OLC.LONGITUDE, HOR.HORIZON_NO, HOR.UPPER_DEPTH, HOR.LOWER_DEPTH, FTS.VALUE , FTS.DEPTH, FTS.TEST_NO
+              FROM (((SIT INNER JOIN OBS ON (SIT.SITE_ID = OBS.SITE_ID) AND (SIT.PROJECT_CODE = OBS.PROJECT_CODE)) INNER JOIN HOR ON (OBS.OBS_NO = HOR.OBS_NO) AND (OBS.SITE_ID = HOR.SITE_ID) AND (OBS.PROJECT_CODE = HOR.PROJECT_CODE)) INNER JOIN FTS ON (HOR.HORIZON_NO = FTS.HORIZON_NO) AND (HOR.OBS_NO = FTS.OBS_NO) AND (HOR.SITE_ID = FTS.SITE_ID) AND (HOR.PROJECT_CODE = FTS.PROJECT_CODE)) INNER JOIN OLC ON (OBS.OBS_NO = OLC.OBS_NO) AND (OBS.SITE_ID = OLC.SITE_ID) AND (OBS.PROJECT_CODE = OLC.PROJECT_CODE)
+              WHERE (((OLC.DATUM)="3")) COLLATE NOCASE;')
+
+    fdf =  doQueryFromSALI(sql)
+    day <- str_sub(fdf$OBS_DATE, 9,10)
+    mnth <- str_sub(fdf$OBS_DATE, 6,7)
+    yr <- str_sub(fdf$OBS_DATE, 1,4)
+
+    oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO ,fdf$TEST_NO, paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
+                                 fdf$DEPTH, fdf$DEPTH, 'FieldMeasurement', observedProperty, fdf[, 11] , NA)
+    print('PHHack')
+  return(oOutDF)
+}
+
+
 getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGroup=NULL ){
 
   OrgName <- getOrgName(DataSet)
@@ -61,6 +79,13 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
   lodfs <- vector("list", nrow(propRecs))
 
     for (i in 1:nrow(propRecs)) {
+
+      if(observedProperty == 'PH_VALUE'){
+        oOutDF <- ph_Hack(DataSet, observedProperty)
+        lodfs[[i]] <- oOutDF
+
+      }else{
+
 
 
       nProp <- propRecs$nativeProp[i]
@@ -110,6 +135,9 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
         nativePropRec <- doQueryFromSALI(paste0("select * from Mappings WHERE SITESfld = '", sProp, "' COLLATE NOCASE"))
         nativeTable <- nativePropRec$SALItblName
         tabLev <- as.numeric(doQueryFromSALI(paste0("select Level from TableLevels WHERE TableName = '", nativeTable, "' COLLATE NOCASE")))
+
+        ### Hack because QLD field test implementations is different to common patterns
+
 
         if(tabLev == 4){
 
@@ -225,6 +253,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
           return(blankResponseDF())
         }
 
+      }
       }
     }
 

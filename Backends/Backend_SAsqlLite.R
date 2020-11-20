@@ -115,12 +115,14 @@ getData_SADB <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGr
 
         # Horizons table only
 
-        sqlTemplate <- paste0("SELECT observations.id, observations.site_id, observations.longitude, observations.latitude, observations.date_described, horizons.horizon_id, horizons.upper_depth, horizons.lower_depth, horizons.texture
+        sqlTemplate <- paste0("SELECT observations.id, observations.site_id, observations.longitude, observations.latitude, observations.date_described, horizons.horizon_id, horizons.upper_depth, horizons.lower_depth, xxxx.yyyy
                                   FROM observations LEFT JOIN horizons ON observations.id = horizons.id
                                   WHERE (((horizons.yyyy)<>''))
                                   ORDER BY observations.id, horizons.horizon_id, horizons.upper_depth;")
 
-          sql2 <- str_replace_all(sqlTemplate, 'yyyy', nProp)
+        sql1 <- str_replace_all(sqlTemplate, 'xxxx', tabName)
+        sql2 <- str_replace_all(sql1, 'yyyy', nProp)
+
 
           fdf = doSAHostedQuery(sql2)
           rd <- fdf$date_described
