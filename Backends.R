@@ -33,7 +33,7 @@ source(paste0('Backends/Backend_LawsonGrains.R'))
 source(paste0('Backends/Backend_ASRIS.R'))
 source(paste0('Backends/Backend_TERNLandscapesDB.R'))
 source(paste0('Backends/Backend_NSSC.R'))
-source(paste0('Backends/Backend_ASRISHostedAPI.R'))
+#source(paste0('Backends/Backend_ASRISHostedAPI.R'))
 source(paste0('Backends/Backend_ASRISSQLTas.R'))
 source(paste0('Backends/Backend_SAsqlLite.R'))
 

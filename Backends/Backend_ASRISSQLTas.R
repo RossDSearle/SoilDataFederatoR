@@ -106,8 +106,8 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
 
   }else{
 
-    tabName <- tasMorphMappings[tasMorphMappings$StdCode == sProp,]$Table
-    tabLev <- as.numeric(tasMorphMappings[tasMorphMappings$StdCode == sProp,]$TabLev)
+    tabName <- tasMorphMappings[str_to_upper(tasMorphMappings$StdCode) == str_to_upper(sProp),]$Table
+    tabLev <- as.numeric(tasMorphMappings[str_to_upper(tasMorphMappings$StdCode) == str_to_upper(sProp),]$TabLev)
 
     if(tabLev == 4){
 
@@ -131,7 +131,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
       c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
       oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$HORIZON_NUMBER, 1 , odate,
-                                    c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 8] , 'None')
+                                    c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 9] , 'None')
       idxs <- which(oOutDF$Value != '')
       lodfs[[i]] <- oOutDF[idxs,]
 
@@ -159,7 +159,7 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
         c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
         oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$HORIZON_NUMBER, 1 , odate,
-                                      c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 8] , 'None')
+                                      c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 9] , 'None')
         idxs <- which(oOutDF$Value != '')
         lodfs[[i]] <- oOutDF[idxs,]
 
@@ -340,7 +340,7 @@ tasMorphMappings <- structure(list(Table = c("soil_coarse_fragment", "soil_coars
                                                                                       "HORIZON_NUMBER", "CLASS", "MOISTURE_STATUS", "SIZE", "GRADE",
                                                                                       "TYPE", "ABUNDANCE", "SIZE", "SHAPE", "LITHOLOGY"), StdCode = c("CF_NO",
                                                                                                                                                       "CF_ABUN", "CF_SIZE", "CF_SHAPE", "CF_LITH", "CF_DISTRIBUTION",
-                                                                                                                                                      "CF_STRENGTH", "COL_NO", "MOTT_HUE_VAL_CHROM", "COL_MOISTURE_STAT",
+                                                                                                                                                      "CF_STRENGTH", "COL_NO", "COL_HUE_VAL_CHROM", "COL_MOISTURE_STAT",
                                                                                                                                                       "CRACK_NO", "CRACK_WIDTH", "CUTAN_NO", "CUTAN_TYPE", "CUTAN_ABUN",
                                                                                                                                                       "CUTAN_DISTINCT", "FAB_TYPE", "HORIZON_NOTES", "H_DESIG_NUM_PREF",
                                                                                                                                                       "H_DESIG_MASTER", "H_DESIG_SUBDIV", "H_DESIG_SUFFIX", "H_UPPER_DEPTH",

@@ -194,6 +194,7 @@ get_VicData <- function(nProp, DataSet,propertyType){
 
   ep <- getASRISService(DataSet)
   url <- paste0(ep, '/LabResults?obs_method=', paste0(nProp ))
+
   fdfRaw <- getWebDataDF(url)
 
   if(length(fdfRaw)==0){
@@ -208,6 +209,10 @@ get_VicData <- function(nProp, DataSet,propertyType){
       d2 <- sapply(d, function (x) x[1])
       d3 <- as.Date(d2, format = "%Y-%m-%d")
       outDate <- format(d3, '%d-%m-%Y')
+
+      if(nProp=='COL_MUNSELL_COLOUR'){
+        fdf$obs_value <- str_remove(fdf$obs_value, '/')
+      }
       oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$project_code, '_', fdf$feature_id, '_',  fdf$obs_no), fdf$sample_no, fdf$sample_no , outDate, fdf$Longitude, fdf$Latitude,
                                    fdf$sample_min_lower , fdf$sample_max_lower, propertyType, nProp, fdf$obs_value , 'NA')
     }else{
@@ -349,8 +354,43 @@ get_NSWLab <- function(nProp, DataSet){
 get_NSWMorph <- function(nProp, DataSet){
 
   ep <- getASRISService(DataSet)
-  url <- paste0(ep, '/MorphResults?morphology_attribute=', nProp )
-  fdfRaw <- getWebDataDF(url)
+
+  if(nProp=='COL_HUE_VAL_CHROM'){
+
+    url <- paste0(ep, '/MorphResults?morphology_attribute=Colourmoistmunsellcolourhue' )
+    fdfhue <- getWebDataDF(url)
+    names(fdfhue)[12]<- 'hue'
+    url <- paste0(ep, '/MorphResults?morphology_attribute=Colourmoistmunsellcolourhuevalue' )
+    fdfhv <- getWebDataDF(url)
+
+    mm1 <- fdfhv[1:12]
+    names(mm1)[12]<- 'hv'
+    m1 <- merge(fdfhue[1:12], mm1, by=names(fdfhue)[1:11])
+
+    url <- paste0(ep, '/MorphResults?morphology_attribute=Colourmoistmunsellcolourvalue' )
+    fdfVal<- getWebDataDF(url)
+    mm2 <- fdfVal[1:12]
+    names(mm2)[12]<- 'value'
+    m2 <- merge(m1, mm2, by=names(m1)[1:11])
+
+    url <- paste0(ep, '/MorphResults?morphology_attribute=Colourmoistmunsellcolourchroma' )
+    fdfCrom <- getWebDataDF(url)
+    mm3 <- fdfCrom[1:12]
+    names(mm3)[12]<- 'chroma'
+    m3 <- merge(m2, mm3, by=names(m2)[1:11])
+    m3$morphology_attribute_value <- paste0(m3$hv, m3$hue,  m3$value, m3$chroma)
+    m4<- m3[-c(12:15)]
+
+    fdfRaw <- m3
+    fdfRaw$morphology_attribute <- 'COL_HUE_VAL_CHROM'
+
+  }else{
+
+    url <- paste0(ep, '/MorphResults?morphology_attribute=', nProp )
+    fdfRaw <- getWebDataDF(url)
+  }
+
+
 
   if(length(fdfRaw)==0){
     oOutDF <- blankResponseDF()

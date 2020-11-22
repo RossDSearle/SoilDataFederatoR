@@ -68,9 +68,9 @@ addUser <- function(email, firstName, lastName, organisation){
 
       url <-URLencode(paste0('https://shiny.esoil.io/SoilDataFederator/Pages/RegisterConfirm/?&email=', email, '&firstname=', firstName, '&lastname=', lastName, '&organisation=',organisation, '&tkey=', apiKey ))
       print(url)
-      emailInfo <- paste0('echo "<p> Dear ', firstName, ',</p><p><br></p><p>Thanks for registering with the TERN SoilDataFederator. Click <a href=', url, '> HERE </a> to confirm your registration and obtain an API key</p><p><br></p><p>Regards</p><p>The TERN SoilDataFederator" | mail -s "$(echo "SoilDataFederator API Key Request\nContent-Type: text/html")" ', email,' -r no-reply@soils-discovery.csiro.au')
+      emailInfo <- paste0('echo "<p> Dear ', firstName, ',</p><p><br></p><p>Thanks for registering with the TERN SoilDataFederator. Click <a href=', url, '> HERE </a> to confirm your registration and obtain an API key</p><p><br></p><p>Your email address wil be your username.</p><p><br></p><p>Regards</p><p>The TERN SoilDataFederator" | mail -s "$(echo "SoilDataFederator API Key Request\nContent-Type: text/html")" ', email,' -r no-reply@soils-discovery.csiro.au')
       system(emailInfo)
-      msg <- "An email has been sent to you from 'no-reply@soils-discovery.csiro.au. Please click on the link in the email to confirm your registration."
+      msg <- "An email has been sent to you from 'no-reply@soils-discovery.csiro.au with your key. Your email address wil be your username. Please click on the link in the email to confirm your registration."
 
 
     }else{

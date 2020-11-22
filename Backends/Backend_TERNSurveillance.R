@@ -80,6 +80,7 @@ getData_TERNSurveillance <- function(DataSet=NULL, observedProperty=NULL, observ
       #   fdf$LayerID[ abs(fdf$upper_depth-ud) < tolerance &  abs(fdf$lower_depth -ld) < tolerance] <- j
       # }
 
+
       oOutDF <- generateResponseDF(DataSet, paste0( fdf$site_location_name, '_', fdf$site_location_visit_id), 'NA', fdf$site_location_visit_id, fdf$DateOut, fdf$longitude, fdf$latitude,
                                    fdf$upper_depth, fdf$lower_depth, propertyType, sProp, fdf$value, units = units)
 
