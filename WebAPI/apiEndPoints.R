@@ -84,11 +84,8 @@ apiGetDataSets <- function(req, res, usr=NULL, key=NULL, format='json'){
 
   tryCatch({
     library(rlang)
-   # env_print(req)
-   # print(env_get(req, 'QUERY_STRING'))
 
     DF <- getDataSets(usr, key)
-
     DF <- within(DF, rm('NativeAPIURL'))
 
     label <- 'DataSets'
@@ -331,6 +328,25 @@ apiGetDataQualityDescriptions <- function(res, DataSet=NULL, bbox=NULL, format='
 }
 
 
+
+
+#* Returns news and updates about the SoilDataFederator development
+#* @param format (Optional) format of the response to return. Either json, csv, or xml. Default = json
+#* @tag Soil Data Federator
+#* @get /SoilDataAPI/News
+apiNews <- function(res, format='json'){
+
+  tryCatch({
+
+    DF <-getNewsAPI()
+    label <- 'DataQualityDescriptions'
+    resp <- cerealize(DF, label, format, res)
+  }, error = function(res)
+  {
+    res$status <- 400 # Bad request    list(error=jsonlite::unbox(geterrmessage()))
+
+  })
+}
 
 
 

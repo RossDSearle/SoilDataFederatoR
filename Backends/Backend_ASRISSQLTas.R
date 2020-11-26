@@ -145,7 +145,12 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
                               FROM soil_site INNER JOIN soil_observation ON soil_site.PROJECT = soil_observation.PROJECT AND soil_site.SITE_ID = soil_observation.SITE_ID INNER JOIN
                               soil_horizon ON soil_observation.SITE_ID = soil_horizon.SITE_ID AND soil_observation.PROJECT = soil_horizon.PROJECT AND soil_observation.OBSERVATION_NUMBER = soil_horizon.OBSERVATION_NUMBER')
 
-        sql2 <- str_replace_all(sqlTemplate, 'yyyy', nProp)
+        if(str_to_upper(nProp)=='H_NAME'){
+          sql2 <- str_replace_all(sqlTemplate, 'yyyy', 'MASTER_DESIGNATION, soil_horizon.SUB_DIVISION')
+        }else{
+          sql2 <- str_replace_all(sqlTemplate, 'yyyy', nProp)
+        }
+
 
         fdf = doQuery(tcon, sql2)
 
@@ -158,8 +163,14 @@ getData_TasGov <- function(DataSet=NULL, observedProperty=NULL, observedProperty
 
         c4326 <- projectTasCoords(e=fdf$EASTING, n=fdf$NORTHING)
 
+        if(str_to_upper(nProp)=='H_NAME'){
+          pVal <- paste0(fdf[, 9], fdf[,10])
+        }else{
+         pVal <- fdf[, 9]
+        }
+
         oOutDF <- generateResponseDF( DataSet, paste0(fdf$PROJECT, '_', fdf$SITE_ID), fdf$HORIZON_NUMBER, 1 , odate,
-                                      c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, fdf[, 9] , 'None')
+                                      c4326$X, c4326$Y , (as.numeric(fdf$UPPER_DEPTH) * 0.01) , (as.numeric(fdf$LOWER_DEPTH) * 0.01) , propertyType, sProp, pVal , 'None')
         idxs <- which(oOutDF$Value != '')
         lodfs[[i]] <- oOutDF[idxs,]
 
@@ -268,7 +279,7 @@ projectTasCoords <- function(e,n){
 
 #dput(inDF)
 
-tasMorphMappings <- structure(list(Table = c("soil_coarse_fragment", "soil_coarse_fragment",
+tasMorphMappings <- structure(list(Table = c("soil_horizon", "soil_coarse_fragment", "soil_coarse_fragment",
                                              "soil_coarse_fragment", "soil_coarse_fragment", "soil_coarse_fragment",
                                              "soil_coarse_fragment", "soil_coarse_fragment", "soil_colour",
                                              "soil_colour", "soil_colour", "soil_crack", "soil_crack", "soil_cutan",
@@ -302,7 +313,7 @@ tasMorphMappings <- structure(list(Table = c("soil_coarse_fragment", "soil_coars
                                              "soil_site", "soil_site", "soil_strength", "soil_strength", "soil_strength",
                                              "soil_structure", "soil_structure", "soil_structure", "soil_surface_coarse_fragment",
                                              "soil_surface_coarse_fragment", "soil_surface_coarse_fragment",
-                                             "soil_surface_coarse_fragment"), Fld = c("OBSERVATION_NUMBER",
+                                             "soil_surface_coarse_fragment"), Fld = c("H_NAME", "OBSERVATION_NUMBER",
                                                                                       "ABUNDANCE", "SIZE", "SHAPE", "LITHOLOGY", "DISTRIBUTION", "STRENGTH",
                                                                                       "OBSERVATION_NUMBER", "COLOUR", "MOISTURE_STATUS", "OBSERVATION_NUMBER",
                                                                                       "WIDTH", "OBSERVATION_NUMBER", "TYPE", "ABUNDANCE", "CONTRAST",
@@ -338,7 +349,7 @@ tasMorphMappings <- structure(list(Table = c("soil_coarse_fragment", "soil_coars
                                                                                       "GEOMORPHIC_MODE", "GEOMORPHIC_AGENT", "PATTERN_SLOPE_CLASS",
                                                                                       "PATTERN_RELIEF_CLASS", "RELIEF_SLOPE_CLASS", "PATTERN_TYPE",
                                                                                       "HORIZON_NUMBER", "CLASS", "MOISTURE_STATUS", "SIZE", "GRADE",
-                                                                                      "TYPE", "ABUNDANCE", "SIZE", "SHAPE", "LITHOLOGY"), StdCode = c("CF_NO",
+                                                                                      "TYPE", "ABUNDANCE", "SIZE", "SHAPE", "LITHOLOGY"), StdCode = c("H_NAME", "CF_NO",
                                                                                                                                                       "CF_ABUN", "CF_SIZE", "CF_SHAPE", "CF_LITH", "CF_DISTRIBUTION",
                                                                                                                                                       "CF_STRENGTH", "COL_NO", "COL_HUE_VAL_CHROM", "COL_MOISTURE_STAT",
                                                                                                                                                       "CRACK_NO", "CRACK_WIDTH", "CUTAN_NO", "CUTAN_TYPE", "CUTAN_ABUN",
@@ -371,7 +382,7 @@ tasMorphMappings <- structure(list(Table = c("soil_coarse_fragment", "soil_coars
                                                                                                                                                       "S_RELIEF_CLASS", "S_REL_MS_CLASS", "S_PATT_TYPE", "HORIZON_NUMBER",
                                                                                                                                                       "STRG_CLASS", "SCF_STRENGTH", "STR_PED_SIZE", "C_STR_PED_GRADE",
                                                                                                                                                       "C_STR_PED_TYPE", "SCF_ABUN", "SCF_SIZE", "C_CF_SHAPE", "C_LITHOLOGY"
-                                                                                      ), TabLev = c(4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L,
+                                                                                      ), TabLev = c(3L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L,
                                                                                                     4L, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L,
                                                                                                     3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 4L, 2L, 2L,
                                                                                                     2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L,
@@ -380,5 +391,5 @@ tasMorphMappings <- structure(list(Table = c("soil_coarse_fragment", "soil_coars
                                                                                                     2L, 2L, 2L, 2L, 2L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 3L, 3L, 4L,
                                                                                                     4L, 4L, 4L, 4L, 4L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,
                                                                                                     1L, 1L, 1L, 1L, 1L, 1L, 4L, 4L, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 3L
-                                                                                      )), class = "data.frame", row.names = c(NA, -140L))
+                                                                                      )), class = "data.frame", row.names = c(NA, -141L))
 

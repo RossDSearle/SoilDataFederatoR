@@ -393,3 +393,9 @@ getWindow <- function(outDF, bBox){
 
 
 
+getNewsAPI <- function(){
+  return(getNews())
+}
+
+
+

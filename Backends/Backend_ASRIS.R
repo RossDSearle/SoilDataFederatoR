@@ -193,9 +193,15 @@ FROM            dbo.SITES INNER JOIN
 get_VicData <- function(nProp, DataSet,propertyType){
 
   ep <- getASRISService(DataSet)
-  url <- paste0(ep, '/LabResults?obs_method=', paste0(nProp ))
 
-  fdfRaw <- getWebDataDF(url)
+#
+#   if(str_to_upper(nProp)=='H_NAME'){
+#     fdfRaw <- horizonName_Vic(ep)
+#   }else{
+    url <- paste0(ep, '/LabResults?obs_method=', paste0(nProp ))
+    print(url)
+    fdfRaw <- getWebDataDF(url)
+  #}
 
   if(length(fdfRaw)==0){
     oOutDF <- blankResponseDF()
@@ -355,14 +361,15 @@ get_NSWMorph <- function(nProp, DataSet){
 
   ep <- getASRISService(DataSet)
 
-  if(nProp=='COL_HUE_VAL_CHROM'){
+  if(str_to_upper(nProp)=='COL_HUE_VAL_CHROM'){
 
     url <- paste0(ep, '/MorphResults?morphology_attribute=Colourmoistmunsellcolourhue' )
+    print(url)
     fdfhue <- getWebDataDF(url)
     names(fdfhue)[12]<- 'hue'
+
     url <- paste0(ep, '/MorphResults?morphology_attribute=Colourmoistmunsellcolourhuevalue' )
     fdfhv <- getWebDataDF(url)
-
     mm1 <- fdfhv[1:12]
     names(mm1)[12]<- 'hv'
     m1 <- merge(fdfhue[1:12], mm1, by=names(fdfhue)[1:11])
@@ -384,7 +391,9 @@ get_NSWMorph <- function(nProp, DataSet){
     fdfRaw <- m3
     fdfRaw$morphology_attribute <- 'COL_HUE_VAL_CHROM'
 
-  }else{
+  }else if(str_to_upper(nProp) =='H_NAME'){
+    fdfRaw <- horizonName_NSW(ep)
+  }else {
 
     url <- paste0(ep, '/MorphResults?morphology_attribute=', nProp )
     fdfRaw <- getWebDataDF(url)
@@ -413,12 +422,24 @@ get_NSWMorph <- function(nProp, DataSet){
 }
 
 
+
+
+
 get_NatSoilMorph <- function(nProp, DataSet){
 
   ep <- getASRISService(DataSet)
-  url <- paste0(ep, '/MorphResults?morphology_attribute=', nProp )
 
-  fdfRaw <- getWebDataDF(url)
+  if(str_to_upper(nProp)=='H_NAME'){
+    fdfRaw <- horizonName_NatSoil(ep)
+
+  }else{
+    url <- paste0(ep, '/MorphResults?morphology_attribute=', nProp )
+    fdfRaw <- getWebDataDF(url)
+  }
+
+
+
+
 
   if(length(fdfRaw)==0){
     oOutDF <- blankResponseDF()
@@ -482,3 +503,58 @@ get_NatSoilLocation <- function(Dataset){
   oOutDF <-  generateResponseAllLocs(dataset=Dataset, location_ID=paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), longitude=fdf$o_longitude_GDA94, latitude=fdf$o_latitude_GDA94, date=outDate )
   return(oOutDF)
 }
+
+
+
+horizonName_NatSoil<- function(ep){
+
+  url <- paste0(ep, '/MorphResults?morphology_attribute=h_desig_num_pref')
+  fdfpref <- getWebDataDF(url)
+  names(fdfpref)[15]<- 'pref'
+  mm0 <- fdfpref[-14]
+
+  url <- paste0(ep, '/MorphResults?morphology_attribute=h_desig_master' )
+  fdfmaster <- getWebDataDF(url)
+  names(fdfmaster)[15]<- 'master'
+  mm1 <- fdfmaster[-14]
+  m1 <- merge(mm0, mm1, by=names(fdfmaster)[1:13], all=T)
+  # print(head(m1))
+
+  url <- paste0(ep, '/MorphResults?morphology_attribute=h_desig_subdiv' )
+  fdfsubdiv <- getWebDataDF(url)
+  names(fdfsubdiv)[15]<- 'subdiv'
+  mm2 <- fdfsubdiv[-14]
+  m2 <- merge( m1,mm2, by=names(m1)[1:13], all=T)
+  # print(head(m2))
+
+  m2$morphology_attribute_value <- str_remove_all( paste0(m2$pref, m2$master,  m2$subdiv), 'NA')
+  m3 <- m2[-c(14:16)]
+  # print(head(m3))
+  fdfRaw <- m3
+  fdfRaw$morphology_attribute <- 'h_name'
+  return(fdfRaw)
+}
+
+
+horizonName_NSW <- function(ep){
+
+  url <- paste0(ep, '/MorphResults?morphology_attribute=Statushorizoncodehorizon')
+   fdfmaster <- getWebDataDF(url)
+   names(fdfmaster)[12]<- 'master'
+   mm0 <- fdfmaster[-c(13:14)]
+
+  url <- paste0(ep, '/MorphResults?morphology_attribute=Statushorizoncodesubdivision')
+  fdfsubdiv <- getWebDataDF(url)
+  names(fdfsubdiv)[12]<- 'subdiv'
+  mm1 <- fdfsubdiv[-c(13:14)]
+  m1 <- merge(mm0, mm1, by=names(fdfmaster)[1:11], all=T)
+
+  m1$morphology_attribute_value <- paste0(m1$master, m1$subdiv)
+
+  fdfRaw <- m1
+  fdfRaw$morphology_attribute <- 'H_NAME'
+  return(fdfRaw)
+}
+
+
+

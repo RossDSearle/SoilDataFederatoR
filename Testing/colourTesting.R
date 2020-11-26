@@ -12,6 +12,10 @@ pgs <-getPropertyGroups(verbose)
 
 props <- getStandardProperties('PHS', T)
 
+
+df <- fromJSON('http://asris-daas02/NatSoil_Services/api/LabResults?method_code=6A1')
+
+
 getSoilData(DataSets='NatSoil',observedProperty='COL_HUE_VAL_CHROM', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment',observedProperty='COL_HUE_VAL_CHROM', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='LawsonGrains_AgCatalyst',observedProperty='COL_HUE_VAL_CHROM', usr='ross.searle@csiro.au', key='a')
@@ -20,6 +24,8 @@ getSoilData(DataSets='TasGovernment',observedProperty='COL_HUE_VAL_CHROM', usr='
 getSoilData(DataSets='WAGovernment',observedProperty='COL_HUE_VAL_CHROM', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SAGovernment',observedProperty='COL_HUE_VAL_CHROM', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='VicGovernment',observedProperty='COL_HUE_VAL_CHROM', usr='ross.searle@csiro.au', key='a')
+
+
 getSoilData(DataSets='NSWGovernment',observedProperty='COL_HUE_VAL_CHROM', usr='ross.searle@csiro.au', key='a')
 
 ####  Still need to fix NT
@@ -34,6 +40,6 @@ getSoilData(DataSets='Kimberley_Rainforest_Survey_1990',observedProperty='COL_HU
 getSoilData(DataSets='Little Sandy Desert survey',observedProperty='COL_HUE_VAL_CHROM', usr='ross.searle@csiro.au', key='a')
 
 
-DataSet<-'NSWGovernment'
+DataSet<-'NTGovernment'
 observedProperty='COL_HUE_VAL_CHROM'
 

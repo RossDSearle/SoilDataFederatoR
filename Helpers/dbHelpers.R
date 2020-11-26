@@ -209,6 +209,7 @@ getDataSets <- function( usr=NULL, key=NULL){
 
   sql <- paste0("SELECT * FROM AuthUsers WHERE usrID = '", usr, "'")
   idRec <- doQueryFromFed(sql)
+  #if(nrow(idRec==0)){stop('User not known. Please register at - https://shiny.esoil.io/SoilDataFederator/Pages/Register')}
 
   cusr <- as.character(idRec$usrID[1])
   cpwd <- as.character(idRec$Pwd[1])
@@ -425,6 +426,13 @@ pointsInAust <- function(df, lat_fld, lon_fld){
   outdf <- df[df[lon_fld] > 112.9211 &  df[lon_fld] < 153.6386 &  df[lat_fld] > -43.64309 &  df[lat_fld] < -9.229727,  ]
   return(outdf)
 
+}
+
+getNews <- function(){
+
+  sql <- paste0("Select * from News order by Date DESC")
+  r <- doQueryFromFed(sql)
+  return(r)
 }
 
 
