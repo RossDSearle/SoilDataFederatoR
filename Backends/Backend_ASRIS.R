@@ -199,7 +199,7 @@ get_VicData <- function(nProp, DataSet,propertyType){
 #     fdfRaw <- horizonName_Vic(ep)
 #   }else{
     url <- paste0(ep, '/LabResults?obs_method=', paste0(nProp ))
-    print(url)
+    #print(url)
     fdfRaw <- getWebDataDF(url)
   #}
 
@@ -364,7 +364,7 @@ get_NSWMorph <- function(nProp, DataSet){
   if(str_to_upper(nProp)=='COL_HUE_VAL_CHROM'){
 
     url <- paste0(ep, '/MorphResults?morphology_attribute=Colourmoistmunsellcolourhue' )
-    print(url)
+    #print(url)
     fdfhue <- getWebDataDF(url)
     names(fdfhue)[12]<- 'hue'
 

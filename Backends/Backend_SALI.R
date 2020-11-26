@@ -60,7 +60,7 @@ ph_Hack <- function(DataSet, observedProperty){
 
     oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), fdf$HORIZON_NO ,fdf$TEST_NO, paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
                                  fdf$DEPTH, fdf$DEPTH, 'FieldMeasurement', observedProperty, fdf[, 11] , NA)
-    print('PHHack')
+    #print('PHHack')
   return(oOutDF)
 }
 

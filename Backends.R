@@ -306,7 +306,7 @@ convertToRequiredDataTypes <- function(df){
 
   df$Provider <- as.character(df$Provider)
   df$Dataset <- as.character(df$Dataset)
-  df$Observation_ID <- as.character(df$Location_ID)
+  df$Location_ID <- as.character(df$Location_ID)
   df$Layer_ID <- as.character(df$Layer_ID)
   df$SampleID <- as.character(df$SampleID)
   df$SampleDate <- as.character(df$SampleDate)

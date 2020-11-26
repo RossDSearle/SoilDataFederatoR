@@ -23,7 +23,7 @@ getSoilData(DataSets='VicGovernment',observedProperty='PH_VALUE', usr='ross.sear
 getSoilData(DataSets='NSWGovernment',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
 
 
-#getSoilData(DataSets='NTGovernment',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NTGovernment',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NatGeoChemicalSurvey',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='SCARP',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
