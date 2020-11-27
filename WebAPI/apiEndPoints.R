@@ -83,7 +83,7 @@ writeLogEntry <- function(logfile, logentry){
 apiGetDataSets <- function(req, res, usr=NULL, key=NULL, format='json'){
 
   tryCatch({
-    library(rlang)
+    #library(rlang)
 
     DF <- getDataSets(usr, key)
     DF <- within(DF, rm('NativeAPIURL'))

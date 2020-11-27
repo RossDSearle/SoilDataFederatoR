@@ -165,6 +165,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
      DT <- as.data.table(outDF2)
      DT %>% group_by(Provider, Dataset, Location_ID) %>% arrange(UpperDepth, LowerDepth)
 
+
      return(DT)
 
 
