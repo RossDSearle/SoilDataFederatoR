@@ -139,6 +139,8 @@ getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.se
 getSoilData(DataSets='QLDGovernment', observedProperty='col_hue_val_chrom', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
+DataSet='QLDGovernment'
+
 unique(dfc$projectID)
 getSoilData(DataSets='Kimberley_Rainforest_Survey_1990', observedProperty='15C1_MG', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='South West Australian Transitional Transect (SWATT)', observedProperty='18F1_AL', usr='ross.searle@csiro.au', key='a')

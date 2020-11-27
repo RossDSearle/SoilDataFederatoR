@@ -195,7 +195,8 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
             oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), 'NA', 'NA', paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
                                          'None' , 'None' , propertyType, sProp, fdf[, 8] , 'None')
             lodfs[[i]] <- oOutDF
-          c}
+
+          }
         }else if(tabLev == 2){
           # Observations table only
 
@@ -246,6 +247,7 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
           oOutDF <- generateResponseDF(DataSet, paste0( 'QLD_', fdf$PROJECT_CODE, '_', fdf$SITE_ID, '_', fdf$OBS_NO ), 'NA', 'NA' , paste0(day, '-', mnth, '-', yr) , fdf$LONGITUDE, fdf$LATITUDE ,
                                        'None' , 'None' , propertyType, sProp, fdf[, 8] , 'None')
+
           lodfs[[i]] <- oOutDF
 
 
@@ -258,6 +260,8 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
     }
 
   outDF = as.data.frame(data.table::rbindlist(lodfs))
+
+  print(nrow(outDF))
 
   return(outDF)
 }
