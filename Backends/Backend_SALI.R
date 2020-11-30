@@ -80,9 +80,11 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
     for (i in 1:nrow(propRecs)) {
 
-      if(observedProperty == 'PH_VALUE'){
+      if(!is.null(observedProperty)) {
+        if( observedProperty == 'PH_VALUE'){
         oOutDF <- ph_Hack(DataSet, observedProperty)
         lodfs[[i]] <- oOutDF
+      }
 
       }else{
 

@@ -73,7 +73,29 @@ props <- c('3A1', 'h_texture')
 props <- c('3A1', 'ph_value')
 
 
+getSoilData(DataSets='NatSoil',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='TERNSurveillance',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='LawsonGrains_AgCatalyst',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NatGeoChemicalSurvey',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='EastCentral_Australia',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NTGovernment',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='SCARP',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='SAGovernment',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='WAGovernment',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='QLDGovernment',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
 
+getSoilData(DataSets='Fire_gimlet_woodlands_flora',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='Kimberley_Islands_Biodiversity_Survey',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='Kimberley_Rainforest_Survey_1990',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='Kimberley_Islands_Biodiversity_Survey',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='Little Sandy Desert survey',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='Nullarbor_Regional_Survey',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='Pilbara_Regional_Survey_Riparian_Flora',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='Salinity_Action_Plan_Flora_Survey',observedPropertyGroup='Soil pH', usr='ross.searle@csiro.au', key='a')
+
+
+DataSet<-'LawsonGrains_AgCatalyst'
+observedProperty=NULL
 
 getLocations(usr=usr, key=key)
 

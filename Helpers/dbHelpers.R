@@ -93,9 +93,23 @@ getNativeProperties <- function(DataSet, observedProperty, observedPropertyGroup
     if(!is.null(observedPropertyGroup)){
 
       sql <- paste0("Select * from Properties where PropertyGroup = '", observedPropertyGroup, "' COLLATE NOCASE")
-      methods = doQueryFromFed(sql)
+      recs = doQueryFromFed(sql)
+      outDF <- data.frame(nativeProp=character(), standardProp=character(),propertyType=character(), StandardCode=character())
+      for (i in 1:nrow(recs)) {
+
+        op <- recs$Property[i]
+        sql <- paste0("Select * from Mappings where Dataset = '", DataSet, "' and ObservedProperty = '", op, "' COLLATE NOCASE")
+        codes = doQueryFromFed(sql)
+        if(nrow(codes)>0){
+                rdf <- data.frame(nativeProp=codes$OrigPropertyCode, standardProp=codes$ObservedProperty,propertyType=codes$DataType, StandardCode=codes$StandardCode, stringsAsFactors = F)
+                rdf$propertyType[rdf$propertyType=='L'] <- 'LaboratoryMeasurement'
+                rdf$propertyType[rdf$propertyType=='M'] <- 'FieldMeasurement'
+                outDF <- rbind(outDF, rdf)
+        }
+
+      }
       #nativeProps <- getLGMethod(methods, mappings)
-      outDF <- data.frame(nativeProp=methods$Property, standardProp=methods$Property, propertyType=methods$PropertyType)
+      #outDF <- data.frame(nativeProp=methods$Property, standardProp=methods$Property, propertyType=methods$PropertyType)
     }else{
 
       bits <- str_split(observedProperty, ';')

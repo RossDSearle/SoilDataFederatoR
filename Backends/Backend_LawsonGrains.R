@@ -46,7 +46,7 @@ getLocationData_LawsonGrains <- function(DataSet){
     return(oOutDF)
 }
 
-getData_LawsonGrains <- function(DataSet, observedProperty, observedPropertyGroup=NULL ){
+getData_LawsonGrains <- function(DataSet, observedProperty=NULL, observedPropertyGroup=NULL ){
 
   OrgName <- getOrgName(DataSet)
 
@@ -78,31 +78,37 @@ getData_LawsonGrains <- function(DataSet, observedProperty, observedPropertyGrou
     nProp <- propRecs$nativeProp[i]
     sProp <- propRecs$standardProp[i]
 
-    propertyType <- propRecs$propertyType[i]
-    units <- getUnits(propertyType = propertyType, prop = sProp)
 
-    sd <- merge(lg, locs,  by.x=c("Sample No."),by.y=c("Site ID"), all.x = T)
 
-    dc <- unique(sd$Depth)
+        propertyType <- propRecs$propertyType[i]
+        units <- getUnits(propertyType = propertyType, prop = sProp)
 
-    sd$LayerID <- NA
-    sd$LayerID[sd$Depth == '0 - 10'] <- 1
-    sd$LayerID[sd$Depth == '30 - 60'] <- 3
-    sd$LayerID[sd$Depth == '10 - 30'] <- 2
-    sd$LayerID[sd$Depth == '0- 10'] <- 1
+        sd <- merge(lg, locs,  by.x=c("Sample No."),by.y=c("Site ID"), all.x = T)
 
-    bits <- str_split(sd$Depth, '-')
-    ud <- as.numeric(str_trim(sapply(bits, function (x) x[1])))
-    ld <- as.numeric(str_trim(sapply(bits, function (x) x[2])))
+    if(str_to_upper(nProp) %in% str_to_upper(colnames(sd))){
 
-    sd$`Lab Number`[is.na(sd$`Lab Number`)] <- "1"
+        dc <- unique(sd$Depth)
 
-    fdf <- data.frame(sd$Aggregation, sd$Year, sd$`Sample No.`, sd$`Lab Number`, ud/100, ld/100, sd[, nProp], sd$Lat, sd$Lon)
-    colnames(fdf) <- c('Aggregation', 'Year',  'SampleNo', 'LabNumber', 'ud', 'ld', 'Value', 'Lat', 'Lon')
+        sd$LayerID <- NA
+        sd$LayerID[sd$Depth == '0 - 10'] <- 1
+        sd$LayerID[sd$Depth == '30 - 60'] <- 3
+        sd$LayerID[sd$Depth == '10 - 30'] <- 2
+        sd$LayerID[sd$Depth == '0- 10'] <- 1
 
-    oOutDF <- generateResponseDF(DataSet, paste0(fdf$Aggregation , '_', fdf$SampleNo ), sd$LayerID, fdf$LabNumber, paste0('01-04-', sd$Year ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, sProp, fdf$Value, units)
-    idxs <- which(!is.na(oOutDF$Value))
-    lodfs[[i]] <- oOutDF[idxs,]
+        bits <- str_split(sd$Depth, '-')
+        ud <- as.numeric(str_trim(sapply(bits, function (x) x[1])))
+        ld <- as.numeric(str_trim(sapply(bits, function (x) x[2])))
+
+        sd$`Lab Number`[is.na(sd$`Lab Number`)] <- "1"
+
+        fdf <- data.frame(sd$Aggregation, sd$Year, sd$`Sample No.`, sd$`Lab Number`, ud/100, ld/100, sd[, nProp], sd$Lat, sd$Lon)
+        colnames(fdf) <- c('Aggregation', 'Year',  'SampleNo', 'LabNumber', 'ud', 'ld', 'Value', 'Lat', 'Lon')
+
+        oOutDF <- generateResponseDF(DataSet, paste0(fdf$Aggregation , '_', fdf$SampleNo ), sd$LayerID, fdf$LabNumber, paste0('01-04-', sd$Year ), fdf$Lon, fdf$Lat, fdf$ud, fdf$ld, propertyType, sProp, fdf$Value, units)
+        idxs <- which(!is.na(oOutDF$Value))
+        lodfs[[i]] <- oOutDF[idxs,]
+    }
+
   }
 
   outDF = as.data.frame(data.table::rbindlist(lodfs))

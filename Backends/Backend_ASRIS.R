@@ -83,13 +83,7 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
       ### Hit the Laboratory endpoint
 
       if(DataSet=='NatSoil' | DataSet=='SCARP'| DataSet=='NTGovernment' | DataSet=='WAGovernment'){
-
-        if(DataSet=='NTGovernment' & str_to_upper(observedProperty)=='PH_VALUE')
-        {
-          NT_pH_Hack()
-        }else{
           odf <- get_NatSoilLab(nProp, DataSet)
-        }
       }else if(DataSet=='NSWGovernment'){
         odf <- get_NSWLab(nProp, DataSet)
       }else if(DataSet=='VicGovernment'){
@@ -100,7 +94,17 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
     ### Hit the morpholgy endpoint
 
       if(DataSet=='NatSoil' | DataSet=='SCARP'| DataSet=='NTGovernment'| DataSet=='WAGovernment'){
-        odf <- get_NatSoilMorph(nProp, DataSet)
+
+          if(DataSet=='NTGovernment' )
+          {
+            if(!is.null(observedProperty)){
+              if(str_to_upper(observedProperty)=='PH_VALUE'){
+                odf <- NT_pH_Hack(DataSet)
+              }
+            }
+          }else{
+            odf <- get_NatSoilMorph(nProp, DataSet)
+          }
       }else if(DataSet=='NSWGovernment'){
         odf <- get_NSWMorph(nProp, DataSet)
       }else if(DataSet=='VicGovernment'){
@@ -124,7 +128,7 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
 }
 
 
-NT_pH_Hack<-function(){
+NT_pH_Hack<-function(DataSet){
 
   tcon <- DBI::dbConnect(odbc::odbc(),
                          Driver   = "ODBC Driver 17 for SQL Server",
