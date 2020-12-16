@@ -267,8 +267,8 @@ cleanTasDepths <- function(fdf){
 }
 
 projectTasCoords <- function(e,n){
-  sdf <- data.frame(e=e, n=n)
-  df.SP <- st_as_sf(sdf, coords = c("e", "n"), na.fail=F, remove=F, crs=28355)
+  sdf <- data.frame(e=as.numeric(e), n=as.numeric(n))
+  df.SP <- st_as_sf(sdf, coords = c("e", "n"), na.fail=T, remove=F, crs=28355)
   projCoords <- st_transform(df.SP ,  crs = 4326)
   xys <- as.data.frame(st_coordinates(projCoords))
   return(xys)
