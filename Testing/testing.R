@@ -144,7 +144,7 @@ getSoilData(DataSets='SCARP',observedProperty='h_notes', usr='ross.searle@csiro.
 getSoilData(DataSets='SCARP',observedProperty='o_asc_ord', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='SCARP', usr='ross.searle@csiro.au', key='a')
 
-getSoilData(DataSets='SAGovernment', observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='SAGovernment', observedProperty='6A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SAGovernment', observedProperty='O_DESC_BY', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SAGovernment', observedProperty='S_SLOPE', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')

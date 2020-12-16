@@ -22,7 +22,7 @@ for (i in 1:nrow(ds)) {
   dSt <- ds$DataSet[i]
 
   cat(crayon::blue('\n', dSt,' : ', sep=''))
-  r1 <- fromJSON(paste0("http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=", prop, "&DataSet=", dSt, '&usr=', usr, '&key=', key))
+  r1 <- fromJSON(paste0("http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=", 'Soil pH' , "&DataSet=", 'NatSoil', '&usr=', usr, '&key=', key))
 
   if( is.list() nrow(r1) > 0){
     cat(crayon::green('SUCCESS', sep=''))
@@ -37,3 +37,13 @@ outDF = as.data.frame(data.table::rbindlist(outLabdfs, fill=T))
 
 
 fromJSON(paste0("http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedProperty=", '4A1', "&DataSet=", 'NSWGovernment', '&usr=', usr, '&key=', key))
+
+
+
+
+
+library(urltools)
+
+url <- paste0("http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?observedPropertyGroup=", 'Soil pH' , "&DataSet=", 'NatSoil', '&usr=', usr, '&key=', key)
+urle <- str_replace_all(url, ' ', '%20')
+fromJSON(urle)

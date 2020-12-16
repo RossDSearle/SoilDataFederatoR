@@ -20,7 +20,9 @@ getSoilData(DataSets='TasGovernment',observedProperty='PH_VALUE', usr='ross.sear
 getSoilData(DataSets='WAGovernment',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SAGovernment',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='VicGovernment',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
-getSoilData(DataSets='NSWGovernment',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
+
+getSoilData(DataSets='NSWGovernment',observedProperty='PH_VALUE', usr='Linda.Gregory@csiro.au', key='7b8sEnafhmOj6U6Vq')
+getSoilData(DataSets='SCARP',observedProperty='PH_VALUE', usr='Linda.Gregory@csiro.au', key='7b8sEnafhmOj6U6Vq')
 
 
 getSoilData(DataSets='NTGovernment',observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')

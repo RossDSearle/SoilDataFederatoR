@@ -482,9 +482,9 @@ get_NatSoilLab <- function(nProp, DataSet){
       day <- str_sub(fdf$o_date_desc, 1,2)
       mnth <- str_sub(fdf$o_date_desc, 3,4)
       yr <- str_sub(fdf$o_date_desc, 5,8)
-      #d3 <- as.Date(paste0(day, '/', mnth,'/', yr), format = "%d/%m/%y")
       outDate <- paste0(day, '-', mnth,'-', yr)
-      #outDate <- format(d3, '%d-%m-%Y')
+
+      print(fdf$o_date_desc)
 
       oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$h_no, fdf$samp_no , outDate, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94,
                                    fdf$samp_upper_depth , fdf$samp_lower_depth, 'LaboratoryMeasurement', fdf$labm_code, fdf$labr_value , 'NA')

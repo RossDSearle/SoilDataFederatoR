@@ -13,11 +13,12 @@ props <-propsDF$Property
 datasetsDF <- fromJSON('http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets')
 datasets<-datasetsDF$DataSet
 
-# Make an empty list to put individual results in
+
 
 
 # Iterate Properties
   for(i in 1:length(props)){
+    # Make an empty list to put individual results in for this property
       res <- vector("list", length = length(datasets))
       # Iterate Datasets
         for (j in 1:length(datasets)) {
