@@ -188,6 +188,7 @@ df <- getSoilData(DataSets='NSWGovernment', observedProperty='h_texture', usr='r
 getSoilData(DataSets='NSWGovernment', observedProperty='o_date_desc', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='NSWGovernment', usr='ross.searle@csiro.au', key='a')
 
+getSoilData(DataSets='VicGovernment', observedProperty='6A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='VicGovernment', observedProperty='15E2_Al', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='VicGovernment', observedProperty='3A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='VicGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')

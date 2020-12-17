@@ -69,8 +69,11 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
   OrgName <- getOrgName(DataSet)
   propRecs <- getNativeProperties(DataSet=DataSet, observedProperty, observedPropertyGroup)
+  print(propRecs)
 
   ep <- getNativeAPIurl(dataset = DataSet)
+
+
 
   if(nrow(propRecs) == 0){
     return(blankResponseDF())
@@ -80,21 +83,26 @@ getData_QLDGovernment <- function(DataSet, observedProperty, observedPropertyGro
 
     for (i in 1:nrow(propRecs)) {
 
-      if(!is.null(observedProperty)) {
-        if( observedProperty == 'PH_VALUE'){
+
+      #if(!is.null(observedProperty)) {
+
+        if( propRecs$standardProp == 'PH_VALUE'){
         oOutDF <- ph_Hack(DataSet, observedProperty)
         lodfs[[i]] <- oOutDF
-      }
+      #}
 
       }else{
 
-
+        print("here")
 
       nProp <- propRecs$nativeProp[i]
       sProp <- propRecs$standardProp[i]
 
       propertyType <- propRecs$propertyType[i]
       units <- getUnits(propertyType = propertyType, prop = sProp)
+
+
+
 
       if(length(units) == 0){units = NA}
 
