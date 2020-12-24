@@ -17,7 +17,7 @@ machineName <- as.character(Sys.info()['nodename'])
     setwd('/srv/plumber/TERNLandscapes/SoilDataFederatoR')
   }else{
     # path below is - C:/R/R-3.6.0/library/SoilDataFederatoR/extdata/soilsFederator.sqlite
-    setwd('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
+    setwd('C:/Users/sea084/OneDrive - CSIRO/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR')
   }
 
 

@@ -9,7 +9,7 @@ machineName <- as.character(Sys.info()['nodename'])
   if(machineName=='soils-discovery'){
     source(paste0('/srv/plumber/TERNLandscapes/SoilDataFederatoR/Backends.R'))
   }else{
-    source(paste0('C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/Backends.R'))
+    source(paste0('C:/Users/sea084/OneDrive - CSIRO/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/Backends.R'))
   }
 #}
 
@@ -183,7 +183,7 @@ df <- fromJSON('http://asris-daas02/NSW_Services/api/LabResults')
 df[df$labm_code == 'N4B1',]
 unique(df$labm_code)
 
-df <- getSoilData(DataSets='NSWGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='NSWGovernment', observedProperty='6A1', usr='ross.searle@csiro.au', key='a')
 df <- getSoilData(DataSets='NSWGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NSWGovernment', observedProperty='o_date_desc', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='NSWGovernment', usr='ross.searle@csiro.au', key='a')

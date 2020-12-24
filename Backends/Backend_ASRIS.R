@@ -95,16 +95,16 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
 
       if(DataSet=='NatSoil' | DataSet=='SCARP'| DataSet=='NTGovernment'| DataSet=='WAGovernment'){
 
-          if(DataSet=='NTGovernment' )
-          {
-            if(!is.null(observedProperty)){
-              if(str_to_upper(observedProperty)=='PH_VALUE'){
-                odf <- NT_pH_Hack(DataSet)
-              }
-            }
-          }else{
+          # if(DataSet=='NTGovernment' )
+          # {
+          #   if(!is.null(observedProperty)){
+          #     if(str_to_upper(observedProperty)=='PH_VALUE'){
+          #       odf <- NT_pH_Hack(DataSet)
+          #     }
+          #   }
+          # }else{
             odf <- get_NatSoilMorph(nProp, DataSet)
-          }
+          #}
       }else if(DataSet=='NSWGovernment'){
         odf <- get_NSWMorph(nProp, DataSet)
       }else if(DataSet=='VicGovernment'){
