@@ -339,7 +339,7 @@ get_NSWLab <- function(nProp, DataSet){
   ep <- getASRISService(DataSet)
   #nProp <- 'Location'
   url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
-  print(url)
+ # print(url)
   fdfRaw <- getWebDataDF(url)
 
 
@@ -484,7 +484,7 @@ get_NatSoilLab <- function(nProp, DataSet){
       yr <- str_sub(fdf$o_date_desc, 5,8)
       outDate <- paste0(day, '-', mnth,'-', yr)
 
-      print(fdf$o_date_desc)
+     # print(fdf$o_date_desc)
 
       oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$h_no, fdf$samp_no , outDate, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94,
                                    fdf$samp_upper_depth , fdf$samp_lower_depth, 'LaboratoryMeasurement', fdf$labm_code, fdf$labr_value , 'NA')

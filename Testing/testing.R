@@ -159,6 +159,7 @@ getSoilData(DataSets='QLDGovernment', observedProperty='6A1', usr='ross.searle@c
 getSoilData(DataSets='QLDGovernment', observedProperty='DIST_TYPE', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment', observedProperty='col_hue_val_chrom', usr='ross.searle@csiro.au', key='a')
+ph <- getSoilData(DataSets='QLDGovernment', observedProperty='PH_VALUE', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
 DataSet='QLDGovernment'
