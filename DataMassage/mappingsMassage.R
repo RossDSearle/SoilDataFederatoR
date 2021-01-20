@@ -418,3 +418,45 @@ for (i in 1:nrow(df)) {
 }
 
 write.csv(df2, 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/DataMassage/StandardSchema3.csv')
+
+
+
+
+
+
+
+##### misc massage of properties table
+
+copyTable(conn, 'Properties', 'Properties_V1')
+
+#sql <- paste0("select * from Properties where VocabURL like 'http://registry.it.csiro.au/def/soil/au/scma%'")
+sql <- paste0("select * from Properties")
+res <- dbSendQuery(conn, sql)
+df <- dbFetch(res)
+dbClearResult(res)
+
+#http://registry.it.csiro.au/def/soil/au/scma
+#http://anzsoil.org/def/au/scma/11
+
+
+#URL: http://registry.it.csiro.au/def/soil/au/asls/soil-prof/horizon
+#URI: http://anzsoil.org/def/au/asls/soil-profile/horizon
+
+
+
+
+df$VocabURL <- str_replace(df$VocabURL, 'http://registry.it.csiro.au', 'http://anzsoil.org')
+df
+df$VocabURL <- str_replace(df$VocabURL, '/soil/', '/')
+df
+df$VocabURL <- str_replace(df$VocabURL, '/soil-prof/', '/soil-profile/')
+df
+
+dbWriteTable(conn, 'Properties_V2', df, appen = F)
+
+
+
+
+
+
+

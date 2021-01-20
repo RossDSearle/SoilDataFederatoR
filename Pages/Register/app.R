@@ -3,17 +3,14 @@ library(RSQLite)
 library(DBI)
 library(stringr)
 
-
-
-
 machineName <- as.character(Sys.info()['nodename'])
 
 if(machineName=='soils-discovery'){
   rootDir <- '/srv/plumber/TERNLandscapes/SoilDataFederatoR'
-  dbPathSoilsFed <- paste0(rootDir, '/DB/soilsFederator.sqlite')
+  dbPathSoilsFed <- '/srv/DB/SoilDataFederator/soilsFederator.sqlite'
 }else{
   rootDir <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
-  dbPathSoilsFed <- paste0(rootDir, '/DB/soilsFederator.sqlite')
+  dbPathSoilsFed <- 'C:/Users/sea084/OneDrive - CSIRO/ProjectAdmin/SoilDataFederator/DB/soilsFederator.sqlite'
 }
 
 doQueryFromFed <- function(sql){
@@ -70,7 +67,7 @@ addUser <- function(email, firstName, lastName, organisation){
       print(url)
       emailInfo <- paste0('echo "<p> Dear ', firstName, ',</p><p><br></p><p>Thanks for registering with the TERN SoilDataFederator. Click <a href=', url, '> HERE </a> to confirm your registration and obtain an API key</p><p><br></p><p>Your email address wil be your username.</p><p><br></p><p>Regards</p><p>The TERN SoilDataFederator" | mail -s "$(echo "SoilDataFederator API Key Request\nContent-Type: text/html")" ', email,' -r no-reply@soils-discovery.csiro.au')
       system(emailInfo)
-      msg <- "An email has been sent to you from 'no-reply@soils-discovery.csiro.au with your key. Your email address wil be your username. Please click on the link in the email to confirm your registration."
+      msg <- "An email has been sent to you from 'no-reply@soils-discovery.csiro.au with your key. Check your junk mail if the email doesn't arrive soon. Your email address wil be your username. Please click on the link in the email to confirm your registration."
 
 
     }else{

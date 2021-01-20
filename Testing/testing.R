@@ -100,6 +100,10 @@ observedProperty=NULL
 getLocations(usr=usr, key=key)
 
 
+
+getSoilData(DataSets='NatSoil',observedProperty='3A1', usr='Chloe.Lai@usq.edu.au', key='djwl49ksc277YOcd')
+
+
 df <- getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 DataSet='TERNSurveillance'
 bboxExt=NULL
@@ -108,7 +112,7 @@ df <- getSoilData(DataSets='TERNSurveillance',observedProperty='7A1', usr='ross.
 getSoilData(DataSets='TERNSurveillance',observedProperty='col_hue_val_chrom', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='TERNSurveillance',observedProperty='col_hue_val_chrom', usr='Chloe.Lai@usq.edu.au', key='djwl49ksc277YOcd')
 getSoilData(DataSets='TERNSurveillance', observedProperty='colour_when_dry', usr='ross.searle@csiro.au', key='a')
-
+getSoilData(DataSets='TERNSurveillance',observedProperty='col_hue_val_chrom', usr='Chloe.Lai@usq.edu.au', key='djwl49ksc277YOcd')
 getSiteLocations(DataSets='TERNSurveillance', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='LawsonGrains_AgCatalyst', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')

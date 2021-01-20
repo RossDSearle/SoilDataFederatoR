@@ -438,6 +438,7 @@ get_NatSoilMorph <- function(nProp, DataSet){
 
   }else{
     url <- paste0(ep, '/MorphResults?morphology_attribute=', nProp )
+    print(url)
     fdfRaw <- getWebDataDF(url)
   }
 
