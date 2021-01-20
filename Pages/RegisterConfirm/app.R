@@ -9,10 +9,10 @@ machineName <- as.character(Sys.info()['nodename'])
 
 if(machineName=='soils-discovery'){
   rootDir <- '/srv/plumber/TERNLandscapes/SoilDataFederatoR'
-  dbPathSoilsFed <- paste0(rootDir, '/DB/soilsFederator.sqlite')
+  dbPathSoilsFed <- '/srv/DB/SoilDataFederator/soilsFederator.sqlite'
 }else{
   rootDir <- 'C:/Users/sea084/Dropbox/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR'
-  dbPathSoilsFed <- paste0(rootDir, '/DB/soilsFederator.sqlite')
+  dbPathSoilsFed <- 'C:/Users/sea084/OneDrive - CSIRO/ProjectAdmin/SoilDataFederator/DB/soilsFederator.sqlite'
 }
 
 

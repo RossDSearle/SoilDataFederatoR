@@ -8,7 +8,7 @@ library(leaflet)
 library(sf)
 library(sfheaders)
 
-dbPathSoilsFed <- 'C:/Users/sea084/OneDrive - CSIRO/ProjectAdmin/SoilDataFederator/DB/soilsFederator.sqlite'
+#dbPathSoilsFed <- 'C:/Users/sea084/OneDrive - CSIRO/ProjectAdmin/SoilDataFederator/DB/soilsFederator.sqlite'
 
 doQuery <- function(con, sql){
   res <- dbSendQuery(con, sql)
@@ -51,7 +51,8 @@ conn <- dbConnect(RSQLite::SQLite(), dbPathSoilsFed)
 
 
 
-df <- read.csv('C:/Projects/TernLandscapes/Site Data/BrianMurphy/ALL_BD_DIPNR.csv', stringsAsFactors = F)
+#df <- read.csv('C:/Projects/TernLandscapes/Site Data/BrianMurphy/ALL_BD_DIPNR.csv', stringsAsFactors = F)
+df <- read.csv('/datasets/work/lw-soildatarepo/work/Ross/temp/ALL_BD_DIPNR.csv', stringsAsFactors = F)
 nrow(df)
 head(df)
 str(df)
@@ -77,7 +78,7 @@ for (i in 1:nrow(rdf)) {
   }else{
     oodf <- odf
   }
-  write.csv(oodf, paste0('C:/Projects/TernLandscapes/Site Data/BrianMurphy/props/', rec$flds, '.csv'), row.names = F)
+  write.csv(oodf, paste0('/datasets/work/lw-soildatarepo/work/Ross/temp/props/', rec$flds, '.csv'), row.names = F)
 }
 
 idf <- read.csv('C:/Projects/TernLandscapes/Site Data/BrianMurphy/props/pH_in_water.csv')
@@ -89,12 +90,25 @@ m <- leaflet() %>%
   addMarkers(idf$Longitude, idf$Latitude)
 m  # Print the map
 
-fls <- list.files('C:/Projects/TernLandscapes/Site Data/BrianMurphy/props', '*.csv', full.names = T)
-conD <- dbConnect(RSQLite::SQLite(), 'C:/Projects/TernLandscapes/Site Data/HostedDBs/SoilDataFederatorDatabase.db3')
-for (i in 2:length(fls)) {
+fls <- list.files('/datasets/work/lw-soildatarepo/work/Ross/temp/props', '*.csv', full.names = T)
+#conD <- dbConnect(RSQLite::SQLite(), 'C:/Projects/TernLandscapes/Site Data/HostedDBs/SoilDataFederatorDatabase.db3')
+conD <- dbConnect(RSQLite::SQLite(), '/datasets/work/lw-soildatarepo/work/TERNLandscapes/SoilsFederator/HostedDBs/SoilDataFederatorDatabase.db3')
+
+for (i in 1:length(fls)) {
   print(i)
   odf<-read.csv(fls[i])
   dbAppendTable(conD, 'ObservedProperties', odf)
 }
 
+mappings <- data.frame(
+  Dataset='BM',
+    OrigPropertyCode = rdf$code,
+  ObservedProperty=rdf$code,
+  DataType='L',
+  StandardCode=1, stringsAsFactors = F)
 
+conn <- dbConnect(RSQLite::SQLite(), '/srv/DB/SoilDataFederator/soilsFederator.sqlite')
+
+
+
+dbAppendTable(conn, 'Mappings', mappings)
