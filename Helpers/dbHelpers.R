@@ -154,7 +154,7 @@ AuthenticateAPIKey <- function(usr=NULL, key=NULL){
   idRec <- doQueryFromFed(sql)
   #print(sql)
 
-  if(nrow(idRec) != 1){return('Error : You need to register to obtain an API key. To register go to https://shiny.esoil.io/SoilDataFederator/Register/')}
+  if(nrow(idRec) != 1){return('Error : You need to register to obtain an API key. To register go to https://shiny.esoil.io/SoilDataFederator/Pages/Register/')}
   if(idRec$Pwd != key){return(paste0('Error : Incorrect API key supplied. Have a look at the help pages at or otherwise contact ', administrator, ' for assistance.'))}
 
   return("OK")
