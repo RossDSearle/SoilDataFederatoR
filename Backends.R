@@ -123,7 +123,7 @@ getSoilData <- function(DataSets=NULL, observedProperty=NULL, observedPropertyGr
           if(areasOverlap(DataSet=dataset, bBox=bBox)){
 
             odfAll <- sendRequest(DataSet=dataset, DataStore=dStore, observedProperty, observedPropertyGroup)
-            odf <- getWindow(odfAll,bBox )
+            odf <- getWindow(outDF=odfAll,bBox )
           }else{
             cat(paste0(dataset, ' -  Requested area and dataset extent do not overlap - skipping\n'))
             odf <- blankResponseDF()
@@ -376,12 +376,12 @@ plotObservationLocationsImage <- function(DF){
 
 getWindow <- function(outDF, bBox){
 
-  # bits <- str_split(bBox, ';')
-  # l <- as.numeric(bits[[1]][1])
-  # r <- as.numeric(bits[[1]][2])
-  # t <- as.numeric(bits[[1]][4])
-  # b <- as.numeric(bits[[1]][3])
-  # bboxExt <- extent(l, r, b, t)
+   bits <- str_split(bBox, ';')
+   l <- as.numeric(bits[[1]][1])
+   r <- as.numeric(bits[[1]][2])
+   t <- as.numeric(bits[[1]][4])
+   b <- as.numeric(bits[[1]][3])
+   bboxExt <- extent(l, r, b, t)
 
   #outdf <- outDF[(outDF$Longitude >= bboxExt@xmin & outDF$Longitude <= bboxExt@xmax & outDF$Latitude >= bboxExt@ymin & outDF$Latitude <= bboxExt@ymax), ]
 
