@@ -4,7 +4,7 @@ library(RCurl)
 library(data.table)
 library(stringr)
 
-ep <- 'http://asris-daas02/NSW_Services/api/'
+ep <- 'http://asris-daas02/NSW_Services/api'
 
 
 getData_NSWGovt <- function(DataSet=NULL, observedProperty=NULL, observedPropertyGroup=NULL ){
@@ -31,6 +31,7 @@ getData_NSWGovt <- function(DataSet=NULL, observedProperty=NULL, observedPropert
     if(propertyType == 'LaboratoryMeasurement'){
       ### Hit the Laboratory endpoint
 
+      print(paste0(ep, '/LabResults?method_code=', observedProperty))
       fdf <- fromJSON(paste0(ep, '/LabResults?method_code=', observedProperty))
       if(nrow(fdf) > 0){
 
