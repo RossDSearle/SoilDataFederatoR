@@ -221,12 +221,14 @@ apiGetSoilData<- function(res, usr='Demo', key='Demo', DataSet=NULL, observedPro
   tryCatch({
 
     if(!is.null(bbox)){
-      bits <- str_split(bbox, ';')
-      l <- as.numeric(bits[[1]][1])
-      r <- as.numeric(bits[[1]][2])
-      t <- as.numeric(bits[[1]][4])
-      b <- as.numeric(bits[[1]][3])
-      bboxExt <- extent(l, r, b, t)
+      # bits <- str_split(bbox, ';')
+      # l <- as.numeric(bits[[1]][1])
+      # r <- as.numeric(bits[[1]][2])
+      # t <- as.numeric(bits[[1]][4])
+      # b <- as.numeric(bits[[1]][3])
+      # bboxExt <- extent(l, r, b, t)
+      bboxExt <- bbox
+
     }else{
       bboxExt <- NULL
     }
