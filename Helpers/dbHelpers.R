@@ -7,15 +7,15 @@ library(sf)
 areasOverlap <- function(DataSet, bBox){
 
 
-  # bits <- str_split(bBox, ';')
+   bits <- str_split(bBox, ';')
   # print('bob')
   # print(bits)
   # print(str(bits))
-  # l <- as.numeric(bits[[1]][1])
-  # r <- as.numeric(bits[[1]][2])
-  # t <- as.numeric(bits[[1]][4])
-  # b <- as.numeric(bits[[1]][3])
-  # bboxExt <- extent(l, r, b, t)
+   l <- as.numeric(bits[[1]][1])
+   r <- as.numeric(bits[[1]][2])
+   t <- as.numeric(bits[[1]][4])
+   b <- as.numeric(bits[[1]][3])
+   bboxExt <- extent(l, r, b, t)
 
   sql <- paste0("Select * from DataSets where DataSet = '", DataSet, "'")
   prov = doQueryFromFed(sql)
@@ -25,7 +25,7 @@ areasOverlap <- function(DataSet, bBox){
   if(nrow(prov) > 0){
     pext <- extent( prov$MinX[1], prov$MaxX[1], prov$MinY[1], prov$MaxY[1])
     ppoly <- makeBoundingBoxPolygon(pext)
-    upoly <- makeBoundingBoxPolygon(bBox)
+    upoly <- makeBoundingBoxPolygon(bboxExt)
     res <- sf::st_intersects(ppoly, upoly, sparse=F)[1,1]
     return(res)
   }
