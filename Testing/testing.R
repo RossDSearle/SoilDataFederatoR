@@ -16,7 +16,7 @@ machineName <- as.character(Sys.info()['nodename'])
 
 usr <- 'ross.searle@csiro.au'; key <- 'a';
 
-
+df <- fromJSON(paste0('http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/DataSets', "?usr=",usr,"&key=",key))
 
 usr='Public'; pwd='Public'
 
@@ -107,7 +107,9 @@ getSoilData(DataSets='NatSoil',observedProperty='3A1', usr='Chloe.Lai@usq.edu.au
 df <- getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 DataSet='TERNSurveillance'
 bboxExt=NULL
-df <- getSoilData(DataSets='TERNSurveillance',observedProperty='7A1', usr='ross.searle@csiro.au', key='a')
+df <- getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.searle@csiro.au', key='a', bBox = '140;153;-40;-30')
+
+
 
 getSoilData(DataSets='TERNSurveillance',observedProperty='col_hue_val_chrom', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='TERNSurveillance', observedProperty='colour_when_dry', usr='ross.searle@csiro.au', key='a')
