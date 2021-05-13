@@ -173,6 +173,9 @@ getSiteLocations(DataSets='QLDGovernment', usr='ross.searle@csiro.au', key='a')
 
 DataSet='QLDGovernment'
 
+df <- getSoilData(DataSets='BM',observedProperty='6Z', usr='ross.searle@csiro.au', key='a')
+
+
 unique(dfc$projectID)
 getSoilData(DataSets='Kimberley_Rainforest_Survey_1990', observedProperty='15C1_MG', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='South West Australian Transitional Transect (SWATT)', observedProperty='18F1_AL', usr='ross.searle@csiro.au', key='a')
