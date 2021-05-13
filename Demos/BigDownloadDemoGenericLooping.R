@@ -1,7 +1,7 @@
 library(httr)
 library(jsonlite)
 
-# use your owner usr & key
+# use your own usr & key
 usr <- 'ross.searle@csiro.au'
 key <- 'a'
 
@@ -40,7 +40,7 @@ datasets<-datasetsDF$DataSet
     # Merge the dataframes in the list into one dataframe
     outDF = as.data.frame(data.table::rbindlist(res, fill=T))
     # Write it to a csv
-    write.csv(outDF, paste0('c:/temp/Carbon/SDF_', p, '.csv'))
+    write.csv(outDF, paste0('c:/temp/SDF_', p, '.csv'))
   }
 
 

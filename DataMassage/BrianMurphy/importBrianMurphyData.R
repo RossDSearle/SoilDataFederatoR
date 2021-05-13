@@ -7,6 +7,7 @@ library(dplyr)
 library(leaflet)
 library(sf)
 library(sfheaders)
+library(jsonlite)
 
 #dbPathSoilsFed <- 'C:/Users/sea084/OneDrive - CSIRO/ProjectAdmin/SoilDataFederator/DB/soilsFederator.sqlite'
 
@@ -100,6 +101,12 @@ for (i in 1:length(fls)) {
   dbAppendTable(conD, 'ObservedProperties', odf)
 }
 
+<<<<<<< HEAD
+url <- paste0('http://esoil.io/TERNLandscapes/SoilDataFederatoR/SoilDataAPI/SoilData?DataSet=BM&observedProperty=', 'P10_NR_Z', '&usr=ross.searle@csiro.au&key=a')
+df <- fromJSON(url)
+df
+
+=======
 mappings <- data.frame(
   Dataset='BM',
     OrigPropertyCode = rdf$code,
@@ -108,6 +115,7 @@ mappings <- data.frame(
   StandardCode=1, stringsAsFactors = F)
 
 conn <- dbConnect(RSQLite::SQLite(), '/srv/DB/SoilDataFederator/soilsFederator.sqlite')
+>>>>>>> 6d9ad6b63954d97a3f6a1c7eb38c403140f3b74b
 
 
 

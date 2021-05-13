@@ -112,6 +112,7 @@ df <- getSoilData(DataSets='TERNSurveillance',observedProperty='4A1', usr='ross.
 
 
 getSoilData(DataSets='TERNSurveillance',observedProperty='col_hue_val_chrom', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='TERNSurveillance',observedProperty='col_hue_val_chrom', usr='Chloe.Lai@usq.edu.au', key='djwl49ksc277YOcd')
 getSoilData(DataSets='TERNSurveillance', observedProperty='colour_when_dry', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='TERNSurveillance',observedProperty='col_hue_val_chrom', usr='Chloe.Lai@usq.edu.au', key='djwl49ksc277YOcd')
 getSiteLocations(DataSets='TERNSurveillance', usr='ross.searle@csiro.au', key='a')
@@ -132,6 +133,8 @@ getSiteLocations(DataSets='EastCentral_Australia', usr='ross.searle@csiro.au', k
 
 getSoilData(DataSets='NatSoil',observedProperty='o_type', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NatSoil',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+
+getSoilData(DataSets='NatSoil',observedProperty='4A1', usr='Chloe.Lai@usq.edu.au', key='djwl49ksc277YOcd')
 
 df <- getSoilData(DataSets='NatSoil',observedProperty='2Z2_Clay', usr='ross.searle@csiro.au', key='a')
 
@@ -215,6 +218,7 @@ df <- getSoilData(DataSets=DataSet, observedProperty='4A1', usr='ross.searle@csi
 df <- getSoilData(DataSets=DataSet, observedPropertyGroup='PSA', usr='ross.searle@csiro.au', key='a')
 
 
+getSoilData(DataSets='BM', observedProperty='P10_NR_Z', usr='ross.searle@csiro.au', key='a')
 
 makeLocations(df, drawit = T)
 

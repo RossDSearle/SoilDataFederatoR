@@ -264,7 +264,7 @@ VicCRSs <- function(){
   zones <- c("54", "54", "54", "54", "54", "54", "54", "54", "55", "55", "55", "55", "55", "55", "55" )
   datums <- c("ADG66", "AGD66", "AGD84","AGDS84", "GDA94","UTM","WGS84",'Undefined',"ADG66", "AGD66","AGD84","GDA94","UTM","WGS84",'Undefined' )
   cnts <- c( 57, 1116, 34, 1, 628, 40, 191, 2181,  123, 1124, 86, 237, 18, 276, 1669)
-  epsgs <- c(20254, 20254, 20354, 20354, 28354, 32754, 32754, 32755, 20255, 20254, 20355, 28355, 32755, 32755, 32755)
+  epsgs <- c(20254, 20254, 20354, 20354, 28354, 32754, 32754, 32754, 20255, 20255, 20355, 28355, 32755, 32755, 32755)
   ddf <- data.frame(zones,datums,cnts,epsgs)
   return(ddf)
 }
@@ -339,7 +339,7 @@ get_NSWLab <- function(nProp, DataSet){
   ep <- getASRISService(DataSet)
   #nProp <- 'Location'
   url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
- # print(url)
+  print(url)
   fdfRaw <- getWebDataDF(url)
 
 
