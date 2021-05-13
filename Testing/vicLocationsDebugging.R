@@ -4,7 +4,7 @@ library(aqp)
 library(jsonlite)
 
 
-source(paste0('C:/Users/sea084/OneDrive - CSIRO/RossRCode/Git/TernLandscapes/APIs/SoilDataFederatoR/Backends.R'))
+source(paste0('Backends.R'))
 
 usr <- 'ross.searle@csiro.au'; key <- 'a';
 
