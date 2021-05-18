@@ -133,6 +133,7 @@ getSiteLocations(DataSets='EastCentral_Australia', usr='ross.searle@csiro.au', k
 
 getSoilData(DataSets='NatSoil',observedProperty='o_type', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='NatSoil',observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='NatSoil',observedProperty='6A1', usr='ross.searle@csiro.au', key='a')
 
 getSoilData(DataSets='NatSoil',observedProperty='4A1', usr='Chloe.Lai@usq.edu.au', key='djwl49ksc277YOcd')
 
@@ -148,6 +149,8 @@ df <- getSiteLocations(DataSets='NTGovernment', usr='ross.searle@csiro.au', key=
 
 
 getSoilData(DataSets='SCARP',observedProperty='6B3', usr='ross.searle@csiro.au', key='a')
+getSoilData(DataSets='SCARP',observedProperty='6H2c_SCaRP', usr='ross.searle@csiro.au', key='a')
+
 df <- getSoilData(DataSets='SCARP',observedProperty='o_date_desc', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SCARP',observedProperty='h_notes', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='SCARP',observedProperty='o_asc_ord', usr='ross.searle@csiro.au', key='a')

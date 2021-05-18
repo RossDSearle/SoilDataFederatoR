@@ -77,7 +77,7 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
 
     propertyType <- propRecs$propertyType[i]
     units <- getUnits(propertyType = propertyType, prop = sProp)
-    if(length(units) == 0){units = NA}
+    if(length(units) == 0){units = '-'}
 
     if(propertyType == 'LaboratoryMeasurement'){
       ### Hit the Laboratory endpoint
