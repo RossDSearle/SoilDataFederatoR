@@ -223,7 +223,7 @@ get_VicData <- function(nProp, DataSet,propertyType){
       if(nProp=='COL_MUNSELL_COLOUR'){
         fdf$obs_value <- str_remove(fdf$obs_value, '/')
       }
-      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$project_code, '_', fdf$feature_id, '_',  fdf$obs_no), fdf$sample_no, fdf$sample_no , outDate, fdf$Longitude, fdf$Latitude,
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$project_code, '_', fdf$feature_id), fdf$sample_no, fdf$sample_no , outDate, fdf$Longitude, fdf$Latitude,
                                    fdf$sample_min_lower , fdf$sample_max_lower, propertyType, nProp, fdf$obs_value , 'NA')
     }else{
       oOutDF <- blankResponseDF()
@@ -255,7 +255,7 @@ d <- str_split( fdfcm$sample_date, 'T')
   yr <- sapply(d3, function (x) x[1])
   outDate <- paste0(dy, '-', mn, '-', yr)
 
-  oOutDF <-  generateResponseAllLocs(dataset=DataSet, location_ID=paste0(fdfcm$agency_code, '_', fdfcm$project_code, '_', fdfcm$feature_id, '_1'), longitude=fdfcm$Longitude, latitude=fdfcm$Latitude, date=outDate )
+  oOutDF <-  generateResponseAllLocs(dataset=DataSet, location_ID=paste0(fdfcm$agency_code, '_', fdfcm$project_code, '_', fdfcm$feature_id), longitude=fdfcm$Longitude, latitude=fdfcm$Latitude, date=outDate )
 
 }
 
