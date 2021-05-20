@@ -623,8 +623,9 @@ get_WALab <- function(nProp, DataSet){
   nrow(fdfRaw)
 
   if(nProp == 'P10_NR_S'){
-    #url <- paste0(ep, '/LabResults?method_code=', paste0('P10_NR_S' ))
-    fdfRaw2 <- WA_Sand_Hack(DataSet)
+    url <- paste0(ep, '/LabResults?method_code=', paste0('P10_NR_Saa' ))
+    fdfRaw2 <- getWebDataDF(url)
+    #fdfRaw2 <- WA_Sand_Hack(DataSet)
     nrow(fdfRaw2)
     fdfRaw <- rbind(fdfRaw, fdfRaw2)
     nrow(fdfRaw)
