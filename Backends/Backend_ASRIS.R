@@ -82,9 +82,13 @@ getData_ASRIS <- function(DataSet=NULL, observedProperty=NULL, observedPropertyG
     if(propertyType == 'LaboratoryMeasurement'){
       ### Hit the Laboratory endpoint
 
-      if(DataSet=='NatSoil' | DataSet=='SCARP'| DataSet=='NTGovernment' | DataSet=='WAGovernment'){
+     # if(DataSet=='NatSoil' | DataSet=='SCARP'| DataSet=='NTGovernment' | DataSet=='WAGovernment'){
+      if(DataSet=='NatSoil' | DataSet=='SCARP'| DataSet=='NTGovernment'){
           odf <- get_NatSoilLab(nProp, DataSet)
-      }else if(DataSet=='NSWGovernment'){
+      }else if(DataSet=='WAGovernment'){
+        odf <- get_WALab (nProp, DataSet)
+      }
+      else if(DataSet=='NSWGovernment'){
         odf <- get_NSWLab(nProp, DataSet)
       }else if(DataSet=='VicGovernment'){
           odf <- get_VicData(nProp, DataSet, propertyType)
@@ -159,6 +163,53 @@ FROM            dbo.SITES INNER JOIN
     return(oOutDF)
  }
  return(blankResponseDF())
+
+}
+
+
+
+WA_Sand_Hack<-function(DataSet){
+
+  tcon <- DBI::dbConnect(odbc::odbc(),
+                         Driver   = "ODBC Driver 17 for SQL Server",
+                         Server   = "asris-sql-stage.it.csiro.au\\sql2017",
+                         Database = "WA_NatSoil",
+                         # UID      = 'rosssearle',
+                         # PWD      = 'Ads@2*&5cv'
+                         UID      = 'NEXUS\\sea084',
+                         PWD      = 'Merv4066',
+                         Trusted_Connection='Yes'
+  )
+
+
+
+  sql<- "  SELECT        dbo.OBSERVATIONS.agency_code, dbo.OBSERVATIONS.proj_code, dbo.OBSERVATIONS.s_id, dbo.OBSERVATIONS.o_id, dbo.OBSERVATIONS.o_latitude_GDA94, dbo.OBSERVATIONS.o_longitude_GDA94,
+                         dbo.OBSERVATIONS.o_date_desc, dbo.SAMPLES.samp_upper_depth, dbo.SAMPLES.samp_lower_depth, dbo.LAB_RESULTS.labr_value, dbo.HORIZONS.h_no, dbo.SAMPLES.samp_no
+FROM            dbo.SAMPLES INNER JOIN
+                         dbo.HORIZONS ON dbo.SAMPLES.agency_code = dbo.HORIZONS.agency_code AND dbo.SAMPLES.proj_code = dbo.HORIZONS.proj_code AND dbo.SAMPLES.s_id = dbo.HORIZONS.s_id AND
+                         dbo.SAMPLES.o_id = dbo.HORIZONS.o_id AND dbo.SAMPLES.h_no = dbo.HORIZONS.h_no INNER JOIN
+                         dbo.LAB_RESULTS ON dbo.SAMPLES.h_no = dbo.LAB_RESULTS.h_no AND dbo.SAMPLES.agency_code = dbo.LAB_RESULTS.agency_code AND dbo.SAMPLES.proj_code = dbo.LAB_RESULTS.proj_code AND
+                         dbo.SAMPLES.s_id = dbo.LAB_RESULTS.s_id AND dbo.SAMPLES.o_id = dbo.LAB_RESULTS.o_id AND dbo.SAMPLES.samp_no = dbo.LAB_RESULTS.samp_no INNER JOIN
+                         dbo.OBSERVATIONS ON dbo.HORIZONS.agency_code = dbo.OBSERVATIONS.agency_code AND dbo.HORIZONS.proj_code = dbo.OBSERVATIONS.proj_code AND dbo.HORIZONS.s_id = dbo.OBSERVATIONS.s_id AND
+                         dbo.HORIZONS.o_id = dbo.OBSERVATIONS.o_id
+						 where labm_code = 'P10_NR_Saa'"
+
+  fdfh = doQuery(tcon, sql)
+
+  if(nrow(fdf) > 0){
+
+    # d <- str_sub(fdf$o_date_desc, 1,2)
+    # m <- str_sub(fdf$o_date_desc, 3,4)
+    # y <- str_sub(fdf$o_date_desc, 5,8)
+    # dte <- paste0(d, '-', m, '-', y)
+    # oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code, '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id ),
+    #                              fdf$h_no, fdf$samp_no, fdf$o_date_desc, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94 , fdf$samp_upper_depth, fdf$samp_lower_depth , 'LaboratoryMeasurement', 'P10_NR_S',fdf$labr_value , 'NA')
+    fdf$spec_id=NA
+    fdf$LABM_NAME=NA
+    fdf$labm_code='P10_NR_S'
+    return(fdf)
+  }
+  return(NULL)
 
 }
 
@@ -561,5 +612,44 @@ horizonName_NSW <- function(ep){
   return(fdfRaw)
 }
 
+
+
+get_WALab <- function(nProp, DataSet){
+
+  ep <- getASRISService(DataSet)
+  url <- paste0(ep, '/LabResults?method_code=', paste0(nProp ))
+
+  fdfRaw <- getWebDataDF(url)
+  nrow(fdfRaw)
+
+  if(nProp == 'P10_NR_S'){
+    #url <- paste0(ep, '/LabResults?method_code=', paste0('P10_NR_S' ))
+    fdfRaw2 <- WA_Sand_Hack(DataSet)
+    nrow(fdfRaw2)
+    fdfRaw <- rbind(fdfRaw, fdfRaw2)
+    nrow(fdfRaw)
+  }
+
+  if(length(fdfRaw)==0){
+    oOutDF <- blankResponseDF()
+  }else{
+    if(nrow(fdfRaw) > 0){
+      fdf <- fdfRaw
+
+      day <- str_sub(fdf$o_date_desc, 1,2)
+      mnth <- str_sub(fdf$o_date_desc, 3,4)
+      yr <- str_sub(fdf$o_date_desc, 5,8)
+      outDate <- paste0(day, '-', mnth,'-', yr)
+
+      # print(fdf$o_date_desc)
+
+      oOutDF <- generateResponseDF(DataSet, paste0(fdf$agency_code , '_', fdf$proj_code, '_', fdf$s_id, '_', fdf$o_id), fdf$h_no, fdf$samp_no , outDate, fdf$o_longitude_GDA94, fdf$o_latitude_GDA94,
+                                   fdf$samp_upper_depth , fdf$samp_lower_depth, 'LaboratoryMeasurement', fdf$labm_code, fdf$labr_value , 'NA')
+    }else{
+      oOutDF <- blankResponseDF()
+    }
+  }
+  return(oOutDF)
+}
 
 

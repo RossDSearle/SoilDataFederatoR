@@ -166,6 +166,9 @@ getSoilData(DataSets='WAGovernment', observedProperty='4A1', usr='ross.searle@cs
 df <- getSoilData(DataSets='WAGovernment', observedProperty='h_texture', usr='ross.searle@csiro.au', key='a')
 getSiteLocations(DataSets='WAGovernment', usr='ross.searle@csiro.au', key='a')
 
+s <- getSoilData(DataSets='WAGovernment', observedProperty='P10_NR_S', usr='ross.searle@csiro.au', key='a')
+c <- getSoilData(DataSets='WAGovernment', observedProperty='P10_NR_C', usr='ross.searle@csiro.au', key='a')
+
 getSoilData(DataSets='QLDGovernment', observedProperty='4A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment', observedProperty='6A1', usr='ross.searle@csiro.au', key='a')
 getSoilData(DataSets='QLDGovernment', observedProperty='DIST_TYPE', usr='ross.searle@csiro.au', key='a')
